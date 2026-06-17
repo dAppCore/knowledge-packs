@@ -195,14 +195,26 @@ All 42 go-* packages now have RFCs in `plans/code/core/go/<package>/`:
 
 ---
 
+## 📚 Package Deep Dives
+
+Detailed documentation for specific packages:
+
+| Package | Documentation | Description |
+|---------|---------------|-------------|
+| [go-lns](./pkg/lns/README.md) | ✅ **Complete** | Lethean Name System — full API, examples, architecture |
+
+More package deep dives coming soon...
+
+---
+
 ## 📝 Notes
 
 - **Repository:** `forge.lthn.sh/core/go`
 - **Primary Spec:** [`plans/code/core/go/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/RFC.md)
 - **Agent Guide:** [`core/go/AGENTS.md`](file:///Users/snider/Code/core/go/AGENTS.md)
-- **Maintained by:** Mistral Vibe (knowledge pack)
+- **Maintained by:** Purberus <purberus@lthn.ai> (knowledge pack)
 
 ---
 
-*Package catalog last updated: 2026-06-17T14:00:00Z*
-*Knowledge Pack: CoreGo v1.0.0*
+*Package catalog last updated: 2026-06-17T15:30:00Z*
+*Knowledge Pack: CoreGo v1.1.0*

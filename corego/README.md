@@ -166,11 +166,11 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 
 ### Blockchain Packages
 
-| Package | Purpose | Status |
-|---------|---------|--------|
-| `go-blockchain` | Blockchain implementation | Production |
-| `go-lns` | Lethean Name System | Production |
-| `go-miner` | Mining operations | Production |
+| Package | Purpose | Status | Deep Dive |
+|---------|---------|--------|-----------|
+| `go-blockchain` | Blockchain implementation | Production | Coming soon |
+| `go-lns` | Lethean Name System | Production | **[✅ Available](./pkg/lns/README.md)** |
+| `go-miner` | Mining operations | Production | Coming soon |
 
 ### AI/ML Packages
 
