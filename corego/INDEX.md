@@ -164,7 +164,7 @@ Total stdlib wrapped:       44
 SPOR compliance:            100%
 Test triplet coverage:      High
 Downstream repositories:    ~30+
-Package deep dives:         20 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference, go-ml, go-config, go-build)
+Package deep dives:         21 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference, go-ml, go-config, go-build, go-ai)
 ```
 
 ---
@@ -223,6 +223,7 @@ Detailed documentation for specific packages:
 | [go-ml](./pkg/ml/README.md) | ✅ **Complete** | **ML Inference Backends & Scoring Engine** — Dual-interface, HTTP/Llama backends, 23 probes, GGUF support, agent orchestrator |
 | [go-config](./pkg/config/README.md) | ✅ **Complete** | **Dual-Viper Configuration** — Hierarchical discovery, manifests, feature flags, watching, XDG compliance |
 | [go-build](./pkg/build/README.md) | ✅ **Complete** | **Build Orchestration** — 12 builders, 8 publishers, SDK generation, Apple ecosystem, workflow automation |
+| [go-ai](./pkg/ai/README.md) | ✅ **Complete** | **AI Integration Layer** — MCP server, metrics logging, RAG facade, provider routing, 50+ tools |
 
 More package deep dives coming soon...
 
