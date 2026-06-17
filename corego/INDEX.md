@@ -69,7 +69,8 @@ Lethean blockchain implementation and related services.
 | [go-lns](file:///Users/snider/Code/core/go-lns/) | **Lethean Name System** (native CoreGO) | Production | `dappco.re/go/lns` |
 | [go-miner](file:///Users/snider/Code/core/go-miner/) | Mining operations | Production | `dappco.re/go/miner` |
 | [go-p2p](file:///Users/snider/Code/core/go-p2p/) | P2P networking (node, levin, UEPS) | Production | `dappco.re/go/p2p` |
-| [go-dns](file:///Users/snider/Code/core/go-dns/) | DNS resolver + server | | `dappco.re/go/dns` |
+| [go-dns](file:///Users/snider/Code/core/go-dns/) | DNS resolver + server for .lthn TLD | Production | `dappco.re/go/dns` |
+| [go-hsd](file:///Users/snider/Code/meowmix/plans/code/core/go/hsd/) | **Handshake Sidechain JSON-RPC client** | ✅ **NEW** | `dappco.re/go/hsd` |
 
 ---
 
@@ -171,16 +172,25 @@ Downstream repositories:    ~30+
 
 ### ✅ Recently Filled Gaps
 
-| Gap | Action | Date |
-|-----|--------|------|
-| go-cuda RFC | Created [RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/cuda/RFC.md) | 2026-06-17 |
-| go-tpu RFC | Created [RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/tpu/RFC.md) | 2026-06-17 |
-| go/array RFC | Created earlier during exploration | 2026-06-17 |
+| Gap | Action | Date | Commit |
+|-----|--------|------|--------|
+| go-cuda RFC | Created [RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/cuda/RFC.md) | 2026-06-17 | 5557cf6 |
+| go-tpu RFC | Created [RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/tpu/RFC.md) | 2026-06-17 | 5557cf6 |
+| go/array RFC | Created [RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/array/RFC.md) | 2026-06-17 | 3912ef3 |
+| go-hsd RFC | Created [RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/hsd/RFC.md) | 2026-06-17 | 5b55199 |
 
-### 🔍 Potential Gaps
+### ✅ All go-* Package RFCs Complete
 
-- [ ] Check for missing INDEX.md files in new packages
-- [ ] Verify all packages have test triplets
+All 42 go-* packages now have RFCs in `plans/code/core/go/<package>/`:
+- All packages verified against code repos (excluding .wiki and codex-mantis variants)
+- No missing RFCs identified
+
+### 🔍 Quality Checks
+
+- [x] All go-* packages have RFCs
+- [x] INDEX.md updated with go-hsd
+- [x] Codex-mantis variants identified (no separate RFCs needed)
+- [ ] Verify all packages have test triplets (_test.go + _example_test.go)
 - [ ] Check for packages with RFC but no code
 
 ---
