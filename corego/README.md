@@ -174,12 +174,12 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 
 ### Network Packages
 
-| Package | Purpose | Protocol |
-|---------|---------|----------|
-| `go-dns` | .lthn DNS Resolution | DNS (RFC 1035) |
-| `go-p2p` | Peer-to-peer networking | Levin, UEPS |
-| `go-proxy` | Proxy server | HTTP |
-| `go-netops` | UniFi network controller | HTTP API |
+| Package | Purpose | Protocol | Deep Dive |
+|---------|---------|----------|-----------|
+| `go-dns` | .lthn DNS Resolution | DNS (RFC 1035) | **[✅ Available](./pkg/dns/README.md)** |
+| `go-p2p` | Peer-to-peer networking | Levin, UEPS, WebSocket | **[✅ Available](./pkg/p2p/README.md)** |
+| `go-proxy` | Stratum mining proxy | TCP/TLS, Stratum JSON-RPC | **[✅ Available](./pkg/proxy/README.md)** |
+| `go-netops` | UniFi network controller | HTTP API | Coming soon |
 
 ### Blockchain Packages
 
@@ -262,7 +262,7 @@ Total stdlib wrapped:   44
 Total downstream repos: ~30+
 SPOR compliance:       100% (each stdlib package has one owner)
 Test triplet coverage:  High (most packages have triplets)
-Package deep dives:    4 (go-lns, go-blockchain, go-dns, go-io)
+Package deep dives:    6 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy)
 ```
 
 ---

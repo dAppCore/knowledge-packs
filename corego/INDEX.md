@@ -205,6 +205,8 @@ Detailed documentation for specific packages:
 | [go-blockchain](./pkg/blockchain/README.md) | ✅ **Complete** | Lethean Blockchain — CryptoNote implementation, P2P, wallet, mining |
 | [go-dns](./pkg/dns/README.md) | ✅ **Complete** | .lthn DNS Resolution — authoritative DNS server, HSD integration, tree-root cache |
 | [go-io](./pkg/io/README.md) | ✅ **Complete** | **Mandatory I/O Abstraction** — universal transport layer, 10+ backends, sigil transformations |
+| [go-p2p](./pkg/p2p/README.md) | ✅ **Complete** | **Peer-to-Peer Networking** — WebSocket transport, SMSG encryption, Poindexter KD-tree, Levin protocol |
+| [go-proxy](./pkg/proxy/README.md) | ✅ **Complete** | **Stratum Mining Proxy** — NiceHash nonce-splitting, TCP/TLS, pool failover, monitoring API |
 
 More package deep dives coming soon...
 
