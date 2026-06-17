@@ -164,6 +164,7 @@ Total stdlib wrapped:       44
 SPOR compliance:            100%
 Test triplet coverage:      High
 Downstream repositories:    ~30+
+Package deep dives:         7 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-i18n)
 ```
 
 ---
@@ -207,6 +208,7 @@ Detailed documentation for specific packages:
 | [go-io](./pkg/io/README.md) | ✅ **Complete** | **Mandatory I/O Abstraction** — universal transport layer, 10+ backends, sigil transformations |
 | [go-p2p](./pkg/p2p/README.md) | ✅ **Complete** | **Peer-to-Peer Networking** — WebSocket transport, SMSG encryption, Poindexter KD-tree, Levin protocol |
 | [go-proxy](./pkg/proxy/README.md) | ✅ **Complete** | **Stratum Mining Proxy** — NiceHash nonce-splitting, TCP/TLS, pool failover, monitoring API |
+| [go-i18n](./pkg/i18n/README.md) | ✅ **Complete** | **Grammar-Aware i18n** — Semantic intent, GrammarImprint, dual-class disambiguation, CLDR pluralization |
 
 More package deep dives coming soon...
 

@@ -181,6 +181,12 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 | `go-proxy` | Stratum mining proxy | TCP/TLS, Stratum JSON-RPC | **[✅ Available](./pkg/proxy/README.md)** |
 | `go-netops` | UniFi network controller | HTTP API | Coming soon |
 
+### Internationalization Packages
+
+| Package | Purpose | Features | Deep Dive |
+|---------|---------|----------|-----------|
+| `go-i18n` | Grammar-aware i18n | Semantic intent, GrammarImprint, dual-class, CLDR | **[✅ Available](./pkg/i18n/README.md)** |
+
 ### Blockchain Packages
 
 | Package | Purpose | Status | Deep Dive |
@@ -262,7 +268,7 @@ Total stdlib wrapped:   44
 Total downstream repos: ~30+
 SPOR compliance:       100% (each stdlib package has one owner)
 Test triplet coverage:  High (most packages have triplets)
-Package deep dives:    6 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy)
+Package deep dives:    7 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-i18n)
 ```
 
 ---
