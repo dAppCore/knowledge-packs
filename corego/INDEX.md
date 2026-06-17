@@ -30,6 +30,7 @@ Core framework primitives that form the foundation of CoreGo.
 
 | Package | Description | Key Files | Status |
 |---------|-------------|-----------|--------|
+| [core](file:///Users/snider/Code/core/go/core.go) | **The Foundation** — 272 files, 100% SPOR, zero deps | core.go, options.go, result.go, service.go | ✅ **Complete** |
 | [action](file:///Users/snider/Code/core/go/action.go) | Action execution framework | action.go, action_test.go, action_example_test.go | ✅ Complete |
 | [api](file:///Users/snider/Code/core/go/api.go) | REST framework + OpenAPI client | api.go, api_bench_test.go, api_example_test.go | ✅ Complete |
 | [context](file:///Users/snider/Code/core/go/context.go) | Context utilities | context.go | ✅ Complete |
@@ -168,7 +169,7 @@ Total stdlib wrapped:       44
 SPOR compliance:            100%
 Test triplet coverage:      High
 Downstream repositories:    ~30+
-Package deep dives:         34 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference, go-ml, go-config, go-build, go-ai, go-ansible, go-cgo, go-container, go-stream, go-crypt, go-store, go-miner, go-devops, go-forge, go-git, go-rag, go-ratelimit, go-tenant)
+Package deep dives:         35 (core, go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference, go-ml, go-config, go-build, go-ai, go-ansible, go-cgo, go-container, go-stream, go-crypt, go-store, go-miner, go-devops, go-forge, go-git, go-rag, go-ratelimit, go-tenant)
 ```
 
 ---
@@ -206,6 +207,7 @@ Detailed documentation for specific packages:
 
 | Package | Documentation | Description |
 |---------|---------------|-------------|
+| [core](./pkg/core/README.md) | ✅ **Complete** | **CoreGo Framework** — Zero-dep foundation, DI, service lifecycle, Result pattern, IPC, 272 files, 100% SPOR compliant |
 | [go-lns](./pkg/lns/README.md) | ✅ **Complete** | Lethean Name System — full API, examples, architecture |
 | [go-blockchain](./pkg/blockchain/README.md) | ✅ **Complete** | Lethean Blockchain — CryptoNote implementation, P2P, wallet, mining |
 | [go-dns](./pkg/dns/README.md) | ✅ **Complete** | .lthn DNS Resolution — authoritative DNS server, HSD integration, tree-root cache |
@@ -255,6 +257,7 @@ More package deep dives coming soon...
 
 ---
 
-*Package catalog last updated: 2026-06-17T21:35:00Z*
+*Package catalog last updated: 2026-06-17T21:45:00Z*
 *Knowledge Pack: CoreGo v1.3.0*
+*Purrr... Core framework documented!* 🐱
 *Purrr... Documentation by Purberus <purberus@lthn.ai>*
