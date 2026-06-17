@@ -8,7 +8,7 @@ description: Complete list of CoreGo packages with their purposes and relationsh
 
 > **Repository:** `dappco.re/core/go`
 > **Total Packages:** 50+ (CoreGo framework + related packages)
-> **Last Updated:** 2026-06-17
+> **Last Updated:** 2026-06-18
 
 ---
 
@@ -54,6 +54,8 @@ Storage-agnostic I/O operations with multiple backends.
 | [go-cache](file:///Users/snider/Code/core/go-cache/) | Caching layer | go-io medium | `dappco.re/go/cache` |
 | [go-store](file:///Users/snider/Code/core/go-store/) | SQLite key-value store | | `dappco.re/go/store` |
 | [go-container](file:///Users/snider/Code/core/go-container/) | LinuxKit + TIM container runtime | | `dappco.re/go/container` |
+| [go-stream](file:///Users/snider/Code/core/go-stream/) | **Transport-agnostic streaming** | 5 transports | `dappco.re/go/stream` |
+| [go-crypt](file:///Users/snider/Code/core/go-crypt/) | **Cryptography & Trust** | 3 subsystems, 5 CLI commands | `dappco.re/go/crypt` |
 
 **go-io backends:** S3, SQLite, local filesystem, HTTP, and more
 
@@ -106,6 +108,8 @@ Network operations and protocols.
 | [go-netops](file:///Users/snider/Code/core/go-netops/) | UniFi network controller client | `dappco.re/go/netops` |
 | [go-proxy](file:///Users/snider/Code/core/go-proxy/) | Proxy server | `dappco.re/go/proxy` |
 | [go-io](file:///Users/snider/Code/core/go-io/) | Storage-agnostic I/O (includes HTTP backend) | `dappco.re/go/io` |
+| [go-stream](file:///Users/snider/Code/core/go-stream/) | **Transport-agnostic streaming** (WebSocket, SSE, Redis, ZMQ, TCP) | `dappco.re/go/stream` |
+| [go-crypt](file:///Users/snider/Code/core/go-crypt/) | **Cryptography & Trust** (ChaCha20, AES, Argon2id, OpenPGP, 3-tier access control) | `dappco.re/go/crypt` |
 
 ---
 
@@ -164,7 +168,7 @@ Total stdlib wrapped:       44
 SPOR compliance:            100%
 Test triplet coverage:      High
 Downstream repositories:    ~30+
-Package deep dives:         24 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference, go-ml, go-config, go-build, go-ai, go-ansible, go-cgo, go-container)
+Package deep dives:         31 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference, go-ml, go-config, go-build, go-ai, go-ansible, go-cgo, go-container, go-stream, go-crypt, go-store, go-miner, go-devops, go-forge, go-git)
 ```
 
 ---
@@ -226,7 +230,14 @@ Detailed documentation for specific packages:
 | [go-ai](./pkg/ai/README.md) | ✅ **Complete** | **AI Integration Layer** — MCP server, metrics logging, RAG facade, provider routing, 50+ tools |
 | [go-ansible](./pkg/ansible/README.md) | ✅ **Complete** | **Pure Go Ansible Engine** — 45 module handlers, SSH transport, YAML parsing, Jinja2 templating, role support |
 | [go-cgo](./pkg/cgo/README.md) | ✅ **Complete** | **Standard CGo Harness** — Buffer, Scope, Call, type conversions, memory-safe C interop for go-blockchain, go-mlx, go-rocm |
+| [go-devops](./pkg/devops/README.md) | ✅ **Complete** | **DevOps Orchestration** — Ansible executor, multi-target build, code signing, release orchestration, Hetzner/CloudNS APIs, SDK generation, devkit tooling |
+| [go-forge](./pkg/forge/README.md) | ✅ **Complete** | **Forgejo API Client** — ~450 endpoints for repos, issues, PRs, projects, orgs, users, webhooks, releases, admin, CI/CD actions |
+| [go-git](./pkg/git/README.md) | ✅ **Complete** | **Multi-Repository Git Operations** — Parallel status/push/pull, CoreGo service integration, path validation, iterator-based streaming |
 | [go-container](./pkg/container/README.md) | ✅ **Complete** | **Docker-Free Container Runtime** — LinuxKit (default), TIM (experimental), VZ (Apple), dev environments, I/O Medium integration |
+| [go-stream](./pkg/stream/README.md) | ✅ **Complete** | **Unified Stream Primitive** — Transport-agnostic hub (WebSocket, SSE, Redis, ZeroMQ, TCP), 5 adapters, reconnecting clients, CoreGO service integration |
+| [go-crypt](./pkg/crypt/README.md) | ✅ **Complete** | **Cryptographic Primitives & Agent Trust** — ChaCha20-Poly1305, AES-256-GCM, Argon2id KDF, OpenPGP auth, 3-tier access control, capability policies, approval workflows, audit trails |
+| [go-store](./pkg/store/README.md) | ✅ **Complete** | **SQLite Key-Value Store** — TTL expiry (triple-layered), namespace isolation via ScopedStore, reactive Watch/OnChange events, DuckDB workspace buffering, InfluxDB time-series journal, compressed JSONL cold archive, io.Medium transport abstraction |
+| [go-miner](./pkg/miner/README.md) | ✅ **Complete** | **Mining Software Controller** — Unified Miner interface for XMRig/TT-Miner/Simulated, Manager for multi-miner lifecycle, ProfileManager with go-store, EventBus via go-stream, CircuitBreaker, RateLimiter, TaskSupervisor, LogBuffer |
 
 More package deep dives coming soon...
 
@@ -241,5 +252,5 @@ More package deep dives coming soon...
 
 ---
 
-*Package catalog last updated: 2026-06-18T00:00:00Z*
+*Package catalog last updated: 2026-06-18T04:00:00Z*
 *Knowledge Pack: CoreGo v1.3.0*
