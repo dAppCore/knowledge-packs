@@ -164,7 +164,7 @@ Total stdlib wrapped:       44
 SPOR compliance:            100%
 Test triplet coverage:      High
 Downstream repositories:    ~30+
-Package deep dives:         12 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-i18n, go-log, go-cache, go-session, go-webview, go-ws)
+Package deep dives:         13 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws)
 ```
 
 ---
@@ -208,6 +208,8 @@ Detailed documentation for specific packages:
 | [go-io](./pkg/io/README.md) | ✅ **Complete** | **Mandatory I/O Abstraction** — universal transport layer, 10+ backends, sigil transformations |
 | [go-p2p](./pkg/p2p/README.md) | ✅ **Complete** | **Peer-to-Peer Networking** — WebSocket transport, SMSG encryption, Poindexter KD-tree, Levin protocol |
 | [go-proxy](./pkg/proxy/README.md) | ✅ **Complete** | **Stratum Mining Proxy** — NiceHash nonce-splitting, TCP/TLS, pool failover, monitoring API |
+| [go-pool](./pkg/pool/README.md) | ✅ **Complete** | **Mining Pool Backend** — ProgPoWZ, Stratum, vardiff, Redis state, RBPPS payouts |
+| [go-process](./pkg/process/README.md) | ✅ **Complete** | **Process Orchestration** — Daemon management, pipeline execution, health checks, cross-platform support |
 | [go-i18n](./pkg/i18n/README.md) | ✅ **Complete** | **Grammar-Aware i18n** — Semantic intent, GrammarImprint, dual-class disambiguation, CLDR pluralization |
 | [go-log](./pkg/log/README.md) | ✅ **Complete** | **Structured Logging & Error Handling** — Mandatory error creation, log levels, redaction, rotation |
 | [go-cache](./pkg/cache/README.md) | ✅ **Complete** | **Storage-Agnostic Caching** — JSON cache with TTL, invalidation, HTTP caching, GitHub helpers |
