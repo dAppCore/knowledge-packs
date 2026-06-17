@@ -164,12 +164,22 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 | `go-cache` | Caching layer | go-io medium |
 | `go-store` | SQLite key-value store | |
 
+### Network Packages
+
+| Package | Purpose | Protocol |
+|---------|---------|----------|
+| `go-dns` | .lthn DNS Resolution | DNS (RFC 1035) |
+| `go-p2p` | Peer-to-peer networking | Levin, UEPS |
+| `go-proxy` | Proxy server | HTTP |
+| `go-netops` | UniFi network controller | HTTP API |
+
 ### Blockchain Packages
 
 | Package | Purpose | Status | Deep Dive |
 |---------|---------|--------|-----------|
-| `go-blockchain` | Blockchain implementation | Production | Coming soon |
+| `go-blockchain` | Blockchain implementation | Production | **[✅ Available](./pkg/blockchain/README.md)** |
 | `go-lns` | Lethean Name System | Production | **[✅ Available](./pkg/lns/README.md)** |
+| `go-dns` | .lthn DNS Resolution | Production | **[✅ Available](./pkg/dns/README.md)** |
 | `go-miner` | Mining operations | Production | Coming soon |
 
 ### AI/ML Packages
@@ -243,6 +253,7 @@ Total stdlib wrapped:   44
 Total downstream repos: ~30+
 SPOR compliance:       100% (each stdlib package has one owner)
 Test triplet coverage:  High (most packages have triplets)
+Package deep dives:    3 (go-lns, go-blockchain, go-dns)
 ```
 
 ---

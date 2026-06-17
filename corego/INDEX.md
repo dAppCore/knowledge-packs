@@ -202,6 +202,8 @@ Detailed documentation for specific packages:
 | Package | Documentation | Description |
 |---------|---------------|-------------|
 | [go-lns](./pkg/lns/README.md) | ✅ **Complete** | Lethean Name System — full API, examples, architecture |
+| [go-blockchain](./pkg/blockchain/README.md) | ✅ **Complete** | Lethean Blockchain — CryptoNote implementation, P2P, wallet, mining |
+| [go-dns](./pkg/dns/README.md) | ✅ **Complete** | .lthn DNS Resolution — authoritative DNS server, HSD integration, tree-root cache |
 
 More package deep dives coming soon...
 
