@@ -164,7 +164,7 @@ Total stdlib wrapped:       44
 SPOR compliance:            100%
 Test triplet coverage:      High
 Downstream repositories:    ~30+
-Package deep dives:         13 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws)
+Package deep dives:         16 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide)
 ```
 
 ---
@@ -216,6 +216,9 @@ Detailed documentation for specific packages:
 | [go-session](./pkg/session/README.md) | ✅ **Complete** | **Claude Code Parser** — Session parsing, analytics, HTML/Video rendering, search |
 | [go-webview](./pkg/webview/README.md) | ✅ **Complete** | **Browser Automation** — Chrome DevTools Protocol, Angular helpers, action pattern |
 | [go-ws](./pkg/ws/README.md) | ✅ **Complete** | **WebSocket Hub** — Real-time streaming, authentication, Redis bridge, reconnecting client |
+| [go-agent](./pkg/agent/README.md) | ✅ **Complete** | **AI Agent Orchestration** — Dispatch, MCP server, fleet management, multi-provider support |
+| [go-gui](./pkg/gui/README.md) | ✅ **Complete** | **HUI Desktop GUI Framework** — Wails v3, Angular 20, 21 services, window management, MCP tools |
+| [go-ide](./pkg/ide/README.md) | ✅ **Complete** | **Lethean Desktop IDE** — Thin Wails shell, 19 MCP tools, 4 modes, Vi Control Panel, multi-platform |
 
 More package deep dives coming soon...
 
@@ -230,5 +233,5 @@ More package deep dives coming soon...
 
 ---
 
-*Package catalog last updated: 2026-06-17T15:30:00Z*
-*Knowledge Pack: CoreGo v1.1.0*
+*Package catalog last updated: 2026-06-17T23:15:00Z*
+*Knowledge Pack: CoreGo v1.2.0*
