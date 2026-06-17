@@ -8,7 +8,7 @@ description: Complete list of CoreGo packages with their purposes and relationsh
 
 > **Repository:** `dappco.re/core/go`
 > **Total Packages:** 50+ (CoreGo framework + related packages)
-> **Last Updated:** 2026-06-18
+> **Last Updated:** 2026-06-17
 
 ---
 
@@ -168,7 +168,7 @@ Total stdlib wrapped:       44
 SPOR compliance:            100%
 Test triplet coverage:      High
 Downstream repositories:    ~30+
-Package deep dives:         31 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference, go-ml, go-config, go-build, go-ai, go-ansible, go-cgo, go-container, go-stream, go-crypt, go-store, go-miner, go-devops, go-forge, go-git)
+Package deep dives:         34 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference, go-ml, go-config, go-build, go-ai, go-ansible, go-cgo, go-container, go-stream, go-crypt, go-store, go-miner, go-devops, go-forge, go-git, go-rag, go-ratelimit, go-tenant)
 ```
 
 ---
@@ -238,6 +238,9 @@ Detailed documentation for specific packages:
 | [go-crypt](./pkg/crypt/README.md) | ✅ **Complete** | **Cryptographic Primitives & Agent Trust** — ChaCha20-Poly1305, AES-256-GCM, Argon2id KDF, OpenPGP auth, 3-tier access control, capability policies, approval workflows, audit trails |
 | [go-store](./pkg/store/README.md) | ✅ **Complete** | **SQLite Key-Value Store** — TTL expiry (triple-layered), namespace isolation via ScopedStore, reactive Watch/OnChange events, DuckDB workspace buffering, InfluxDB time-series journal, compressed JSONL cold archive, io.Medium transport abstraction |
 | [go-miner](./pkg/miner/README.md) | ✅ **Complete** | **Mining Software Controller** — Unified Miner interface for XMRig/TT-Miner/Simulated, Manager for multi-miner lifecycle, ProfileManager with go-store, EventBus via go-stream, CircuitBreaker, RateLimiter, TaskSupervisor, LogBuffer |
+| [go-rag](./pkg/rag/README.md) | ✅ **Complete** | **RAG (Retrieval-Augmented Generation)** — Qdrant vector database, Ollama embeddings, chunking, indexing, similarity search, query augmentation, multi-backend support |
+| [go-ratelimit](./pkg/ratelimit/README.md) | ✅ **Complete** | **Rate Limiting Service** — Token bucket, sliding window, fixed window algorithms, Redis backend, middleware, multi-tenant support, configurable burst handling |
+| [go-tenant](./pkg/tenant/README.md) | ✅ **Complete** | **Multi-Tenant Service** — Tenant isolation, scoped resource management, middleware, CoreGO service integration, Redis state backend, partition-aware routing |
 
 More package deep dives coming soon...
 
@@ -252,5 +255,6 @@ More package deep dives coming soon...
 
 ---
 
-*Package catalog last updated: 2026-06-18T04:00:00Z*
+*Package catalog last updated: 2026-06-17T21:35:00Z*
 *Knowledge Pack: CoreGo v1.3.0*
+*Purrr... Documentation by Purberus <purberus@lthn.ai>*
