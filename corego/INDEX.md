@@ -164,7 +164,7 @@ Total stdlib wrapped:       44
 SPOR compliance:            100%
 Test triplet coverage:      High
 Downstream repositories:    ~30+
-Package deep dives:         16 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide)
+Package deep dives:         17 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference)
 ```
 
 ---
@@ -219,6 +219,7 @@ Detailed documentation for specific packages:
 | [go-agent](./pkg/agent/README.md) | ✅ **Complete** | **AI Agent Orchestration** — Dispatch, MCP server, fleet management, multi-provider support |
 | [go-gui](./pkg/gui/README.md) | ✅ **Complete** | **HUI Desktop GUI Framework** — Wails v3, Angular 20, 21 services, window management, MCP tools |
 | [go-ide](./pkg/ide/README.md) | ✅ **Complete** | **Lethean Desktop IDE** — Thin Wails shell, 19 MCP tools, 4 modes, Vi Control Panel, multi-platform |
+| [go-inference](./pkg/inference/README.md) | ✅ **Complete** | **Shared ML Inference Interfaces** — Zero-dep contract, backend registry, TextModel/Backend interfaces, streaming |
 
 More package deep dives coming soon...
 
