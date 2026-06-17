@@ -164,6 +164,14 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 | `go-cache` | Caching layer | go-io medium |
 | `go-store` | SQLite key-value store | |
 
+### I/O Packages
+
+| Package | Purpose | Backends |
+|---------|---------|----------|
+| `go-io` | **Mandatory I/O abstraction** | 10+ (Local, Memory, S3, GitHub, etc.) |
+| `go-cache` | Caching layer | go-io medium |
+| `go-store` | SQLite key-value store | |
+
 ### Network Packages
 
 | Package | Purpose | Protocol |
@@ -180,6 +188,7 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 | `go-blockchain` | Blockchain implementation | Production | **[✅ Available](./pkg/blockchain/README.md)** |
 | `go-lns` | Lethean Name System | Production | **[✅ Available](./pkg/lns/README.md)** |
 | `go-dns` | .lthn DNS Resolution | Production | **[✅ Available](./pkg/dns/README.md)** |
+| `go-io` | **Mandatory I/O abstraction** | Production | **[✅ Available](./pkg/io/README.md)** |
 | `go-miner` | Mining operations | Production | Coming soon |
 
 ### AI/ML Packages
@@ -253,7 +262,7 @@ Total stdlib wrapped:   44
 Total downstream repos: ~30+
 SPOR compliance:       100% (each stdlib package has one owner)
 Test triplet coverage:  High (most packages have triplets)
-Package deep dives:    3 (go-lns, go-blockchain, go-dns)
+Package deep dives:    4 (go-lns, go-blockchain, go-dns, go-io)
 ```
 
 ---
