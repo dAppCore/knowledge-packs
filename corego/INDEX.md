@@ -164,7 +164,7 @@ Total stdlib wrapped:       44
 SPOR compliance:            100%
 Test triplet coverage:      High
 Downstream repositories:    ~30+
-Package deep dives:         21 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference, go-ml, go-config, go-build, go-ai)
+Package deep dives:         24 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-pool, go-process, go-i18n, go-log, go-cache, go-session, go-webview, go-ws, go-agent, go-gui, go-ide, go-inference, go-ml, go-config, go-build, go-ai, go-ansible, go-cgo, go-container)
 ```
 
 ---
@@ -224,6 +224,9 @@ Detailed documentation for specific packages:
 | [go-config](./pkg/config/README.md) | ✅ **Complete** | **Dual-Viper Configuration** — Hierarchical discovery, manifests, feature flags, watching, XDG compliance |
 | [go-build](./pkg/build/README.md) | ✅ **Complete** | **Build Orchestration** — 12 builders, 8 publishers, SDK generation, Apple ecosystem, workflow automation |
 | [go-ai](./pkg/ai/README.md) | ✅ **Complete** | **AI Integration Layer** — MCP server, metrics logging, RAG facade, provider routing, 50+ tools |
+| [go-ansible](./pkg/ansible/README.md) | ✅ **Complete** | **Pure Go Ansible Engine** — 45 module handlers, SSH transport, YAML parsing, Jinja2 templating, role support |
+| [go-cgo](./pkg/cgo/README.md) | ✅ **Complete** | **Standard CGo Harness** — Buffer, Scope, Call, type conversions, memory-safe C interop for go-blockchain, go-mlx, go-rocm |
+| [go-container](./pkg/container/README.md) | ✅ **Complete** | **Docker-Free Container Runtime** — LinuxKit (default), TIM (experimental), VZ (Apple), dev environments, I/O Medium integration |
 
 More package deep dives coming soon...
 
@@ -238,5 +241,5 @@ More package deep dives coming soon...
 
 ---
 
-*Package catalog last updated: 2026-06-17T23:15:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
+*Package catalog last updated: 2026-06-18T00:00:00Z*
+*Knowledge Pack: CoreGo v1.3.0*
