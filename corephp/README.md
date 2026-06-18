@@ -10,27 +10,195 @@ tags: [framework, php, lethean, web, laravel-like]
 
 # CorePHP Knowledge Pack
 
-> **"PHP framework for the Lethean ecosystem"**
+> **"The CorePHP module framework"** — CorePHP RFC
 
-CorePHP is the PHP framework for Lethean PHP applications, providing a modern, modular approach to PHP development with Laravel-like conventions.
+**Module:** `dappco.re/php/*`
+**Repository:** `core-php` + `core-{module}` per module
+
+CorePHP is the PHP framework for the Lethean ecosystem, providing a modern, modular approach with Laravel-like conventions. **Everything is a module. Every module is self-contained. Every module has one `Boot.php`.**
 
 ---
 
 ## 🎯 Overview
 
-**CorePHP** provides:
-- Modern PHP development
-- Modular architecture
-- Laravel-like conventions
-- Lethean-specific integrations
-- Multiple specialized packages
+From the [CorePHP RFC](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.md):
+
+**CorePHP** provides the framework architecture for PHP development in the Lethean ecosystem.
+
+**Key principles:**
+- Everything is a module
+- Every module is self-contained
+- Every module has one `Boot.php` (ServiceProvider entry point)
+- Modules are only instantiated when their events fire — **lazy loading**
+
+### Module Architecture
+
+```
+app/Mod/{ModuleName}/
+├── Boot.php              # Single ServiceProvider entry point
+├── Console/              # Artisan Commands
+├── Controllers/          # HTTP Controllers (Web & API)
+├── Database/             # Migrations, Factories, Seeders
+├── Events/               # Events & Listeners
+├── Jobs/                 # Queueable Jobs
+├── Mcp/                  # MCP Tools & Servers
+├── Models/               # Eloquent Models (Namespace: Mod\{Mod}\Models)
+├── Services/             # Business Logic
+├── Tests/                # Pest Tests
+└── View/                 # UI Layer (MVVM)
+    ├── Modal/            # Livewire Components (ViewModels)
+    │   ├── Admin/        # Admin-facing
+    │   └── Web/          # Public-facing
+    ├── Blade/            # Dumb templates (no logic)
+    │   ├── admin/
+    │   └── web/
+    ├── Components/       # Reusable Blade Components
+    └── routes/           # Route definitions
+```
+
+### Event-Driven Boot
+
+```php
+class Boot extends ServiceProvider
+{
+    public static array $listens = [
+        AdminPanelBooting::class => 'onAdminPanel',
+        WebRoutesRegistering::class => 'onWebRoutes',
+        ApiRoutesRegistering::class => 'onApiRoutes',
+        ConsoleBooting::class => 'onConsole',
+        McpToolsRegistering::class => 'onMcpTools',
+    ];
+}
+```
+
+Modules are only instantiated when their events fire — **lazy loading**.
+
+### MVVM View Protocol (Modern Flexy)
+
+- **Controller** = traffic cop (delegates, never touches HTML)
+- **View Modal** = the interface (Livewire Component — formats, prepares, manages state)
+- **Template** = dumb (HTML + simple interpolation, no `@php` blocks, no DB queries)
+
+**Rule:** Modules provide DATA, Core provides RENDERING.
+
+### Three-Tier Frontend
+
+```
+Core/Front/Web    → Public (anonymous, read-only)
+Core/Front/Client → SaaS customer (authenticated, namespace owner)
+Core/Front/Admin  → Backend admin (privileged)
+Core/Hub          → SaaS operator (Host.uk.com control plane)
+```
+
+**Namespace** = identity, tied to URI/handle (lt.hn/you, you.lthn).
+**Workspace** = management container (org that can own multiple namespaces).
+
+### Sub-Specs
+
+The CorePHP RFC includes these sub-specifications:
+- [Architecture](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.architecture.md)
+- [Commands](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.commands.md)
+- [Endpoints](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.endpoints.md)
+- [Events](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.events.md)
+- [Models](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.models.md)
+- [Patterns](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.patterns.md)
+- [Release](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.release.md)
+- [Scaffolding](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.scaffolding.md)
+- [UI](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.ui.md)
 
 ### Key Statistics
 
 - **Repository:** `forge.lthn.sh/core/php`
+- **Module:** `dappco.re/php/*`
 - **PHP Version:** 8.2+
 - **Total Repos:** 25+ (php-* ecosystem)
 - **Framework:** Custom (Laravel-inspired)
+- **Testing:** Pest PHP framework
+- **Total Modules:** 25+ (see INDEX.md)
+
+### Component Pattern
+
+- **Anonymous** (no PHP class) — pure presentation (`<admin:panel>`, `<admin:nav-item>`)
+- **Class-backed** — when logic needed (`<admin:data-table>`, `<admin:sidemenu>`)
+
+**Rule:** Modules provide DATA, Core provides RENDERING.
+
+### Table Naming Convention
+
+`[module_snake_case]_[table_name]` — e.g., `agentic_plans`, `social_posts`, `analytics_visitors`.
+
+### Enforcement Rules
+
+1. No Eloquent in Blade — template uses View Modal getters
+2. No `@php` blocks with business logic
+3. Modules don't query other modules' tables directly — use Service contracts or Events
+4. A module should be extractable as a Composer package with minimal effort
+
+### Shared Services
+
+Cross-cutting services available to all modules:
+
+| Service | Purpose |
+|---------|---------|
+| `DeviceDetectionService` | Device type, OS, browser, bot detection, in-app browser detection (15 platforms) |
+| `GeoIpService` | IP geolocation from CDN headers or MaxMind |
+| `PrivacyHelper` | IP anonymisation and hashing |
+| `UtmHelper` | UTM parameter extraction |
+
+#### In-App Browser Detection
+
+Detects social media in-app browsers (Instagram, TikTok, Facebook, Twitter, Snapchat, LinkedIn, Threads, Pinterest, Reddit, WeChat, LINE, Telegram, Discord, WhatsApp).
+
+```php
+$dd = app(DeviceDetectionService::class);
+$dd->isInAppBrowser($ua);          // any in-app browser
+$dd->isStrictContentPlatform($ua); // platforms that enforce content policies
+$dd->isMetaPlatform($ua);          // Instagram, Facebook, Threads
+$dd->getPlatformDisplayName($ua);  // "Instagram", "TikTok", etc.
+```
+
+Used by BioHost for 18+ content warnings when accessed from strict platforms.
+
+---
+
+### Inter-Module Communication
+
+Modules communicate via Laravel events — **lifecycle events** (`WebRoutesRegistering`, `AdminPanelBooting`, etc.) for route/panel registration, and **domain events** (`DomainResolving`) for cross-module data flows.
+
+```php
+// Fire a domain event (not lifecycle)
+event(new MemoryStored($memory));
+
+// Any module can listen
+MemoryStored::class => [UpdateTrainingData::class, TrackRecallLatency::class]
+```
+
+Shared event types in `Core\Events\` namespace:
+
+```php
+// src/Core/Events/DataEvents.php
+namespace Core\Events;
+
+class MemoryStored { public function __construct(public BrainMemory $memory) {} }
+class MemoryRecalled { public function __construct(public string $query, public array $results) {} }
+class WorkspaceCreated { public function __construct(public Workspace $workspace) {} }
+class SubscriptionActivated { public function __construct(public Workspace $workspace, public Plan $plan) {} }
+class ApiRequestCompleted { public function __construct(public string $endpoint, public float $duration) {} }
+```
+
+---
+
+### Testing Strategy
+
+Tests use **Pest** with Orchestra Testbench and in-memory SQLite. Tests are co-located in `src/Core/{Package}/Tests/` and `src/Mod/{Module}/Tests/`.
+
+CI matrix covers PHP 8.2/8.3/8.4 × Laravel 11/12.
+
+Every module has:
+- Unit tests for Actions and Services
+- Feature tests for API endpoints (happy path, 401, 403, 422)
+- Livewire component tests
+- Migration tests (up + down)
 
 ---
 
@@ -145,6 +313,90 @@ CorePHP (PHP Framework)
 
 ---
 
+## 💻 How-Tos
+
+### 1. Creating a New Module
+
+```bash
+# Create module directory
+mkdir -p app/Mod/MyModule
+
+# Create Boot.php
+cat > app/Mod/MyModule/Boot.php <<EOF
+<?php
+
+namespace App\Mod\MyModule;
+
+use Core\ServiceProvider;
+use Core\Events\WebRoutesRegistering;
+
+class Boot extends ServiceProvider
+{
+    public static array \$listens = [
+        WebRoutesRegistering::class => 'onWebRoutes',
+    ];
+    
+    public function onWebRoutes(WebRoutesRegistering \$event): void
+    {
+        // Register routes
+    }
+}
+EOF
+```
+
+### 2. Creating a Livewire Component
+
+```php
+// app/Mod/MyModule/Modal/Web/MyComponent.php
+namespace App\Mod\MyModule\Modal\Web;
+
+use Livewire\Component;
+
+class MyComponent extends Component
+{
+    public string \$name = '';
+    
+    public function render()
+    {
+        return view('mymodule::web.my-component');
+    }
+}
+```
+
+### 3. Using Device Detection
+
+```php
+// In a controller or service
+\$dd = app(DeviceDetectionService::class);
+
+if (\$dd->isInAppBrowser(request()->userAgent())) {
+    // Show warning for in-app browser
+    return view('warnings.in-app-browser');
+}
+
+if (\$dd->isStrictContentPlatform(request()->userAgent())) {
+    // Show 18+ content warning
+    return view('warnings.strict-platform');
+}
+```
+
+### 4. Firing Domain Events
+
+```php
+// In a service
+use Core\Events\MemoryStored;
+
+event(new MemoryStored($memory));
+
+// Listeners are registered in Boot.php
+MemoryStored::class => [
+    UpdateTrainingData::class,
+    TrackRecallLatency::class,
+]
+```
+
+---
+
 ## 🚀 Getting Started
 
 ### For Agents
@@ -159,6 +411,53 @@ CorePHP (PHP Framework)
 2. **Install dependencies:** `composer install`
 3. **Run development server:** `php artisan serve`
 4. **Build for production:** `php artisan optimize`
+
+---
+
+## 📖 Quick Reference
+
+### Module Structure
+
+| Directory | Purpose | Namespace |
+|-----------|---------|-----------|
+| `Boot.php` | ServiceProvider entry | `App\Mod\{Module}` |
+| `Console/` | Artisan Commands | `App\Mod\{Module}\Console` |
+| `Controllers/` | HTTP Controllers | `App\Mod\{Module}\Controllers` |
+| `Database/` | Migrations, Factories | `App\Mod\{Module}\Database` |
+| `Events/` | Events & Listeners | `App\Mod\{Module}\Events` |
+| `Jobs/` | Queueable Jobs | `App\Mod\{Module}\Jobs` |
+| `Mcp/` | MCP Tools | `App\Mod\{Module}\Mcp` |
+| `Models/` | Eloquent Models | `App\Mod\{Module}\Models` |
+| `Services/` | Business Logic | `App\Mod\{Module}\Services` |
+| `Tests/` | Pest Tests | `App\Mod\{Module}\Tests` |
+| `View/` | UI Layer | `App\Mod\{Module}\View` |
+
+### Frontend Tiers
+
+| Tier | Audience | Access |
+|------|----------|--------|
+| `Core/Front/Web` | Public | Anonymous, read-only |
+| `Core/Front/Client` | SaaS customer | Authenticated, namespace owner |
+| `Core/Front/Admin` | Backend admin | Privileged |
+| `Core/Hub` | SaaS operator | Host.uk.com control plane |
+
+### Device Detection Methods
+
+| Method | Returns | Example |
+|--------|---------|---------|
+| `isInAppBrowser($ua)` | `bool` | Detect any in-app browser |
+| `isStrictContentPlatform($ua)` | `bool` | Strict content policy platforms |
+| `isMetaPlatform($ua)` | `bool` | Instagram, Facebook, Threads |
+| `getPlatformDisplayName($ua)` | `string` | "Instagram", "TikTok" |
+
+### Testing Strategy
+
+| Test Type | Purpose | Location |
+|-----------|---------|----------|
+| Unit tests | Actions and Services | `Tests/Unit/` |
+| Feature tests | API endpoints | `Tests/Feature/` |
+| Livewire tests | Component tests | `Tests/Livewire/` |
+| Migration tests | Database migrations | `Tests/Migration/` |
 
 ---
 
