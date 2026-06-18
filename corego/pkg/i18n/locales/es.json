@@ -1,0 +1,117 @@
+{
+	"gram": {
+		"verb": {
+			"ser": { "base": "ser", "past": "fui", "gerund": "siendo" },
+			"estar": { "base": "estar", "past": "estuve", "gerund": "estando" },
+			"tener": { "base": "tener", "past": "tuve", "gerund": "teniendo" },
+			"hacer": { "base": "hacer", "past": "hice", "gerund": "haciendo" },
+			"poder": { "base": "poder", "past": "pude", "gerund": "pudiendo" },
+			"decir": { "base": "decir", "past": "dije", "gerund": "diciendo" },
+			"ir": { "base": "ir", "past": "fui", "gerund": "yendo" },
+			"ver": { "base": "ver", "past": "vi", "gerund": "viendo" },
+			"dar": { "base": "dar", "past": "di", "gerund": "dando" },
+			"saber": { "base": "saber", "past": "supe", "gerund": "sabiendo" },
+			"querer": { "base": "querer", "past": "quise", "gerund": "queriendo" },
+			"llegar": { "base": "llegar", "past": "llegué", "gerund": "llegando" },
+			"pasar": { "base": "pasar", "past": "pasé", "gerund": "pasando" },
+			"deber": { "base": "deber", "past": "debi", "gerund": "debiendo" },
+			"parar": { "base": "parar", "past": "paré", "gerund": "parando" },
+			"empezar": { "base": "empezar", "past": "empecé", "gerund": "empezando" },
+			"terminar": { "base": "terminar", "past": "terminé", "gerund": "terminando" },
+			"trabajar": { "base": "trabajar", "past": "trabajé", "gerund": "trabajando" },
+			"crear": { "base": "crear", "past": "creé", "gerund": "creando" },
+			"construir": { "base": "construir", "past": "construí", "gerund": "construyendo" },
+			"ejecutar": { "base": "ejecutar", "past": "ejecuté", "gerund": "ejecutando" },
+			"probar": { "base": "probar", "past": "probé", "gerund": "probando" },
+			"buscar": { "base": "buscar", "past": "busqué", "gerund": "buscando" },
+			"encontrar": { "base": "encontrar", "past": "encontré", "gerund": "encontrando" }
+		},
+		"noun": {
+			"archivo": { "one": "archivo", "other": "archivos", "gender": "m" },
+			"repositorio": { "one": "repositorio", "other": "repositorios", "gender": "m" },
+			"confirmación": { "one": "confirmación", "other": "confirmaciones", "gender": "f" },
+			"compromiso": { "one": "compromiso", "other": "compromisos", "gender": "m" },
+			"rama": { "one": "rama", "other": "ramas", "gender": "f" },
+			"cambio": { "one": "cambio", "other": "cambios", "gender": "m" },
+			"elemento": { "one": "elemento", "other": "elementos", "gender": "m" },
+			"problema": { "one": "problema", "other": "problemas", "gender": "m" },
+			"paquete": { "one": "paquete", "other": "paquetes", "gender": "m" },
+			"vulnerabilidad": { "one": "vulnerabilidad", "other": "vulnerabilidades", "gender": "f" },
+			"dependencia": { "one": "dependencia", "other": "dependencias", "gender": "f" },
+			"directorio": { "one": "directorio", "other": "directorios", "gender": "m" },
+			"categoría": { "one": "categoría", "other": "categorías", "gender": "f" },
+			"consulta": { "one": "consulta", "other": "consultas", "gender": "f" },
+			"prueba": { "one": "prueba", "other": "pruebas", "gender": "f" },
+			"ejecución": { "one": "ejecución", "other": "ejecuciones", "gender": "f" },
+			"compilación": { "one": "compilación", "other": "compilaciones", "gender": "f" }
+		},
+		"article": {
+			"indefinite": { "default": "un", "vowel": "un" },
+			"definite": "el",
+			"by_gender": { "m": "el", "f": "la" }
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JS"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"el", "la", "los", "las",
+				"un", "una", "unos", "unas",
+				"este", "esta", "estos", "estas",
+				"ese", "esa", "esos", "esas"
+			],
+			"verb_auxiliary": [
+				"es", "son", "era", "eran",
+				"tiene", "tienen", "tenía", "tenían"
+			],
+			"verb_infinitive": ["de", "a", "con", "por", "para"]
+		},
+		"number": {
+			"thousands": ".",
+			"decimal": ",",
+			"percent": "%s %"
+		}
+	},
+	"prompt": {
+		"yes": "s",
+		"no": "n",
+		"continue": "¿Continuar?",
+		"proceed": "¿Proceder?",
+		"confirm": "¿Está seguro?",
+		"overwrite": "¿Sobreescribir?",
+		"discard": "¿Descartar cambios?"
+	},
+	"time": {
+		"just_now": "ahora mismo",
+		"ago": {
+			"second": { "one": "hace {{.Count}} segundo", "other": "hace {{.Count}} segundos" },
+			"minute": { "one": "hace {{.Count}} minuto", "other": "hace {{.Count}} minutos" },
+			"hour": { "one": "hace {{.Count}} hora", "other": "hace {{.Count}} horas" },
+			"day": { "one": "hace {{.Count}} día", "other": "hace {{.Count}} días" },
+			"week": { "one": "hace {{.Count}} semana", "other": "hace {{.Count}} semanas" },
+			"month": { "one": "hace {{.Count}} mes", "other": "hace {{.Count}} meses" },
+			"year": { "one": "hace {{.Count}} año", "other": "hace {{.Count}} años" }
+		}
+	},
+	"lang": {
+		"de": "alemán",
+		"en": "inglés",
+		"es": "español",
+		"fr": "francés",
+		"it": "italiano",
+		"pt": "portugués",
+		"ru": "ruso",
+		"zh": "chino"
+	}
+}

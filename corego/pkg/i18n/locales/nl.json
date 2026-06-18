@@ -1,0 +1,109 @@
+{
+	"gram": {
+		"verb": {
+			"zijn": { "base": "zijn", "past": "was", "gerund": "zijn" },
+			"hebben": { "base": "hebben", "past": "had", "gerund": "hebbend" },
+			"doen": { "base": "doen", "past": "deed", "gerund": "doend" },
+			"gaan": { "base": "gaan", "past": "ging", "gerund": "gaand" },
+			"kunnen": { "base": "kunnen", "past": "kon", "gerund": "kunnend" },
+			"moeten": { "base": "moeten", "past": "moest", "gerund": "moetend" },
+			"willen": { "base": "willen", "past": "wilde", "gerund": "willend" },
+			"weten": { "base": "weten", "past": "wist", "gerund": "wetend" },
+			"zien": { "base": "zien", "past": "zag", "gerund": "ziend" },
+			"nemen": { "base": "nemen", "past": "nam", "gerund": "nemend" },
+			"geven": { "base": "geven", "past": "gaf", "gerund": "gevend" },
+			"maken": { "base": "maken", "past": "maakte", "gerund": "makend" },
+			"bouwen": { "base": "bouwen", "past": "bouwde", "gerund": "bouwend" },
+			"uitvoeren": { "base": "uitvoeren", "past": "voerde uit", "gerund": "uitvoerend" },
+			"testen": { "base": "testen", "past": "testte", "gerund": "testend" },
+			"controleren": { "base": "controleren", "past": "controleerde", "gerund": "controlerend" },
+			"beginnen": { "base": "beginnen", "past": "began", "gerund": "beginnend" },
+			"eindigen": { "base": "eindigen", "past": "eindigde", "gerund": "eindigend" },
+			"werken": { "base": "werken", "past": "werkte", "gerund": "werkend" }
+		},
+		"noun": {
+			"bestand": { "one": "bestand", "other": "bestanden", "gender": "n" },
+			"repository": { "one": "repository", "other": "repositories", "gender": "n" },
+			"bevestiging": { "one": "bevestiging", "other": "bevestigingen", "gender": "f" },
+			"commit": { "one": "commit", "other": "commits", "gender": "m" },
+			"branch": { "one": "branch", "other": "branches", "gender": "f" },
+			"wijziging": { "one": "wijziging", "other": "wijzigingen", "gender": "f" },
+			"element": { "one": "element", "other": "elementen", "gender": "n" },
+			"probleem": { "one": "probleem", "other": "problemen", "gender": "n" },
+			"pakket": { "one": "pakket", "other": "pakketten", "gender": "n" },
+			"kwetsbaarheid": { "one": "kwetsbaarheid", "other": "kwetsbaarheden", "gender": "f" },
+			"afhankelijkheid": { "one": "afhankelijkheid", "other": "afhankelijkheden", "gender": "f" },
+			"map": { "one": "map", "other": "mappen", "gender": "f" },
+			"categorie": { "one": "categorie", "other": "categorieën", "gender": "f" },
+			"verzoek": { "one": "verzoek", "other": "verzoeken", "gender": "n" },
+			"test": { "one": "test", "other": "tests", "gender": "m" },
+			"uitvoering": { "one": "uitvoering", "other": "uitvoeringen", "gender": "f" }
+		},
+		"article": {
+			"indefinite": { "default": "een", "vowel": "een" },
+			"definite": "het",
+			"by_gender": { "m": "de", "f": "de", "n": "het" }
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JS"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"de", "het", "een",
+				"den", "der"
+			],
+			"verb_auxiliary": [
+				"is", "zijn", "was", "waren",
+				"heeft", "hebben", "had", "hadden"
+			],
+			"verb_infinitive": ["te", "om", "met", "voor"]
+		},
+		"number": {
+			"thousands": ".",
+			"decimal": ",",
+			"percent": "%s %"
+		}
+	},
+	"prompt": {
+		"yes": "j",
+		"no": "n",
+		"continue": "Doorgaan?",
+		"proceed": "Doorzetten?",
+		"confirm": "Weet u het zeker?",
+		"overwrite": "Overschrijven?",
+		"discard": "Wijzigingen negeren?"
+	},
+	"time": {
+		"just_now": "zojuist",
+		"ago": {
+			"second": { "one": "{{.Count}} seconde geleden", "other": "{{.Count}} seconden geleden" },
+			"minute": { "one": "{{.Count}} minuut geleden", "other": "{{.Count}} minuten geleden" },
+			"hour": { "one": "{{.Count}} uur geleden", "other": "{{.Count}} uur geleden" },
+			"day": { "one": "{{.Count}} dag geleden", "other": "{{.Count}} dagen geleden" },
+			"week": { "one": "{{.Count}} week geleden", "other": "{{.Count}} weken geleden" },
+			"month": { "one": "{{.Count}} maand geleden", "other": "{{.Count}} maanden geleden" },
+			"year": { "one": "{{.Count}} jaar geleden", "other": "{{.Count}} jaar geleden" }
+		}
+	},
+	"lang": {
+		"de": "Duits",
+		"en": "Engels",
+		"es": "Spaans",
+		"fr": "Frans",
+		"it": "Italiaans",
+		"pt": "Portugees",
+		"ru": "Russisch",
+		"zh": "Chinees"
+	}
+}

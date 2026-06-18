@@ -1,0 +1,114 @@
+{
+	"gram": {
+		"verb": {
+			"essere": { "base": "essere", "past": "fui", "gerund": "essendo" },
+			"avere": { "base": "avere", "past": "ebbi", "gerund": "avendo" },
+			"fare": { "base": "fare", "past": "feci", "gerund": "facendo" },
+			"andare": { "base": "andare", "past": "andai", "gerund": "andando" },
+			"dovere": { "base": "dovere", "past": "dovetti", "gerund": "dovendo" },
+			"potere": { "base": "potere", "past": "potei", "gerund": "potendo" },
+			"volere": { "base": "volere", "past": "volli", "gerund": "volendo" },
+			"sapere": { "base": "sapere", "past": "seppi", "gerund": "sapendo" },
+			"vedere": { "base": "vedere", "past": "vidi", "gerund": "vedendo" },
+			"dare": { "base": "dare", "past": "diedi", "gerund": "dando" },
+			"dire": { "base": "dire", "past": "dissi", "gerund": "dicendo" },
+			"prere": { "base": "prendere", "past": "presi", "gerund": "prendendo" },
+			"mettere": { "base": "mettere", "past": "misi", "gerund": "mettendo" },
+			"trovare": { "base": "trovare", "past": "trovai", "gerund": "trovando" },
+			"costruire": { "base": "costruire", "past": "costruii", "gerund": "costruendo" },
+			"eseguire": { "base": "eseguire", "past": "eseguii", "gerund": "eseguendo" },
+			"testare": { "base": "testare", "past": "testai", "gerund": "testando" },
+			"controllare": { "base": "controllare", "past": "controllai", "gerund": "controllando" },
+			"iniziare": { "base": "iniziare", "past": "iniziai", "gerund": "iniziando" },
+			"finire": { "base": "finire", "past": "finii", "gerund": "finendo" },
+			"lavorare": { "base": "lavorare", "past": "lavorai", "gerund": "lavorando" },
+			"creare": { "base": "creare", "past": "creai", "gerund": "creando" }
+		},
+		"noun": {
+			"file": { "one": "file", "other": "file", "gender": "m" },
+			"repository": { "one": "repository", "other": "repository", "gender": "m" },
+			"conferma": { "one": "conferma", "other": "conferme", "gender": "f" },
+			"commit": { "one": "commit", "other": "commit", "gender": "m" },
+			"branch": { "one": "branch", "other": "branch", "gender": "m" },
+			"modifica": { "one": "modifica", "other": "modifiche", "gender": "f" },
+			"elemento": { "one": "elemento", "other": "elementi", "gender": "m" },
+			"problema": { "one": "problema", "other": "problemi", "gender": "m" },
+			"pacchetto": { "one": "pacchetto", "other": "pacchetti", "gender": "m" },
+			"vulnerabilità": { "one": "vulnerabilità", "other": "vulnerabilità", "gender": "f" },
+			"dipendenza": { "one": "dipendenza", "other": "dipendenze", "gender": "f" },
+			"cartella": { "one": "cartella", "other": "cartelle", "gender": "f" },
+			"categoria": { "one": "categoria", "other": "categorie", "gender": "f" },
+			"richiesta": { "one": "richiesta", "other": "richieste", "gender": "f" },
+			"test": { "one": "test", "other": "test", "gender": "m" },
+			"esecuzione": { "one": "esecuzione", "other": "esecuzioni", "gender": "f" },
+			"compilazione": { "one": "compilazione", "other": "compilazioni", "gender": "f" }
+		},
+		"article": {
+			"indefinite": { "default": "un", "vowel": "un" },
+			"definite": "il",
+			"by_gender": { "m": "il", "f": "la" }
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JS"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"il", "la", "i", "le", "gli", "le",
+				"un", "una", "un",
+				"questo", "questa", "questi", "queste"
+			],
+			"verb_auxiliary": [
+				"è", "sono", "era", "erano",
+				"ha", "hanno", "aveva", "avevano"
+			],
+			"verb_infinitive": ["di", "a", "da", "in", "con", "su", "per"]
+		},
+		"number": {
+			"thousands": ".",
+			"decimal": ",",
+			"percent": "%s %"
+		}
+	},
+	"prompt": {
+		"yes": "s",
+		"no": "n",
+		"continue": "Continuare?",
+		"proceed": "Procedere?",
+		"confirm": "Sei sicuro?",
+		"overwrite": "Sovrascrivere?",
+		"discard": "Scartare le modifiche?"
+	},
+	"time": {
+		"just_now": "proprio ora",
+		"ago": {
+			"second": { "one": "{{.Count}} secondo fa", "other": "{{.Count}} secondi fa" },
+			"minute": { "one": "{{.Count}} minuto fa", "other": "{{.Count}} minuti fa" },
+			"hour": { "one": "{{.Count}} ora fa", "other": "{{.Count}} ore fa" },
+			"day": { "one": "{{.Count}} giorno fa", "other": "{{.Count}} giorni fa" },
+			"week": { "one": "{{.Count}} settimana fa", "other": "{{.Count}} settimane fa" },
+			"month": { "one": "{{.Count}} mese fa", "other": "{{.Count}} mesi fa" },
+			"year": { "one": "{{.Count}} anno fa", "other": "{{.Count}} anni fa" }
+		}
+	},
+	"lang": {
+		"de": "tedesco",
+		"en": "inglese",
+		"es": "spagnolo",
+		"fr": "francese",
+		"it": "italiano",
+		"pt": "portoghese",
+		"ru": "russo",
+		"zh": "cinese"
+	}
+}

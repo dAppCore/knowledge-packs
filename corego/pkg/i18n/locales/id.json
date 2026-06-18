@@ -1,0 +1,118 @@
+{
+	"gram": {
+		"verb": {
+			"ada": { "base": "ada", "past": "ada", "gerund": "ada" },
+			"punya": { "base": "punya", "past": "punya", "gerund": "mempunyai" },
+			"buat": { "base": "buat", "past": "membuat", "gerund": "membuat" },
+			"pergi": { "base": "pergi", "past": "pergi", "gerund": "pergi" },
+			"beri": { "base": "beri", "past": "memberi", "gerund": "memberi" },
+			"ambil": { "base": "ambil", "past": "mengambil", "gerund": "mengambil" },
+			"baca": { "base": "baca", "past": "membaca", "gerund": "membaca" },
+			"tulis": { "base": "tulis", "past": "menulis", "gerund": "menulis" },
+			"bangun": { "base": "bangun", "past": "membangun", "gerund": "membangun" },
+			"kirim": { "base": "kirim", "past": "mengirim", "gerund": "mengirim" },
+			"temukan": { "base": "temukan", "past": "menemukan", "gerund": "menemukan" },
+			"mulai": { "base": "mulai", "past": "memulai", "gerund": "memulai" },
+			"pindah": { "base": "pindah", "past": "memindah", "gerund": "memindah" },
+			"bekerja": { "base": "bekerja", "past": "bekerja", "gerund": "bekerja" },
+			"ciptakan": { "base": "ciptakan", "past": "menciptakan", "gerund": "menciptakan" },
+			"jalankan": { "base": "jalankan", "past": "menjalankan", "gerund": "menjalankan" },
+			"uji": { "base": "uji", "past": "menguji", "gerund": "menguji" },
+			"cari": { "base": "cari", "past": "mencari", "gerund": "mencari" },
+			"temukan": { "base": "temukan", "past": "menemukan", "gerund": "menemukan" },
+			"perbarui": { "base": "perbarui", "past": "memperbarui", "gerund": "memperbarui" },
+			"hapus": { "base": "hapus", "past": "menghapus", "gerund": "menghapus" },
+			"letakkan": { "base": "letakkan", "past": "meletakkan", "gerund": "meletakkan" }
+		},
+		"noun": {
+			"berkas": { "one": "berkas", "other": "berkas-berkas" },
+			"gudang": { "one": "gudang", "other": "gudang-gudang" },
+			"konfirmasi": { "one": "konfirmasi", "other": "konfirmasi-konfirmasi" },
+			"komitmen": { "one": "komitmen", "other": "komitmen-komitmen" },
+			"cabang": { "one": "cabang", "other": "cabang-cabang" },
+			"perubahan": { "one": "perubahan", "other": "perubahan-perubahan" },
+			"elemen": { "one": "elemen", "other": "elemen-elemen" },
+			"masalah": { "one": "masalah", "other": "masalah-masalah" },
+			"paket": { "one": "paket", "other": "paket-paket" },
+			"kerentanan": { "one": "kerentanan", "other": "kerentanan-kerentanan" },
+			"ketergantungan": { "one": "ketergantungan", "other": "ketergantungan-ketergantungan" },
+			"direktori": { "one": "direktori", "other": "direktori-direktori" },
+			"kategori": { "one": "kategori", "other": "kategori-kategori" },
+			"kueri": { "one": "kueri", "other": "kueri-kueri" },
+			"uji": { "one": "tes", "other": "tes-tes" },
+			"jalankan": { "one": "eksekusi", "other": "eksekusi-eksekusi" },
+			"bangunan": { "one": "bangunan", "other": "bangunan-bangunan" }
+		},
+		"article": {
+			"indefinite": { "default": "sebuah", "vowel": "sebuah" },
+			"definite": "",
+			"by_gender": {}
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JavaScript"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"ini", "itu", "tersebut", "ini semua", "itu semua",
+				"saya", "kamu", "dia", "kita", "kita semua", "mereka",
+				"semua", "beberapa", "banyak", "sedikit"
+			],
+			"verb_auxiliary": [
+				"adalah", "merupakan", "adalah", "merupakan",
+				"punya", "mempunyai", "telah", "sudah"
+			],
+			"verb_infinitive": ["untuk", "dengan", "di", "ke", "dari", "dan"]
+		},
+		"number": {
+			"thousands": ".",
+			"decimal": ",",
+			"percent": "%s%%"
+		}
+	},
+	"prompt": {
+		"yes": "y",
+		"no": "n",
+		"continue": "Lanjutkan?",
+		"proceed": "Lanjut?",
+		"confirm": "Yakin?",
+		"overwrite": "Tulis ulang?",
+		"discard": "Batalkan perubahan?"
+	},
+	"time": {
+		"just_now": "baru saja",
+		"ago": {
+			"second": { "one": "{{.Count}} detik yang lalu", "other": "{{.Count}} detik yang lalu" },
+			"minute": { "one": "{{.Count}} menit yang lalu", "other": "{{.Count}} menit yang lalu" },
+			"hour": { "one": "{{.Count}} jam yang lalu", "other": "{{.Count}} jam yang lalu" },
+			"day": { "one": "{{.Count}} hari yang lalu", "other": "{{.Count}} hari yang lalu" },
+			"week": { "one": "{{.Count}} minggu yang lalu", "other": "{{.Count}} minggu yang lalu" },
+			"month": { "one": "{{.Count}} bulan yang lalu", "other": "{{.Count}} bulan yang lalu" },
+			"year": { "one": "{{.Count}} tahun yang lalu", "other": "{{.Count}} tahun yang lalu" }
+		}
+	},
+	"lang": {
+		"de": "Jerman",
+		"en": "Inggris",
+		"es": "Spanyol",
+		"fr": "Prancis",
+		"id": "Indonesia",
+		"it": "Italia",
+		"ja": "Jepang",
+		"ko": "Korea",
+		"pl": "Polandia",
+		"pt": "Portugis",
+		"ru": "Rusia",
+		"zh": "Tionghoa"
+	}
+}

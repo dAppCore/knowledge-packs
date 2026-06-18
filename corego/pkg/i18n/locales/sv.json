@@ -1,0 +1,107 @@
+{
+	"gram": {
+		"verb": {
+			"vara": { "base": "vara", "past": "var", "gerund": "varande" },
+			"ha": { "base": "ha", "past": "hade", "gerund": "havande" },
+			"göra": { "base": "göra", "past": "gjorde", "gerund": "görande" },
+			"gå": { "base": "gå", "past": "gick", "gerund": "gående" },
+			"kunna": { "base": "kunna", "past": "kunde", "gerund": "kunnande" },
+			"måste": { "base": "måste", "past": "måste", "gerund": "måste" },
+			"vilja": { "base": "vilja", "past": "ville", "gerund": "viljande" },
+			"veta": { "base": "veta", "past": "visste", "gerund": "vetande" },
+			"se": { "base": "se", "past": "såg", "gerund": "seende" },
+			"ta": { "base": "ta", "past": "tog", "gerund": "tagande" },
+			"ge": { "base": "ge", "past": "gav", "gerund": "givande" },
+			"skriva": { "base": "skriva", "past": "skrev", "gerund": "skrivande" },
+			"bygga": { "base": "bygga", "past": "byggde", "gerund": "byggande" },
+			"utföra": { "base": "utföra", "past": "utförde", "gerund": "utförande" },
+			"testa": { "base": "testa", "past": "testade", "gerund": "testande" },
+			"kontrollera": { "base": "kontrollera", "past": "kontrollerade", "gerund": "kontrollerande" },
+			"börja": { "base": "börja", "past": "började", "gerund": "börjande" },
+			"sluta": { "base": "sluta", "past": "slutade", "gerund": "slutande" },
+			"arbeta": { "base": "arbeta", "past": "arbetade", "gerund": "arbetande" }
+		},
+		"noun": {
+			"fil": { "one": "fil", "other": "filer", "gender": "c" },
+			"repo": { "one": "repo", "other": "repos", "gender": "n" },
+			"bekräftelse": { "one": "bekräftelse", "other": "bekräftelser", "gender": "c" },
+			"commit": { "one": "commit", "other": "commits", "gender": "c" },
+			"gren": { "one": "gren", "other": "grenar", "gender": "c" },
+			"ändring": { "one": "ändring", "other": "ändringar", "gender": "c" },
+			"element": { "one": "element", "other": "element", "gender": "n" },
+			"problem": { "one": "problem", "other": "problem", "gender": "n" },
+			"paket": { "one": "paket", "other": "paket", "gender": "n" },
+			"sårbarhet": { "one": "sårbarhet", "other": "sårbarheter", "gender": "c" },
+			"beroende": { "one": "beroende", "other": "beroenden", "gender": "n" },
+			"katalog": { "one": "katalog", "other": "kataloger", "gender": "c" },
+			"kategori": { "one": "kategori", "other": "kategorier", "gender": "c" },
+			"förfrågan": { "one": "förfrågan", "other": "förfrågningar", "gender": "c" },
+			"test": { "one": "test", "other": "tester", "gender": "c" },
+			"exekvering": { "one": "exekvering", "other": "exekveringar", "gender": "c" }
+		},
+		"article": {
+			"indefinite": { "default": "en", "vowel": "en" },
+			"definite": "",
+			"by_gender": { "m": "", "f": "", "n": "" }
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JS"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"en", "ett", "den", "det"
+			],
+			"verb_auxiliary": [
+				"är", "ära", "var", "varit"
+			],
+			"verb_infinitive": ["att"]
+		},
+		"number": {
+			"thousands": " ",
+			"decimal": ",",
+			"percent": "%s %"
+		}
+	},
+	"prompt": {
+		"yes": "j",
+		"no": "n",
+		"continue": "Fortsätta?",
+		"proceed": "Fortgå?",
+		"confirm": "Är du säker?",
+		"overwrite": "Skriva över?",
+		"discard": "Kassera ändringar?"
+	},
+	"time": {
+		"just_now": "just nu",
+		"ago": {
+			"second": { "one": "för {{.Count}} sekund sedan", "other": "för {{.Count}} sekunder sedan" },
+			"minute": { "one": "för {{.Count}} minut sedan", "other": "för {{.Count}} minuter sedan" },
+			"hour": { "one": "för {{.Count}} timme sedan", "other": "för {{.Count}} timmar sedan" },
+			"day": { "one": "för {{.Count}} dag sedan", "other": "för {{.Count}} dagar sedan" },
+			"week": { "one": "för {{.Count}} vecka sedan", "other": "för {{.Count}} veckor sedan" },
+			"month": { "one": "för {{.Count}} månad sedan", "other": "för {{.Count}} månader sedan" },
+			"year": { "one": "för {{.Count}} år sedan", "other": "för {{.Count}} år sedan" }
+		}
+	},
+	"lang": {
+		"de": "tyska",
+		"en": "engelska",
+		"es": "spanska",
+		"fr": "franska",
+		"it": "italienska",
+		"pt": "portugisiska",
+		"ru": "ryska",
+		"zh": "kinesiska"
+	}
+}

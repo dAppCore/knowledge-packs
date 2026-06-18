@@ -1,0 +1,114 @@
+{
+	"gram": {
+		"verb": {
+			"sein": { "base": "sein", "past": "war", "gerund": "seiend" },
+			"haben": { "base": "haben", "past": "hatte", "gerund": "habend" },
+			"machen": { "base": "machen", "past": "machte", "gerund": "machend" },
+			"tun": { "base": "tun", "past": "tat", "gerund": "tuend" },
+			"kommen": { "base": "kommen", "past": "kam", "gerund": "kommend" },
+			"gehen": { "base": "gehen", "past": "ging", "gerund": "gehend" },
+			"sehen": { "base": "sehen", "past": "sah", "gerund": "sehend" },
+			"wissen": { "base": "wissen", "past": "wusste", "gerund": "wissend" },
+			"können": { "base": "können", "past": "konnte", "gerund": "könnend" },
+			"müssen": { "base": "müssen", "past": "musste", "gerund": "müssend" },
+			"sollen": { "base": "sollen", "past": "sollte", "gerund": "sollend" },
+			"wollen": { "base": "wollen", "past": "wollte", "gerund": "wollend" },
+			"dürfen": { "base": "dürfen", "past": "durfte", "gerund": "dürfend" },
+			"geben": { "base": "geben", "past": "gab", "gerund": "gebend" },
+			"nehmen": { "base": "nehmen", "past": "nahm", "gerund": "nehmend" },
+			"finden": { "base": "finden", "past": "fand", "gerund": "findend" },
+			"bauen": { "base": "bauen", "past": "baute", "gerund": "bauend" },
+			"ausführen": { "base": "ausführen", "past": "führte aus", "gerund": "ausführend" },
+			"testen": { "base": "testen", "past": "testete", "gerund": "testend" },
+			"prüfen": { "base": "prüfen", "past": "prüfte", "gerund": "prüfend" },
+			"starten": { "base": "starten", "past": "startete", "gerund": "startend" },
+			"beenden": { "base": "beenden", "past": "beendete", "gerund": "beendend" }
+		},
+		"noun": {
+			"datei": { "one": "Datei", "other": "Dateien", "gender": "f" },
+			"repository": { "one": "Repository", "other": "Repositories", "gender": "n" },
+			"bestätigung": { "one": "Bestätigung", "other": "Bestätigungen", "gender": "f" },
+			"commit": { "one": "Commit", "other": "Commits", "gender": "m" },
+			"branch": { "one": "Branch", "other": "Branches", "gender": "m" },
+			"änderung": { "one": "Änderung", "other": "Änderungen", "gender": "f" },
+			"element": { "one": "Element", "other": "Elemente", "gender": "n" },
+			"problem": { "one": "Problem", "other": "Probleme", "gender": "n" },
+			"paket": { "one": "Paket", "other": "Pakete", "gender": "n" },
+			"sicherheitslücke": { "one": "Sicherheitslücke", "other": "Sicherheitslücken", "gender": "f" },
+			"abhängigkeit": { "one": "Abhängigkeit", "other": "Abhängigkeiten", "gender": "f" },
+			"verzeichnis": { "one": "Verzeichnis", "other": "Verzeichnisse", "gender": "n" },
+			"kategorie": { "one": "Kategorie", "other": "Kategorien", "gender": "f" },
+			"anfrage": { "one": "Anfrage", "other": "Anfragen", "gender": "f" },
+			"test": { "one": "Test", "other": "Tests", "gender": "m" },
+			"ausführung": { "one": "Ausführung", "other": "Ausführungen", "gender": "f" },
+			"kompilierung": { "one": "Kompilierung", "other": "Kompilierungen", "gender": "f" }
+		},
+		"article": {
+			"indefinite": { "default": "ein", "vowel": "ein" },
+			"definite": "das",
+			"by_gender": { "m": "der", "f": "die", "n": "das" }
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JS"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"der", "die", "das",
+				"den", "dem", "des",
+				"ein", "eine", "ein"
+			],
+			"verb_auxiliary": [
+				"ist", "sind", "war", "waren",
+				"hat", "haben", "hatte", "hatten"
+			],
+			"verb_infinitive": ["zu"]
+		},
+		"number": {
+			"thousands": ".",
+			"decimal": ",",
+			"percent": "%s %"
+		}
+	},
+	"prompt": {
+		"yes": "j",
+		"no": "n",
+		"continue": "Fortsetzen?",
+		"proceed": "Fortfahren?",
+		"confirm": "Sind Sie sicher?",
+		"overwrite": "Überschreiben?",
+		"discard": "Änderungen verwerfen?"
+	},
+	"time": {
+		"just_now": "gerade jetzt",
+		"ago": {
+			"second": { "one": "vor {{.Count}} Sekunde", "other": "vor {{.Count}} Sekunden" },
+			"minute": { "one": "vor {{.Count}} Minute", "other": "vor {{.Count}} Minuten" },
+			"hour": { "one": "vor {{.Count}} Stunde", "other": "vor {{.Count}} Stunden" },
+			"day": { "one": "vor {{.Count}} Tag", "other": "vor {{.Count}} Tagen" },
+			"week": { "one": "vor {{.Count}} Woche", "other": "vor {{.Count}} Wochen" },
+			"month": { "one": "vor {{.Count}} Monat", "other": "vor {{.Count}} Monaten" },
+			"year": { "one": "vor {{.Count}} Jahr", "other": "vor {{.Count}} Jahren" }
+		}
+	},
+	"lang": {
+		"de": "Deutsch",
+		"en": "Englisch",
+		"es": "Spanisch",
+		"fr": "Französisch",
+		"it": "Italienisch",
+		"pt": "Portugiesisch",
+		"ru": "Russisch",
+		"zh": "Chinesisch"
+	}
+}

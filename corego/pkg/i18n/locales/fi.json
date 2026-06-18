@@ -1,0 +1,117 @@
+{
+	"gram": {
+		"verb": {
+			"olla": { "base": "ole", "past": "oli", "gerund": "ollen" },
+			"omistaa": { "base": "omista", "past": "omisti", "gerund": "omistaen" },
+			"tehda": { "base": "tee", "past": "teki", "gerund": "tehden" },
+			"mennä": { "base": "mene", "past": "meni", "gerund": "mennessä" },
+			"antaa": { "base": "anna", "past": "antoi", "gerund": "antaen" },
+			"ottaa": { "base": "ota", "past": "otti", "gerund": "ottaen" },
+			"lukea": { "base": "luke", "past": "luki", "gerund": "lukiessa" },
+			"kirjoittaa": { "base": "kirjoita", "past": "kirjoitti", "gerund": "kirjoittaen" },
+			"rakentaa": { "base": "rakenna", "past": "rakensi", "gerund": "rakentaen" },
+			"lahettää": { "base": "laheta", "past": "lahesi", "gerund": "lahettaen" },
+			"löytää": { "base": "loyda", "past": "loyi", "gerund": "loytaen" },
+			"alkaa": { "base": "aloita", "past": "aloitti", "gerund": "aloittaen" },
+			"siirtää": { "base": "siirra", "past": "siirsi", "gerund": "siirtaen" },
+			"työskennellä": { "base": "tyoskentele", "past": "tyoskenteli", "gerund": "tyoskennellen" },
+			"luoda": { "base": "luo", "past": "loi", "gerund": "luoden" },
+			"suorittaa": { "base": "suorita", "past": "suoritti", "gerund": "suorittaen" },
+			"testata": { "base": "testaa", "past": "testasi", "gerund": "testaten" },
+			"etsia": { "base": "etsi", "past": "etsi", "gerund": "etsien" },
+			"paivittaa": { "base": "paivita", "past": "paivitti", "gerund": "paivittaen" },
+			"poistaa": { "base": "poista", "past": "poisti", "gerund": "poistaen" },
+			"laittaa": { "base": "laheta", "past": "lahesi", "gerund": "lahettaen" }
+		},
+		"noun": {
+			"tiedosto": { "one": "tiedosto", "other": "tiedostot" },
+			"varasto": { "one": "varasto", "other": "varastot" },
+			"varmennus": { "one": "varmennus", "other": "varmennukset" },
+			"sitoumus": { "one": "sitoumus", "other": "sitoumukset" },
+			"haara": { "one": "haara", "other": "haarat" },
+			"muutos": { "one": "muutos", "other": "muutokset" },
+			"elementti": { "one": "elementti", "other": "elementit" },
+			"ongelma": { "one": "ongelma", "other": "ongelmat" },
+			"paketti": { "one": "paketti", "other": "paketit" },
+			"haavoittuvuus": { "one": "haavoittuvuus", "other": "haavoittuvuudet" },
+			"riippuvuus": { "one": "riippuvuus", "other": "riippuvuudet" },
+			"hakemisto": { "one": "hakemisto", "other": "hakemistot" },
+			"kategoria": { "one": "kategoria", "other": "kategoriat" },
+			"kysely": { "one": "kysely", "other": "kyselyt" },
+			"testi": { "one": "testi", "other": "testit" },
+			"suoritus": { "one": "suoritus", "other": "suoritukset" },
+			"käännös": { "one": "käännös", "other": "käännökset" }
+		},
+		"article": {
+			"indefinite": { "default": "", "vowel": "" },
+			"definite": "",
+			"by_gender": {}
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JavaScript"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"tama", "tama", "nama", "nämä", "nuo", "ne",
+				"minun", "sinun", "hänen", "meidän", "teidän", "heidän",
+				"kaikki", "jotkut", "moni", "vähän"
+			],
+			"verb_auxiliary": [
+				"on", "ovat", "oli", "olivat",
+				"minulla", "sinulla", "hänellä"
+			],
+			"verb_infinitive": ["voida", "täytyä", "pitää", "saada", "voida"]
+		},
+		"number": {
+			"thousands": " ",
+			"decimal": ",",
+			"percent": "%s %%"
+		}
+	},
+	"prompt": {
+		"yes": "k",
+		"no": "e",
+		"continue": "Jatkaa?",
+		"proceed": "Edetä?",
+		"confirm": "Oletko varma?",
+		"overwrite": "Ylikirjoittaa?",
+		"discard": "Hylätä muutokset?"
+	},
+	"time": {
+		"just_now": "juuri nyt",
+		"ago": {
+			"second": { "one": "{{.Count}} sekuntia sitten", "other": "{{.Count}} sekuntia sitten" },
+			"minute": { "one": "{{.Count}} minuuttia sitten", "other": "{{.Count}} minuuttia sitten" },
+			"hour": { "one": "{{.Count}} tuntia sitten", "other": "{{.Count}} tuntia sitten" },
+			"day": { "one": "{{.Count}} päivää sitten", "other": "{{.Count}} päivää sitten" },
+			"week": { "one": "{{.Count}} viikkoa sitten", "other": "{{.Count}} viikkoa sitten" },
+			"month": { "one": "{{.Count}} kuukautta sitten", "other": "{{.Count}} kuukautta sitten" },
+			"year": { "one": "{{.Count}} vuotta sitten", "other": "{{.Count}} vuotta sitten" }
+		}
+	},
+	"lang": {
+		"de": "saksa",
+		"en": "englanti",
+		"es": "espanja",
+		"fi": "suomi",
+		"fr": "ranska",
+		"it": "italia",
+		"ja": "japani",
+		"ko": "korea",
+		"pl": "puola",
+		"pt": "portugali",
+		"ru": "venäjä",
+		"zh": "kiina"
+	}
+}

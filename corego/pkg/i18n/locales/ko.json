@@ -1,0 +1,117 @@
+{
+	"gram": {
+		"verb": {
+			"ida": { "base": "있", "past": "있었다", "gerund": "있는" },
+			"hada": { "base": "하", "past": "했다", "gerund": "하는" },
+			"gada": { "base": "가", "past": "갔", "gerund": "가는" },
+			"neomda": { "base": "넘", "past": "넘었다", "gerund": "넘는" },
+			"geurida": { "base": "그리", "past": "그렸다", "gerund": "그리는" },
+			"sseuda": { "base": "쓰", "past": "쐈다", "gerund": "쓰는" },
+			"ikkaeda": { "base": "읽", "past": "읽었다", "gerund": "읽는" },
+			"jikyeoda": { "base": "적", "past": "적었다", "gerund": "적는" },
+			"bonaeda": { "base": "보내", "past": "보냈다", "gerund": "보내는" },
+			"chatda": { "base": "찾", "past": "찾았다", "gerund": "찾는" },
+			"sijakada": { "base": "시작하", "past": "시작했다", "gerund": "시작하는" },
+			"jaryeohada": { "base": "하는데", "past": "했", "gerund": "하는" },
+			"haldal": { "base": "할", "past": "했다", "gerund": "하는" },
+			"mandeureoda": { "base": "만들", "past": "만들었다", "gerund": "만드는" },
+			"geonganghada": { "base": "건강하", "past": "건강했다", "gerund": "건강하는" },
+			"silheohada": { "base": "실행하", "past": "실행했다", "gerund": "실행하는" },
+			"siheomhada": { "base": "시험하", "past": "시험했다", "gerund": "시험하는" },
+			"chajda": { "base": "찾", "past": "찾았다", "gerund": "찾는" },
+			"gayeohada": { "base": "가져오", "past": "가져왔다", "gerund": "가져오는" },
+			"sinyeonghada": { "base": "신청하", "past": "신청했다", "gerund": "신청하는" },
+			"jeoha": { "base": "제거하", "past": "제거했다", "gerund": "제거하는" },
+			"gwonryuhada": { "base": "권류하", "past": "권류했다", "gerund": "권류하는" }
+		},
+		"noun": {
+			"dongyeo": { "one": "파일", "other": "파일들" },
+			"gitrepo": { "one": "저장소", "other": "저장소들" },
+			"hwagin": { "one": "확인", "other": "확인들" },
+			"yeonrak": { "one": "커밋", "other": "커밋들" },
+			"gaeseon": { "one": "브랜치", "other": "브랜치들" },
+			"byeonhwa": { "one": "변화", "other": "변화들" },
+			"sosok": { "one": "요소", "other": "요소들" },
+			"munje": { "one": "문제", "other": "문제들" },
+			"paekenji": { "one": "패키지", "other": "패키지들" },
+			"yeolpum": { "one": "취약점", "other": "취약점들" },
+			"jogisang": { "one": "의존성", "other": "의존성들" },
+			"direkteoli": { "one": "디렉토리", "other": "디렉토리들" },
+			"buneung": { "one": "카테고리", "other": "카테고리들" },
+			"jeongbo": { "one": "쿼리", "other": "쿼리들" },
+			"sihum": { "one": "테스트", "other": "테스트들" },
+			"gaebal": { "one": "실행", "other": "실행들" },
+			"beondeu": { "one": "빌드", "other": "빌드들" }
+		},
+		"article": {
+			"indefinite": { "default": "", "vowel": "" },
+			"definite": "",
+			"by_gender": {}
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JavaScript"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"이", "그", "저", "이것", "그것", "저것",
+				"이들", "그들", "저들",
+				"모든", "일부", "많이", "적게"
+			],
+			"verb_auxiliary": [
+				"이다", "이하다", "이였다", "일",
+				"있다", "없다", "했다"
+			],
+			"verb_infinitive": ["을", "를", "에", "에서", "으로", "로", "과", "와"]
+		},
+		"number": {
+			"thousands": ",",
+			"decimal": ".",
+			"percent": "%s%%"
+		}
+	},
+	"prompt": {
+		"yes": "y",
+		"no": "n",
+		"continue": "계속할까요?",
+		"proceed": "진행할까요?",
+		"confirm": "확실한가요?",
+		"overwrite": " 덮어쓸까요?",
+		"discard": "변경 사항을 버릴까요?"
+	},
+	"time": {
+		"just_now": "방금",
+		"ago": {
+			"second": { "one": "{{.Count}}초 전", "other": "{{.Count}}초 전" },
+			"minute": { "one": "{{.Count}}분 전", "other": "{{.Count}}분 전" },
+			"hour": { "one": "{{.Count}}시간 전", "other": "{{.Count}}시간 전" },
+			"day": { "one": "{{.Count}}일 전", "other": "{{.Count}}일 전" },
+			"week": { "one": "{{.Count}}주 전", "other": "{{.Count}}주 전" },
+			"month": { "one": "{{.Count}}개월 전", "other": "{{.Count}}개월 전" },
+			"year": { "one": "{{.Count}}년 전", "other": "{{.Count}}년 전" }
+		}
+	},
+	"lang": {
+		"de": "독일어",
+		"en": "영어",
+		"es": "스페인어",
+		"fr": "프랑스어",
+		"it": "이탈리아어",
+		"ja": "일본어",
+		"ko": "한국어",
+		"pl": "폴란드어",
+		"pt": "포르투갈어",
+		"ru": "러시아어",
+		"zh": "중국어"
+	}
+}

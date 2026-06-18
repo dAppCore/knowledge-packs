@@ -1,0 +1,118 @@
+{
+	"gram": {
+		"verb": {
+			"olmak": { "base": "ol", "past": "oldum", "gerund": "olurken" },
+			"sahip": { "base": "sahip", "past": "sahiptim", "gerund": "sahip olarak" },
+			"yapmak": { "base": "yap", "past": "yaptım", "gerund": "yaparken" },
+			"gitmek": { "base": "git", "past": "gittim", "gerund": "giderken" },
+			"vermek": { "base": "ver", "past": "verdim", "gerund": "verirken" },
+			"almak": { "base": "al", "past": "aldım", "gerund": "alırken" },
+			"okumak": { "base": "oku", "past": "okudum", "gerund": "okurken" },
+			"yazmak": { "base": "yaz", "past": "yazdım", "gerund": "yazarken" },
+			"inşa": { "base": "inşa", "past": "inşattım", "gerund": "inşa ederken" },
+			"göndermak": { "base": "gönder", "past": "gönderdim", "gerund": "gönderirken" },
+			"bulmak": { "base": "bul", "past": "buldum", "gerund": "bulurken" },
+			"başlamak": { "base": "başla", "past": "başladım", "gerund": "başlarken" },
+			"taşımak": { "base": "taşı", "past": "taşıdım", "gerund": "taşırken" },
+			"çalışmak": { "base": "çalış", "past": "çalıştım", "gerund": "çalışırken" },
+			"oluşturmak": { "base": "oluştur", "past": "oluşturdum", "gerund": "oluştururken" },
+			"çalıştır": { "base": "çaliştır", "past": "çalıştırdım", "gerund": "çaliştirirken" },
+			"testetmek": { "base": "test et", "past": "test ettim", "gerund": "test ederken" },
+			"aramak": { "base": "ara", "past": "ardım", "gerund": "ararken" },
+			"bulmak": { "base": "bul", "past": "buldum", "gerund": "bulurken" },
+			"güncelle": { "base": "güncelle", "past": "güncellettim", "gerund": "güncellerken" },
+			"silmek": { "base": "sil", "past": "sildim", "gerund": "silirken" },
+			"koymak": { "base": "koy", "past": "koydum", "gerund": "koyarken" }
+		},
+		"noun": {
+			"dosya": { "one": "dosya", "other": "dosyalar" },
+			"depo": { "one": "depo", "other": "depolar" },
+			"onay": { "one": "onay", "other": "onaylar" },
+			"commit": { "one": "commit", "other": "commitler" },
+			"dal": { "one": "dal", "other": "dallar" },
+			"değişiklik": { "one": "değişiklik", "other": "değişiklikler" },
+			"öge": { "one": "öge", "other": "öğeler" },
+			"sorun": { "one": "sorun", "other": "sorunlar" },
+			"paket": { "one": "paket", "other": "paketler" },
+			"açık": { "one": "açık", "other": "açıklar" },
+			"bağımlılık": { "one": "bağımlılık", "other": "bağımlılıklar" },
+			"dizin": { "one": "dizin", "other": "dizinler" },
+			"kategori": { "one": "kategori", "other": "kategoriler" },
+			"sorgulama": { "one": "sorgulama", "other": "sorgulamalar" },
+			"test": { "one": "test", "other": "testler" },
+			"çalıştırma": { "one": "çalıştırma", "other": "çalıştırmalar" },
+			"derleme": { "one": "derleme", "other": "derlemeler" }
+		},
+		"article": {
+			"indefinite": { "default": "bir", "vowel": "bir" },
+			"definite": "",
+			"by_gender": {}
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JavaScript"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"bu", "şu", "o", "bunlar", "şunlar", "onlar",
+				"benim", "senin", "onun", "bizim", "sizin", "onların",
+				"tüm", "bazı", "çok", "az"
+			],
+			"verb_auxiliary": [
+				"dir", "dır", "dur", "dır", "durum", "dırım",
+				"var", "yok", "dı", "di", "du", "dü"
+			],
+			"verb_infinitive": ["mek", "mak", "ile", "e", "de", "den", "a", "ve"]
+		},
+		"number": {
+			"thousands": ".",
+			"decimal": ",",
+			"percent": "%s%%"
+		}
+	},
+	"prompt": {
+		"yes": "e",
+		"no": "h",
+		"continue": "Devam etmek?",
+		"proceed": "İlerlemek?",
+		"confirm": "Emin misiniz?",
+		"overwrite": "Üzerine yaz?",
+		"discard": "Değişiklikleri iptal et?"
+	},
+	"time": {
+		"just_now": "şimdi",
+		"ago": {
+			"second": { "one": "{{.Count}} saniye önce", "other": "{{.Count}} saniye önce" },
+			"minute": { "one": "{{.Count}} dakika önce", "other": "{{.Count}} dakika önce" },
+			"hour": { "one": "{{.Count}} saat önce", "other": "{{.Count}} saat önce" },
+			"day": { "one": "{{.Count}} gün önce", "other": "{{.Count}} gün önce" },
+			"week": { "one": "{{.Count}} hafta önce", "other": "{{.Count}} hafta önce" },
+			"month": { "one": "{{.Count}} ay önce", "other": "{{.Count}} ay önce" },
+			"year": { "one": "{{.Count}} yıl önce", "other": "{{.Count}} yıl önce" }
+		}
+	},
+	"lang": {
+		"de": "Almanca",
+		"en": "İngilizce",
+		"es": "İspanyolca",
+		"fr": "Fransızca",
+		"it": "İtalyanca",
+		"ja": "Japonca",
+		"ko": "Korece",
+		"pl": "Lehçe",
+		"pt": "Portekizce",
+		"ru": "Rusça",
+		"tr": "Türkçe",
+		"zh": "Çince"
+	}
+}

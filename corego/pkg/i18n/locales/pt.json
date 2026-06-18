@@ -1,0 +1,111 @@
+{
+	"gram": {
+		"verb": {
+			"ser": { "base": "ser", "past": "fui", "gerund": "sendo" },
+			"estar": { "base": "estar", "past": "estive", "gerund": "estando" },
+			"ter": { "base": "ter", "past": "tive", "gerund": "tendo" },
+			"fazer": { "base": "fazer", "past": "fiz", "gerund": "fazendo" },
+			"poder": { "base": "poder", "past": "pude", "gerund": "podendo" },
+			"dever": { "base": "dever", "past": "devia", "gerund": "devendo" },
+			"ir": { "base": "ir", "past": "fui", "gerund": "indo" },
+			"ver": { "base": "ver", "past": "vi", "gerund": "vendo" },
+			"dar": { "base": "dar", "past": "dei", "gerund": "dando" },
+			"dizer": { "base": "dizer", "past": "disse", "gerund": "dizendo" },
+			"falar": { "base": "falar", "past": "falei", "gerund": "falando" },
+			"chegar": { "base": "chegar", "past": "cheguei", "gerund": "chegando" },
+			"sair": { "base": "sair", "past": "saí", "gerund": "saindo" },
+			"construir": { "base": "construir", "past": "construí", "gerund": "construindo" },
+			"executar": { "base": "executar", "past": "executei", "gerund": "executando" },
+			"testar": { "base": "testar", "past": "testei", "gerund": "testando" },
+			"verificar": { "base": "verificar", "past": "verifiquei", "gerund": "verificando" },
+			"iniciar": { "base": "iniciar", "past": "iniciei", "gerund": "iniciando" },
+			"terminar": { "base": "terminar", "past": "terminei", "gerund": "terminando" },
+			"trabalhar": { "base": "trabalhar", "past": "trabalhei", "gerund": "trabalhando" }
+		},
+		"noun": {
+			"arquivo": { "one": "arquivo", "other": "arquivos", "gender": "m" },
+			"repositório": { "one": "repositório", "other": "repositórios", "gender": "m" },
+			"confirmação": { "one": "confirmação", "other": "confirmações", "gender": "f" },
+			"commit": { "one": "commit", "other": "commits", "gender": "m" },
+			"branch": { "one": "branch", "other": "branches", "gender": "m" },
+			"alteração": { "one": "alteração", "other": "alterações", "gender": "f" },
+			"elemento": { "one": "elemento", "other": "elementos", "gender": "m" },
+			"problema": { "one": "problema", "other": "problemas", "gender": "m" },
+			"pacote": { "one": "pacote", "other": "pacotes", "gender": "m" },
+			"vulnerabilidade": { "one": "vulnerabilidade", "other": "vulnerabilidades", "gender": "f" },
+			"dependência": { "one": "dependência", "other": "dependências", "gender": "f" },
+			"diretório": { "one": "diretório", "other": "diretórios", "gender": "m" },
+			"categoria": { "one": "categoria", "other": "categorias", "gender": "f" },
+			"consulta": { "one": "consulta", "other": "consultas", "gender": "f" },
+			"teste": { "one": "teste", "other": "testes", "gender": "m" },
+			"execução": { "one": "execução", "other": "execuções", "gender": "f" }
+		},
+		"article": {
+			"indefinite": { "default": "um", "vowel": "um" },
+			"definite": "o",
+			"by_gender": { "m": "o", "f": "a" }
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JS"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"o", "a", "os", "as",
+				"um", "uma", "uns", "umas",
+				"este", "esta", "estes", "estas"
+			],
+			"verb_auxiliary": [
+				"é", "são", "era", "eram",
+				"tem", "têm", "tinha", "tinham"
+			],
+			"verb_infinitive": ["de", "a", "em", "com", "por"]
+		},
+		"number": {
+			"thousands": ".",
+			"decimal": ",",
+			"percent": "%s %"
+		}
+	},
+	"prompt": {
+		"yes": "s",
+		"no": "n",
+		"continue": "Continuar?",
+		"proceed": "Prosseguir?",
+		"confirm": "Tem certeza?",
+		"overwrite": "Sobrescrever?",
+		"discard": "Descartar alterações?"
+	},
+	"time": {
+		"just_now": "agora mesmo",
+		"ago": {
+			"second": { "one": "há {{.Count}} segundo", "other": "há {{.Count}} segundos" },
+			"minute": { "one": "há {{.Count}} minuto", "other": "há {{.Count}} minutos" },
+			"hour": { "one": "há {{.Count}} hora", "other": "há {{.Count}} horas" },
+			"day": { "one": "há {{.Count}} dia", "other": "há {{.Count}} dias" },
+			"week": { "one": "há {{.Count}} semana", "other": "há {{.Count}} semanas" },
+			"month": { "one": "há {{.Count}} mês", "other": "há {{.Count}} meses" },
+			"year": { "one": "há {{.Count}} ano", "other": "há {{.Count}} anos" }
+		}
+	},
+	"lang": {
+		"de": "alemão",
+		"en": "inglês",
+		"es": "espanhol",
+		"fr": "francês",
+		"it": "italiano",
+		"pt": "português",
+		"ru": "russo",
+		"zh": "chinês"
+	}
+}

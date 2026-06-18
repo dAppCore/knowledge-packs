@@ -1,0 +1,103 @@
+{
+	"gram": {
+		"verb": {
+			"する": { "base": "する", "past": "した", "gerund": "している" },
+			"ある": { "base": "ある", "past": "あった", "gerund": "あって" },
+			"いる": { "base": "いる", "past": "いた", "gerund": "いて" },
+			"いく": { "base": "いく", "past": "いった", "gerund": "いって" },
+			"できる": { "base": "できる", "past": "できた", "gerund": "できて" },
+			"みる": { "base": "みる", "past": "みた", "gerund": "みて" },
+			"しる": { "base": "しる", "past": "しった", "gerund": "しって" },
+			"いう": { "base": "いう", "past": "いった", "gerund": "いって" },
+			"とる": { "base": "とる", "past": "とった", "gerund": "とって" },
+			"つくる": { "base": "つくる", "past": "つくった", "gerund": "つくって" },
+			"やる": { "base": "やる", "past": "やった", "gerund": "やって" },
+			"かく": { "base": "かく", "past": "かいた", "gerund": "かいて" },
+			"たてる": { "base": "たてる", "past": "たてた", "gerund": "たてて" },
+			"テストする": { "base": "テストする", "past": "テストした", "gerund": "テストして" },
+			"チェックする": { "base": "チェックする", "past": "チェックした", "gerund": "チェックして" },
+			"はじめる": { "base": "はじめる", "past": "はじめた", "gerund": "はじめて" },
+			"おわる": { "base": "おわる", "past": "おわった", "gerund": "おわって" },
+			"はたらく": { "base": "はたらく", "past": "はたらいた", "gerund": "はたらいて" }
+		},
+		"noun": {
+			"ファイル": { "one": "ファイル", "other": "ファイル", "gender": "" },
+			"リポジトリ": { "one": "リポジトリ", "other": "リポジトリ", "gender": "" },
+			"確認": { "one": "確認", "other": "確認", "gender": "" },
+			"コミット": { "one": "コミット", "other": "コミット", "gender": "" },
+			"ブランチ": { "one": "ブランチ", "other": "ブランチ", "gender": "" },
+			"変更": { "one": "変更", "other": "変更", "gender": "" },
+			"要素": { "one": "要素", "other": "要素", "gender": "" },
+			"問題": { "one": "問題", "other": "問題", "gender": "" },
+			"パッケージ": { "one": "パッケージ", "other": "パッケージ", "gender": "" },
+			"脆弱性": { "one": "脆弱性", "other": "脆弱性", "gender": "" },
+			"依存": { "one": "依存", "other": "依存", "gender": "" },
+			"ディレクトリ": { "one": "ディレクトリ", "other": "ディレクトリ", "gender": "" },
+			"カテゴリ": { "one": "カテゴリ", "other": "カテゴリ", "gender": "" },
+			"リクエスト": { "one": "リクエスト", "other": "リクエスト", "gender": "" },
+			"テスト": { "one": "テスト", "other": "テスト", "gender": "" }
+		},
+		"article": {
+			"indefinite": { "default": "", "vowel": "" },
+			"definite": "",
+			"by_gender": {}
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JS"
+		},
+		"punct": {
+			"label": "：",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [],
+			"verb_auxiliary": [
+				"です", "ます", "だった", "でした"
+			],
+			"verb_infinitive": ["を", "で", "に", "と"]
+		},
+		"number": {
+			"thousands": ",",
+			"decimal": ".",
+			"percent": "%s %%"
+		}
+	},
+	"prompt": {
+		"yes": "はい",
+		"no": "いいえ",
+		"continue": "続けますか？",
+		"proceed": "進めますか？",
+		"confirm": "よろしいですか？",
+		"overwrite": "上書きしますか？",
+		"discard": "変更を破棄しますか？"
+	},
+	"time": {
+		"just_now": "たった今",
+		"ago": {
+			"second": { "one": "{{.Count}} 秒前", "other": "{{.Count}} 秒前" },
+			"minute": { "one": "{{.Count}} 分前", "other": "{{.Count}} 分前" },
+			"hour": { "one": "{{.Count}} 時間前", "other": "{{.Count}} 時間前" },
+			"day": { "one": "{{.Count}} 日前", "other": "{{.Count}} 日前" },
+			"week": { "one": "{{.Count}} 週前", "other": "{{.Count}} 週前" },
+			"month": { "one": "{{.Count}} か月前", "other": "{{.Count}} か月前" },
+			"year": { "one": "{{.Count}} 年前", "other": "{{.Count}} 年前" }
+		}
+	},
+	"lang": {
+		"de": "ドイツ語",
+		"en": "英語",
+		"es": "スペイン語",
+		"fr": "フランス語",
+		"it": "イタリア語",
+		"pt": "ポルトガル語",
+		"ru": "ロシア語",
+		"zh": "中国語"
+	}
+}

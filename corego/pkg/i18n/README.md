@@ -19,6 +19,27 @@ tags:
   - cldr
   - pluralization
 ---
+---
+type: Package Documentation
+package: i18n
+module: dappco.re/go/i18n
+repo: core/go-i18n
+lang: go
+tags:
+  - internationalization
+  - localization
+  - translation
+  - i18n
+  - l10n
+  - grammar
+  - semantics
+  - intent
+  - reversal
+  - grammarimprint
+  - dual-class
+  - cldr
+  - pluralization
+---
 # go-i18n — Grammar-Aware Internationalization Engine
 
 > **"The reference implementation — every shape decision propagates to the semantic layer of the network"**
@@ -67,7 +88,27 @@ This allows packages to import only `core/go` and use `c.I18n().Translate()` wit
 - **Content Classification** — GrammarImprint for privacy-preserving semantic analysis
 - **Multi-language Support** — Full Unicode, RTL, plural rules for 100+ languages
 
+### Available Locales
+
+Base translation files are available in the `locales/` directory:
+
+| Locale | File | Description |
+|--------|------|-------------|
+| English | [en.json](./locales/en.json) | Base English translations with full grammar data |
+| Français | [fr.json](./locales/fr.json) | French translations with verb conjugations, noun genders, and CLDR plural rules |
+
+**French Locale Features:**
+- Complete verb conjugation tables (base, past, gerund)
+- Noun pluralization with gender support (masculine/feminine)
+- Article selection rules (le/la/les, un/une/des)
+- Signal words for grammar analysis
+- Number formatting (thousands separator, decimal point)
+- Time relative formatting ("il y a X secondes")
+- Language name mappings (français, anglais, espagnol, etc.)
+
 ---
+
+## 🏗️ Architecture
 
 ## 🏗️ Architecture
 

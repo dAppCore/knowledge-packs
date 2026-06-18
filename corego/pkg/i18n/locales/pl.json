@@ -1,0 +1,120 @@
+{
+	"gram": {
+		"verb": {
+			"byc": { "base": "być", "past": "był", "gerund": "będąc" },
+			"miec": { "base": "mieć", "past": "miał", "gerund": "mając" },
+			"robic": { "base": "robić", "past": "robił", "gerund": "robiąc" },
+			"isc": { "base": "iść", "past": "szedł", "gerund": "idąc" },
+			"dawac": { "base": "dawać", "past": "dał", "gerund": "dając" },
+			"brac": { "base": "brać", "past": "brał", "gerund": "biorąc" },
+			"widziec": { "base": "widzieć", "past": "widział", "gerund": "widząc" },
+			"miec": { "base": "mieć", "past": "miał", "gerund": "mając" },
+			"umiec": { "base": "umieć", "past": "umiał", "gerund": "umiejąc" },
+			"chciec": { "base": "chcieć", "past": "chciał", "gerund": "chcąc" },
+			"musiec": { "base": "musieć", "past": "musiał", "gerund": "musząc" },
+			"powinien": { "base": "powinien", "past": "powinien był", "gerund": "powinienem" },
+			"zaczynac": { "base": "zaczynać", "past": "zaczął", "gerund": "zaczynając" },
+			"konczyc": { "base": "kończyć", "past": "skończył", "gerund": "kończąc" },
+			"pracowac": { "base": "pracować", "past": "pracował", "gerund": "pracując" },
+			"tworzyc": { "base": "tworzyć", "past": "stworzył", "gerund": "tworząc" },
+			"budowac": { "base": "budować", "past": "budował", "gerund": "budując" },
+			"uruchamiac": { "base": "uruchamiać", "past": "uruchomił", "gerund": "uruchamiając" },
+			"testowac": { "base": "testować", "past": "testował", "gerund": "testując" },
+			"szukac": { "base": "szukać", "past": "szukał", "gerund": "szukając" },
+			"znajdowac": { "base": "znajdować", "past": "znalazł", "gerund": "znajdując" },
+			"aktualizowac": { "base": "aktualizować", "past": "zaktualizował", "gerund": "aktualizując" },
+			"usuwac": { "base": "usuwać", "past": "usunął", "gerund": "usuwając" },
+			"wysylac": { "base": "wysyłać", "past": "wysłał", "gerund": "wysyłając" },
+			"sprawdzac": { "base": "sprawdzać", "past": "sprawdził", "gerund": "sprawdzając" }
+		},
+		"noun": {
+			"pliku": { "one": "plik", "other": "pliki", "gender": "m" },
+			"repozytorium": { "one": "repozytorium", "other": "repozytoria", "gender": "n" },
+			"potwierdzenie": { "one": "potwierdzenie", "other": "potwierdzenia", "gender": "n" },
+			"commit": { "one": "commit", "other": "commity", "gender": "m" },
+			"gałąź": { "one": "gałąź", "other": "gałęzie", "gender": "f" },
+			"zmiana": { "one": "zmiana", "other": "zmiany", "gender": "f" },
+			"element": { "one": "element", "other": "elementy", "gender": "m" },
+			"problem": { "one": "problem", "other": "problemy", "gender": "m" },
+			"pakiet": { "one": "pakiet", "other": "pakiety", "gender": "m" },
+			"luka": { "one": "luka", "other": "luki", "gender": "f" },
+			"zależność": { "one": "zależność", "other": "zależności", "gender": "f" },
+			"katalog": { "one": "katalog", "other": "katalogi", "gender": "m" },
+			"kategoria": { "one": "kategoria", "other": "kategorie", "gender": "f" },
+			"zapytanie": { "one": "zapytanie", "other": "zapytania", "gender": "n" },
+			"test": { "one": "test", "other": "testy", "gender": "m" },
+			"uruchomienie": { "one": "uruchomienie", "other": "uruchomienia", "gender": "n" },
+			"kompilacja": { "one": "kompilacja", "other": "kompilacje", "gender": "f" }
+		},
+		"article": {
+			"indefinite": { "default": "jakiś", "vowel": "jakiś" },
+			"definite": "",
+			"by_gender": { "m": "", "f": "", "n": "" }
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JS"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"ten", "ta", "to", "ci", "te",
+				"mój", "twój", "jego", "jej", "nasz", "wasz",
+				"każdy", "każda", "każde", "wszyscy", "wszystkie",
+				"takie", "tacy", "niektóre", "wiele", "kilka"
+			],
+			"verb_auxiliary": [
+				"jest", "są", "był", "były",
+				"ma", "mają", "miał", "mieli",
+				"muszę", "musisz", "musi", "musimy"
+			],
+			"verb_infinitive": ["by", "do", "od", "na", "z", "w"]
+		},
+		"number": {
+			"thousands": " ",
+			"decimal": ",",
+			"percent": "%s%%"
+		}
+	},
+	"prompt": {
+		"yes": "t",
+		"no": "n",
+		"continue": "Kontynuować?",
+		"proceed": "Przejść dalej?",
+		"confirm": "Jesteś pewien?",
+		"overwrite": "Nadpisać?",
+		"discard": "Porzucić zmiany?"
+	},
+	"time": {
+		"just_now": "właśnie teraz",
+		"ago": {
+			"second": { "one": "{{.Count}} sekundę temu", "other": "{{.Count}} sekund temu" },
+			"minute": { "one": "{{.Count}} minutę temu", "other": "{{.Count}} minut temu" },
+			"hour": { "one": "{{.Count}} godzinę temu", "other": "{{.Count}} godzin temu" },
+			"day": { "one": "{{.Count}} dzień temu", "other": "{{.Count}} dni temu" },
+			"week": { "one": "{{.Count}} tydzień temu", "other": "{{.Count}} tygodni temu" },
+			"month": { "one": "{{.Count}} miesiąc temu", "other": "{{.Count}} miesięcy temu" },
+			"year": { "one": "{{.Count}} rok temu", "other": "{{.Count}} lat temu" }
+		}
+	},
+	"lang": {
+		"de": "niemiecki",
+		"en": "angielski",
+		"es": "hiszpański",
+		"fr": "francuski",
+		"it": "włoski",
+		"pl": "polski",
+		"pt": "portugalski",
+		"ru": "rosyjski",
+		"zh": "chiński"
+	}
+}

@@ -1,0 +1,105 @@
+{
+	"gram": {
+		"verb": {
+			"是": { "base": "是", "past": "是", "gerund": "是" },
+			"有": { "base": "有", "past": "有", "gerund": "有" },
+			"做": { "base": "做", "past": "做了", "gerund": "做着" },
+			"去": { "base": "去", "past": "去了", "gerund": "去" },
+			"可以": { "base": "可以", "past": "可以了", "gerund": "可以" },
+			"要": { "base": "要", "past": "要了", "gerund": "要" },
+			"看": { "base": "看", "past": "看了", "gerund": "看着" },
+			"知道": { "base": "知道", "past": "知道了", "gerund": "知道" },
+			"想": { "base": "想", "past": "想了", "gerund": "想" },
+			"说": { "base": "说", "past": "说了", "gerund": "说着" },
+			"拿": { "base": "拿", "past": "拿了", "gerund": "拿着" },
+			"给": { "base": "给", "past": "给了", "gerund": "给" },
+			"写": { "base": "写", "past": "写了", "gerund": "写着" },
+			"建设": { "base": "建设", "past": "建设了", "gerund": "建设着" },
+			"执行": { "base": "执行", "past": "执行了", "gerund": "执行着" },
+			"测试": { "base": "测试", "past": "测试了", "gerund": "测试着" },
+			"检查": { "base": "检查", "past": "检查了", "gerund": "检查着" },
+			"开始": { "base": "开始", "past": "开始了", "gerund": "开始" },
+			"完成": { "base": "完成", "past": "完成了", "gerund": "完成着" },
+			"工作": { "base": "工作", "past": "工作了", "gerund": "工作着" }
+		},
+		"noun": {
+			"文件": { "one": "文件", "other": "文件", "gender": "" },
+			"仓库": { "one": "仓库", "other": "仓库", "gender": "" },
+			"确认": { "one": "确认", "other": "确认", "gender": "" },
+			"提交": { "one": "提交", "other": "提交", "gender": "" },
+			"分支": { "one": "分支", "other": "分支", "gender": "" },
+			"更改": { "one": "更改", "other": "更改", "gender": "" },
+			"元素": { "one": "元素", "other": "元素", "gender": "" },
+			"问题": { "one": "问题", "other": "问题", "gender": "" },
+			"包": { "one": "包", "other": "包", "gender": "" },
+			"漏洞": { "one": "漏洞", "other": "漏洞", "gender": "" },
+			"依赖": { "one": "依赖", "other": "依赖", "gender": "" },
+			"目录": { "one": "目录", "other": "目录", "gender": "" },
+			"类别": { "one": "类别", "other": "类别", "gender": "" },
+			"请求": { "one": "请求", "other": "请求", "gender": "" },
+			"测试": { "one": "测试", "other": "测试", "gender": "" }
+		},
+		"article": {
+			"indefinite": { "default": "", "vowel": "" },
+			"definite": "",
+			"by_gender": {}
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JS"
+		},
+		"punct": {
+			"label": "：",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [],
+			"verb_auxiliary": [
+				"是", "有", "了"
+			],
+			"verb_infinitive": ["的", "了", "着"]
+		},
+		"number": {
+			"thousands": ",",
+			"decimal": ".",
+			"percent": "%s %%"
+		}
+	},
+	"prompt": {
+		"yes": "是",
+		"no": "否",
+		"continue": "继续吗？",
+		"proceed": "继续进行吗？",
+		"confirm": "确认吗？",
+		"overwrite": "覆盖吗？",
+		"discard": "放弃更改吗？"
+	},
+	"time": {
+		"just_now": "刚才",
+		"ago": {
+			"second": { "one": "{{.Count}} 秒前", "other": "{{.Count}} 秒前" },
+			"minute": { "one": "{{.Count}} 分钟前", "other": "{{.Count}} 分钟前" },
+			"hour": { "one": "{{.Count}} 小时前", "other": "{{.Count}} 小时前" },
+			"day": { "one": "{{.Count}} 天前", "other": "{{.Count}} 天前" },
+			"week": { "one": "{{.Count}} 周前", "other": "{{.Count}} 周前" },
+			"month": { "one": "{{.Count}} 个月前", "other": "{{.Count}} 个月前" },
+			"year": { "one": "{{.Count}} 年前", "other": "{{.Count}} 年前" }
+		}
+	},
+	"lang": {
+		"de": "德语",
+		"en": "英语",
+		"es": "西班牙语",
+		"fr": "法语",
+		"it": "意大利语",
+		"pt": "葡萄牙语",
+		"ru": "俄语",
+		"zh": "中文"
+	}
+}

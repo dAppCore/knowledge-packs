@@ -1,0 +1,116 @@
+{
+	"gram": {
+		"verb": {
+			"kan": { "base": "كان", "past": "كان", "gerund": "يكون" },
+			"yakoon": { "base": "يكون", "past": "كان", "gerund": "كون" },
+			"yafal": { "base": "يفعل", "past": "فعل", "gerund": "فعل" },
+			"yadhhab": { "base": "يذهب", "past": "ذهب", "gerund": "ذهاب" },
+			"yakhudh": { "base": "يأخذ", "past": "أخذ", "gerund": "أخذ" },
+			"yaqra": { "base": "يقرأ", "past": "قرأ", "gerund": "قراءة" },
+			"yaktub": { "base": "يكتب", "past": "كتب", "gerund": "كتابة" },
+			"yabni": { "base": "يبني", "past": "بنى", "gerund": "بناء" },
+			"yursil": { "base": "يرسل", "past": "أرسل", "gerund": "إرسال" },
+			"yajid": { "base": "يجد", "past": "وجد", "gerund": "إيجاد" },
+			"yabda": { "base": "يبدأ", "past": "بدأ", "gerund": "بدء" },
+			"yantaqil": { "base": "ينتقل", "past": "انتقل", "gerund": "انتقال" },
+			"yaamal": { "base": "يعمل", "past": "عمل", "gerund": "عمل" },
+			"yakhluq": { "base": "يخلق", "past": "خلق", "gerund": "خلق" },
+			"yansha": { "base": "ينشئ", "past": "أنشاء", "gerund": "إنشاء" },
+			"yujri": { "base": "يجري", "past": "جرى", "gerund": "تنفيذ" },
+			"yukhdir": { "base": "يختبر", "past": "اختبر", "gerund": "اختبار" },
+			"yabhath": { "base": "يبحث", "past": "بحث", "gerund": "بحث" },
+			"yuhaddith": { "base": "يثبت", "past": "حدث", "gerund": "تحديث" },
+			"yazil": { "base": "يمسح", "past": "مسح", "gerund": "مسح" },
+			"yataqaddam": { "base": "يتقدم", "past": "تقدم", "gerund": "تقدم" }
+		},
+		"noun": {
+			"mawjud": { "one": "ملف", "other": "ملفات", "gender": "m" },
+			"mustawda": { "one": "مستودع", "other": "مستودعات", "gender": "m" },
+			"taqdiyq": { "one": "تأكيد", "other": "تأكيدات", "gender": "m" },
+			"iltizam": { "one": "التزام", "other": "التزامات", "gender": "m" },
+			"far": { "one": "فرع", "other": "فروع", "gender": "m" },
+			"taghyir": { "one": "تغيير", "other": "تغييرات", "gender": "m" },
+			"unsur": { "one": "عنصر", "other": "عناصر", "gender": "m" },
+			"mushkila": { "one": "مشكلة", "other": "مشاكل", "gender": "f" },
+			"haizm": { "one": "حزمة", "other": "حزم", "gender": "f" },
+			"thaghra": { "one": "ثغرة", "other": "ثغرات", "gender": "f" },
+			"tawakkul": { "one": "اعتماد", "other": "اعتماديات", "gender": "m" },
+			"majald": { "one": "مجلد", "other": "مجلدات", "gender": "m" },
+			"faidat": { "one": "فئة", "other": "فئات", "gender": "f" },
+			"istifta": { "one": "استفسار", "other": "استفسارات", "gender": "m" },
+			"ikhtibar": { "one": "اختبار", "other": "اختبارات", "gender": "m" },
+			"tashghil": { "one": "تفعيل", "other": "تفعيلات", "gender": "m" },
+			"tarsif": { "one": "ترصة", "other": "ترص", "gender": "f" }
+		},
+		"article": {
+			"indefinite": { "default": "", "vowel": "" },
+			"definite": "ال",
+			"by_gender": { "m": "", "f": "" }
+		},
+		"word": {
+			"url": "URL",
+			"id": "ID",
+			"ok": "OK",
+			"api": "API",
+			"sdk": "SDK",
+			"html": "HTML",
+			"css": "CSS",
+			"js": "JavaScript"
+		},
+		"punct": {
+			"label": ":",
+			"progress": "..."
+		},
+		"signal": {
+			"noun_determiner": [
+				"هذا", "هذه", "هذان", "هاتان", "هؤلاء",
+				"ذالك", "تلك", "أولئك",
+				"كل", "بعض", "كثير", "قليل"
+			],
+			"verb_auxiliary": [
+				"هو", "هما", "هم", "هي", "هن",
+				"كان", "كانت", "كانوا", "كن",
+				"لديه", "لديها"
+			],
+			"verb_infinitive": ["أن", "إلى", "من", "على", "في", "مع"]
+		},
+		"number": {
+			"thousands": ",",
+			"decimal": ".",
+			"percent": "%s%%"
+		}
+	},
+	"prompt": {
+		"yes": "ن",
+		"no": "ل",
+		"continue": "متابعة؟",
+		"proceed": "المضي قدما؟",
+		"confirm": "هل أنت متأكد؟",
+		"overwrite": "الكتابة فوق؟",
+		"discard": "تخلي عن التغيرات؟"
+	},
+	"time": {
+		"just_now": "الآن",
+		"ago": {
+			"second": { "one": "منذ {{.Count}} ثانية", "other": "منذ {{.Count}} ثوان" },
+			"minute": { "one": "منذ {{.Count}} دقيقة", "other": "منذ {{.Count}} دقائق" },
+			"hour": { "one": "منذ {{.Count}} ساعة", "other": "منذ {{.Count}} ساعات" },
+			"day": { "one": "منذ {{.Count}} يوم", "other": "منذ {{.Count}} أيام" },
+			"week": { "one": "منذ {{.Count}} أسبوع", "other": "منذ {{.Count}} أسابيع" },
+			"month": { "one": "منذ {{.Count}} شهر", "other": "منذ {{.Count}} أشهر" },
+			"year": { "one": "منذ {{.Count}} عام", "other": "منذ {{.Count}} أعوام" }
+		}
+	},
+	"lang": {
+		"ar": "العربية",
+		"de": "الألمانية",
+		"en": "الإنجليزية",
+		"es": "الإسبانية",
+		"fr": "الفرنسية",
+		"it": "الإيطالية",
+		"pl": "البولندية",
+		"pt": "البرتغالية",
+		"ru": "الروسية",
+		"zh": "الصينية"
+	}
+}
