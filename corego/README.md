@@ -12,26 +12,43 @@ tags: [framework, golang, zero-dependency, core, lethean]
 
 > **"The reference implementation — every shape decision propagates to ~30 downstream repos"**
 
+> **Official Site:** [dappco.re/go/](https://dappco.re/go/)
+
 This knowledge pack contains everything an agent needs to understand, use, and contribute to CoreGo — the foundational Go framework for the Lethean ecosystem.
+
+**Official Documentation:** All content in this knowledge pack is sourced from [dappco.re/go/](https://dappco.re/go/), the official CoreGo documentation site.
 
 ---
 
 ## 🎯 Overview
 
-**CoreGo** is a zero-dependency Go framework that provides:
+`dappco.re/go` is the umbrella primitives package. Four universal types form the surface every operation flows through. The package has zero external dependencies — `go.mod` stays at three lines.
 
-- **Shared primitives** for all dAppCore repositories
-- **Standard error handling** via `core.Result`
-- **Panic recovery** middleware
-- **Simplified downstream code** through consistent patterns
-- **AX Standard** compliance (Agents-first development)
+**Official Description from [dappco.re/go/](https://dappco.re/go/):**
+
+### Key Characteristics
+
+- **Zero external dependencies** — `go.mod` stays at three lines
+- **Universal types** — Result, Options, Actions, Errors form the foundation
+- **Design discipline:** Predictable names, comments as examples, path as documentation
+- **Universal types everywhere** — No bespoke error idioms per-package
+- **Lib never imports consumer** — Primitives stay zero-dependency
 
 ### Key Statistics
 
 - **Total packages:** 50+ (see [INDEX.md](INDEX.md))
-- **Stdlib packages wrapped:** 44 (from earlier exploration)
+- **Stdlib packages wrapped:** 44
 - **SPOR Rule:** Single Point Of Responsibility — each stdlib package has exactly ONE owner file
 - **Downstream impact:** ~30+ repositories depend on CoreGo
+- **Current version:** v0.9.0 (last breaking-change window before v1.0.0-beta.1)
+- **Status:** Patch releases (v0.9.x) for fixes only
+
+### Official Install
+
+```bash
+# From dappco.re/go/
+go get dappco.re/go@latest
+```
 
 ---
 
@@ -78,37 +95,240 @@ This knowledge pack **aggregates and organizes** that information for agent cons
 
 ## 📦 Core Concepts
 
+All content sourced from [dappco.re/go/](https://dappco.re/go/)
+
+### The Four Universal Primitives
+
+From the official documentation: "Four universal types form the surface every operation flows through."
+
+| Primitive | Purpose | Source |
+|-----------|---------|--------|
+| **[Result](#1-the-result-pattern)** | `{Value any, OK bool}` — replaces the `(T, error)` pair | [dappco.re/go/result/](https://dappco.re/go/result/) |
+| **[Options](#2-the-options-pattern)** | Typed key/value bag — the universal input | [dappco.re/go/options/](https://dappco.re/go/options/) |
+| **[Actions](#3-the-actions-pattern)** | Named, registered, invokable unit of work | [dappco.re/go/action/](https://dappco.re/go/action/) |
+| **[Errors](#4-the-errors-pattern)** | Structured `*Err` with operation context, stable codes | [dappco.re/go/error/](https://dappco.re/go/error/) |
+
+Every component in the ecosystem accepts and returns the same primitive types. An agent processing any level of the tree sees identical shapes.
+
+---
+
 ### 1. The Result Pattern
 
 **Purpose:** Standard error handling with logging and panic recovery
 
-```go
-// core.Result wraps values with error context
-result := core.OK(value)           // Success
-result := core.E(err)              // Error
-result := core.Panic(err, msg)    // Panic with context
-
-// Automatic logging and recovery
-result.Log()                      // Logs error if present
-result.Panic()                    // Panics with context
-result.Unwrap()                   // Extract value or panic
-```
-
-**AX Standard:** Every function returns `core.Result[T]` instead of `(T, error)`
-
-### 2. Panic Recovery
-
-**Purpose:** Graceful degradation when panics occur
+**Official Description:** `Result` is the universal output type. Every Core operation returns one. It collapses the `(T, error)` pair into a single value with `OK` discrimination.
 
 ```go
-// Automatic recovery in handlers
-func handler() core.Result {
-    defer core.Recover(&result)  // Catches panics, converts to error
-    // ... code that may panic
+// Type definition
+type Result struct {
+    Value any
+    OK    bool
 }
 ```
 
-**Key insight:** Downstream code is simpler because panics are automatically recovered and logged.
+**Constructors:**
+
+| Constructor | When to use | Example |
+|-------------|--------------|---------|
+| `core.Ok(v)` | Happy path | `return core.Ok(parsed)` |
+| `core.Fail(err)` | Sad path | `if err := decode(b); err != nil { return core.Fail(err) }` |
+| `core.ResultOf(v, err)` | Adapt a stdlib `(T, error)` pair | `r := core.ResultOf(os.ReadFile(path))` |
+| `core.Try(fn)` | Wrap a function that may panic | `r := core.Try(func() any { return riskyParse(input) })` |
+
+**Unwrap Methods:**
+
+| Method | When to use | Example |
+|--------|--------------|---------|
+| `r.OK` | Branch on success | `if !r.OK { return r }` |
+| `r.Or(fallback)` | Get value or default | `port := opts.Get("port").Or("8080").(string)` |
+| `r.Must()` | Panic on failure (init/test only) | `cfg := core.MustCast[*Config](...)` |
+| `core.Cast[T](r)` | Typed extract `(T, ok)` | `if user, ok := core.Cast[*User](r); ok { use(user) }` |
+| `core.MustCast[T](r)` | Panicking generic variant | Hot config paths |
+
+**Inspect Methods:**
+
+| Method | Returns | Example |
+|--------|---------|---------|
+| `r.Error()` | Error message string when `!r.OK` | `if r.Error() != "" { log.Error(r.Error()) }` |
+| `r.Code()` | Stable error code when failure is `*core.Err` | `switch r.Code() { case "fs.notfound": firstRun() }` |
+
+**Why a single shape:** Every operation in `core/go` returns `Result`. Every operation in every consumer package returns `Result`. Agents reading the codebase never have to learn a per-package error idiom — the shape is universal.
+
+**AX Standard:** Every function returns `core.Result[T]` instead of `(T, error)`
+
+---
+
+### 2. The Options Pattern
+
+**Purpose:** Typed key/value bag — the universal input
+
+**Official Description:** `Options` is the universal input type. Every Core operation that takes parameters takes one. A structured collection of key/value pairs with typed accessors.
+
+```go
+// Type definition
+type Option struct {
+    Key   string
+    Value any
+}
+
+type Options struct { /* opaque */ }
+```
+
+**Construct:**
+
+```go
+opts := core.NewOptions(
+    core.Option{Key: "name", Value: "brain"},
+    core.Option{Key: "port", Value: 8080},
+    core.Option{Key: "debug", Value: true},
+)
+```
+
+**Mutate:**
+
+```go
+opts.Set("key", value)  // Add or update a key. Mutates in place.
+```
+
+**Typed Accessors:** Each accessor returns the type's zero value when the key is missing or the stored value isn't assignable to that type.
+
+| Accessor | Returns | Zero | Example |
+|----------|---------|------|---------|
+| `opts.String(key)` | `string` | `""` | `name := opts.String("name")` |
+| `opts.Int(key)` | `int` | `0` | `port := opts.Int("port")` |
+| `opts.Bool(key)` | `bool` | `false` | `debug := opts.Bool("debug")` |
+| `opts.Float64(key)` | `float64` | `0` | `weight := opts.Float64("weight")` (promotes int/int64/float32) |
+| `opts.Duration(key)` | `core.Duration` | `0` | `timeout := opts.Duration("timeout")` (parses string via `ParseDuration`) |
+
+**Strict Reads (Result-shaped):** For cases where missing-vs-typed-zero matters:
+
+```go
+r := opts.Get("port")
+if !r.OK { return core.Fail(core.NewError("port required")) }
+port := r.Value.(int)
+```
+
+**Inspect:**
+
+| Method | Returns | Example |
+|--------|---------|---------|
+| `opts.Has(key)` | `true` if the key exists, regardless of value type | `if opts.Has("debug") { ... }` |
+| `opts.Len()` | Number of options | `if opts.Len() > 0 { ... }` |
+| `opts.Items()` | Copy of the underlying option slice | `for _, opt := range opts.Items() { ... }` |
+
+---
+
+### 3. The Actions Pattern
+
+**Purpose:** Named, registered, invokable unit of work
+
+**Official Description:** Actions are the atomic unit of work in `core/go`. Named, registered, invokable, inspectable. The Action registry **is** the capability map.
+
+**Register:**
+
+```go
+c.Action("git.log", func(ctx core.Context, opts core.Options) core.Result {
+    dir := opts.String("dir")
+    return c.Process().RunIn(ctx, dir, "git", "log")
+})
+```
+
+The signature is invariant across every action:
+
+```go
+type ActionHandler func(core.Context, core.Options) core.Result
+```
+
+**Invoke:**
+
+```go
+r := c.Action("git.log").Run(ctx, core.NewOptions(
+    core.Option{Key: "dir", Value: "/path/to/repo"},
+))
+```
+
+**Lifecycle — Enable / Disable:**
+
+```go
+c.Action("dangerous.purge").Disable()
+// ...later...
+c.Action("dangerous.purge").Enable()
+
+if c.Action("dangerous.purge").Enabled() { /* will fire */ }
+```
+
+`Run()` on a disabled action returns `Result{OK: false}` with code `"action.disabled"`. The capability stays queryable via `Exists()`.
+
+**Inspect:**
+
+| Method | Returns | Example |
+|--------|---------|---------|
+| `c.Action(name).Exists()` | `true` if a handler is registered | `if c.Action("git.log").Exists() { ... }` |
+| `c.Action(name).Enabled()` | `true` if it will run when invoked | `if c.Action("git.log").Enabled() { ... }` |
+| `c.Actions()` | All registered action names in registration order | `for _, name := range c.Actions() { ... }` |
+
+**Background — PerformAsync:** For long-running work that shouldn't block the request path:
+
+```go
+r := c.PerformAsync("agentic.dispatch", opts)
+taskID := r.Value.(string)
+// ActionTaskStarted / ActionTaskProgress / ActionTaskCompleted broadcast on IPC
+```
+
+**Progress updates:**
+
+```go
+c.Progress(taskID, 0.5, "halfway done", "agentic.dispatch")
+```
+
+**Composition — Tasks:** A `Task` is a named sequence of action steps:
+
+```go
+c.Task("agent.completion", core.Task{
+    Steps: []core.Step{
+        {Action: "agentic.qa"},
+        {Action: "agentic.auto-pr"},
+        {Action: "agentic.verify", Input: "previous"},
+        {Action: "agentic.poke", Async: true},
+    },
+})
+
+r := c.Task("agent.completion").Run(ctx, c, opts)
+```
+
+Sync steps run sequentially — failure stops the chain. Async steps fire-and-forget. `Input: "previous"` pipes the last sync step's output as `_input` on the next.
+
+**Why named actions:** The registry IS the capability map. Auditable, testable, swappable. Permission boundaries (entitlements) and observability (broadcast events) attach at a single choke point — `Action.Run` — instead of being threaded through every call site.
+
+---
+
+### 4. The Errors Pattern
+
+**Purpose:** Structured `*Err` with operation context, stable codes, uniform introspection
+
+**Constructors:**
+
+| Constructor | When to use |
+|-------------|--------------|
+| `core.E(err)` | Create error Result |
+| `core.NewError(msg)` | Create new error with message |
+| `core.NewCode(code, msg)` | Create error with stable code |
+| `core.Wrap(err, msg)` | Wrap existing error with context |
+
+**Codes form a flat keyspace agents grep on:**
+
+```go
+switch r.Code() {
+case "fs.notfound":
+    firstRun()
+case "http.timeout":
+    retry()
+case "http.refused":
+    fallback()
+}
+```
+
+See the stable codespace for all available error codes.
 
 ### 3. SPOR (Single Point Of Responsibility)
 
@@ -135,6 +355,22 @@ pkg/
 ```
 
 **Pattern:** Good tests (happy path), Bad tests (error cases), Ugly tests (edge cases)
+
+---
+
+## 🏗️ Design Principles
+
+From [dappco.re/go/](https://dappco.re/go/design):
+
+Every shape decision in `core/go` propagates to ~30 downstream consumer repos. The discipline:
+
+- **Predictable names over short names** — agents grep, not autocomplete
+- **Comments as usage examples** — every public symbol shows a copy-pastable call
+- **Path is documentation** — folder structure equals API shape
+- **Universal types** — Result, Options, Action are everywhere; no bespoke pairs
+- **Lib never imports consumer** — primitives stay zero-dependency
+
+These principles form the **AX Standard** (Agent Experience) — designing code for AI agents as first-class consumers.
 
 ---
 
@@ -269,7 +505,57 @@ Total downstream repos: ~30+
 SPOR compliance:       100% (each stdlib package has one owner)
 Test triplet coverage:  High (most packages have triplets)
 Package deep dives:    7 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-i18n)
+Current version:      v0.9.0 (pre-v1.0.0-beta.1)
 ```
+
+---
+
+## 📖 Quick Reference
+
+### Result Constructors
+
+| Constructor | Purpose | Example |
+|-------------|---------|---------|
+| `core.Ok(v)` | Success with value | `return core.Ok(data)` |
+| `core.Fail(err)` | Failure with error | `return core.Fail(err)` |
+| `core.ResultOf(v, err)` | Adapt `(T, error)` | `r := core.ResultOf(os.ReadFile(path))` |
+| `core.Try(fn)` | Panic-safe wrapper | `r := core.Try(func() any { ... })` |
+
+### Result Methods
+
+| Method | Returns | Use Case |
+|--------|---------|----------|
+| `r.OK` | `bool` | Check success |
+| `r.Value` | `any` | Access the value |
+| `r.Error()` | `string` | Get error message |
+| `r.Code()` | `string` | Get stable error code |
+| `r.Or(fallback)` | `any` | Value or fallback |
+| `r.Must()` | `any` | Panic on error |
+| `core.Cast[T](r)` | `(T, bool)` | Type-safe extract |
+| `core.MustCast[T](r)` | `T` | Panic on type mismatch |
+
+### Options Accessors
+
+| Accessor | Returns | Zero Value |
+|----------|---------|------------|
+| `opts.String(key)` | `string` | `""` |
+| `opts.Int(key)` | `int` | `0` |
+| `opts.Bool(key)` | `bool` | `false` |
+| `opts.Float64(key)` | `float64` | `0` |
+| `opts.Duration(key)` | `core.Duration` | `0` |
+
+### Action Methods
+
+| Method | Returns | Use Case |
+|--------|---------|----------|
+| `c.Action(name).Run(ctx, opts)` | `Result` | Invoke action |
+| `c.Action(name).Exists()` | `bool` | Check if registered |
+| `c.Action(name).Enabled()` | `bool` | Check if enabled |
+| `c.Action(name).Disable()` | - | Disable action |
+| `c.Action(name).Enable()` | - | Enable action |
+| `c.Actions()` | `[]string` | List all actions |
+| `c.PerformAsync(name, opts)` | `Result` | Run in background |
+| `c.Progress(taskID, pct, msg, action)` | - | Update progress |
 
 ---
 
@@ -282,12 +568,15 @@ Package deep dives:    7 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy
 ✅ **Panic recovery** — Use `core.Recover` in handlers
 ✅ **I/O operations** — Use `go-io` backends instead of raw file operations
 ✅ **HTTP clients** — Use `core.Request` instead of raw `http.Client`
+✅ **Universal input** — Use `core.Options` for all function parameters
+✅ **Named capabilities** — Use `core.Action` for all invokable operations
 
 ### When NOT to Use CoreGo
 
 ❌ **Performance-critical code** — CoreGo adds minimal overhead but may not be suitable for extreme performance requirements
 ❌ **External libraries** — Don't wrap external library calls in CoreGo (use the library directly)
 ❌ **Stdlib packages already wrapped** — Don't re-wrap; use the existing CoreGo wrapper
+❌ **Binary size-sensitive projects** — CoreGo is designed for clarity over minimalism
 
 ---
 
@@ -303,11 +592,30 @@ Package deep dives:    7 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy
 
 ## 💡 Agent Tips
 
-1. **Always check the RFC first** — The spec drives the code
-2. **Follow SPOR** — Don't duplicate stdlib wrappers
-3. **Use core.Result** — Never return raw `(T, error)`
-4. **Write triplets** — Every new package needs `_test.go` and `_example_test.go`
-5. **Comments for agents** — Write documentation that agents can parse
+### Core Principles
+
+1. **Always check the RFC first** — The spec in [`plans/code/core/go/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/RFC.md) drives the code
+2. **Follow SPOR** — Don't duplicate stdlib wrappers; each has exactly one owner
+3. **Use core.Result** — Never return raw `(T, error)`; always use `core.Result[T]`
+4. **Write triplets** — Every new package needs `file.go`, `file_test.go`, and `file_example_test.go`
+5. **Comments for agents** — Write documentation that agents can parse (show usage, not describe)
+
+### AX-Specific Guidance
+
+6. **Universal shapes** — Every operation returns `Result`, takes `Options`
+7. **Named everything** — Use descriptive names; abbreviations add mapping overhead
+8. **Path navigation** — Directory structure tells you the intent before reading files
+9. **Greppable codes** — Error codes form a flat keyspace for easy searching
+10. **Capability map** — The Action registry IS the API; it's auditable and testable
+
+### Learning Resources
+
+- **[Official Site](https://dappco.re/go/)** — Always start here
+- **[Result Deep Dive](https://dappco.re/go/result/)** — Master the universal output type
+- **[Options Deep Dive](https://dappco.re/go/options/)** — Understand the universal input
+- **[Actions Deep Dive](https://dappco.re/go/action/)** — Learn named capabilities
+- **[GitHub Repository](https://github.com/dappcore/go)** — Source code and issues
+- **[AGENTS.md](file:///Users/snider/Code/core/go/AGENTS.md)** — Agent-specific guidance
 
 ---
 
