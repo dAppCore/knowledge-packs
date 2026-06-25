@@ -18,8 +18,6 @@ tags:
 ---
 # go-ml — ML Inference Backends & Scoring Engine
 
-> **ML inference backends, multi-suite scoring engine, and agent orchestrator for the Lethean AI stack**
-
 **Module:** `dappco.re/go/core/ml`
 **Repository:** [~/Code/core/go-ml/](file:///Users/snider/Code/core/go-ml/)
 **Status:** ✅ Production-Ready
@@ -35,7 +33,7 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
 `go-ml` is the **ML inference backend and scoring engine** for the Lethean AI stack. It provides:
 
@@ -68,7 +66,7 @@ The scoring engine evaluates model responses across **5 different suites**:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Dual-Interface Backend System
 
@@ -158,7 +156,7 @@ Reverse adapters (`HTTPTextModel`, `LlamaTextModel`) allow HTTP/Llama backends t
 
 ---
 
-## 📦 Repository Structure
+## Repository structure
 
 ```
 go/
@@ -210,7 +208,7 @@ go/
 
 ---
 
-## 🔌 Core Interfaces
+## Core interfaces
 
 ### ml.Backend
 
@@ -288,7 +286,7 @@ func (m *BackendTextModel) Generate(ctx context.Context, prompt string, opts ...
 
 ---
 
-## 🎯 Backend Implementations
+## Backend implementations
 
 ### HTTPBackend
 
@@ -368,7 +366,7 @@ resp, err := adapter.Generate(ctx, "Hello")
 
 ---
 
-## 📊 Scoring Engine
+## Scoring engine
 
 ### Engine Architecture
 
@@ -470,7 +468,7 @@ exactScore := engine.ScoreExact(response, expected)
 
 ---
 
-## 🎯 Capability Probes (23 Total)
+## Capability probes (23 total)
 
 Binary pass/fail tests across AI capabilities:
 
@@ -522,7 +520,7 @@ result := ml.RunCustomProbe(ctx, backend, customProbe)
 
 ---
 
-## 📦 GGUF Support
+## GGUF support
 
 ### GGUF Model Management
 
@@ -568,7 +566,7 @@ metadata["llama.post_norm"]       // Post-normalization
 
 ---
 
-## 🚀 Agent Orchestrator
+## Agent orchestrator
 
 SSH-based remote evaluation system:
 
@@ -643,7 +641,7 @@ duckStreamer.Stream(ctx, result)
 
 ---
 
-## 🔌 CLI Commands
+## CLI commands
 
 ### Command Structure
 
@@ -692,7 +690,7 @@ lem serve --port 8080 --backend http --url http://localhost:11434
 
 ---
 
-## 🌐 REST API
+## REST API
 
 ### Endpoints
 
@@ -728,7 +726,7 @@ curl -X POST http://localhost:8080/v1/ml/score \
 
 ---
 
-## 🚀 Usage Examples
+## Usage examples
 
 ### Basic Inference
 
@@ -823,7 +821,7 @@ for _, m := range models {
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Structure
 
@@ -864,20 +862,7 @@ go/
 
 ---
 
-## 📈 Quality Metrics
-
-- ✅ **Multiple Backend Types** — HTTP, Llama, Inference adapters
-- ✅ **Comprehensive Scoring** — 5 scoring suites with 23 probes
-- ✅ **GGUF Support** — Full GGUF format parsing and management
-- ✅ **Agent Orchestration** — Remote evaluation with streaming
-- ✅ **CLI & API** — Full command-line and REST interfaces
-- ✅ **Well-Tested** — Good/Bad/Ugly pattern throughout
-- ✅ **Core Integration** — Full Core framework support
-- ✅ **Production Ready** — Deployed in Lethean AI stack
-
----
-
-## 📝 Stability Notes
+## Stability notes
 
 ### Dual Interface Pattern
 
@@ -886,7 +871,7 @@ The package maintains both `ml.Backend` and `inference.TextModel` interfaces:
 - **`ml.Backend`** — Result-based, preferred for existing HTTP/Llama code
 - **`inference.TextModel`** — Token-streaming, preferred for new GPU backends
 
-Adapters bridge between the two worlds seamlessly.
+Adapters bridge between the two worlds.
 
 ### Backward Compatibility
 
@@ -896,7 +881,7 @@ Adapters bridge between the two worlds seamlessly.
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 ### Backend Dependencies
 
@@ -921,7 +906,7 @@ Adapters bridge between the two worlds seamlessly.
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/go-ml/](file:///Users/snider/Code/core/go-ml/)
 2. **CLAUDE.md** — [~/Code/core/go-ml/CLAUDE.md](file:///Users/snider/Code/core/go-ml/CLAUDE.md)

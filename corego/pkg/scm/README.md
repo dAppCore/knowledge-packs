@@ -1,36 +1,36 @@
-# go-scm — Source Control Management
+# go-scm — Source control management
 
 > **Package:** `dappco.re/go/scm`  
 > **Repository:** [`github.com/dappcore/go-scm`](https://github.com/dappcore/go-scm)  
 > **Spec:** [`plans/code/core/go/scm/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/scm/RFC.md)  
 > **Maintainer:** Purberus <purberus@lthn.ai>  
-> **Status:** ✅ Production Ready  
+> **Status:** Production ready
 
 ---
 
-## 📋 Overview
+## Overview
 
-**go-scm** is the source control management package for the Core ecosystem. It provides comprehensive multi-repo management, git-based marketplace operations, Forge/Gitea integration, and data collection capabilities.
+**go-scm** is the source control management package for the Core ecosystem. It provides multi-repo management, git-based marketplace operations, Forge/Gitea integration, and data collection capabilities.
 
-### 🎯 Key Features
+### Key features
 
 | Category | Features |
 |----------|----------|
-| **Multi-Repo Management** | repos.yaml registry, health checks, batch operations across 51+ repos |
-| **Package Manifests** | manifest.yaml → core.json compilation, ed25519 signing |
-| **Git-Based Marketplace** | Package discovery, installation, version resolution via git tags |
-| **Forge/Gitea Integration** | Full API clients for repos, PRs, issues, mirroring, sync |
-| **Data Collection** | GitHub, BitcoinTalk, market data, academic papers |
-| **Job Runner** | Forgejo CI runner integration with event-driven architecture |
+| **Multi-repo management** | repos.yaml registry, health checks, batch operations across 51+ repos |
+| **Package manifests** | manifest.yaml → core.json compilation, ed25519 signing |
+| **Git-based marketplace** | Package discovery, installation, version resolution via git tags |
+| **Forge/Gitea integration** | Full API clients for repos, PRs, issues, mirroring, sync |
+| **Data collection** | GitHub, BitcoinTalk, market data, academic papers |
+| **Job runner** | Forgejo CI runner integration with event-driven architecture |
 | **Agent CI** | Agent-driven CI workflows with security validation |
-| **Plugin System** | Dynamic SCM extension loading |
-| **Git Abstraction** | Unified git operations layer |
+| **Plugin system** | Dynamic SCM extension loading |
+| **Git abstraction** | Unified git operations layer |
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Repository Structure
+### Repository structure
 
 ```
 core/go-scm/
@@ -54,7 +54,7 @@ core/go-scm/
 │   │   ├── client.go            # HTTP client
 │   │   ├── repos.go             # Repository operations
 │   │   ├── prs.go               # Pull request operations
-│   │   ├── orgs.go              # Organization operations
+│   │   ├── orgs.go              # Organisation operations
 │   │   └── auth.go              # Authentication
 │   │
 │   ├── gitea/                   # Gitea API client
@@ -152,7 +152,7 @@ core/go-scm/
 └── sonar-project.properties
 ```
 
-### Module Information
+### Module information
 
 - **Module Path:** `dappco.re/go/scm`
 - **Go Version:** 1.22+
@@ -161,9 +161,9 @@ core/go-scm/
 
 ---
 
-## 🔍 Package Deep Dive
+## Package deep dive
 
-### scm/ — Main SCM Package
+### scm/ — Main SCM package
 
 The root package provides the main SCM functionality and service integration.
 
@@ -191,11 +191,11 @@ func (s *SCMService) Name() string
 func (s *SCMService) Run(ctx context.Context) core.Result
 ```
 
-### manifest/ — Package Manifest System
+### manifest/ — Package manifest system
 
-**Purpose:** Parse, validate, sign manifest.yaml and compile to core.json build artifacts.
+**Purpose:** Parse, validate, sign manifest.yaml and compile to core.json build artefacts.
 
-**Manifest Format (Source):**
+**Manifest format (source):**
 ```yaml
 # .core/manifest.yaml
 code: go-io
@@ -207,7 +207,7 @@ sign: <ed25519 signature>
 sign_key: <ed25519 public key>
 ```
 
-**Core.json Format (Build Artifact):**
+**Core.json format (build artefact):**
 ```json
 {
   "code": "go-io",
@@ -224,16 +224,16 @@ sign_key: <ed25519 public key>
 }
 ```
 
-**Key Files:**
+**Key files:**
 
-| File | Purpose | Key Types/Functions |
+| File | Purpose | Key types/functions |
 |------|---------|---------------------|
 | `manifest.go` | Parse and validate manifest.yaml | `Manifest`, `Parse()`, `Validate()` |
 | `compile.go` | Compile manifest.yaml → core.json | `Compile()`, `CompileToCoreJSON()` |
 | `sign.go` | Ed25519 signature operations | `Sign()`, `VerifySignature()` |
 | `verify.go` | Manifest verification | `Verify()`, `VerifyIntegrity()` |
 
-**Manifest Type:**
+**Manifest type:**
 ```go
 type Manifest struct {
     Code        string `yaml:"code" json:"code"`
@@ -265,7 +265,7 @@ type DaemonSpec struct {
 }
 ```
 
-**Signing Process:**
+**Signing process:**
 1. Parse manifest.yaml
 2. Validate structure and required fields
 3. Compute SHA-256 hash of content
@@ -273,7 +273,7 @@ type DaemonSpec struct {
 5. Store signature in `sign` field
 6. Store public key in `sign_key` field
 
-**Verification Process:**
+**Verification process:**
 1. Parse manifest
 2. Extract signature and public key
 3. Recompute hash of content (excluding sign fields)
@@ -288,15 +288,15 @@ type DaemonSpec struct {
 - `go get dappco.re/go/io@v0.3.0` resolves via tag
 - Marketplace indexes tags, not a database
 
-### repos/ — Multi-Repo Registry
+### repos/ — Multi-repo registry
 
 **Purpose:** Manage multiple repositories via repos.yaml registry with health checks and batch operations.
 
-**Registry File Locations:**
+**Registry file locations:**
 1. `.core/repos.yaml` — Project-specific registry
 2. `~/.core/repos.yaml` — System-wide registry
 
-**Registry Format:**
+**Registry format:**
 ```yaml
 # .core/repos.yaml or ~/.core/repos.yaml
 repos:
@@ -311,7 +311,7 @@ repos:
   # ... 51 repos
 ```
 
-**Registry Entry:**
+**Registry entry:**
 ```go
 type RepoEntry struct {
     Path      string `yaml:"path"`
@@ -336,7 +336,7 @@ type Registry struct {
 - Project registry at `.core/repos.yaml`
 - Operations work across all discovered repos
 
-**Key Files:**
+**Key files:**
 
 | File | Purpose |
 |------|---------|
@@ -345,38 +345,38 @@ type Registry struct {
 | `workconfig.go` | Work configuration for batch operations |
 | `kbconfig.go` | Knowledge base configuration |
 | `gitstate.go` | Git state tracking (dirty, ahead/behind) |
-| `service_sync.go` | Sync service for repository synchronization |
+| `service_sync.go` | Sync service for repository synchronisation |
 
 **Operations:**
 
 | Operation | Command | Purpose |
 |-----------|---------|---------|
-| Health Check | `core dev health` | Status across all repos (clean/dirty, synced/ahead/behind) |
+| Health check | `core dev health` | Status across all repos (clean/dirty, synced/ahead/behind) |
 | Work | `core dev work` | Full workflow: status → commit → push |
 | Commit | `core dev commit` | Claude-assisted commits for dirty repos |
 | Push | `core dev push` | Push repos with unpushed commits |
 | Pull | `core dev pull` | Pull repos that are behind |
 | Impact | `core dev impact {pkg}` | Show dependency graph impact |
 
-**Repository States:**
+**Repository states:**
 - **Clean** — No uncommitted changes
 - **Dirty** — Has uncommitted changes
 - **Synced** — Up to date with remote
 - **Ahead** — Local commits not pushed
 - **Behind** — Remote has commits not pulled
 
-### marketplace/ — Git-Based Marketplace
+### marketplace/ — Git-based marketplace
 
 **Purpose:** Git-based package registry with no separate server. Packages are discovered via git repositories with manifest.yaml files.
 
-**Design Principles:**
+**Design principles:**
 1. Each package has `.core/manifest.yaml`
 2. Manifests are indexed by marketplace scanner
 3. `core pkg install {name}` clones and verifies
 4. ed25519 signatures verified before installation
 5. Version resolution via git tags
 
-**Key Files:**
+**Key files:**
 
 | File | Purpose |
 |------|---------|
@@ -387,13 +387,13 @@ type Registry struct {
 | `publish.go` | Package publishing |
 | `scanner.go` | Marketplace scanning |
 
-**Marketplace Index:**
+**Marketplace index:**
 - Scans repositories for manifest.yaml files
 - Builds index of available packages
 - Resolves package names to repository URLs
 - Caches index for performance
 
-**Package Identification:**
+**Package identification:**
 - Package name = `code` field from manifest.yaml
 - Package version = git tag
 - Package repository = git remote URL
@@ -408,7 +408,7 @@ type Registry struct {
 | `core pkg list` | List installed packages |
 | `core pkg publish` | Push manifest to marketplace index |
 
-**Installation Process:**
+**Installation process:**
 1. Search marketplace index for package name
 2. Resolve package to repository URL
 3. Clone repository
@@ -416,21 +416,21 @@ type Registry struct {
 5. Copy package to destination
 6. Return installation result
 
-### forge/ — Forgejo API Client
+### forge/ — Forgejo API client
 
-**Purpose:** Full Forgejo API client for repository, PR, organization, and authentication operations.
+**Purpose:** Full Forgejo API client for repository, PR, organisation, and authentication operations.
 
-**Key Files:**
+**Key files:**
 
-| File | Purpose | API Coverage |
+| File | Purpose | API coverage |
 |------|---------|--------------|
 | `client.go` | HTTP client and configuration | Connection management |
 | `repos.go` | Repository operations | CRUD, forking, mirroring |
 | `prs.go` | Pull request operations | CRUD, reviews, merging |
-| `orgs.go` | Organization operations | CRUD, membership |
+| `orgs.go` | Organisation operations | CRUD, membership |
 | `auth.go` | Authentication | Token, SSH key management |
 
-**Client Type:**
+**Client type:**
 ```go
 type Client struct {
     Endpoint string
@@ -442,7 +442,7 @@ func NewClient(endpoint, token string) *Client
 func (c *Client) Do(ctx context.Context, method, path string, body, result any) core.Result
 ```
 
-**Repository Operations:**
+**Repository operations:**
 - List repositories
 - Get repository details
 - Create repository
@@ -455,7 +455,7 @@ func (c *Client) Do(ctx context.Context, method, path string, body, result any) 
 - Get repository tags
 - Get repository commits
 
-**Pull Request Operations:**
+**Pull request operations:**
 - List PRs
 - Get PR details
 - Create PR
@@ -467,33 +467,33 @@ func (c *Client) Do(ctx context.Context, method, path string, body, result any) 
 - Get PR comments
 - Add PR comment
 
-**Organization Operations:**
-- List organizations
-- Get organization details
-- Create organization
-- Update organization
-- Delete organization
-- List organization members
-- Add organization member
-- Remove organization member
+**Organisation operations:**
+- List organisations
+- Get organisation details
+- Create organisation
+- Update organisation
+- Delete organisation
+- List organisation members
+- Add organisation member
+- Remove organisation member
 
-### gitea/ — Gitea API Client
+### gitea/ — Gitea API client
 
 **Purpose:** Full Gitea API client for repository, PR, issue, mirroring, and sync operations.
 
-**Key Files:**
+**Key files:**
 
-| File | Purpose | API Coverage |
+| File | Purpose | API coverage |
 |------|---------|--------------|
 | `client.go` | HTTP client and configuration | Connection management |
 | `repos.go` | Repository operations | CRUD, forking, mirroring |
 | `prs.go` | Pull request operations | CRUD, reviews, merging |
 | `issues.go` | Issue operations | CRUD, labels, milestones |
 | `mirror.go` | Repository mirroring | Create, update, delete |
-| `sync.go` | Repository synchronization | Sync status, trigger |
+| `sync.go` | Repository synchronisation | Sync status, trigger |
 | `config.go` | Configuration | Server settings |
 
-**Gitea-Specific Features:**
+**Gitea-specific features:**
 - Issue tracker management
 - Milestone management
 - Label management
@@ -501,31 +501,31 @@ func (c *Client) Do(ctx context.Context, method, path string, body, result any) 
 - Repository mirroring (one-way sync from external sources)
 - Repository sync (two-way sync with external sources)
 
-**Mirror Operations:**
+**Mirror operations:**
 - Create mirror repository
 - Update mirror settings
 - Delete mirror repository
 - Sync mirror repository
 - List mirror repositories
 
-**Sync Operations:**
+**Sync operations:**
 - Trigger repository sync
 - Get sync status
 - List sync operations
 - Configure sync settings
 
-### git/ — Git Abstraction Layer
+### git/ — Git abstraction layer
 
 **Purpose:** Unified git operations abstraction for consistent git interactions.
 
-**Key Files:**
+**Key files:**
 
 | File | Purpose |
 |------|---------|
 | `git.go` | Core git operations |
 | `service.go` | Git service with context-aware support |
 
-**Git Service:**
+**Git service:**
 ```go
 type GitService struct {
     Config *GitConfig
@@ -570,11 +570,11 @@ type GitAuth struct {
 }
 ```
 
-### collect/ — Data Collection System
+### collect/ — Data collection system
 
 **Purpose:** Collect external data from various sources including GitHub, BitcoinTalk, market data, and academic papers.
 
-**Key Files:**
+**Key files:**
 
 | File | Purpose |
 |------|---------|
@@ -587,16 +587,16 @@ type GitAuth struct {
 | `state.go` | Persistent state management |
 | `ratelimit.go` | API rate limiting |
 
-**Collection Sources:**
+**Collection sources:**
 
-| Source | Command | Data Collected |
+| Source | Command | Data collected |
 |--------|---------|---------------|
 | GitHub | `core collect github` | Repository metadata, stars, contributors, forks, issues, PRs |
 | BitcoinTalk | `core collect bitcointalk` | Forum threads, posts, community sentiment |
 | Market | `core collect market` | Price data, volume, exchanges, trading pairs |
 | Papers | `core collect papers` | Academic papers, research publications |
 
-**Collection Process:**
+**Collection process:**
 1. Parse collection configuration
 2. Load persistent state (last run, rate limits)
 3. Dispatch collection jobs to worker agents
@@ -604,7 +604,7 @@ type GitAuth struct {
 5. Store collected data
 6. Update persistent state
 
-**Event Types:**
+**Event types:**
 ```go
 type CollectionEvent struct {
     Type      string `json:"type"`
@@ -614,13 +614,13 @@ type CollectionEvent struct {
 }
 ```
 
-**Rate Limiting:**
+**Rate limiting:**
 - Per-source rate limits
 - Configurable limits
 - Token bucket algorithm
 - Automatic backoff
 
-### jobrunner/ — Forgejo CI Job Runner
+### jobrunner/ — Forgejo CI job runner
 
 **Purpose:** Forgejo CI integration with event-driven architecture for running CI jobs.
 
@@ -629,7 +629,7 @@ type CollectionEvent struct {
 Forge webhook → Job Runner picks up → Executes handlers → Reports status
 ```
 
-**Key Files:**
+**Key files:**
 
 | File | Purpose |
 |------|---------|
@@ -642,7 +642,7 @@ Forge webhook → Job Runner picks up → Executes handlers → Reports status
 | `handlers/merge.go` | Merge handler |
 | `handlers/resolve.go` | Resolve handler |
 
-**Signal Interface:**
+**Signal interface:**
 ```go
 type Signal interface {
     Type() string
@@ -651,7 +651,7 @@ type Signal interface {
 }
 ```
 
-**Source Interface:**
+**Source interface:**
 ```go
 type Source interface {
     Name() string
@@ -660,7 +660,7 @@ type Source interface {
 }
 ```
 
-**Handler Interface:**
+**Handler interface:**
 ```go
 type Handler interface {
     Type() string
@@ -668,7 +668,7 @@ type Handler interface {
 }
 ```
 
-**Poller Features:**
+**Poller features:**
 - Multiple sources (Forgejo, GitHub Actions, etc.)
 - Handler chain (first match wins)
 - Dry-run mode for testing
@@ -681,11 +681,11 @@ type Handler interface {
 - Persistent storage
 - Queryable interface
 
-### agentci/ — Agent-Driven CI Workflows
+### agentci/ — Agent-driven CI workflows
 
 **Purpose:** Agent-driven CI workflows with security validation and orchestration.
 
-**Key Files:**
+**Key files:**
 
 | File | Purpose |
 |------|---------|
@@ -711,23 +711,23 @@ type SecurityConfig struct {
 }
 ```
 
-**Clotho Orchestrator:**
+**Clotho orchestrator:**
 - Manages workflow lifecycle
 - Handles task dependencies
 - Provides rollback capabilities
 - Integrates with external systems
 
-**Security Features:**
+**Security features:**
 - Action approval workflow
 - Concurrency limits
 - Allowed action list
 - Audit logging
 
-### plugin/ — Plugin System
+### plugin/ — Plugin system
 
 **Purpose:** Dynamic loading of SCM extensions via plugin manifests.
 
-**Key Files:**
+**Key files:**
 
 | File | Purpose |
 |------|---------|
@@ -738,13 +738,13 @@ type SecurityConfig struct {
 | `config.go` | Plugin configuration management |
 | `plugin.go` | Plugin interface and runtime |
 
-**Plugin Discovery:**
+**Plugin discovery:**
 - Loaded from manifest Namespace declarations
 - Each CoreApp can declare plugins it provides
 - Plugins are loaded on demand
 - Lifecycle: Discover → Load → Configure → Run → Unload
 
-**Plugin Manifest:**
+**Plugin manifest:**
 ```yaml
 # .core/manifest.yaml
 namespace: my-namespace
@@ -757,7 +757,7 @@ plugins:
     permissions: ["read", "write", "network"]
 ```
 
-**Plugin Interface:**
+**Plugin interface:**
 ```go
 type Plugin interface {
     Name() string
@@ -781,18 +781,18 @@ func (r *Registry) Unload(name string) error
 func (r *Registry) Configure(name string, config any) error
 ```
 
-### pkg/api/ — REST API Surface
+### pkg/api/ — REST API surface
 
 **Purpose:** REST API for SCM operations with embedded UI assets.
 
-**Key Files:**
+**Key files:**
 
 | File | Purpose |
 |------|---------|
 | `provider.go` | API provider implementing Core API service |
 | `embed.go` | Embedded HTML/CSS/JS assets |
 
-**API Endpoints:**
+**API endpoints:**
 ```
 GET  /api/scm/repos              - List registered repositories
 GET  /api/scm/repos/{repo}       - Get repository details
@@ -804,7 +804,7 @@ GET  /api/scm/marketplace/packages - List marketplace packages
 GET  /api/scm/marketplace/search   - Search marketplace
 ```
 
-**UI Assets:**
+**UI assets:**
 - Embedded static files
 - Angular-based frontend
 - Real-time updates via WebSocket
@@ -812,9 +812,9 @@ GET  /api/scm/marketplace/search   - Search marketplace
 
 ---
 
-## 🚀 Commands
+## Commands
 
-### Command Structure
+### Command structure
 
 ```
 core dev       - Multi-repo operations
@@ -827,7 +827,7 @@ core compile   - Manifest compilation
 core sign      - Manifest signing
 ```
 
-### core dev — Multi-Repo Operations
+### core dev — Multi-repo operations
 
 **Purpose:** Manage multiple repositories in batch.
 
@@ -891,7 +891,7 @@ core dev impact {pkg} [--depth INT] [--json]
 - `--depth` limits traversal depth
 - `--json` outputs as JSON
 
-### core pkg — Marketplace Operations
+### core pkg — Marketplace operations
 
 **Purpose:** Interact with the git-based marketplace.
 
@@ -941,7 +941,7 @@ core pkg publish [--repo PATH] [--manifest PATH] [--dry-run]
 - `--manifest` specifies manifest file
 - `--dry-run` validates without publishing
 
-### core forge — Forge Operations
+### core forge — Forge operations
 
 **Purpose:** Interact with Forgejo/Forge instances.
 
@@ -953,8 +953,8 @@ core pkg publish [--repo PATH] [--manifest PATH] [--dry-run]
 ```bash
 core forge repos [--org STRING] [--all] [--json]
 ```
-- List repositories in organization
-- `--org` specifies organization
+- List repositories in organisation
+- `--org` specifies organisation
 - `--all` lists all repositories (not just org)
 - `--json` outputs as JSON
 
@@ -962,7 +962,7 @@ core forge repos [--org STRING] [--all] [--json]
 ```bash
 core forge orgs [--json]
 ```
-- List organizations
+- List organisations
 - `--json` outputs as JSON
 
 **3. PRs:**
@@ -982,7 +982,7 @@ core forge auth [--token STRING] [--test]
 - `--token` specifies authentication token
 - `--test` tests current authentication
 
-### core gitea — Gitea Operations
+### core gitea — Gitea operations
 
 **Purpose:** Interact with Gitea instances.
 
@@ -1027,7 +1027,7 @@ core gitea mirror [--repo STRING] [--remote STRING] [--interval DURATION] [--cre
 ```bash
 core gitea sync [--repo STRING] [--now]
 ```
-- Trigger repository synchronization
+- Trigger repository synchronisation
 - `--repo` specifies repository to sync
 - `--now` triggers immediate sync
 
@@ -1040,7 +1040,7 @@ core gitea config [--get STRING] [--set STRING=VALUE] [--list]
 - `--set` sets configuration value
 - `--list` lists all configuration
 
-### core collect — Data Collection Operations
+### core collect — Data collection operations
 
 **Purpose:** Collect external data from various sources.
 
@@ -1064,7 +1064,7 @@ core collect github [--repo STRING] [--org STRING] [--all] [--limit INT] [--json
 ```
 - Collect GitHub repository data
 - `--repo` specifies repository
-- `--org` specifies organization
+- `--org` specifies organisation
 - `--all` collects from all accessible repos
 - `--limit` limits number of repos
 - `--json` outputs as JSON
@@ -1101,7 +1101,7 @@ core collect papers [--query STRING] [--source STRING] [--all] [--limit INT] [--
 - `--limit` limits number of papers
 - `--json` outputs as JSON
 
-### core verify — Manifest Verification
+### core verify — Manifest verification
 
 **Purpose:** Verify manifest.yaml signatures and integrity.
 
@@ -1118,7 +1118,7 @@ core verify [--manifest PATH] [--key PATH] [--json]
 - `--key` specifies public key file
 - `--json` outputs as JSON
 
-**2. Batch Verify:**
+**2. Batch verify:**
 ```bash
 core verify batch [--dir PATH] [--recursive] [--json]
 ```
@@ -1127,9 +1127,9 @@ core verify batch [--dir PATH] [--recursive] [--json]
 - `--recursive` scans subdirectories
 - `--json` outputs as JSON
 
-### core compile — Manifest Compilation
+### core compile — Manifest compilation
 
-**Purpose:** Compile manifest.yaml to core.json build artifacts.
+**Purpose:** Compile manifest.yaml to core.json build artefacts.
 
 **Registration:** `cmd/compile/cmd.go`
 
@@ -1144,7 +1144,7 @@ core compile [--manifest PATH] [--output PATH] [--pretty]
 - `--output` specifies output file
 - `--pretty` formats JSON output
 
-**2. Batch Compile:**
+**2. Batch compile:**
 ```bash
 core compile batch [--dir PATH] [--recursive] [--overwrite]
 ```
@@ -1153,7 +1153,7 @@ core compile batch [--dir PATH] [--recursive] [--overwrite]
 - `--recursive` scans subdirectories
 - `--overwrite` overwrites existing files
 
-### core sign — Manifest Signing
+### core sign — Manifest signing
 
 **Purpose:** Sign manifest.yaml with ed25519 keys.
 
@@ -1171,7 +1171,7 @@ core sign [--manifest PATH] [--key PATH] [--output PATH] [--overwrite]
 - `--output` specifies output file
 - `--overwrite` overwrites existing file
 
-**2. Generate Keys:**
+**2. Generate keys:**
 ```bash
 core sign keygen [--output PATH] [--overwrite]
 ```
@@ -1181,11 +1181,11 @@ core sign keygen [--output PATH] [--overwrite]
 
 ---
 
-## 📝 Configuration
+## Configuration
 
-### Registry Files
+### Registry files
 
-**Project Registry:** `.core/repos.yaml`
+**Project registry:** `.core/repos.yaml`
 ```yaml
 repos:
   - path: core/go
@@ -1198,7 +1198,7 @@ repos:
     workspace: core/go-io
 ```
 
-**System Registry:** `~/.core/repos.yaml`
+**System registry:** `~/.core/repos.yaml`
 ```yaml
 repos:
   - path: core/go
@@ -1209,7 +1209,7 @@ repos:
     branch: main
 ```
 
-### Environment Variables
+### Environment variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -1220,7 +1220,7 @@ repos:
 | `GITEA_ENDPOINT` | Gitea API endpoint | `https://gitea.lthn.ai` |
 | `GITEA_TOKEN` | Gitea authentication token | (none) |
 
-### Manifest Configuration
+### Manifest configuration
 
 **manifest.yaml:**
 ```yaml
@@ -1262,9 +1262,9 @@ plugins:
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
-### CoreGo Dependencies
+### CoreGo dependencies
 
 ```go
 import (
@@ -1276,7 +1276,7 @@ import (
 )
 ```
 
-### External Dependencies
+### External dependencies
 
 ```
 # From go.mod
@@ -1284,19 +1284,19 @@ github.com/go-git/go-git/v5      - Git operations
 github.com/google/go-github/v62 - GitHub API
 ```
 
-### Related Packages
+### Related packages
 
 | Package | Relationship | Purpose |
 |---------|--------------|---------|
 | `go-config` | Dependency | Configuration (manifests, repos.yaml) |
-| `go-build` | Related | Build artifacts and compilation |
+| `go-build` | Related | Build artefacts and compilation |
 | `go-ai` | Related | AI integration for commit messages |
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 All packages follow the **AX-7 Triplet Pattern**:
 
@@ -1308,9 +1308,9 @@ manifest/
 └── stdlib_assert_test.go       # Standard library compliance
 ```
 
-### Test Coverage
+### Test coverage
 
-**Key Test Files:**
+**Key test files:**
 - `scm_test.go` — Main SCM package tests
 - `service_test.go` — Service tests
 - `manifest/manifest_test.go` — Manifest parsing tests
@@ -1325,7 +1325,7 @@ manifest/
 - `jobrunner/*_test.go` — Job runner tests
 - `cmd/*/*_test.go` — CLI command tests
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -1351,9 +1351,9 @@ go test -v ./scm
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Type Index
+### Type index
 
 | Type | Package | Description |
 |------|---------|-------------|
@@ -1371,7 +1371,7 @@ go test -v ./scm
 | `Handler` | `jobrunner` | Job handler interface |
 | `SCMService` | `scm` | SCM core service |
 
-### Function Index
+### Function index
 
 | Function | Package | Description |
 |----------|---------|-------------|
@@ -1391,9 +1391,9 @@ go test -v ./scm
 
 ---
 
-## 🎓 Examples
+## Examples
 
-### Example 1: Load and Verify Manifest
+### Example 1: Load and verify manifest
 
 ```go
 package main
@@ -1425,7 +1425,7 @@ func main() {
 }
 ```
 
-### Example 2: Compile Manifest to core.json
+### Example 2: Compile manifest to core.json
 
 ```go
 package main
@@ -1459,7 +1459,7 @@ func main() {
 }
 ```
 
-### Example 3: Load Repository Registry
+### Example 3: Load repository registry
 
 ```go
 package main
@@ -1489,7 +1489,7 @@ func main() {
 }
 ```
 
-### Example 4: Forgejo API Client
+### Example 4: Forgejo API client
 
 ```go
 package main
@@ -1510,7 +1510,7 @@ func main() {
     }
     
     repositoryList := reposResult.Value.([]forge.Repository)
-    println("Found", len(repositoryList), "repositories in 'core' organization")
+    println("Found", len(repositoryList), "repositories in 'core' organisation")
     
     // List PRs
     prsResult := client.ListPRs(context.Background(), "core/go", "open", 0, 50)
@@ -1523,7 +1523,7 @@ func main() {
 }
 ```
 
-### Example 5: Git Operations
+### Example 5: Git operations
 
 ```go
 package main
@@ -1563,9 +1563,9 @@ func main() {
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### RFC Documents
+### RFC documents
 
 | Document | Location | Description | Size |
 |----------|----------|-------------|------|
@@ -1576,7 +1576,7 @@ func main() {
 | Imports RFC | [`RFC.imports.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/scm/RFC.imports.md) | Import specifications | 705 bytes |
 | CLAUDE.md | [`CLAUDE.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/scm/CLAUDE.md) | Claude-specific notes | 1.7KB |
 
-### Repository Documentation
+### Repository documentation
 
 | Document | Location | Description |
 |----------|----------|-------------|
@@ -1586,7 +1586,7 @@ func main() {
 | LICENCE | [`LICENCE`](file:///Users/snider/Code/core/go-scm/LICENCE) | EUPL-1.2 license | 14KB |
 | sonar-project.properties | [`sonar-project.properties`](file:///Users/snider/Code/core/go-scm/sonar-project.properties) | SonarQube configuration | 531 bytes |
 
-### Knowledge Pack Documentation
+### Knowledge pack documentation
 
 | Document | Location | Description |
 |----------|----------|-------------|
@@ -1595,7 +1595,7 @@ func main() {
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
 ```yaml
 name: go-scm

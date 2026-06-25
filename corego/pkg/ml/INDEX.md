@@ -20,7 +20,6 @@ tags:
 ---
 # go-ml Package Index
 
-> **ML Inference Backends & Scoring Engine — The AI execution layer for the Lethean AI stack**
 
 **Repository:** `core/go-ml`  
 **Module:** `dappco.re/go/core/ml`  
@@ -34,7 +33,7 @@ tags:
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -49,11 +48,11 @@ tags:
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-`go-ml` is the **ML inference backend and scoring engine** for the Lethean AI stack, providing a comprehensive platform for AI model execution, evaluation, and management.
+`go-ml` is the **ML inference backend and scoring engine** for the Lethean AI stack, providing a platform for AI model execution, evaluation, and management.
 
-### Core Capabilities
+### Core capabilities
 
 1. **Pluggable Inference Backends** — Multiple backend types (HTTP, Llama, Inference adapters)
 2. **Multi-Suite Scoring Engine** — Concurrent evaluation across 5 scoring suites
@@ -62,19 +61,19 @@ tags:
 5. **Agent Orchestrator** — SSH-based remote checkpoint discovery and evaluation
 6. **CLI & REST API** — Full command-line and HTTP interface
 
-### Design Philosophy
+### Design philosophy
 
 - **Dual-Interface Architecture** — Supports both `ml.Backend` (result-based) and `inference.TextModel` (streaming)
-- **Adapter Pattern** — Seamless bridging between interface families
+- **Adapter Pattern** — Bridging between interface families
 - **Backend-Agnostic** — Swap backends without changing consumer code
 - **Comprehensive Evaluation** — Multiple scoring methods for different use cases
 - **Production-First** — Deployed in Lethean AI stack
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### High-Level Overview
+### High-level overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -127,7 +126,7 @@ tags:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Dual-Interface System
+### Dual-interface system
 
 The key architectural innovation is the **dual-interface pattern**:
 
@@ -178,7 +177,7 @@ The key architectural innovation is the **dual-interface pattern**:
 | **Preferred For** | HTTP, Llama backends | GPU backends (Metal, ROCm) |
 | **Maturity** | Production, stable | New, evolving |
 
-### Repository Structure
+### Repository structure
 
 ```
 go/
@@ -250,7 +249,7 @@ go/
 
 ---
 
-## 🔌 Core Interfaces
+## Core interfaces
 
 ### ml.Backend
 
@@ -311,7 +310,7 @@ type Options struct {
 }
 ```
 
-### Interface Comparison
+### Interface comparison
 
 | Feature | ml.Backend | inference.TextModel |
 |---------|------------|---------------------|
@@ -323,7 +322,7 @@ type Options struct {
 
 ---
 
-## 🎯 Backend Implementations
+## Backend implementations
 
 ### 1. HTTPBackend
 
@@ -347,10 +346,10 @@ backend := ml.NewHTTPBackend(
 ```
 
 **Supported Services:**
-- ✅ **Ollama** — Local LLM inference (`http://localhost:11434`)
-- ✅ **LM Studio** — Local LLM management
-- ✅ **OpenAI-compatible** — Any OpenAI-compatible API
-- ✅ **Custom HTTP** — Any REST-based inference endpoint
+- **Ollama** — Local LLM inference (`http://localhost:11434`)
+- **LM Studio** — Local LLM management
+- **OpenAI-compatible** — Any OpenAI-compatible API
+- **Custom HTTP** — Any REST-based inference endpoint
 
 **Features:**
 - Automatic JSON serialization/deserialization
@@ -431,7 +430,7 @@ resp, err := adapter.Generate(ctx, "Explain AI", ml.Options{
 - Respects platform-specific availability
 - Falls back gracefully
 
-### Reverse Adapters
+### Reverse adapters
 
 For using ml.Backend where inference.TextModel is expected:
 
@@ -448,7 +447,7 @@ for token := range textModel.Generate(ctx, "Hello") {
 
 ---
 
-## 📊 Scoring Engine
+## Scoring engine
 
 ### Architecture
 
@@ -473,7 +472,7 @@ score := engine.Score(ctx, response, "semantic")
 score := engine.ScoreWithSuites(ctx, response, []string{"heuristic", "semantic"})
 ```
 
-### Scoring Suites
+### Scoring suites
 
 #### 1. Heuristic Suite
 
@@ -601,7 +600,7 @@ exactScore := engine.ScoreExact(response, expected, ml.ExactOptions{
 - Simple Q&A evaluation
 - Deterministic testing
 
-### Score Result
+### Score result
 
 ```go
 type ScoreResult struct {
@@ -622,7 +621,7 @@ type OverallScore struct {
 
 ---
 
-## 🎯 Capability Probes (23 Total)
+## Capability probes (23 total)
 
 Binary pass/fail tests across AI capabilities. Each probe returns:
 
@@ -636,7 +635,7 @@ type ProbeResult struct {
 }
 ```
 
-### Math & Logic Probes (5)
+### Math & logic probes (5)
 
 | # | Probe | Description |
 |---|-------|-------------|
@@ -654,7 +653,7 @@ result := ml.RunProbe(ctx, backend, "arithmetic")
 // Passes if answer is correct
 ```
 
-### Code Generation Probes (5)
+### Code generation probes (5)
 
 | # | Probe | Description |
 |---|-------|-------------|
@@ -671,7 +670,7 @@ result := ml.RunProbe(ctx, backend, "arithmetic")
 result := ml.RunProbe(ctx, backend, "function")
 ```
 
-### Reasoning Probes (5)
+### Reasoning probes (5)
 
 | # | Probe | Description |
 |---|-------|-------------|
@@ -688,7 +687,7 @@ result := ml.RunProbe(ctx, backend, "function")
 result := ml.RunProbe(ctx, backend, "deduction")
 ```
 
-### Language & Knowledge Probes (5)
+### Language & knowledge probes (5)
 
 | # | Probe | Description |
 |---|-------|-------------|
@@ -705,7 +704,7 @@ result := ml.RunProbe(ctx, backend, "deduction")
 result := ml.RunProbe(ctx, backend, "knowledge")
 ```
 
-### Specialized Probes (3)
+### Specialized probes (3)
 
 | # | Probe | Description |
 |---|-------|-------------|
@@ -713,7 +712,7 @@ result := ml.RunProbe(ctx, backend, "knowledge")
 | 22 | `translation` | Language translation |
 | 23 | `summarization` | Text summarization |
 
-### Running Probes
+### Running probes
 
 ```go
 // Run all 23 probes
@@ -736,7 +735,7 @@ result := ml.RunCustomProbe(ctx, backend, ml.Probe{
 
 ---
 
-## 📦 GGUF Support
+## GGUF support
 
 ### Overview
 
@@ -747,7 +746,7 @@ GGUF (Geraldo's Generic Unified Format) is a binary format for storing machine l
 - **Inventory** — Manage collections of GGUF models
 - **Validation** — Verify GGUF file integrity
 
-### GGUF Model
+### GGUF model
 
 ```go
 // Parse a GGUF file
@@ -770,7 +769,7 @@ for _, tensor := range tensors {
 }
 ```
 
-### GGUF Metadata
+### GGUF metadata
 
 Standard metadata fields:
 
@@ -804,7 +803,7 @@ metadata["tokenizer.ggml.pre"]      // Pre-tokenization string
 metadata["tokenizer.ggml.special_tokens"] // Special tokens
 ```
 
-### GGUF Conversion
+### GGUF conversion
 
 ```go
 // Convert Safetensors to GGUF
@@ -825,7 +824,7 @@ err := gguf.ConvertGGUFToSafetensors(
 )
 ```
 
-### Quantization Types
+### Quantization types
 
 | Type | Description | Bits | Size Reduction |
 |------|-------------|------|-----------------|
@@ -837,7 +836,7 @@ err := gguf.ConvertGGUFToSafetensors(
 | `Q5_1` | 5-bit, with scaling | 5 | 6.4x |
 | `Q8_0` | 8-bit | 8 | 4x |
 
-### GGUF Inventory
+### GGUF inventory
 
 ```go
 // Create inventory
@@ -865,7 +864,7 @@ info, err := inventory.GetInfo("gemma-3-1b")
 
 ---
 
-## 🚀 Agent Orchestrator
+## Agent orchestrator
 
 ### Overview
 
@@ -907,7 +906,7 @@ The agent orchestrator provides **remote evaluation capabilities** for fine-tune
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Checkpoint Discovery
+### Checkpoint discovery
 
 ```go
 // Discover checkpoints on remote server
@@ -931,7 +930,7 @@ for _, cp := range checkpoints {
 }
 ```
 
-### Remote Evaluation
+### Remote evaluation
 
 ```go
 // Evaluate a checkpoint on remote server
@@ -962,7 +961,7 @@ for _, suiteResult := range result.SuiteResults {
 }
 ```
 
-### Batch Evaluation
+### Batch evaluation
 
 ```go
 // Evaluate multiple checkpoints
@@ -983,7 +982,7 @@ results, err := agent.EvaluateCheckpoints(
 )
 ```
 
-### Metrics Streaming
+### Metrics streaming
 
 #### InfluxDB Streaming
 
@@ -1022,17 +1021,17 @@ duckStreamer.StreamToTable(ctx, result, "evaluation_results")
 
 ---
 
-## 🔌 CLI Commands
+## CLI commands
 
 ### Overview
 
-The `lem` CLI provides a comprehensive command-line interface for go-ml:
+The `lem` CLI provides a command-line interface for go-ml:
 
 ```bash
 lem [command] [subcommand] [flags]
 ```
 
-### Command Hierarchy
+### Command hierarchy
 
 ```
 lem/
@@ -1062,7 +1061,7 @@ lem/
     └── start          # Start API server
 ```
 
-### Command Examples
+### Command examples
 
 #### Benchmarking
 
@@ -1167,7 +1166,7 @@ lem serve start --port 8080 --backends http,llama
 
 ---
 
-## 🌐 REST API
+## REST API
 
 ### Overview
 
@@ -1231,7 +1230,7 @@ Base URL: /v1/ml/
 | GET | `/status` | System status |
 | GET | `/version` | Version info |
 
-### API Examples
+### API examples
 
 #### Generate Text
 
@@ -1292,9 +1291,9 @@ curl -X POST http://localhost:8080/v1/ml/probe \
 
 ---
 
-## 🚀 Usage Examples
+## Usage examples
 
-### Basic Inference
+### Basic inference
 
 ```go
 package main
@@ -1328,7 +1327,7 @@ func main() {
 }
 ```
 
-### Chat Conversation
+### Chat conversation
 
 ```go
 messages := []ml.Message{
@@ -1380,7 +1379,7 @@ for i, score := range scores {
 }
 ```
 
-### Custom Heuristic Scoring
+### Custom heuristic scoring
 
 ```go
 // Define custom heuristic rules
@@ -1401,7 +1400,7 @@ score := scorer.Score("The capital of France is Paris.")
 fmt.Printf("Score: %.2f\n", score)
 ```
 
-### Run Capability Probes
+### Run capability probes
 
 ```go
 // Run specific probes
@@ -1417,7 +1416,7 @@ passRate := ml.CalculatePassRate(results)
 fmt.Printf("Pass rate: %.1f%%\n", passRate*100)
 ```
 
-### GGUF Operations
+### GGUF operations
 
 ```go
 // Parse and inspect GGUF
@@ -1441,9 +1440,9 @@ for _, m := range models {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 Following the AX Standard with Good/Bad/Ugly test triplets:
 
@@ -1485,7 +1484,7 @@ Agent Tests:
 └── agent/stream_test.go
 ```
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -1515,25 +1514,9 @@ go test -short ./...
 
 ---
 
-## 📈 Quality Metrics
+## Implementation notes
 
-| Metric | Status | Details |
-|--------|--------|---------|
-| **Multiple Backends** | ✅ | HTTP, Llama, Inference adapters |
-| **Comprehensive Scoring** | ✅ | 5 suites, 23 probes |
-| **GGUF Support** | ✅ | Parse, convert, inventory, validate |
-| **Agent Orchestration** | ✅ | Remote discovery, evaluation, streaming |
-| **CLI Interface** | ✅ | Full command-line support |
-| **REST API** | ✅ | Complete HTTP API |
-| **Test Coverage** | ✅ | Good/Bad/Ugly pattern throughout |
-| **Core Integration** | ✅ | Full Core framework support |
-| **Production Ready** | ✅ | Deployed in Lethean AI stack |
-
----
-
-## 📝 Implementation Notes
-
-### Dual Interface Pattern
+### Dual interface pattern
 
 The package maintains both interface families for backward compatibility and flexibility:
 
@@ -1546,7 +1529,7 @@ The package maintains both interface families for backward compatibility and fle
 3. Gradually migrate consumers to `inference.TextModel`
 4. Maintain both interfaces indefinitely for compatibility
 
-### Adapter Design
+### Adapter design
 
 Adapters follow the **adapter pattern** to bridge between incompatible interfaces:
 
@@ -1585,9 +1568,9 @@ func (m *HTTPTextModel) Generate(ctx context.Context, prompt string, opts ...inf
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
-### Backend Dependencies
+### Backend dependencies
 
 | Package | Module | Relationship |
 |---------|--------|--------------|
@@ -1595,14 +1578,14 @@ func (m *HTTPTextModel) Generate(ctx context.Context, prompt string, opts ...inf
 | [go-mlx](../mlx/) | `dappco.re/go/mlx` | Apple Metal GPU backend |
 | [go-rocm](../rocm/) | `dappco.re/go/rocm` | AMD ROCm GPU backend |
 
-### Consumer Packages
+### Consumer packages
 
 | Package | Module | Relationship |
 |---------|--------|--------------|
 | [go-ai](../ai/) | `dappco.re/go/ai` | Uses ml.Backend for AI integration |
 | [go-i18n](../i18n/) | `dappco.re/go/i18n` | Uses ml.Backend for classification |
 
-### Core Framework
+### Core framework
 
 | Package | Relationship |
 |---------|--------------|
@@ -1610,7 +1593,7 @@ func (m *HTTPTextModel) Generate(ctx context.Context, prompt string, opts ...inf
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/go-ml/](file:///Users/snider/Code/core/go-ml/)
 2. **CLAUDE.md** — [~/Code/core/go-ml/CLAUDE.md](file:///Users/snider/Code/core/go-ml/CLAUDE.md)

@@ -15,8 +15,6 @@ tags:
 ---
 # go-log — Structured Logging & Error Handling
 
-> **The authoritative structured logging and error handling package for the Lethean ecosystem**
-
 **RFC:** [plans/code/core/go/log/RFC.md](../../../../../plans/code/core/go/log/RFC.md)
 **Source:** [~/Code/core/go-log/](file:///Users/snider/Code/core/go-log/)
 **Module:** `dappco.re/go/log`
@@ -25,7 +23,7 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
 `go-log` provides **unified structured logging and error handling** for Core applications. It combines:
 
@@ -52,7 +50,7 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Component Stack
 
@@ -86,7 +84,7 @@ tags:
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 go-log/
@@ -107,7 +105,7 @@ go-log/
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
 ### Basic Logging
 
@@ -170,7 +168,7 @@ if err != nil {
 
 ---
 
-## 🔧 Core Types
+## Core types
 
 ### Level
 
@@ -279,7 +277,7 @@ type Err struct {
 
 ---
 
-## 📝 Logging API
+## Logging API
 
 ### Level-Based Logging
 
@@ -323,7 +321,7 @@ log.Info("request completed",
 
 ---
 
-## ⚡ Error Handling API
+## Error handling API
 
 ### Error Creation
 
@@ -400,7 +398,7 @@ if errors.As(err, &notFoundErr) {
 
 ---
 
-## 🔐 Recovery Metadata
+## Recovery metadata
 
 ### Retryable Errors
 
@@ -447,7 +445,7 @@ if action := log.NextAction(err); action != "" {
 
 ---
 
-## 🛡️ Security Features
+## Security features
 
 ### Automatic Redaction
 
@@ -482,7 +480,7 @@ logger.Info("user input", "input", "\n[INF] fake log entry")
 
 ---
 
-## 📁 Log Rotation
+## Log rotation
 
 ### Configuration
 
@@ -518,7 +516,7 @@ logger := log.New(log.Options{
 
 ---
 
-## 🎨 Styling & Customization
+## Styling & customisation
 
 ### Level Styling
 
@@ -563,7 +561,7 @@ log.Info("styled message")
 
 ---
 
-## 🔗 CoreGO Integration
+## CoreGO integration
 
 ### Re-exported Functions
 
@@ -618,7 +616,7 @@ svc.Logger.Info("service started")
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Triplets
 
@@ -651,7 +649,7 @@ go test -run Example -v
 
 ---
 
-## 📊 Best Practices
+## Best practices
 
 ### 1. ALWAYS Use Structured Errors
 
@@ -735,7 +733,7 @@ log.SetLevel(log.LevelError)
 
 ---
 
-## 📚 Examples
+## Examples
 
 ### Example 1: Basic Application Logging
 
@@ -876,7 +874,7 @@ func main() {
 
 ---
 
-## 🐛 Debugging
+## Debugging
 
 ### Enable Debug Logging
 
@@ -916,7 +914,7 @@ func debugError(err error) {
 
 ---
 
-## 📈 Performance Considerations
+## Performance considerations
 
 ### Logging Overhead
 
@@ -947,7 +945,7 @@ logger := log.New(log.Options{
 
 ---
 
-## 📝 Notes
+## Notes
 
 - **Repository:** `forge.lthn.sh/core/go-log`
 - **Primary Spec:** [RFC.md](../../../../../plans/code/core/go/log/RFC.md)
@@ -957,7 +955,7 @@ logger := log.New(log.Options{
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -968,7 +966,7 @@ logger := log.New(log.Options{
 
 ---
 
-## 🎯 Tags
+## Tags
 
 ```yaml
 - logging

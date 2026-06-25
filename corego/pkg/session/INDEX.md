@@ -8,17 +8,15 @@ description: Claude Code session parser and analytics package
 
 # go-session Package Index
 
-> **Claude Code Session Parser & Analytics**
-
-**Repository:** `core/go-session`  
-**Module:** `dappco.re/go/session`  
-**Status:** ✅ Complete Documentation  
-**Last Updated:** 2026-06-17  
+**Repository:** `core/go-session`
+**Module:** `dappco.re/go/session`
+**Status:** Complete documentation
+**Last Updated:** 2026-06-17
 **Maintainer:** Purberus <purberus@lthn.ai>
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -27,33 +25,33 @@ description: Claude Code session parser and analytics package
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-**go-session** provides a complete pipeline for parsing, analyzing, and rendering Claude Code JSONL transcript files. It implements parsing, analytics, HTML rendering, video rendering, and search functionality.
+**go-session** provides a complete pipeline for parsing, analysing, and rendering Claude Code JSONL transcript files. It implements parsing, analytics, HTML rendering, video rendering, and search functionality.
 
-### Key Features
+### Key features
 
-- ✅ Claude Code JSONL transcript parser
-- ✅ Session and Event types with tool correlation
-- ✅ Analytics engine (tool counts, error rates, latency, tokens)
-- ✅ HTML renderer (dark theme, collapsible panels, search)
-- ✅ Video renderer (VHS tape → MP4)
-- ✅ Cross-session text search
-- ✅ Session listing and pruning
-- ✅ Pure library (no CLI, no external deps)
+- Claude Code JSONL transcript parser
+- Session and Event types with tool correlation
+- Analytics engine (tool counts, error rates, latency, tokens)
+- HTML renderer (dark theme, collapsible panels, search)
+- Video renderer (VHS tape → MP4)
+- Cross-session text search
+- Session listing and pruning
+- Pure library (no CLI, no external deps)
 
-### Architecture Layers
+### Architecture layers
 
-1. **Parser Layer** — JSONL parsing with tool_use/tool_result correlation
-2. **Analytics Layer** — Statistics computation and metrics
-3. **Rendering Layer** — HTML and video output generation
-4. **Search Layer** — Cross-session text search
+1. **Parser layer** — JSONL parsing with tool_use/tool_result correlation
+2. **Analytics layer** — Statistics computation and metrics
+3. **Rendering layer** — HTML and video output generation
+4. **Search layer** — Cross-session text search
 
 ---
 
-## 🏗️ Components
+## Components
 
-### Parser Types
+### Parser types
 
 | Type | File | Purpose |
 |------|------|---------|
@@ -61,21 +59,21 @@ description: Claude Code session parser and analytics package
 | `Session` | `parser.go` | Parsed session with metadata and events |
 | `rawEntry` | `parser.go` | Raw JSONL entry structure |
 
-### Analytics Types
+### Analytics types
 
 | Type | File | Purpose |
 |------|------|---------|
 | `SessionAnalytics` | `analytics.go` | Computed statistics for a session |
 | `ToolStats` | `analytics.go` | Per-tool statistics |
 
-### Rendering Types
+### Rendering types
 
 | Type | File | Purpose |
 |------|------|---------|
 | `HTMLOptions` | `html.go` | HTML rendering options |
 | `VideoOptions` | `video.go` | Video rendering options |
 
-### Search Types
+### Search types
 
 | Type | File | Purpose |
 |------|------|---------|
@@ -84,7 +82,7 @@ description: Claude Code session parser and analytics package
 
 ---
 
-## 📁 File Structure
+## File structure
 
 ```
 go-session/
@@ -115,9 +113,9 @@ go-session/
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
-### Parse a Session
+### Parse a session
 
 ```go
 import "dappco.re/go/session"
@@ -128,7 +126,7 @@ for evt := range sess.EventsSeq() {
 }
 ```
 
-### List All Sessions
+### List all sessions
 
 ```go
 sessions, err := session.ListSessions("/path/to/.claude")
@@ -137,7 +135,7 @@ for _, sess := range sessions {
 }
 ```
 
-### Compute Analytics
+### Compute analytics
 
 ```go
 analytics := session.ComputeAnalytics(sess)
@@ -154,7 +152,7 @@ html, _ := session.RenderHTML(sess, session.HTMLOptions{
 os.WriteFile("session.html", []byte(html), 0644)
 ```
 
-### Search Sessions
+### Search sessions
 
 ```go
 results, _ := session.SearchSessions(sessions, "error", session.SearchOptions{})
@@ -165,9 +163,9 @@ for _, r := range results {
 
 ---
 
-## 🎓 Use Cases
+## Use cases
 
-### 1. Session Analysis
+### 1. Session analysis
 
 ```go
 sess, _ := session.ParseFile("session.jsonl")
@@ -175,14 +173,14 @@ analytics := session.ComputeAnalytics(sess)
 fmt.Printf("Tool usage: %+v\n", analytics.ToolStats)
 ```
 
-### 2. Session Replay (HTML)
+### 2. Session replay (HTML)
 
 ```go
 html, _ := session.RenderHTML(sess, session.HTMLOptions{Theme: "dark"})
 os.WriteFile("replay.html", []byte(html), 0644)
 ```
 
-### 3. Video Generation
+### 3. Video generation
 
 ```go
 tape, _ := session.RenderVideo(sess, session.VideoOptions{Width: 1280})
@@ -190,7 +188,7 @@ os.WriteFile("session.tape", []byte(tape), 0644)
 // Run: vhs session.tape session.mp4
 ```
 
-### 4. Training Data Extraction
+### 4. Training data extraction
 
 ```go
 for _, sess := range sessions {
@@ -203,7 +201,7 @@ for _, sess := range sessions {
 }
 ```
 
-### 5. Session Search
+### 5. Session search
 
 ```go
 results, _ := session.SearchSessions(sessions, "Bash", session.SearchOptions{
@@ -214,9 +212,9 @@ results, _ := session.SearchSessions(sessions, "Bash", session.SearchOptions{
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### Parser Options
+### Parser options
 
 ```go
 // Default parsing
@@ -228,7 +226,7 @@ sess, err := session.ParseFileValidated("session.jsonl", session.ValidateOptions
 })
 ```
 
-### List Options
+### List options
 
 ```go
 type ListOptions struct {
@@ -238,7 +236,7 @@ type ListOptions struct {
 }
 ```
 
-### Prune Options
+### Prune options
 
 ```go
 type PruneOptions struct {
@@ -249,9 +247,9 @@ type PruneOptions struct {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Coverage
+### Test coverage
 
 All files have test triplets (`_test.go` + `_example_test.go`):
 
@@ -270,7 +268,7 @@ All files have test triplets (`_test.go` + `_example_test.go`):
 | service_test.go | Service tests |
 | service_example_test.go | Service examples |
 
-### Running Tests
+### Running tests
 
 ```bash
 cd ~/Code/core/go-session/go
@@ -287,7 +285,7 @@ go test -run Example -v
 
 ---
 
-## 📊 Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -295,13 +293,13 @@ go test -run Example -v
 | **Repository** | `core/go-session` |
 | **Language** | Go 1.26+ |
 | **Dependencies** | `dappco.re/go` |
-| **Test Triplets** | ✅ Complete |
-| **RFC Compliance** | ✅ Verified |
-| **Documentation** | ✅ Complete |
+| **Test triplets** | Complete |
+| **RFC compliance** | Verified |
+| **Documentation** | Complete |
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -310,35 +308,7 @@ go test -run Example -v
 
 ---
 
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Initial deep dive documentation | N/A |
-| 2026-06-17 | Package INDEX created | N/A |
-
----
-
-## 🎯 Tags
-
-```yaml
-- session
-- claude-code
-- transcript
-- parser
-- analytics
-- html-rendering
-- video-rendering
-- search
-- jsonl
-- vhs
-- session-analysis
-- replay
-```
-
----
-
-## 📈 Statistics
+## Performance figures
 
 | Metric | Value |
 |--------|-------|
@@ -350,6 +320,5 @@ go test -run Example -v
 
 ---
 
-*Package index generated: 2026-06-17T17:30:00Z*
 *Knowledge Pack: CoreGo v1.1.0*
 *Maintainer: Purberus <purberus@lthn.ai>*

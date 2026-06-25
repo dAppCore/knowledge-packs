@@ -21,13 +21,12 @@ tags:
 ---
 # go-agent Package Index
 
-> **AI Agent Orchestration Platform for the Core Ecosystem**
 
 **Repository:** `core/agent`  
 **Module:** `dappco.re/go/agent`  
 **Binary:** `core-agent` / `lthn-agent`  
 **PHP Package:** `forge.lthn.ai/core/agent`  
-**Status:** ✅ Production-Ready  
+**Status:** Production  
 **License:** EUPL-1.2  
 **Test Pattern:** Good/Bad/Ugly (AX Standard)  
 **RFC:** [plans/code/core/go/agent/RFC.md](../../../../../plans/code/core/go/agent/RFC.md)
@@ -36,7 +35,7 @@ tags:
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -49,11 +48,11 @@ tags:
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-`go-agent` is the **AI agent orchestration platform** for the Core ecosystem, providing a single Go binary (`core-agent` or `lthn-agent`) that runs as a Model Context Protocol (MCP) server and CLI tool. It serves as the **AUI** (Agent-facing User Interface) where agents wield the system headlessly, with `lthn/desktop` as its **HUI** (Human-facing User Interface) twin.
+`go-agent` is the AI agent orchestration platform for the Core ecosystem, providing a single Go binary (`core-agent` or `lthn-agent`) that runs as a Model Context Protocol (MCP) server and CLI tool. It serves as the AUI (Agent-facing User Interface) where agents wield the system headlessly, with `lthn/desktop` as its HUI (Human-facing User Interface) twin.
 
-### Core Capabilities
+### Core capabilities
 
 1. **Agent Dispatch** — Fan out tasks to sandboxed workers (Claude, Codex, Hermes, Google) running in isolated workspaces
 2. **MCP Server** — Full Model Context Protocol implementation for IDE integrations (Claude Code, Cursor, etc.)
@@ -66,7 +65,7 @@ tags:
 9. **Container Runtime** — Local and container-based runners with dispatch queue
 10. **Workspace Orchestration** — Full workspace lifecycle management with spec tree copying
 
-### Design Principles
+### Design principles
 
 - **Single Binary** — One binary with multiple modes (mcp, serve, hub, chat)
 - **Core-Native** — Full integration with CoreGO framework (ServiceRuntime, ACTION system, Result pattern)
@@ -77,7 +76,7 @@ tags:
 - **Extensible** — Subsystem architecture for custom tool groups
 - **Portable** — Works across Unix and Windows (where applicable)
 
-### Binary Name Detection
+### Binary name detection
 
 The binary detects its invocation name from `argv[0]`:
 - `core-agent` — Legacy name
@@ -86,9 +85,9 @@ The binary detects its invocation name from `argv[0]`:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Layers
+### Component layers
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -138,7 +137,7 @@ The binary detects its invocation name from `argv[0]`:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Repository Layout
+### Repository layout
 
 ```
 core/agent/
@@ -320,11 +319,11 @@ core/agent/
 
 ---
 
-## 🎯 Binary Modes
+## Binary modes
 
 The `core-agent` binary supports multiple operation modes, each serving a specific purpose in the agent ecosystem.
 
-### 1. MCP Mode (`core-agent mcp`)
+### 1. MCP mode (`core-agent mcp`)
 
 **Purpose:** Stdio MCP server for coding-agent host integration (Claude Code, Cursor, etc.)
 
@@ -346,7 +345,7 @@ core-agent mcp
 lthn-agent mcp
 ```
 
-### 2. Serve Mode (`core-agent serve`)
+### 2. Serve mode (`core-agent serve`)
 
 **Purpose:** HTTP MCP daemon for cross-agent communication, CI, and remote use
 
@@ -368,7 +367,7 @@ MCP_HTTP_ADDR=localhost:8081 \
   core-agent serve
 ```
 
-### 3. Hub Mode (`core-agent hub`)
+### 3. Hub mode (`core-agent hub`)
 
 **Purpose:** Loopback control plane for opencode control/proxy groups and brain
 
@@ -389,7 +388,7 @@ MCP_HTTP_ADDR=localhost:8081 \
 core-agent hub --http 127.0.0.1:9201 --mcp-http 127.0.0.1:9202
 ```
 
-### 4. Chat Mode (`core-agent chat --user=<id>`)
+### 4. Chat mode (`core-agent chat --user=<id>`)
 
 **Purpose:** REPL against the local LEM engine (lthn-mlx / lthn-ai driver)
 
@@ -409,7 +408,7 @@ core-agent chat --user=purberus
 core-agent chat --user=purberus --model=gemma3-1b
 ```
 
-### 5. Model Management Commands
+### 5. Model management commands
 
 **Purpose:** Manage local model engine and downloads
 
@@ -436,7 +435,7 @@ core-agent models-download --model gemma3-1b --quant q4_0
 core-agent models-job --id <job-id>
 ```
 
-### 6. Flow Execution (`core-agent run flow <path>`)
+### 6. Flow execution (`core-agent run flow <path>`)
 
 **Purpose:** Execute predefined YAML workflows
 
@@ -457,13 +456,13 @@ core-agent run flow /path/to/workflow.yaml --var key=value
 
 ---
 
-## 🚀 Core Services
+## Core services
 
-### 1. Agentic Service (`pkg/agentic/`)
+### 1. Agentic service (`pkg/agentic/`)
 
 **The core orchestration engine** for agent dispatch and workspace management.
 
-#### Key Responsibilities:
+#### Key responsibilities:
 - Task dispatch to AI agents
 - Workspace preparation and management
 - Plan, phase, and session lifecycle
@@ -471,7 +470,7 @@ core-agent run flow /path/to/workflow.yaml --var key=value
 - Repository mirroring and scanning
 - QA analysis and review queue management
 
-#### Path Utilities (`paths.go`):
+#### Path utilities (`paths.go`):
 
 All paths use environment variables with sensible defaults:
 
@@ -494,14 +493,14 @@ All paths use environment variables with sensible defaults:
 | `WorkspaceStatusPath()` | Status path | `<workspace>/status.json` |
 | `WorkspaceLogFiles()` | Agent log files | `.meta/agent-*.log` |
 
-#### Environment Variable Overrides:
+#### Environment variable overrides:
 - `CORE_WORKSPACE` — Override workspace root
 - `LETHEAN_HOME` — Override Lethean home
 - `AGENT_NAME` — Override agent name
 - `GITHUB_ORG` — Override GitHub organization
 - `CORE_HOME` — Override Core home (fallback to `HOME` or `DIR_HOME`)
 
-#### Workspace Preparation Flow:
+#### Workspace preparation flow:
 
 ```
 Input: PrepInput{Repo, Org, Task, Agent, Issue, PR, Branch, Tag, Template, Persona, Variables, DryRun}
@@ -529,7 +528,7 @@ Input: PrepInput{Repo, Org, Task, Agent, Issue, PR, Branch, Tag, Template, Perso
 Output: PrepOutput{Success, WorkspaceDir, RepoDir, Branch, Prompt, PromptVersion, Memories, Consumers, Resumed}
 ```
 
-#### Dispatch Flow:
+#### Dispatch flow:
 
 ```
 Task → Queue
@@ -553,7 +552,7 @@ Commit → Auto PR → Inline Tests → Pass → Auto-merge on Forge
 Push to GitHub → CodeRabbit reviews → Merge or dispatch fix agent
 ```
 
-#### Agent Types:
+#### Agent types:
 
 | Agent Identifier | Provider | Use Case | Speed | Cost |
 |-----------------|----------|----------|-------|------|
@@ -567,7 +566,7 @@ Push to GitHub → CodeRabbit reviews → Merge or dispatch fix agent
 | `opencode` | OpenCode | Sandboxed agent (local/free-compute) | Variable | Free |
 | `local` | Ollama bridge | Local OSS models | Fast | Free |
 
-#### Provider Management:
+#### Provider management:
 
 The `provider_manager.go` handles:
 - Provider registration and discovery
@@ -576,9 +575,9 @@ The `provider_manager.go` handles:
 - Error handling and retry logic
 - Provider-specific configuration
 
-### 2. Brain Service (`pkg/brain/`)
+### 2. Brain service (`pkg/brain/`)
 
-**OpenBrain integration** for semantic memory and cross-agent messaging.
+OpenBrain integration for semantic memory and cross-agent messaging.
 
 #### Capabilities:
 - `brain_recall` — Recall from brain with tags, type, and confidence filters
@@ -588,7 +587,7 @@ The `provider_manager.go` handles:
 - `brain_list` — List brain entries with pagination
 - Cross-agent messaging via `agent_send`, `agent_inbox`, `agent_conversation`
 
-#### Data Model:
+#### Data model:
 
 ```go
 type BrainMemory struct {
@@ -606,12 +605,12 @@ type BrainMemory struct {
 }
 ```
 
-#### Storage Backend:
+#### Storage backend:
 - **Postgres** — Primary relational storage for metadata
 - **Qdrant** — Vector database for semantic search
 - **Ollama** — Embedding generation (homelab stack)
 
-#### Client Architecture:
+#### Client architecture:
 
 ```
 pkg/brain/
@@ -625,7 +624,7 @@ pkg/brain/
     └── coreio_compat.go # CoreIO compatibility layer
 ```
 
-### 3. Lemma Service (`pkg/lemma/`)
+### 3. Lemma service (`pkg/lemma/`)
 
 **Local LEM engine client** (lthn-mlx / lthn-ai driver).
 
@@ -643,7 +642,7 @@ pkg/brain/
 - Handles GPU resource allocation
 - Provides REST API for chat operations
 
-### 4. Chat History Service (`pkg/chathistory/`)
+### 4. Chat history service (`pkg/chathistory/`)
 
 **Per-user portable DuckDB chat archive** for conversation persistence.
 
@@ -654,7 +653,7 @@ pkg/brain/
 - **Exportable** — Export conversations to JSON/Markdown
 - **Versioned** — Schema migrations for backward compatibility
 
-#### Database Schema:
+#### Database schema:
 
 ```sql
 -- Conversations table
@@ -683,7 +682,7 @@ CREATE INDEX idx_messages_conversation ON messages(conversation_id);
 CREATE INDEX idx_messages_created ON messages(created_at);
 ```
 
-#### Export Functionality:
+#### Export functionality:
 
 The `export.go` provides:
 - `ExportConversation(conversationID, format)` — Export single conversation
@@ -691,7 +690,7 @@ The `export.go` provides:
 - Format options: JSON, Markdown, HTML
 - Metadata inclusion options
 
-### 5. Monitor Service (`pkg/monitor/`)
+### 5. Monitor service (`pkg/monitor/`)
 
 **Background monitoring and repository synchronization**.
 
@@ -712,14 +711,14 @@ The `export.go` provides:
 | `harvest.go` | Data harvesting from workspaces |
 | `register.go` | Service registration and configuration |
 
-#### Monitoring Targets:
+#### Monitoring targets:
 - Local repository mirrors (`~/Code/{org}/{repo}`)
 - Workspace directories (`~/Lethean/workspace/**`)
 - Agent process health
 - Container runtime status
 - GPU resource utilization
 
-### 6. Runner Service (`pkg/runner/`)
+### 6. Runner service (`pkg/runner/`)
 
 **Local and container process runners** with dispatch queue.
 
@@ -736,18 +735,18 @@ The `export.go` provides:
   - Dependency resolution
   - Result aggregation
 
-#### Path Utilities:
+#### Path utilities:
 - `paths.go` — Resolve container paths, volume mounts, workspace mappings
 - Docker socket communication
 - Cross-platform path handling
 
-#### Queue Management:
+#### Queue management:
 - Priority levels (high, medium, low)
 - Concurrency limits per priority
 - Task timeout and retry
 - Result collection and error handling
 
-### 7. Setup Service (`pkg/setup/`)
+### 7. Setup service (`pkg/setup/`)
 
 **Project detection and workspace scaffolding**.
 
@@ -779,11 +778,11 @@ Creates the following structure:
 
 ---
 
-## 📡 MCP Tools
+## MCP tools
 
 The agent package exposes **50+ MCP tools** across multiple tool groups, organized into subsystems.
 
-### Agentic Tools (Dispatch & Workspace)
+### Agentic tools (dispatch & workspace)
 
 **Tool Prefix:** `agentic_`
 
@@ -797,7 +796,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `agentic_resume` | Resume previous session | session_id |
 | `agentic_watch` | Watch workspace for changes | path, recursive |
 
-### Plan Management Tools
+### Plan management tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -807,7 +806,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `agentic_plan_delete` | Delete plan | plan_id |
 | `agentic_plan_list` | List all plans | status, limit, offset |
 
-### Phase Management Tools
+### Phase management tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -815,7 +814,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `agentic_phase_update` | Update phase | plan_id, phase_id, changes |
 | `agentic_phase_complete` | Mark phase complete | plan_id, phase_id |
 
-### Epic & Issue Tools
+### Epic & issue tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -824,7 +823,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `agentic_issue_create` | Create issue | repo, title, description, labels, priority |
 | `agentic_issue_list` | List issues | repo, filter, limit |
 
-### PR & Review Tools
+### PR & review tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -833,7 +832,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `agentic_create_epic` | Create epic | title, description, issues |
 | `agentic_review_queue` | Get review queue | - |
 
-### Mirror & Scan Tools
+### Mirror & scan tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -841,7 +840,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `agentic_scan` | Scan repository for issues | repo, depth, patterns |
 | `agentic_scan_remote` | Remote scan | host, repo, depth |
 
-### Brain Tools
+### Brain tools
 
 **Tool Prefix:** `brain_`
 
@@ -853,7 +852,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `brain_search` | Semantic search | query, tags, limit |
 | `brain_list` | List brain entries | tags, type, limit, offset |
 
-### Messaging Tools
+### Messaging tools
 
 **Tool Prefix:** `agent_`
 
@@ -864,7 +863,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `agent_conversation` | Get conversation | conversation_id, limit |
 | `agent_conversations` | List conversations | agent, limit |
 
-### File Tools
+### File tools
 
 **Tool Prefix:** `file_`
 
@@ -878,7 +877,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `file_exists` | Check file existence | path |
 | `file_stat` | Get file stats | path |
 
-### Directory Tools
+### Directory tools
 
 **Tool Prefix:** `dir_`
 
@@ -889,7 +888,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `dir_delete` | Delete directory | path, recursive |
 | `dir_exists` | Check directory existence | path |
 
-### Language Tools
+### Language tools
 
 **Tool Prefix:** `lang_`
 
@@ -900,9 +899,9 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 
 ---
 
-## 🎯 Domain Model
+## Domain model
 
-### Struct Types
+### Struct types
 
 | Type | Package | Description |
 |------|---------|-------------|
@@ -917,7 +916,7 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 | `WorkspaceState` | agentic | Typed key-value state per plan |
 | `Sandbox` | agentic | Running opencode container state |
 
-### Status Enums
+### Status enums
 
 **AgentPlan Status:**
 - `draft` — Plan is being created
@@ -944,9 +943,9 @@ The agent package exposes **50+ MCP tools** across multiple tool groups, organiz
 
 ---
 
-## 🌐 Provider Integrations
+## Provider integrations
 
-### Claude Code Provider (`provider/claude/`)
+### Claude Code provider (`provider/claude/`)
 
 **8 Marketplace Plugins:**
 
@@ -996,7 +995,7 @@ claude plugin marketplace add https://github.com/dappcore/agent
 claude plugin install core-agent
 ```
 
-### Codex Provider (`provider/codex/`)
+### Codex provider (`provider/codex/`)
 
 **Codex CLI integration** for autonomous coding.
 
@@ -1019,7 +1018,7 @@ providers:
       hourly: 50
 ```
 
-### Hermes Provider (`provider/hermes/`)
+### Hermes provider (`provider/hermes/`)
 
 **Hermes plugin** for homelab agent integration.
 
@@ -1029,15 +1028,15 @@ providers:
 - Custom tool support
 - WebSocket-based communication
 
-### Google Provider (`provider/google/`)
+### Google provider (`provider/google/`)
 
 **Google Gemini integration** scaffolding for future development.
 
 ---
 
-## 📁 Configuration
+## Configuration
 
-### Environment Variables
+### Environment variables
 
 | Variable | Description | Default | Example |
 |----------|-------------|---------|---------|
@@ -1052,7 +1051,7 @@ providers:
 | `MCP_UNIX_SOCKET` | MCP Unix socket | - | `/tmp/mcp.sock` |
 | `DIR_HOME` | Home directory fallback | - | `/home/user` |
 
-### Configuration Files
+### Configuration files
 
 #### `~/.Lethean/conf/agents.yaml`
 
@@ -1205,9 +1204,9 @@ templates:
 
 ---
 
-## 🚀 Quick Start Examples
+## Quick start examples
 
-### Basic Usage
+### Basic usage
 
 ```bash
 # Clone and build
@@ -1237,7 +1236,7 @@ MCP_HTTP_ADDR=localhost:8081 \
 ./core-agent serve-status
 ```
 
-### Go Module Integration
+### Go module integration
 
 ```go
 package main
@@ -1275,7 +1274,7 @@ func main() {
 }
 ```
 
-### Dispatch Example
+### Dispatch example
 
 ```go
 package main
@@ -1314,7 +1313,7 @@ func main() {
 }
 ```
 
-### Workspace Preparation
+### Workspace preparation
 
 ```go
 package main
@@ -1358,7 +1357,7 @@ func main() {
 }
 ```
 
-### Brain Operations
+### Brain operations
 
 ```go
 package main
@@ -1406,7 +1405,7 @@ func main() {
 }
 ```
 
-### MCP Server Integration
+### MCP server integration
 
 ```go
 package main
@@ -1442,9 +1441,9 @@ func main() {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 The package follows the **AX Standard** with complete test triplet coverage:
 
@@ -1456,7 +1455,7 @@ The package follows the **AX Standard** with complete test triplet coverage:
 - `TestBad*` — Expected error conditions
 - `TestUgly*` — Panics and edge cases
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -1488,7 +1487,7 @@ go test -timeout 60s ./...
 go test -short ./...
 ```
 
-### Test Coverage Areas
+### Test coverage areas
 
 All major components have comprehensive test coverage:
 
@@ -1503,7 +1502,7 @@ All major components have comprehensive test coverage:
 - ✅ **Path Utilities** — All path helpers and overrides
 - ✅ **Messages** — IPC message serialization and deserialization
 
-### Example Test Patterns
+### Example test patterns
 
 ```go
 // Good path test
@@ -1547,9 +1546,9 @@ func TestUglyDispatch(t *testing.T) {
 
 ---
 
-## 🌐 API Endpoints
+## API endpoints
 
-### Hub Control Plane API
+### Hub control plane API
 
 **Base URL:** `http://127.0.0.1:9201` (configurable via `--http` flag)
 
@@ -1585,7 +1584,7 @@ Follows the [Model Context Protocol specification](https://modelcontextprotocol.
 | POST | `/mcp/resources/read` | Read a resource |
 | POST | `/mcp/sampling/createMessage` | Create message (streaming) |
 
-### Response Formats
+### Response formats
 
 All endpoints return JSON responses:
 
@@ -1610,31 +1609,7 @@ All endpoints return JSON responses:
 
 ---
 
-## 📊 Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Total Go files** | ~400+ |
-| **Test files** | ~300+ |
-| **Example test files** | ~150+ |
-| **Lines of code** | ~100,000+ |
-| **Test coverage** | High |
-| **Binary size** | ~50MB |
-| **Subsystems** | 7 (agentic, brain, lemma, chathistory, monitor, runner, setup) |
-| **MCP tools** | 50+ |
-| **Provider integrations** | 4 (Claude, Codex, Hermes, Google) |
-| **MCP transports** | 4 (stdio, tcp, http, unix) |
-| **Binary modes** | 8 (mcp, serve, hub, chat, serve-status, serve-reload, serve-profiles, models-download, models-job, run flow) |
-| **Configuration files** | 2 (agents.yaml, workspace.yaml) |
-| **Environment variables** | 15+ |
-| **Agent types** | 9 |
-| **Personas** | 50+ (embedded in pkg/lib/persona/) |
-| **Prompt templates** | 20+ (embedded in pkg/lib/prompt/) |
-| **Flow templates** | 10+ (embedded in pkg/lib/flow/) |
-
----
-
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -1650,35 +1625,7 @@ All endpoints return JSON responses:
 
 ---
 
-## 📈 Quality Metrics
-
-- ✅ **MCP Specification Compliance** — Full Model Context Protocol v1.0 implementation
-- ✅ **Test Coverage** — Good/Bad/Ugly pattern for all scenarios (100% of public APIs)
-- ✅ **Transport Flexibility** — Multiple transport backends (stdio, tcp, http, unix)
-- ✅ **Security** — Workspace sandboxing, Bearer authentication, input sanitization
-- ✅ **Extensibility** — Subsystem architecture for custom tools and providers
-- ✅ **Documentation** — Complete README + INDEX + inline documentation
-- ✅ **Core Integration** — Full CoreGO framework support (ServiceRuntime, ACTION, Result)
-- ✅ **Cross-Platform** — Unix + Windows support (where applicable)
-- ✅ **Production Ready** — Deployed in production environments
-- ✅ **AX Standard Compliance** — Single Point Of Responsibility for all types
-
----
-
-## 📝 Changelog
-
-| Date | Change | Commit | Author |
-|------|--------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | N/A | Purberus |
-| 2026-05-XX | Brain subsystem finalized with full MCP integration | N/A | Cladius |
-| 2026-04-30 | CLAUDE.md guidance created with sprint intel collection | N/A | Cladius |
-| 2026-04-XX | Opencode integration added with sandboxed host support | N/A | Cladius |
-| 2026-03-XX | Initial package creation with basic dispatch capabilities | N/A | Cladius |
-| 2026-02-XX | Repository structure established (go/, php/, provider/) | N/A | Cladius |
-
----
-
-## 🎯 Tags
+## Tags
 
 ```yaml
 # Core Capabilities
@@ -1764,9 +1711,9 @@ All endpoints return JSON responses:
 
 ---
 
-## 📚 References
+## References
 
-### Internal Documentation
+### Internal documentation
 
 1. **RFC Specification** — [plans/code/core/go/agent/RFC.md](../../../../../plans/code/core/go/agent/RFC.md)
    - Complete contract for all subsystems
@@ -1788,7 +1735,7 @@ All endpoints return JSON responses:
    - Quickstart guide
    - Build and test instructions
 
-### External References
+### External references
 
 1. **Model Context Protocol** — [modelcontextprotocol.io](https://modelcontextprotocol.io)
    - Official MCP specification
@@ -1808,9 +1755,4 @@ All endpoints return JSON responses:
    - Project documentation
    - Architecture overviews
 
----
-
-*Package index generated: 2026-06-17T20:00:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
-*Repository: dappco.re/go/agent*
 *Maintainer: Purberus <purberus@lthn.ai>*

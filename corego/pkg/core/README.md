@@ -7,32 +7,25 @@ domain: dappco.re/go
 repository: https://github.com/dappcore/go
 ---
 
-# CoreGo Framework — The Foundation
-
-> **Zero dependencies. Zero exceptions.**
-> The universal substrate that ~30 downstream dAppCore packages build upon.
-
----
-
-## 🎯 Overview
+# CoreGo Framework — The foundation
 
 **CoreGo** (`core/go` or `dappco.re/go`) is a zero-dependency Go framework that provides:
 
-- **Dependency Injection** — Central `Core` struct with typed accessors for all subsystems
-- **Service Lifecycle** — Startup, shutdown, reload hooks with ordering guarantees
-- **Result Pattern** — Universal error handling with panic recovery
-- **IPC Message Bus** — ACTION (broadcast), QUERY (first-respondent), QUERYALL (collect all)
-- **Named Action Registry** — Capability discovery and invocation
-- **Universal Types** — `Options` for input, `Result` for output
-- **SPOR Compliance** — Single Point Of Responsibility for all stdlib wrappers
+- **Dependency injection** — Central `Core` struct with typed accessors for all subsystems
+- **Service lifecycle** — Startup, shutdown, reload hooks with ordering guarantees
+- **Result pattern** — Universal error handling with panic recovery
+- **IPC message bus** — ACTION (broadcast), QUERY (first-respondent), QUERYALL (collect all)
+- **Named action registry** — Capability discovery and invocation
+- **Universal types** — `Options` for input, `Result` for output
+- **SPOR compliance** — Single Point Of Responsibility for all stdlib wrappers
 
-**Design Philosophy:** Every pattern in CoreGo is intentionally shaped for **Agent Experience (AX)** — AI agents replicate these patterns without a judgement layer. The framework IS the example.
+Every pattern in CoreGo is shaped for Agent Experience (AX) — AI agents replicate these patterns without a judgement layer. The framework is the example.
 
 ---
 
-## 🏗️ Core Architecture
+## Core architecture
 
-### The Core Struct
+### The Core struct
 
 The central object that orchestrates everything:
 
@@ -74,9 +67,9 @@ c := core.New(core.WithOption("name", "my-app"))
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Universal Types
+### Universal types
 
-#### Options — Universal Input
+#### Options — universal input
 
 Structured key-value configuration. Every Core operation accepts Options.
 
@@ -102,7 +95,7 @@ nested := core.NewOptions(
 dbHost := nested.Options("database").String("host")
 ```
 
-#### Result — Universal Output
+#### Result — universal output
 
 Every Core operation returns a Result. Replaces Go's `(value, error)` pattern.
 
@@ -140,9 +133,9 @@ if r.Code() == "fs.notfound" {
 
 ---
 
-## ⚡ Key Features
+## Key features
 
-### 1. Service Lifecycle Management
+### 1. Service lifecycle management
 
 Services are the building blocks of CoreGo applications:
 
@@ -175,15 +168,15 @@ core.WithService(myService.Register)        // Register during Core creation
 core.WithServiceLock()                      // Lock service registry (no new services)
 ```
 
-**Lifecycle Order:**
+**Lifecycle order:**
 1. `OnStart` called in registration order
 2. CLI runs (if configured)
 3. `OnStop` called in reverse order on shutdown
 4. `OnReload` for configuration changes
 
-**Service Lock:** When `WithServiceLock()` is used, no new services can be registered and admin modifications are prevented. This creates a secure enclave.
+**Service lock:** When `WithServiceLock()` is used, no new services can be registered and admin modifications are prevented. This creates a secure enclave.
 
-### 2. IPC Message Bus
+### 2. IPC message bus
 
 Three messaging patterns for inter-service communication:
 
@@ -217,16 +210,16 @@ c.RegisterQuery(func(_ *core.Core, q core.Query) core.Result {
 })
 ```
 
-**Built-in Messages:**
+**Built-in messages:**
 - `ActionServiceStartup` — Broadcast when a service finishes startup
 - `ActionServiceShutdown` — Broadcast when Core begins shutdown
 - `ActionTaskStarted` — Broadcast when async task begins
 - `ActionTaskProgress` — Broadcast for task progress updates
 - `ActionTaskCompleted` — Broadcast when task finishes
 
-### 3. Named Action Registry
+### 3. Named action registry
 
-The action system is the **capability map** — it answers "what can this application do?"
+The action system is the capability map — it answers "what can this application do?"
 
 ```go
 // Register an action
@@ -253,7 +246,7 @@ c.Action("dangerous.purge").Disable()
 c.Action("dangerous.purge").Enable()
 ```
 
-**Action Features:**
+**Action features:**
 - Named and discoverable
 - Typed input via `Options`
 - Panic recovery built-in
@@ -261,7 +254,7 @@ c.Action("dangerous.purge").Enable()
 - Enable/disable toggles
 - Schema declaration for expected inputs
 
-### 4. Context Propagation
+### 4. Context propagation
 
 Core manages context lifecycles carefully:
 
@@ -288,7 +281,7 @@ go func() {
 }()
 ```
 
-### 5. Configuration Management
+### 5. Configuration management
 
 Hierarchical configuration with multiple sources:
 
@@ -315,7 +308,7 @@ c.Config().Watch(func(key string, value any) {
 })
 ```
 
-### 6. Embedded Data Registry
+### 6. Embedded data registry
 
 Asset management for embedded files:
 
@@ -335,7 +328,7 @@ if c.Data().Has("prompts/coding.md") {
 }
 ```
 
-### 7. Transport Registry (Drive)
+### 7. Transport registry (Drive)
 
 Resource handle management:
 
@@ -351,7 +344,7 @@ if r.OK {
 c.Drive().Set("custom", myTransport)
 ```
 
-### 8. Structured Logging
+### 8. Structured logging
 
 Mandatory error creation with structured fields:
 
@@ -369,17 +362,17 @@ if !r.OK {
 }
 ```
 
-**Log Levels:** Info, Error, Warn, Debug (configurable)
+**Log levels:** Info, Error, Warn, Debug (configurable)
 
-**Error Logging:** Mandatory — all errors MUST be created through Core's error system for proper tracking.
+**Error logging:** Mandatory — all errors must be created through Core's error system for proper tracking.
 
 ---
 
-## 📋 Framework Primitives Deep Dive
+## Framework primitives
 
-### Error System
+### Error system
 
-**Mandatory Error Creation:** All errors flow through Core's error system.
+**Mandatory error creation:** All errors flow through Core's error system.
 
 ```go
 // Create errors
@@ -400,7 +393,7 @@ err := core.WrapCode(err, "config.load", "failed to load")
 // - "core.Service", "action.Run"
 ```
 
-**Error Type:**
+**Error type:**
 ```go
 type Err struct {
     Code    string      // Stable error code (for grepping)
@@ -410,7 +403,7 @@ type Err struct {
 }
 ```
 
-### Registry Pattern
+### Registry pattern
 
 Thread-safe named collections with three lock modes:
 
@@ -444,12 +437,12 @@ r.Lock()   // Fully frozen, no writes at all
 r.Unlock() // Return to open mode
 ```
 
-**Lock Modes:**
+**Lock modes:**
 - **Open** (default) — Anything goes
-- **Sealed** — No new keys, existing keys CAN be updated
+- **Sealed** — No new keys, existing keys can be updated
 - **Locked** — Fully frozen, no writes at all
 
-### Command Framework
+### Command framework
 
 Hierarchical CLI command system:
 
@@ -473,7 +466,7 @@ parent := c.Command("deploy.to")
 children := parent.Children()
 ```
 
-### Entitlement System
+### Entitlement system
 
 Permission boundaries for actions and services:
 
@@ -499,9 +492,9 @@ if e := c.Action("admin.purge").Entitled(); !e.Allowed {
 
 ---
 
-## 🛡️ Core Patterns
+## Core patterns
 
-### Pattern 1: Service with Lifecycle
+### Pattern 1: Service with lifecycle
 
 ```go
 type Database struct {
@@ -538,7 +531,7 @@ func (s *MyService) OnStartup(ctx context.Context) core.Result {
 }
 ```
 
-### Pattern 2: IPC Communication
+### Pattern 2: IPC communication
 
 ```go
 // Service A: Broadcast events
@@ -571,7 +564,7 @@ func (s *ServiceB) OnStartup(ctx context.Context) core.Result {
 }
 ```
 
-### Pattern 3: Query-Based Data Fetching
+### Pattern 3: Query-based data fetching
 
 ```go
 // Service providing data
@@ -602,7 +595,7 @@ func (s *APIService) GetUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-### Pattern 4: Result Chain Handling
+### Pattern 4: Result chain handling
 
 ```go
 // Chaining operations with Result
@@ -639,7 +632,7 @@ func (s *Service) ProcessFileLogged(path string) core.Result {
 }
 ```
 
-### Pattern 5: Options-Based Configuration
+### Pattern 5: Options-based configuration
 
 ```go
 type MyService struct {
@@ -671,9 +664,9 @@ c := core.New(
 
 ---
 
-## 🔌 CoreGo Service Integration
+## CoreGo service integration
 
-### WithServiceLock() — Secure Enclave
+### WithServiceLock() — secure enclave
 
 Creates an immutable service bundle:
 
@@ -691,7 +684,7 @@ c := core.New(
 // No admin modifications allowed
 ```
 
-### Service Discovery
+### Service discovery
 
 ```go
 // Get service by type
@@ -714,9 +707,9 @@ if c.Service("database").OK {
 
 ---
 
-## 📊 Performance Considerations
+## Performance considerations
 
-### Lock-Free Dispatch
+### Lock-free dispatch
 
 IPC dispatch uses atomic pointers for lock-free reads:
 
@@ -732,7 +725,7 @@ if handlers != nil {
 
 Registration takes a short mutex while copying-on-write to a new slice.
 
-### Registry Efficiency
+### Registry efficiency
 
 `Registry[T]` uses:
 - `RWMutex` for thread-safety
@@ -740,7 +733,7 @@ Registration takes a short mutex while copying-on-write to a new slice.
 - `[]string` for insertion-order iteration
 - Three modes (Open, Sealed, Locked) for progressive freezing
 
-### Result Ergonomics
+### Result ergonomics
 
 Result methods collapse common patterns:
 
@@ -768,28 +761,28 @@ value := r.Must().(string)  // Panics with context on failure
 
 ---
 
-## 🎯 When to Use CoreGo
+## When to use CoreGo
 
-### ✅ Perfect for:
+**Suited for:**
 
-- **Agent Orchestration** — The entire dAppCore ecosystem is built on CoreGo
+- **Agent orchestration** — The entire dAppCore ecosystem is built on CoreGo
 - **Microservices** — Service lifecycle + IPC makes service composition natural
-- **CLI Tools** — Command framework + configuration management
+- **CLI tools** — Command framework + configuration management
 - **Daemons** — Long-running processes with clean shutdown
-- **Plugin Systems** — Action registry enables plugin discovery
-- **AI Services** — RAG, inference backends all use CoreGo
+- **Plugin systems** — Action registry enables plugin discovery
+- **AI services** — RAG, inference backends all use CoreGo
 
-### 📦 What You Get:
+**What you get:**
 
-- **Zero external dependencies** — Pure Go stdlib
-- **Panic recovery** — Built into every operation
-- **Structured logging** — Consistent error reporting
-- **Configuration** — Hierarchical with multiple sources
-- **I18n** — Grammar-aware internationalization
-- **IPC** — Service communication without tight coupling
-- **Testing** — Test triplets (example + unit + bench) for every package
+- Zero external dependencies — Pure Go stdlib
+- Panic recovery — Built into every operation
+- Structured logging — Consistent error reporting
+- Configuration — Hierarchical with multiple sources
+- I18n — Grammar-aware internationalisation
+- IPC — Service communication without tight coupling
+- Testing — Test triplets (example + unit + bench) for every package
 
-### 📝 What You Must Do:
+**What you must do:**
 
 - Use `core.Result` for all operations
 - Use `core.Options` for all configuration
@@ -799,7 +792,7 @@ value := r.Must().(string)  // Panics with context on failure
 
 ---
 
-## 🏆 AX (Agent Experience) Principles in Practice
+## AX (Agent Experience) principles in practice
 
 The 10 AX principles that shaped CoreGo:
 
@@ -818,7 +811,7 @@ The 10 AX principles that shaped CoreGo:
 
 ---
 
-## 📚 File Structure
+## File structure
 
 ```
 core/go/
@@ -839,7 +832,7 @@ core/go/
 ├── fs.go            # Filesystem abstraction
 ├── process.go       # Process execution
 ├── command.go       # CLI command tree
-├── i18n.go          # Internationalization
+├── i18n.go          # Internationalisation
 ├── context.go       # Context utilities
 ├── AGENTS.md        # Agent orientation + AX principles
 ├── ... (272 files total)
@@ -847,11 +840,11 @@ core/go/
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 CoreGo is extended by ~48 `go-*` packages in the dAppCore ecosystem:
 
-| Category | Key Packages |
+| Category | Key packages |
 |----------|--------------|
 | I/O | go-io, go-store, go-cache, go-stream |
 | Blockchain | go-blockchain, go-lns, go-miner, go-p2p |
@@ -865,9 +858,9 @@ All follow the same AX principles and SPOR compliance.
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
-### Minimal Application
+### Minimal application
 
 ```go
 package main
@@ -893,7 +886,7 @@ func main() {
 }
 ```
 
-### With CLI Commands
+### With CLI commands
 
 ```go
 func main() {
@@ -948,20 +941,20 @@ func main() {
 
 ---
 
-## 📖 References
+## References
 
 - **Source:** `https://github.com/dappcore/go`
 - **Module:** `dappco.re/go`
-- **Previous Path:** `dappco.re/go/core` (migration in progress)
-- **Go Version:** 1.26.0+
+- **Previous path:** `dappco.re/go/core` (migration in progress)
+- **Go version:** 1.26.0+
 - **Dependencies:** Zero external dependencies
 - **AGENTS.md:** [`core/go/AGENTS.md`](file:///Users/snider/Code/core/go/AGENTS.md)
 - **RFC:** [`plans/code/core/go/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/RFC.md)
-- **SPOR Table:** [`docs/pkg/PACKAGE_STANDARDS.md`](file:///Users/snider/Code/meowmix/plans/docs/pkg/PACKAGE_STANDARDS.md)
+- **SPOR table:** [`docs/pkg/PACKAGE_STANDARDS.md`](file:///Users/snider/Code/meowmix/plans/docs/pkg/PACKAGE_STANDARDS.md)
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
 ```yaml
 package: core
@@ -977,7 +970,3 @@ knowledge_pack: CoreGo v1.3.0
 documented_by: Purberus <purberus@lthn.ai>
 documented_at: 2026-06-17
 ```
-
----
-
-*Purrr... This is the foundation. Everything else builds on this.* 🐱

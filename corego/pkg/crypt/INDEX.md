@@ -1,7 +1,7 @@
 ---
 type: Package Index
 title: go-crypt Package Index
-description: Complete index of go-crypt package components and API surface
+description: Index of go-crypt package components and API surface
 module: dappco.re/go/crypt
 ---
 
@@ -16,14 +16,14 @@ module: dappco.re/go/crypt
 
 ---
 
-## 📚 Quick Links
+## Quick links
 
 - **[README.md](./README.md)** — Complete package documentation
 - **[RFC Specification](file:///Users/snider/Code/meowmix/plans/code/core/go/crypt/RFC.md)** — Technical specification (self-contained, agent-implementable)
 - **[CLAUDE.md](file:///Users/snider/Code/core/go-crypt/CLAUDE.md)** — Implementation details, dependencies, conventions
 - **[AGENTS.md](file:///Users/snider/Code/core/go-crypt/AGENTS.md)** — Agent guidance
 
-### Sub-Specifications
+### Sub-specifications
 
 The RFC includes comprehensive sub-specifications:
 
@@ -33,7 +33,7 @@ The RFC includes comprehensive sub-specifications:
 - **Section 5:** CLI Commands — `keygen`, `encrypt`, `decrypt`, `hash`, `checksum`
 - **Section 5a:** Additional Packages — `chachapoly`, `lthn`, `pgp`, `rsa`, `openpgp`
 
-### Local Documentation
+### Local documentation
 
 - [Architecture](file:///Users/snider/Code/core/go-crypt/docs/architecture.md) — Full internals
 - [History](file:///Users/snider/Code/core/go-crypt/docs/history.md) — Project history
@@ -42,150 +42,150 @@ The RFC includes comprehensive sub-specifications:
 
 ---
 
-## 🗂️ File Structure
+## File structure
 
-### Core Package (`go/crypt/`)
+### Core package (`go/crypt/`)
 
 | File | Lines | Purpose | Status |
 |------|-------|---------|--------|
-| `crypt.go` | ~100 | Main encryption/decryption functions (Encrypt, Decrypt, EncryptAES, DecryptAES) | ✅ Complete |
-| `kdf.go` | ~100 | Key derivation (Argon2id), password hashing | ✅ Complete |
-| `checksum.go` | ~50 | MD5, SHA256 checksums | ✅ Complete |
-| `hmac.go` | ~50 | HMAC-SHA256 generation and verification | ✅ Complete |
+| `crypt.go` | ~100 | Main encryption/decryption functions (Encrypt, Decrypt, EncryptAES, DecryptAES) | Complete |
+| `kdf.go` | ~100 | Key derivation (Argon2id), password hashing | Complete |
+| `checksum.go` | ~50 | MD5, SHA256 checksums | Complete |
+| `hmac.go` | ~50 | HMAC-SHA256 generation and verification | Complete |
 
 ### ChaCha20-Poly1305 (`go/crypt/chachapoly/`)
 
 | File | Purpose | Status |
 |------|---------|--------|
-| `chachapoly.go` | ChaCha20-Poly1305 encryption wrapper | ✅ Complete |
-| `chachapoly_test.go` | Tests | ✅ Complete |
+| `chachapoly.go` | ChaCha20-Poly1305 encryption wrapper | Complete |
+| `chachapoly_test.go` | Tests | Complete |
 
-### LTHN Hash (`go/crypt/lthn/`)
+### LTHN hash (`go/crypt/lthn/`)
 
 | File | Purpose | Status |
 |------|---------|--------|
-| `lthn.go` | LTHN quasi-salted hash algorithm | ✅ Complete |
-| `lthn_test.go` | Tests | ✅ Complete |
+| `lthn.go` | LTHN quasi-salted hash algorithm | Complete |
+| `lthn_test.go` | Tests | Complete |
 
 ### PGP (`go/crypt/pgp/`)
 
 | File | Purpose | Status |
 |------|---------|--------|
-| `pgp.go` | PGP operations (protonmail/go-crypto) | ✅ Complete |
-| `pgp_test.go` | Tests | ✅ Complete |
+| `pgp.go` | PGP operations (protonmail/go-crypto) | Complete |
+| `pgp_test.go` | Tests | Complete |
 
 ### RSA (`go/crypt/rsa/`)
 
 | File | Purpose | Status |
 |------|---------|--------|
-| `rsa.go` | RSA-2048 key generation, encryption, decryption | ✅ Complete |
-| `rsa_test.go` | Tests | ✅ Complete |
-| `fallback_test.go` | Fallback behavior tests | ✅ Complete |
+| `rsa.go` | RSA-2048 key generation, encryption, decryption | Complete |
+| `rsa_test.go` | Tests | Complete |
+| `fallback_test.go` | Fallback behaviour tests | Complete |
 
 ### OpenPGP (`go/crypt/openpgp/`)
 
 | File | Purpose | Status |
 |------|---------|--------|
-| `service.go` | OpenPGP service (golang.org/x/crypto/openpgp) | ✅ Complete |
-| `service_test.go` | Tests | ✅ Complete |
-| `service_example_test.go` | Usage examples | ✅ Complete |
-| `error_paths_test.go` | Error path tests | ✅ Complete |
-| `ax7_service_test.go` | Additional tests | ✅ Complete |
-| `test_helpers_test.go` | Test helpers | ✅ Complete |
+| `service.go` | OpenPGP service (golang.org/x/crypto/openpgp) | Complete |
+| `service_test.go` | Tests | Complete |
+| `service_example_test.go` | Usage examples | Complete |
+| `error_paths_test.go` | Error path tests | Complete |
+| `ax7_service_test.go` | Additional tests | Complete |
+| `test_helpers_test.go` | Test helpers | Complete |
 
 ### Authentication (`go/auth/`)
 
 | File | Lines | Purpose | Status |
 |------|-------|---------|--------|
-| `auth.go` | ~400 | OpenPGP challenge-response authentication, User, Challenge, Session types | ✅ Complete |
-| `session_store.go` | ~100 | Session store interface | ✅ Complete |
-| `session_store_sqlite.go` | ~200 | SQLite session store implementation | ✅ Complete |
-| `hardware.go` | ~50 | Hardware token management (FIDO2 stub) | ✅ Stub |
+| `auth.go` | ~400 | OpenPGP challenge-response authentication, User, Challenge, Session types | Complete |
+| `session_store.go` | ~100 | Session store interface | Complete |
+| `session_store_sqlite.go` | ~200 | SQLite session store implementation | Complete |
+| `hardware.go` | ~50 | Hardware token management (FIDO2 stub) | Stub |
 
-### Authentication Tests
+### Authentication tests
 
 | File | Lines | Purpose | Coverage |
 |------|-------|---------|----------|
-| `auth_test.go` | ~500 | Authentication tests | ✅ Good/Bad/Ugly |
-| `auth_example_test.go` | ~100 | Usage examples | ✅ Complete |
-| `ax7_auth_test.go` | ~100 | Additional tests | ✅ Complete |
-| `session_store_test.go` | ~300 | Session store tests | ✅ Good/Bad/Ugly |
-| `session_store_example_test.go` | ~100 | Session store examples | ✅ Complete |
-| `session_store_sqlite_test.go` | ~200 | SQLite session store tests | ✅ Complete |
-| `hardware_test.go` | ~100 | Hardware token tests | ✅ Complete |
-| `hardware_example_test.go` | ~50 | Hardware examples | ✅ Complete |
-| `error_paths_test.go` | ~100 | Error path tests | ✅ Complete |
-| `test_helpers_test.go` | ~50 | Test helpers | ✅ Complete |
+| `auth_test.go` | ~500 | Authentication tests | Good/Bad/Ugly |
+| `auth_example_test.go` | ~100 | Usage examples | Complete |
+| `ax7_auth_test.go` | ~100 | Additional tests | Complete |
+| `session_store_test.go` | ~300 | Session store tests | Good/Bad/Ugly |
+| `session_store_example_test.go` | ~100 | Session store examples | Complete |
+| `session_store_sqlite_test.go` | ~200 | SQLite session store tests | Complete |
+| `hardware_test.go` | ~100 | Hardware token tests | Complete |
+| `hardware_example_test.go` | ~50 | Hardware examples | Complete |
+| `error_paths_test.go` | ~100 | Error path tests | Complete |
+| `test_helpers_test.go` | ~50 | Test helpers | Complete |
 
 ### Trust (`go/trust/`)
 
 | File | Lines | Purpose | Status |
 |------|-------|---------|--------|
-| `trust.go` | ~150 | Trust tiers, Agent, Capability types | ✅ Complete |
-| `registry.go` | ~200 | Agent registry | ✅ Complete |
-| `policy.go` | ~300 | Policy engine and Policy types | ✅ Complete |
-| `approval.go` | ~250 | Approval workflow | ✅ Complete |
-| `audit.go` | ~200 | Audit trail | ✅ Complete |
-| `config.go` | ~100 | Trust configuration | ✅ Complete |
-| `service.go` | ~150 | Trust service integration | ✅ Complete |
-| `scope.go` | ~50 | Scope matching helpers | ✅ Complete |
-| `bench_test.go` | ~100 | Benchmarks | ✅ Complete |
+| `trust.go` | ~150 | Trust tiers, Agent, Capability types | Complete |
+| `registry.go` | ~200 | Agent registry | Complete |
+| `policy.go` | ~300 | Policy engine and Policy types | Complete |
+| `approval.go` | ~250 | Approval workflow | Complete |
+| `audit.go` | ~200 | Audit trail | Complete |
+| `config.go` | ~100 | Trust configuration | Complete |
+| `service.go` | ~150 | Trust service integration | Complete |
+| `scope.go` | ~50 | Scope matching helpers | Complete |
+| `bench_test.go` | ~100 | Benchmarks | Complete |
 
-### Trust Tests
+### Trust tests
 
 | File | Lines | Purpose | Coverage |
 |------|-------|---------|----------|
-| `trust_test.go` | ~500 | Trust tests | ✅ Good/Bad/Ugly |
-| `trust_example_test.go` | ~200 | Usage examples | ✅ Complete |
-| `policy_test.go` | ~400 | Policy engine tests | ✅ Good/Bad/Ugly |
-| `policy_example_test.go` | ~100 | Policy examples | ✅ Complete |
-| `approval_test.go` | ~300 | Approval workflow tests | ✅ Good/Bad/Ugly |
-| `approval_example_test.go` | ~100 | Approval examples | ✅ Complete |
-| `audit_test.go` | ~300 | Audit trail tests | ✅ Good/Bad/Ugly |
-| `audit_example_test.go` | ~100 | Audit examples | ✅ Complete |
-| `config_test.go` | ~100 | Configuration tests | ✅ Complete |
-| `config_example_test.go` | ~50 | Configuration examples | ✅ Complete |
-| `service_test.go` | ~200 | Service tests | ✅ Complete |
-| `service_example_test.go` | ~100 | Service examples | ✅ Complete |
-| `service_behaviour_test.go` | ~150 | Service behavior tests | ✅ Complete |
-| `test_helpers_test.go` | ~50 | Test helpers | ✅ Complete |
+| `trust_test.go` | ~500 | Trust tests | Good/Bad/Ugly |
+| `trust_example_test.go` | ~200 | Usage examples | Complete |
+| `policy_test.go` | ~400 | Policy engine tests | Good/Bad/Ugly |
+| `policy_example_test.go` | ~100 | Policy examples | Complete |
+| `approval_test.go` | ~300 | Approval workflow tests | Good/Bad/Ugly |
+| `approval_example_test.go` | ~100 | Approval examples | Complete |
+| `audit_test.go` | ~300 | Audit trail tests | Good/Bad/Ugly |
+| `audit_example_test.go` | ~100 | Audit examples | Complete |
+| `config_test.go` | ~100 | Configuration tests | Complete |
+| `config_example_test.go` | ~50 | Configuration examples | Complete |
+| `service_test.go` | ~200 | Service tests | Complete |
+| `service_example_test.go` | ~100 | Service examples | Complete |
+| `service_behaviour_test.go` | ~150 | Service behaviour tests | Complete |
+| `test_helpers_test.go` | ~50 | Test helpers | Complete |
 
-### CLI Commands (`go/cmd/crypt/`)
+### CLI commands (`go/cmd/crypt/`)
 
 | File | Lines | Purpose | Status |
 |------|-------|---------|--------|
-| `cmd.go` | ~100 | Command group registration | ✅ Complete |
-| `cmd_encrypt.go` | ~200 | encrypt/decrypt commands | ✅ Complete |
-| `cmd_hash.go` | ~150 | hash command | ✅ Complete |
-| `cmd_checksum.go` | ~150 | checksum command | ✅ Complete |
-| `cmd_keygen.go` | ~100 | keygen command | ✅ Complete |
+| `cmd.go` | ~100 | Command group registration | Complete |
+| `cmd_encrypt.go` | ~200 | encrypt/decrypt commands | Complete |
+| `cmd_hash.go` | ~150 | hash command | Complete |
+| `cmd_checksum.go` | ~150 | checksum command | Complete |
+| `cmd_keygen.go` | ~100 | keygen command | Complete |
 
-### CLI Tests
+### CLI tests
 
 | File | Lines | Purpose | Coverage |
 |------|-------|---------|----------|
-| `cmd_test.go` | ~300 | Command tests | ✅ Good/Bad/Ugly |
-| `cmd_behaviour_test.go` | ~150 | Behavior tests | ✅ Complete |
-| `cmd_example_test.go` | ~100 | Usage examples | ✅ Complete |
-| `ax7_commands_test.go` | ~100 | Additional command tests | ✅ Complete |
+| `cmd_test.go` | ~300 | Command tests | Good/Bad/Ugly |
+| `cmd_behaviour_test.go` | ~150 | Behaviour tests | Complete |
+| `cmd_example_test.go` | ~100 | Usage examples | Complete |
+| `ax7_commands_test.go` | ~100 | Additional command tests | Complete |
 
 ### Internal (`go/internal/corecompat/`)
 
 | File | Purpose | Status |
 |------|---------|--------|
-| `corecompat.go` | Encoding helpers (HexEncode/Decode, Base64Encode/Decode) | ✅ Complete |
+| `corecompat.go` | Encoding helpers (HexEncode/Decode, Base64Encode/Decode) | Complete |
 
-### Test Harness (`go/cmd/testcmd/`)
+### Test harness (`go/cmd/testcmd/`)
 
 | File | Purpose | Status |
 |------|---------|--------|
-| `cmd_main.go` | Test harness main | ✅ Complete |
-| `cmd_commands.go` | Test commands | ✅ Complete |
-| `cmd_runner.go` | Test runner | ✅ Complete |
-| `cmd_output.go` | Test output | ✅ Complete |
-| `cmd_print.go` | Test print | ✅ Complete |
+| `cmd_main.go` | Test harness main | Complete |
+| `cmd_commands.go` | Test commands | Complete |
+| `cmd_runner.go` | Test runner | Complete |
+| `cmd_output.go` | Test output | Complete |
+| `cmd_print.go` | Test print | Complete |
 
-### Tests Directory (`tests/`)
+### Tests directory (`tests/`)
 
 Integration and end-to-end tests.
 
@@ -198,11 +198,11 @@ Integration and end-to-end tests.
 
 ---
 
-## 🔧 Public API Surface
+## Public API surface
 
-### crypt Package
+### crypt package
 
-#### Encryption Functions
+#### Encryption functions
 
 ```go
 // ChaCha20-Poly1305 (preferred)
@@ -216,7 +216,7 @@ func DecryptAES(ciphertext, passphrase []byte) ([]byte, error)
 
 **Format:** `salt (16 bytes) + nonce (24 for ChaCha20, 12 for AES) + ciphertext`
 
-#### Key Derivation
+#### Key derivation
 
 ```go
 // Constants
@@ -233,7 +233,7 @@ func HashPassword(password string) (string, error)
 func VerifyPassword(password, hash string) bool
 ```
 
-**Argon2id Parameters:**
+**Argon2id parameters:**
 - Time: 2 iterations
 - Memory: 64 MiB
 - Parallelism: 4 threads
@@ -258,7 +258,7 @@ func MD5Sum(data []byte) string
 func SHA256Sum(data []byte) string
 ```
 
-### chachapoly Package
+### chachapoly package
 
 ```go
 func ChaCha20Encrypt(plaintext, key []byte) ([]byte, error)
@@ -267,7 +267,7 @@ func ChaCha20Decrypt(ciphertext, key []byte) ([]byte, error)
 
 **Format:** `nonce (24 bytes) + ciphertext`
 
-### lthn Package
+### lthn package
 
 ```go
 func Hash(input string) string
@@ -277,7 +277,7 @@ func Verify(input, hash string) bool
 **Algorithm:** SHA-256 with derived salt (input reversal + leet-speak)
 **Note:** NOT for password hashing — use Argon2id
 
-### pgp Package
+### pgp package
 
 ```go
 type KeyPair struct {
@@ -294,7 +294,7 @@ func Sign(data []byte, privateKey string, passphrase []byte) ([]byte, error)
 func Verify(data, signature, publicKey string) (bool, error)
 ```
 
-### rsa Package
+### rsa package
 
 ```go
 func GenerateKey() (publicKey, privateKey []byte, err error)
@@ -302,7 +302,7 @@ func Encrypt(plaintext, publicKey []byte) ([]byte, error)
 func Decrypt(ciphertext, privateKey []byte) ([]byte, error)
 ```
 
-### openpgp Package
+### openpgp package
 
 ```go
 type Service struct { /* unexported */ }
@@ -314,7 +314,7 @@ func (s *Service) Verify(data, signature, publicKey []byte) (bool, error)
 
 ---
 
-## 🔐 Authentication API
+## Authentication API
 
 ### Types
 
@@ -380,7 +380,7 @@ func (a *Authenticator) GenerateChallenge(publicKey string) (*Challenge, error)
 func (a *Authenticator) VerifyResponse(challenge *Challenge, signature string, publicKey string) (*Session, error)
 ```
 
-### Session Store
+### Session store
 
 ```go
 // Interface
@@ -397,9 +397,9 @@ func NewSessionStore(dbPath string) SessionStore
 
 ---
 
-## 🛡️ Trust API
+## Trust API
 
-### Trust Tiers
+### Trust tiers
 
 ```go
 type Tier int
@@ -459,7 +459,7 @@ func (r *Registry) All() []*Agent
 func (r *Registry) Remove(name string)
 ```
 
-### Policy Engine
+### Policy engine
 
 ```go
 type Decision int
@@ -497,7 +497,7 @@ func (pe *PolicyEngine) AddPolicy(policy *Policy)
 func (pe *PolicyEngine) Evaluate(agentName string, cap Capability, repo string) EvalResult
 ```
 
-### Approval Workflow
+### Approval workflow
 
 ```go
 type CapabilityRequest struct {
@@ -530,7 +530,7 @@ func (w *ApprovalWorkflow) Approved() []*ApprovalRequest
 func (w *ApprovalWorkflow) Denied() []*ApprovalRequest
 ```
 
-### Audit Trail
+### Audit trail
 
 ```go
 type AuditEntry struct {
@@ -558,16 +558,16 @@ func (a *AuditLog) Add(entry *AuditEntry)
 
 ---
 
-## 🔌 CLI Commands
+## CLI commands
 
-### Command Group
+### Command group
 
 ```go
 // Register with Core CLI
 func RegisterCommands()
 ```
 
-### keygen Command
+### keygen command
 
 ```go
 // Flags
@@ -579,7 +579,7 @@ func RegisterCommands()
 core crypt keygen --length 32 --hex
 ```
 
-### encrypt/decrypt Commands
+### encrypt/decrypt commands
 
 ```go
 // Flags
@@ -591,7 +591,7 @@ core crypt encrypt --passphrase "secret" file.txt
 core crypt decrypt --passphrase "secret" file.txt.enc
 ```
 
-### hash Command
+### hash command
 
 ```go
 // Flags
@@ -605,7 +605,7 @@ core crypt hash --bcrypt
 echo "password" | core crypt hash --verify "$argon2id$..."
 ```
 
-### checksum Command
+### checksum command
 
 ```go
 // Flags
@@ -620,9 +620,9 @@ core crypt checksum --verify "expected-hash" file.txt
 
 ---
 
-## 🏷️ Component Catalog
+## Component catalogue
 
-### Cryptography Components
+### Cryptography components
 
 | Component | File | Purpose | Algorithm |
 |-----------|------|---------|-----------|
@@ -639,7 +639,7 @@ core crypt checksum --verify "expected-hash" file.txt
 | `GenerateKey`/`Encrypt`/`Decrypt` | `rsa/` | Asymmetric encryption | RSA-2048 |
 | `Sign`/`Verify` | `openpgp/` | OpenPGP signatures | golang.org/x/crypto/openpgp |
 
-### Authentication Components
+### Authentication components
 
 | Component | File | Purpose |
 |-----------|------|---------|
@@ -652,7 +652,7 @@ core crypt checksum --verify "expected-hash" file.txt
 | `SQLiteSessionStore` | `session_store_sqlite.go` | SQLite implementation |
 | `HardwareToken` | `hardware.go` | FIDO2/WebAuthn (stub) |
 
-### Trust Components
+### Trust components
 
 | Component | File | Purpose |
 |-----------|------|---------|
@@ -671,7 +671,7 @@ core crypt checksum --verify "expected-hash" file.txt
 | `Config` | `config.go` | Trust configuration |
 | `Service` | `service.go` | Trust service |
 
-### CLI Components
+### CLI components
 
 | Component | File | Purpose |
 |-----------|------|---------|
@@ -683,30 +683,30 @@ core crypt checksum --verify "expected-hash" file.txt
 
 ---
 
-## 📊 Comparison Tables
+## Comparison tables
 
-### Encryption Comparison
+### Encryption comparison
 
 | Feature | ChaCha20-Poly1305 | AES-256-GCM |
 |---------|-------------------|-------------|
-| Preferred | ✅ Yes | ❌ Legacy |
+| Preferred | Yes | Legacy |
 | Speed | ~500-800 MB/s | ~800-1200 MB/s |
-| Hardware Acceleration | ❌ No needed | ✅ Available |
+| Hardware Acceleration | Not needed | Available |
 | Nonce Size | 24 bytes | 12 bytes |
 | Security | Modern | NIST Standard |
 | Use Case | New code | Interoperability |
 
-### Hash Comparison
+### Hash comparison
 
 | Algorithm | Purpose | Security | Speed |
 |-----------|---------|----------|-------|
-| Argon2id | Password hashing | ✅ High | ~10-20/s |
-| bcrypt | Password hashing | ✅ High | ~5-10/s |
-| SHA-256 | Checksum, signing | ✅ High | ~500+ MB/s |
-| MD5 | Checksum (legacy) | ❌ Broken | ~1+ GB/s |
-| LTHN | Quasi-salted hash | ⚠️ Limited | ~500+ MB/s |
+| Argon2id | Password hashing | High | ~10-20/s |
+| bcrypt | Password hashing | High | ~5-10/s |
+| SHA-256 | Checksum, signing | High | ~500+ MB/s |
+| MD5 | Checksum (legacy) | Broken | ~1+ GB/s |
+| LTHN | Quasi-salted hash | Limited | ~500+ MB/s |
 
-### Trust Tier Comparison
+### Trust tier comparison
 
 | Tier | Name | Access Level | Use Case |
 |------|------|--------------|----------|
@@ -716,9 +716,9 @@ core crypt checksum --verify "expected-hash" file.txt
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
-### External Dependencies
+### External dependencies
 
 | Package | Purpose | Version |
 |---------|---------|---------|
@@ -734,7 +734,7 @@ core crypt checksum --verify "expected-hash" file.txt
 | `protonmail/go-crypto` | PGP operations | Latest |
 | `github.com/mattn/go-sqlite3` | SQLite driver | Latest |
 
-### Internal Dependencies
+### Internal dependencies
 
 | Package | Purpose | Import Path |
 |---------|---------|-------------|
@@ -745,9 +745,7 @@ core crypt checksum --verify "expected-hash" file.txt
 | Core CLI | CLI framework | `forge.lthn.ai/core/cli` |
 | Enchantrix | Cryptographic primitives | `forge.lthn.ai/Snider/Enchantrix/pkg/crypt/std/*` |
 
-### Banned Imports
-
-The following are **banned** in go-crypt code:
+### Banned imports
 
 | Banned | Use Instead |
 |--------|-------------|
@@ -756,9 +754,7 @@ The following are **banned** in go-crypt code:
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
+## Code metrics
 
 ```
 Total Go files:           50+
@@ -771,36 +767,36 @@ Trust tiers:             3 (Untrusted, Verified, Full)
 Capabilities:            9 predefined
 ```
 
-### Test Coverage
+### Test coverage
 
 | Category | Files | Tests | Status |
 |----------|-------|-------|--------|
-| crypt | 4 | 60+ | ✅ Complete (Good/Bad/Ugly) |
-| chachapoly | 2 | 20+ | ✅ Complete |
-| lthn | 2 | 15+ | ✅ Complete |
-| pgp | 2 | 20+ | ✅ Complete |
-| rsa | 3 | 25+ | ✅ Complete |
-| openpgp | 6 | 30+ | ✅ Complete |
-| auth | 5 | 80+ | ✅ Complete |
-| trust | 8 | 120+ | ✅ Complete |
-| cmd/crypt | 5 | 50+ | ✅ Complete |
-| internal | 1 | 10+ | ✅ Complete |
+| crypt | 4 | 60+ | Complete (Good/Bad/Ugly) |
+| chachapoly | 2 | 20+ | Complete |
+| lthn | 2 | 15+ | Complete |
+| pgp | 2 | 20+ | Complete |
+| rsa | 3 | 25+ | Complete |
+| openpgp | 6 | 30+ | Complete |
+| auth | 5 | 80+ | Complete |
+| trust | 8 | 120+ | Complete |
+| cmd/crypt | 5 | 50+ | Complete |
+| internal | 1 | 10+ | Complete |
 
-### Security Properties
+### Security properties
 
 | Property | Status | Notes |
 |----------|--------|-------|
-| FIPS 140-2 | ⚠️ Partial | ChaCha20-Poly1305 and AES-256-GCM are FIPS-approved |
-| Side-channel resistance | ✅ Yes | Constant-time operations |
-| Memory safety | ✅ Yes | Zeroize sensitive data |
-| Audit logging | ✅ Yes | Immutable audit trail |
-| Rate limiting | ✅ Yes | Configurable per-agent |
+| FIPS 140-2 | Partial | ChaCha20-Poly1305 and AES-256-GCM are FIPS-approved |
+| Side-channel resistance | Yes | Constant-time operations |
+| Memory safety | Yes | Zeroize sensitive data |
+| Audit logging | Yes | Immutable audit trail |
+| Rate limiting | Yes | Configurable per-agent |
 
 ---
 
-## 🎯 Usage Patterns
+## Usage patterns
 
-### Pattern 1: Password-Based Encryption
+### Pattern 1: Password-based encryption
 
 ```go
 import "dappco.re/go/crypt/crypt"
@@ -812,7 +808,7 @@ ciphertext, _ := crypt.Encrypt([]byte("secret"), []byte("password"))
 plaintext, _ := crypt.Decrypt(ciphertext, []byte("password"))
 ```
 
-### Pattern 2: Key-Based Encryption
+### Pattern 2: Key-based encryption
 
 ```go
 import "dappco.re/go/crypt/crypt"
@@ -826,7 +822,7 @@ ciphertext, _ := crypt.ChaCha20Encrypt(plaintext, key)
 plaintext, _ := crypt.ChaCha20Decrypt(ciphertext, key)
 ```
 
-### Pattern 3: Agent Authentication
+### Pattern 3: Agent authentication
 
 ```go
 import (
@@ -850,7 +846,7 @@ if session.Agent.Tier >= trust.TierVerified {
 }
 ```
 
-### Pattern 4: Capability Check
+### Pattern 4: Capability check
 
 ```go
 import "dappco.re/go/crypt/trust"
@@ -866,7 +862,7 @@ if result.Decision == trust.Allow {
 }
 ```
 
-### Pattern 5: Full Trust Workflow
+### Pattern 5: Full trust workflow
 
 ```go
 import "dappco.re/go/crypt/trust"
@@ -893,7 +889,7 @@ if result.Decision == trust.NeedsApproval {
 }
 ```
 
-### Pattern 6: Encrypted Storage
+### Pattern 6: Encrypted storage
 
 ```go
 import (
@@ -918,43 +914,43 @@ data, _ := medium.Read("secrets.dat")
 
 ---
 
-## 📋 Compliance Summary
+## Compliance summary
 
-### Coding Standards
+### Coding standards
 
-✅ **UK English:** colour, organisation, centre, artefact, licence, serialise
-✅ **Strict types:** All parameters and return types explicitly typed
-✅ **AX comments:** Usage examples, not prose descriptions
-✅ **Test triplets:** Good/Bad/Ugly pattern for all functions
-✅ **Licence:** EUPL-1.2 with SPDX identifier
-✅ **Error handling:** `coreerr.E("package.Function", "message", err)` exclusively
-✅ **Randomness:** `crypto/rand` only; never `math/rand`
+- UK English: colour, organisation, centre, artefact, licence, serialise
+- Strict types: all parameters and return types explicitly typed
+- AX comments: usage examples, not prose descriptions
+- Test triplets: Good/Bad/Ugly pattern for all functions
+- Licence: EUPL-1.2 with SPDX identifier
+- Error handling: `coreerr.E("package.Function", "message", err)` exclusively
+- Randomness: `crypto/rand` only; never `math/rand`
 
-### Security Rules
+### Security rules
 
-✅ **No secret leakage:** Errors never include secrets
-✅ **Constant-time operations:** For cryptographic comparisons
-✅ **Memory safety:** Zeroize sensitive data after use
-✅ **Input validation:** All inputs validated before processing
-✅ **Rate limiting:** Protect against brute-force attacks
-✅ **Session expiration:** Automatic cleanup of expired sessions
-✅ **Secure defaults:** Argon2id parameters suitable for production
+- No secret leakage: errors never include secrets
+- Constant-time operations: for cryptographic comparisons
+- Memory safety: zeroize sensitive data after use
+- Input validation: all inputs validated before processing
+- Rate limiting: protect against brute-force attacks
+- Session expiration: automatic cleanup of expired sessions
+- Secure defaults: Argon2id parameters suitable for production
 
-### File Organization
+### File organisation
 
-✅ **Comments as examples:** Every exported type/function has usage comments
-✅ **SPOR compliance:** Single Point Of Responsibility for each file
-✅ **Test file pairing:** Every `.go` file has `_test.go` and `_example_test.go`
-✅ **No banned imports:** Uses only `crypto/rand`, never `math/rand`
+- Comments as examples: every exported type/function has usage comments
+- SPOR compliance: Single Point Of Responsibility for each file
+- Test file pairing: every `.go` file has `_test.go` and `_example_test.go`
+- No banned imports: uses only `crypto/rand`, never `math/rand`
 
-### Test Organization
+### Test organisation
 
-✅ **File-aware tests:** Each production file owns its test file
-✅ **Table-driven subtests:** Uses `t.Run()`
-✅ **Good/Bad/Ugly pattern:** Comprehensive test coverage
-✅ **Race-safe:** All tests pass with `-race`
-✅ **Concurrency tests:** 10 goroutines via WaitGroup
-✅ **Integration tests:** Full workflow testing
+- File-aware tests: each production file owns its test file
+- Table-driven subtests: uses `t.Run()`
+- Good/Bad/Ugly pattern: comprehensive test coverage
+- Race-safe: all tests pass with `-race`
+- Concurrency tests: 10 goroutines via WaitGroup
+- Integration tests: full workflow testing
 
 ### Verification
 
@@ -967,7 +963,7 @@ gofmt -l .
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author:** Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created:** 2026-06-18T04:00:00Z
@@ -977,7 +973,7 @@ gofmt -l .
 - **Repository:** `forge.lthn.sh/core/go-crypt`
 - **Module:** `dappco.re/go/crypt`
 
-### Key Contacts
+### Key contacts
 
 - **Project Lead:** Hades (Lethean)
 - **Maintainer:** Purberus <purberus@lthn.ai>
@@ -986,75 +982,16 @@ gofmt -l .
 - **Consumes:** Core framework, Enchantrix primitives
 - **CI/CD:** Woodpecker.yml
 
-### Upstream Dependencies
+### Upstream dependencies
 
 - **CoreGo framework:** `dappco.re/go/core` (mandatory)
 - **Enchantrix:** `forge.lthn.ai/Snider/Enchantrix/pkg/crypt/std/*` (primitives)
 - **protonmail/go-crypto:** PGP operations
 - **sqlite3:** Session/approval/audit storage
 
-### Downstream Dependencies
+### Downstream dependencies
 
 - **go-io:** Uses `crypt.Encrypt`/`crypt.Decrypt` for encrypted Medium backends
 - **Borg:** Uses cryptography for SMSG/STIM/STMF encryption
 - **Mining:** Uses for UEPS consent tokens
 - **core/agent:** Uses trust system for fleet dispatch permissions
-
----
-
-## 🏷️ Tags & Categories
-
-### Technology Tags
-
-- `cryptography` — Primary tag
-- `encryption` — Symmetric encryption
-- `security` — Security-focused
-- `aes` — AES encryption
-- `chacha20` — ChaCha20 cipher
-- `argon2` — Argon2id key derivation
-- `hmac` — HMAC authentication
-- `pgp` — PGP encryption
-- `openpgp` — OpenPGP standard
-- `rsa` — RSA encryption
-- `authentication` — Authentication system
-- `trust` — Trust management
-- `access-control` — Access control system
-- `capabilities` — Capability-based permissions
-- `policy` — Policy engine
-- `audit` — Audit logging
-
-### Feature Tags
-
-- `encrypt` — Encryption
-- `decrypt` — Decryption
-- `hashing` — Hash functions
-- `kdf` — Key derivation
-- `signature` — Digital signatures
-- `session` — Session management
-- `tier` — Trust tiers
-- `capability` — Capability checking
-- `approval` — Approval workflow
-- `audit-trail` — Audit logging
-- `cli` — Command-line interface
-
-### Security Tags
-
-- `secure` — Security-focused
-- `fips` — FIPS-compliant algorithms
-- `side-channel-resistant` — Side-channel protection
-- `memory-safe` — Memory safety
-- `production-ready` — Production-ready
-
-### Agent Tags
-
-- `athena` — Full trust agent
-- `virgil` — Full trust agent
-- `charon` — Full trust agent
-- `clotho` — Verified agent
-- `hypnos` — Verified agent
-- `untrusted` — Untrusted agents
-
----
-
-*Package index generated: 2026-06-18T04:00:00Z*
-*Knowledge Pack: CoreGo v1.3.0*

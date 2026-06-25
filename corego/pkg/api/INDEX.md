@@ -17,8 +17,6 @@ tags:
 
 # go-api Package Index
 
-> **REST Framework for the Lethean Ecosystem**
-
 **Repository:** `core/api`  
 **Module:** `dappco.re/go/api`  
 **PHP Package:** `forge.lthn.ai/core/api`  
@@ -30,7 +28,7 @@ tags:
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -40,9 +38,9 @@ tags:
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-`go-api` is the **REST framework** for CoreGO and Lethean ecosystem applications, providing a comprehensive Gin-based HTTP engine with auto-generated OpenAPI/Swagger documentation, WebSocket support, Server-Sent Events (SSE), ToolBridge for MCP integration, authentication providers, rate limiting, webhooks, GraphQL, chat completions, and upstream proxy capabilities.
+`go-api` is the **REST framework** for CoreGO and Lethean ecosystem applications, providing a Gin-based HTTP engine with auto-generated OpenAPI/Swagger documentation, WebSocket support, Server-Sent Events (SSE), ToolBridge for MCP integration, authentication providers, rate limiting, webhooks, GraphQL, chat completions, and upstream proxy capabilities.
 
 ### Core Capabilities
 
@@ -77,7 +75,7 @@ core/api/
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Component Layers
 
@@ -116,7 +114,7 @@ core/api/
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 core/api/go/
@@ -373,7 +371,7 @@ core/api/go/
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
 ### Basic HTTP Server
 
@@ -438,7 +436,7 @@ engine.Serve(context.Background())
 
 ---
 
-## 🔧 Core Components
+## Core components
 
 ### Engine
 
@@ -546,7 +544,7 @@ api.WithCacheMaxBytes(bytes)
 
 ---
 
-## 📡 Features
+## Features
 
 ### OpenAPI & Swagger
 
@@ -774,7 +772,7 @@ engine.AddUpstream("backend2", "http://localhost:8081")
 
 ---
 
-## 🛡️ Security Features
+## Security features
 
 ### SSRF Guard
 
@@ -818,7 +816,7 @@ This adds `Sunset: Sun, 31 Dec 2026 23:59:59 GMT` and `Link: </v2>; rel="success
 
 ---
 
-## 📦 Middleware
+## Middleware
 
 ### Built-in Middleware
 
@@ -868,7 +866,7 @@ engine.GET("/admin", api.RequireAuth(), api.RequireGroup("admin"), handler)
 
 ---
 
-## 🌐 Response Helpers
+## Response helpers
 
 Standardized response formatting.
 
@@ -926,9 +924,9 @@ c.JSON(api.PaginatedResponse{
 
 ---
 
-## 🧪 Testing
+## Testing
 
-Comprehensive test coverage following the Good/Bad/Ugly pattern.
+Test coverage follows the Good/Bad/Ugly pattern.
 
 ### Running Tests
 
@@ -966,7 +964,7 @@ func TestAuthentik_Login_Ugly(t *testing.T) { ... }
 
 ---
 
-## 🚀 Command-Line Interface
+## Command-line interface
 
 ### Build Commands
 
@@ -1017,24 +1015,7 @@ core go lint
 
 ---
 
-## 📊 Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Total Go files** | ~200+ |
-| **Test files** | ~150+ |
-| **Example test files** | ~75+ |
-| **Features** | 13+ |
-| **Middleware** | 10+ |
-| **Transports** | 5 (HTTP/1.1, HTTP/2, HTTP/3, WebSocket, SSE) |
-| **Auth methods** | 2 (Bearer, Authentik OIDC) |
-| **Rate limit algorithms** | 2 (Token Bucket, Sliding Window) |
-| **Upstream balancers** | 4 (Round Robin, Random, Least Connections, IP Hash) |
-| **Chat adapters** | 2+ (Anthropic, Ollama, extensible) |
-
----
-
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -1046,30 +1027,7 @@ core go lint
 
 ---
 
-## 📈 Quality Metrics
-
-- ✅ **OpenAPI 3.1 Compliance** — Full specification support
-- ✅ **Test Coverage** — Good/Bad/Ugly pattern for all scenarios
-- ✅ **Transport Flexibility** — Multiple HTTP versions and real-time protocols
-- ✅ **Security** — SSRF guard, strict bind, authentication, authorization
-- ✅ **Observability** — OpenTelemetry tracing, pprof, expvar
-- ✅ **Documentation** — Complete README + INDEX
-- ✅ **Cross-Language** — Go + PHP Laravel packages
-- ✅ **Extensibility** — Middleware, route groups, custom adapters
-
----
-
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | N/A |
-| 2026-05-XX | Chat completions finalized | N/A |
-| 2026-04-30 | CLAUDE.md guidance created | N/A |
-
----
-
-## 🎯 Tags
+## Tags
 
 ```yaml
 - rest
@@ -1120,7 +1078,7 @@ core go lint
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/api/](file:///Users/snider/Code/core/api/)
 2. **CLAUDE.md** — [~/Code/core/api/CLAUDE.md](file:///Users/snider/Code/core/api/CLAUDE.md)
@@ -1130,8 +1088,3 @@ core go lint
 6. **Authentik** — [goauthentik.io](https://goauthentik.io)
 7. **Casbin** — [casbin.org](https://casbin.org)
 
----
-
-*Package index generated: 2026-06-17T20:00:00Z*
-*Knowledge Pack: CoreGo v1.1.0*
-*Maintainer: Purberus <purberus@lthn.ai>*

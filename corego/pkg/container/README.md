@@ -1,8 +1,7 @@
 ---
 type: Package Deep Dive
-title: go-container — Docker-Free Container Runtime
-description: Complete documentation for go-container — container runtime without daemon overhead
-description: LinuxKit builder, dev environment management, TIM bundles, and VZ provider
+title: go-container — Docker-free container runtime
+description: Container runtime without daemon overhead — LinuxKit builder, dev environment management, TIM bundles, and VZ provider
 module: dappco.re/go/container
 repo: core/go-container
 tags: [container, docker, isolation, execution, vm, linuxkit, tim, vz, apple, sandbox]
@@ -11,19 +10,17 @@ author: Mistral Vibe
 version: 1.0.0
 ---
 
-# go-container — Docker-Free Container Runtime
+# go-container — Docker-free container runtime
 
-> **"An agent should be able to build and run containers from this document alone."**
-
-`dappco.re/go/container` is a **container runtime without the daemon overhead** that provides immutable images with LinuxKit (stable, default) or TIM bundles (experimental). Used by core/dev for portable dev environments and by LEM (Lethean Ethical Models) for model isolation.
+`dappco.re/go/container` is a container runtime without daemon overhead that provides immutable images with LinuxKit (stable, default) or TIM bundles (experimental). Used by core/dev for portable dev environments and by LEM (Lethean Ethical Models) for model isolation.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### Philosophy
 
-**"Default to trusted, battle-tested tech. Our stuff is experimental."**
+"Default to trusted tech. Our stuff is experimental."
 
 This package provides container runtime capabilities without requiring Docker daemon, focusing on:
 
@@ -39,7 +36,7 @@ This package provides container runtime capabilities without requiring Docker da
 │                     core run (abstraction)               │
 ├────────────────────────────┬────────────────────────────┤
 │  LinuxKit (default)        │  TIM (experimental)        │
-│  ✓ Trusted, battle-tested  │  ⚠ Homegrown              │
+│  ✓ Trusted, tested         │  ⚠ Homegrown              │
 │  ✓ Multi-format output     │  ✓ Lightweight             │
 │  ✓ dm-crypt encryption     │  ✓ Sigil encryption        │
 │  ✓ Community support       │  ⚠ Just us                 │
@@ -51,7 +48,7 @@ This package provides container runtime capabilities without requiring Docker da
 └─────────────────────────────────────────────────────────┘
 ```
 
-### Package Structure
+### Package structure
 
 Three packages with clear dependency direction: `devenv` → `container` (root) → `sources`.
 
@@ -86,9 +83,9 @@ go-container/
 
 ---
 
-## 📦 Quick Start
+## Quick start
 
-### Basic Usage
+### Basic usage
 
 ```go
 import "dappco.re/go/container"
@@ -114,7 +111,7 @@ if err := container.Stop(context.Background()); err != nil {
 }
 ```
 
-### CLI Usage
+### CLI usage
 
 ```bash
 # Build and run a LinuxKit container
@@ -141,11 +138,9 @@ core vm console mycontainer
 
 ---
 
-## 🏗️ Core Components
+## Core components
 
-### 1. Provider Interface
-
-The heart of go-container is the **Provider interface**:
+### 1. Provider interface
 
 ```go
 type Provider interface {
@@ -156,17 +151,17 @@ type Provider interface {
 }
 ```
 
-#### Implemented Providers
+#### Implemented providers
 
 | Provider | Status | Description | Platform |
 |----------|--------|-------------|----------|
-| `LinuxKitProvider` | ✅ Production | Default provider using LinuxKit | Linux/macOS |
-| `TIMProvider` | ⚠️ Experimental | Homegrown lightweight format | Linux/macOS |
-| `VZProvider` | ✅ Production | Apple Virtualization Framework | macOS 26+ |
+| `LinuxKitProvider` | Production | Default provider using LinuxKit | Linux/macOS |
+| `TIMProvider` | Experimental | Homegrown lightweight format | Linux/macOS |
+| `VZProvider` | Production | Apple Virtualization Framework | macOS 26+ |
 
-### 2. Container Lifecycle
+### 2. Container lifecycle
 
-#### Build Process
+#### Build process
 
 ```
 BuildConfig → Provider.Build() → Image
@@ -178,7 +173,7 @@ BuildConfig → Provider.Build() → Image
                               └── Package into output format
 ```
 
-#### Run Process
+#### Run process
 
 ```
 Image + RunOptions → Provider.Run() → Container
@@ -190,7 +185,7 @@ Image + RunOptions → Provider.Run() → Container
                                     └── Return container handle
 ```
 
-#### Container Operations
+#### Container operations
 
 ```go
 type Container interface {
@@ -207,9 +202,9 @@ type Container interface {
 }
 ```
 
-### 3. Image Management
+### 3. Image management
 
-#### ImageSource Interface
+#### ImageSource interface
 
 ```go
 type ImageSource interface {
@@ -219,15 +214,15 @@ type ImageSource interface {
 }
 ```
 
-#### Implemented Sources
+#### Implemented sources
 
 | Source | Status | Description |
 |--------|--------|-------------|
-| `CDNSource` | ✅ Production | HTTP GET from CDN URLs |
-| `GitHubSource` | ✅ Production | Download from GitHub releases |
-| `LocalSource` | ✅ Production | Local file system |
+| `CDNSource` | Production | HTTP GET from CDN URLs |
+| `GitHubSource` | Production | Download from GitHub releases |
+| `LocalSource` | Production | Local file system |
 
-#### Image Types
+#### Image types
 
 | Type | Description | Format |
 |------|-------------|--------|
@@ -238,9 +233,9 @@ type ImageSource interface {
 
 ---
 
-## 📁 LinuxKit Provider (Default)
+## LinuxKit provider (default)
 
-### Why LinuxKit First?
+### Why LinuxKit first?
 
 1. **Trust** — Docker Inc + community backed, years of production use
 2. **Formats** — ISO, raw disk, AWS AMI, GCP, Azure, qemu, VMware
@@ -248,9 +243,9 @@ type ImageSource interface {
 4. **Immutability** — Read-only base, explicit writable mounts
 5. **Composable** — YAML config, pluggable components
 
-### LinuxKit YAML Structure
+### LinuxKit YAML structure
 
-#### Basic Example
+#### Basic example
 
 ```yaml
 kernel:
@@ -301,7 +296,7 @@ trust:
     - linuxkit/*
 ```
 
-### LinuxKit Components
+### LinuxKit components
 
 #### Kernel
 
@@ -315,7 +310,7 @@ kernel:
     - nf_conntrack
 ```
 
-#### Init System
+#### Init system
 
 ```yaml
 init:
@@ -353,7 +348,7 @@ services:
       - /etc/ssh:/etc/ssh
 ```
 
-#### Files and Directories
+#### Files and directories
 
 ```yaml
 files:
@@ -392,7 +387,7 @@ mounts:
     options: trans=virtio,version=9p2000.L,rw
 ```
 
-### LinuxKit Features
+### LinuxKit features
 
 #### Networking
 
@@ -445,23 +440,23 @@ services:
 
 ---
 
-## 🍎 Apple VZ Provider
+## Apple VZ provider
 
 ### Overview
 
-**Apple Virtualization Framework (VZ)** is a macOS 26+ framework for running virtual machines and containers. go-container provides an **in-process VZ provider** for efficient, lightweight container execution on Apple Silicon.
+**Apple Virtualization Framework (VZ)** is a macOS 26+ framework for running virtual machines and containers. go-container provides an in-process VZ provider for efficient, lightweight container execution on Apple Silicon.
 
-### VZ Features
+### VZ features
 
 | Feature | Status | Description |
 |---------|--------|-------------|
-| In-process execution | ✅ Complete | No separate VM process |
-| Virtualization | ✅ Complete | Full VM support |
-| VSOCK | ✅ Complete | Communication channel |
-| File sharing | ✅ Complete | Shared directories |
-| Network isolation | ✅ Complete | NAT and bridging |
+| In-process execution | Complete | No separate VM process |
+| Virtualisation | Complete | Full VM support |
+| VSOCK | Complete | Communication channel |
+| File sharing | Complete | Shared directories |
+| Network isolation | Complete | NAT and bridging |
 
-### VZ Configuration
+### VZ configuration
 
 ```go
 type VZConfig struct {
@@ -492,7 +487,7 @@ type VZShare struct {
 }
 ```
 
-### VZ Agent
+### VZ agent
 
 The `vzagent` is a small process that runs inside VZ containers to handle:
 - Console I/O
@@ -500,7 +495,7 @@ The `vzagent` is a small process that runs inside VZ containers to handle:
 - Port forwarding
 - File sharing
 
-#### VZ Agent Files
+#### VZ agent files
 
 ```
 cmd/vzagent/
@@ -512,18 +507,18 @@ cmd/vzagent/
 
 ---
 
-## 📦 TIM Provider (Experimental)
+## TIM provider (experimental)
 
 ### What is TIM?
 
-**TIM (The Immutable)** is a homegrown, lightweight container/image format designed for the Lethean ecosystem. It's **experimental** and optimized for:
+**TIM (The Immutable)** is a homegrown, lightweight container/image format designed for the Lethean ecosystem. It is **experimental** and optimised for:
 
 - **Minimal overhead** — No daemon, direct execution
 - **Sigil encryption** — Built-in encryption support
 - **Portability** — Run anywhere with minimal dependencies
 - **Speed** — Fast boot times
 
-### TIM Structure
+### TIM structure
 
 A TIM bundle is a directory with a specific structure:
 
@@ -545,7 +540,7 @@ myapp.tim/
     └── upper/
 ```
 
-### TIM Manifest (tim.yaml)
+### TIM manifest (tim.yaml)
 
 ```yaml
 name: myapp
@@ -584,9 +579,9 @@ encryption:
   key_file: /path/to/key
 ```
 
-### TIM Features
+### TIM features
 
-#### Sigil Encryption
+#### Sigil encryption
 
 TIM uses **Sigil encryption** for secure image storage:
 
@@ -598,7 +593,7 @@ encrypted, err := timProvider.Encrypt(image, "my-secret-key")
 decrypted, err := timProvider.Decrypt(encrypted, "my-secret-key")
 ```
 
-#### Overlay Filesystems
+#### Overlay filesystems
 
 TIM supports overlay filesystems for efficient layering:
 
@@ -610,7 +605,7 @@ layers:
 
 ---
 
-## 📁 Dev Environment (devenv)
+## Dev environment (devenv)
 
 ### Overview
 
@@ -622,7 +617,7 @@ The `devenv` package provides **DevOps orchestration** that composes container a
 - **Auto-detection of serve/test commands** — Intelligent project analysis
 - **Sandboxed Claude sessions** — Secure AI assistant integration
 
-### DevOps Workflow
+### DevOps workflow
 
 ```go
 // Create a DevOps environment
@@ -653,9 +648,9 @@ if err := env.Stop(context.Background()); err != nil {
 }
 ```
 
-### Dev Environment Features
+### Dev environment features
 
-#### Project Mounting via Reverse SSHFS
+#### Project mounting via reverse SSHFS
 
 Instead of traditional bind mounts, devenv uses **reverse SSHFS** for project mounting:
 
@@ -673,7 +668,7 @@ Benefits:
 - Secure (SSH-based)
 - Dynamic (can mount/unmount at runtime)
 
-#### Auto-Detection
+#### Auto-detection
 
 DevOps automatically detects project type and sets up appropriate commands:
 
@@ -685,7 +680,7 @@ DevOps automatically detects project type and sets up appropriate commands:
 | Rust | Cargo.toml | `cargo run` | `cargo test` |
 | Generic | Dockerfile | `CMD` from Dockerfile | `RUN test` from Dockerfile |
 
-#### SSH Access
+#### SSH access
 
 ```go
 // Start an SSH session
@@ -702,7 +697,7 @@ if err := env.Console(context.Background()); err != nil {
 output, err := env.Exec(context.Background(), "ls -la /app")
 ```
 
-#### Sandboxed Claude Sessions
+#### Sandboxed Claude sessions
 
 ```go
 // Start a sandboxed Claude session with auth forwarding
@@ -721,9 +716,9 @@ response, err := session.Send("Explain this codebase")
 
 ---
 
-## 📦 Image Sources
+## Image sources
 
-### ImageSource Interface
+### ImageSource interface
 
 ```go
 type ImageSource interface {
@@ -738,7 +733,7 @@ type ImageSource interface {
 }
 ```
 
-### CDN Source
+### CDN source
 
 Downloads images via HTTP GET:
 
@@ -747,7 +742,7 @@ source := sources.NewCDNSource("https://images.example.com/")
 reader, err := source.GetImage(context.Background(), "alpine:latest.iso")
 ```
 
-#### CDN Configuration
+#### CDN configuration
 
 ```go
 type CDNSource struct {
@@ -759,7 +754,7 @@ type CDNSource struct {
 }
 ```
 
-### GitHub Source
+### GitHub source
 
 Downloads images from GitHub releases:
 
@@ -768,7 +763,7 @@ source := sources.NewGitHubSource("linuxkit", "linuxkit")
 reader, err := source.GetImage(context.Background(), "v0.10.0")
 ```
 
-#### GitHub Configuration
+#### GitHub configuration
 
 ```go
 type GitHubSource struct {
@@ -779,7 +774,7 @@ type GitHubSource struct {
 }
 ```
 
-### Local Source
+### Local source
 
 Loads images from local file system:
 
@@ -790,7 +785,7 @@ reader, err := source.GetImage(context.Background(), "myapp.iso")
 
 ---
 
-## 🔧 State Management
+## State management
 
 All container state is persisted as JSON to `~/.core/containers.json`:
 
@@ -823,7 +818,7 @@ All container state is persisted as JSON to `~/.core/containers.json`:
 }
 ```
 
-### State Operations
+### State operations
 
 ```go
 // Get container state
@@ -849,9 +844,9 @@ if err := state.Delete("abc123"); err != nil {
 
 ---
 
-## 💻 CLI Commands
+## CLI commands
 
-### Command Structure
+### Command structure
 
 ```
 go-container/cmd/
@@ -864,9 +859,9 @@ go-container/cmd/
 └── vzagent/             # VZ agent (runs inside containers)
 ```
 
-### Available Commands
+### Available commands
 
-#### Container Management
+#### Container management
 
 ```bash
 # List all containers
@@ -891,7 +886,7 @@ core vm console <name>
 core vm exec <name> -- ls -la /app
 ```
 
-#### Image Management
+#### Image management
 
 ```bash
 # List all images
@@ -907,7 +902,7 @@ core vm images delete alpine:latest
 core vm images build app.yml
 ```
 
-#### TIM Commands
+#### TIM commands
 
 ```bash
 # Build a TIM bundle
@@ -920,7 +915,7 @@ core vm tim run app.tim
 core vm tim list
 ```
 
-#### Template Management
+#### Template management
 
 ```bash
 # List available templates
@@ -930,7 +925,7 @@ core vm templates list
 core vm templates init myapp --template golang
 ```
 
-#### VM Management
+#### VM management
 
 ```bash
 # Start the VM service
@@ -943,9 +938,9 @@ core vm service stop
 core vm service status
 ```
 
-### Command Flags
+### Command flags
 
-#### Global Flags
+#### Global flags
 
 ```bash
 --config      # Config file path (default: ~/.core/config.yaml)
@@ -955,7 +950,7 @@ core vm service status
 --workspace   # Workspace directory
 ```
 
-#### Run Command Flags
+#### Run command flags
 
 ```bash
 core run app.yml [flags]
@@ -976,9 +971,9 @@ Flags:
 
 ---
 
-## 🏗️ Key Patterns
+## Key patterns
 
-### 1. io.Medium Abstraction
+### 1. io.Medium abstraction
 
 File system operations use `io.Medium` (from `go-io`) instead of `os` directly:
 
@@ -994,7 +989,7 @@ medium.WriteFile("/test/file", []byte("test"))
 
 **Benefit:** Enables test mocking and alternative backends (GitHub, S3, etc.).
 
-### 2. Compile-Time Interface Checks
+### 2. Compile-time interface checks
 
 All implementations verify interface compliance at compile time:
 
@@ -1005,7 +1000,7 @@ var _ Provider = (*LinuxKitProvider)(nil)
 var _ Provider = (*TIMProvider)(nil)
 ```
 
-### 3. Copy-on-Read State
+### 3. Copy-on-read state
 
 All state operations return copies to prevent data races:
 
@@ -1022,7 +1017,7 @@ if err := state.Save(container); err != nil {
 }
 ```
 
-### 4. Context Propagation
+### 4. Context propagation
 
 All blocking operations take `context.Context` as the first parameter:
 
@@ -1038,9 +1033,7 @@ func (p *LinuxKitProvider) Build(ctx context.Context, config BuildConfig) (Image
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
+## Code metrics
 
 ```
 Total Go files:           50+
@@ -1052,13 +1045,13 @@ Supported providers:     3 (LinuxKit, TIM, VZ)
 Supported sources:       3 (CDN, GitHub, Local)
 ```
 
-### Test Coverage
+### Test coverage
 
 | Component | Coverage | Status |
 |-----------|----------|--------|
-| container | High | ✅ Complete |
-| devenv | High | ✅ Complete |
-| sources | High | ✅ Complete |
+| container | High | Complete |
+| devenv | High | Complete |
+| sources | High | Complete |
 
 ### Performance
 
@@ -1072,24 +1065,24 @@ Supported sources:       3 (CDN, GitHub, Local)
 
 ---
 
-## 🔒 Compliance Rules
+## Compliance rules
 
 From `AGENTS.md` and `CLAUDE.md`:
 
-### Coding Standards
+### Coding standards
 
 - **UK English** — colour, organisation, honour
 - **Error wrapping** — Use `core.E("Op", "message", err)`
 - **Context propagation** — All blocking operations take `context.Context`
 - **Licence** — EUPL-1.2
 
-### Test Organization
+### Test organisation
 
 - Tests use `testify` assertions
 - Naming convention: `TestSubject_Function_{Good,Bad,Ugly}`
 - Example tests with `// Output:` form
 
-### File Organization
+### File organisation
 
 - **Root package (`container`)** — Container lifecycle, hypervisor abstraction, state, templates
 - **`devenv` package** — DevOps orchestrator, SSH access, project mounting
@@ -1112,7 +1105,7 @@ From `AGENTS.md` and `CLAUDE.md`:
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
 - [CoreGo Framework](../../README.md) — Parent knowledge pack
 - [go-io Package](../io/README.md) — I/O Medium interface used throughout
@@ -1121,7 +1114,7 @@ From `AGENTS.md` and `CLAUDE.md`:
 - [go-container RFC](file:///Users/snider/Code/meowmix/plans/code/core/go/container/RFC.md) — Package specification
 - [go-container CLAUDE.md](file:///Users/snider/Code/core/go-container/CLAUDE.md) — Implementation details
 
-### Sub-Specifications
+### Sub-specifications
 
 - [RFC.apple.md](file:///Users/snider/Code/meowmix/plans/code/core/go/container/RFC.apple.md) — Apple + Runtime Detection
 - [RFC.commands.md](file:///Users/snider/Code/meowmix/plans/code/core/go/container/RFC.commands.md) — Command specifications
@@ -1132,25 +1125,25 @@ From `AGENTS.md` and `CLAUDE.md`:
 
 ---
 
-## 🎯 Use Cases
+## Use cases
 
-### Primary Use Cases
+### Primary use cases
 
-1. **Dev Environments** — Portable, reproducible dev environments with `core run`
-2. **Model Isolation** — Running LEM (Lethean Ethical Models) in isolated containers
-3. **CI/CD Pipelines** — Containerized build and test environments
-4. **Edge Computing** — Lightweight container runtime for edge devices
+1. **Dev environments** — Portable, reproducible dev environments with `core run`
+2. **Model isolation** — Running LEM (Lethean Ethical Models) in isolated containers
+3. **CI/CD pipelines** — Containerised build and test environments
+4. **Edge computing** — Lightweight container runtime for edge devices
 
-### Integration Patterns
+### Integration patterns
 
-1. **Library Mode** — Embed in Go applications for container management
-2. **CLI Mode** — Use via `core vm` and `core run` commands
-3. **DevOps Mode** — Use `devenv` package for full dev environment orchestration
-4. **Provider Mode** — Implement custom providers for new runtime backends
+1. **Library mode** — Embed in Go applications for container management
+2. **CLI mode** — Use via `core vm` and `core run` commands
+3. **DevOps mode** — Use `devenv` package for full dev environment orchestration
+4. **Provider mode** — Implement custom providers for new runtime backends
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author**: Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created**: 2026-06-18T00:00:00Z
@@ -1158,7 +1151,3 @@ From `AGENTS.md` and `CLAUDE.md`:
 - **Version**: 1.0.0
 - **Licence**: EUPL-1.2
 - **Repository**: `forge.lthn.sh/core/go-container`
-
----
-
-*Package documentation created: 2026-06-18T00:00:00Z*

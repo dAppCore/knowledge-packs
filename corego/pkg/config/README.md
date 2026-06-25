@@ -17,13 +17,11 @@ tags:
   - config-resolution
   - filesystem-watching
 ---
-# go-config — Core Configuration Module
-
-> **Config primitives — schemas, conclave, env, watch, resolve, workspace**
+# go-config — Core configuration module
 
 **Module:** `dappco.re/go/config`
 **Repository:** [~/Code/core/config/](file:///Users/snider/Code/core/config/)
-**Status:** ✅ Production-Ready
+**Status:** Production-ready
 **License:** EUPL-1.2
 **Language:** Go 1.26+
 **Dependencies:** Core framework, go-io (Medium abstraction), Viper, testify
@@ -32,21 +30,21 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-config` is the **Core configuration module** that provides a unified way for Core services and command-line tools to resolve configuration from multiple sources. It implements a **dual-Viper pattern** that prevents environment variables from leaking into saved configuration files.
+`go-config` is the Core configuration module that provides a unified way for Core services and command-line tools to resolve configuration from multiple sources. It implements a **dual-Viper pattern** that prevents environment variables from leaking into saved configuration files.
 
-### Key Capabilities
+### Key capabilities
 
-1. **Dual-Viper Pattern** — Two Viper instances: read view (file + env + defaults) and write view (file + explicit writes only)
-2. **Hierarchical Discovery** — Discovers `.core/config.yaml` files by walking up from project directory
-3. **Manifest Resolution** — Resolves typed Core manifests (`build.yaml`, `test.yaml`, `workspace.yaml`, `manifest.yaml`, `agent.yaml`, `zone.yaml`)
-4. **Signature Verification** — Signs and verifies view and package manifests with ed25519 signatures
-5. **Feature Flags** — Exposes feature flags through config, process-level defaults, and environment overrides
-6. **Core Service Integration** — Runs as a Core service with lifecycle management, actions, commands, and optional filesystem watching
-7. **Storage Abstraction** — All file I/O through `coreio.Medium` abstraction from go-io
+1. **Dual-Viper pattern** — Two Viper instances: read view (file + env + defaults) and write view (file + explicit writes only)
+2. **Hierarchical discovery** — Discovers `.core/config.yaml` files by walking up from project directory
+3. **Manifest resolution** — Resolves typed Core manifests (`build.yaml`, `test.yaml`, `workspace.yaml`, `manifest.yaml`, `agent.yaml`, `zone.yaml`)
+4. **Signature verification** — Signs and verifies view and package manifests with ed25519 signatures
+5. **Feature flags** — Exposes feature flags through config, process-level defaults, and environment overrides
+6. **Core service integration** — Runs as a Core service with lifecycle management, actions, commands, and optional filesystem watching
+7. **Storage abstraction** — All file I/O through `coreio.Medium` abstraction from go-io
 
-### Configuration Resolution Priority (Ascending)
+### Configuration resolution priority (ascending)
 
 ```
 Defaults → File → Environment Variables (CORE_CONFIG_*) → Explicit Set()
@@ -54,11 +52,9 @@ Defaults → File → Environment Variables (CORE_CONFIG_*) → Explicit Set()
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Dual-Viper Pattern
-
-The core architectural innovation is the **dual-Viper pattern**:
+### Dual-Viper pattern
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -112,7 +108,7 @@ The core architectural innovation is the **dual-Viper pattern**:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Component Hierarchy
+### Component hierarchy
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -166,7 +162,7 @@ The core architectural innovation is the **dual-Viper pattern**:
 
 ---
 
-## 📦 Repository Structure
+## Repository structure
 
 ```
 go/
@@ -234,11 +230,9 @@ go/
 
 ---
 
-## 🔌 Core Types & Interfaces
+## Core types and interfaces
 
-### Config Type
-
-The main configuration type:
+### Config type
 
 ```go
 type Config struct {
@@ -259,7 +253,7 @@ type Config struct {
 var _ core.Config = (*Config)(nil)
 ```
 
-### Interface Contract
+### Interface contract
 
 ```go
 // core.Config interface that Config implements
@@ -276,11 +270,11 @@ type Config interface {
 
 ---
 
-## 🎯 Core Functionality
+## Core functionality
 
-### 1. Basic Configuration
+### 1. Basic configuration
 
-#### Creating a Config
+#### Creating a config
 
 ```go
 // Create with defaults
@@ -294,7 +288,7 @@ cfg, err := config.New(
 )
 ```
 
-#### Getting Values
+#### Getting values
 
 ```go
 // Get a value
@@ -320,7 +314,7 @@ if cfg.Has("dev.editor") {
 }
 ```
 
-#### Setting Values
+#### Setting values
 
 ```go
 // Set a value (writes to both v and f)
@@ -337,7 +331,7 @@ if err := cfg.Set("server.host", "localhost"); err != nil {
 }
 ```
 
-#### Committing Changes
+#### Committing changes
 
 ```go
 // Persist changes to file (uses f, not v)
@@ -346,7 +340,7 @@ if err := cfg.Commit(); err != nil {
 }
 ```
 
-### 2. Dual-Viper Invariant
+### 2. Dual-Viper invariant
 
 The critical invariant that must be maintained:
 
@@ -375,9 +369,9 @@ func (c *Config) Commit() error {
 }
 ```
 
-### 3. Configuration Discovery
+### 3. Configuration discovery
 
-#### Hierarchical Discovery
+#### Hierarchical discovery
 
 ```go
 // Discover config walking up from current directory
@@ -394,7 +388,7 @@ cfg, err := config.New(
 )
 ```
 
-#### Discovery Algorithm
+#### Discovery algorithm
 
 ```
 1. Start from current working directory
@@ -408,9 +402,9 @@ cfg, err := config.New(
 6. Merge all found configs (later files override earlier)
 ```
 
-### 4. Environment Variables
+### 4. Environment variables
 
-#### Default Prefix
+#### Default prefix
 
 ```bash
 # All environment variables with prefix CORE_CONFIG_ are loaded
@@ -419,7 +413,7 @@ CORE_CONFIG_server__port=8080
 CORE_CONFIG_database__host=localhost
 ```
 
-#### Custom Prefix
+#### Custom prefix
 
 ```go
 // Use custom prefix
@@ -427,7 +421,7 @@ cfg, err := config.New(config.WithEnvPrefix("MYAPP"))
 // Now loads MYAPP_dev__editor, MYAPP_server__port, etc.
 ```
 
-#### Environment Variable Format
+#### Environment variable format
 
 ```bash
 # Double underscore represents nested keys
@@ -438,9 +432,9 @@ CORE_CONFIG_dev__editor=vim
 # Translates to: dev.editor
 ```
 
-### 5. Feature Flags
+### 5. Feature flags
 
-#### Basic Usage
+#### Basic usage
 
 ```go
 // Enable a feature
@@ -460,7 +454,7 @@ if err := cfg.Feature("experimental.ai", &enabled); err != nil {
 }
 ```
 
-#### Resolution Priority
+#### Resolution priority
 
 ```
 1. Explicit SetFeature() calls (highest priority)
@@ -471,9 +465,9 @@ if err := cfg.Feature("experimental.ai", &enabled); err != nil {
 
 ---
 
-## 📄 Manifest Resolution
+## Manifest resolution
 
-### Supported Manifest Types
+### Supported manifest types
 
 | Manifest | Purpose | Module |
 |----------|---------|--------|
@@ -484,7 +478,7 @@ if err := cfg.Feature("experimental.ai", &enabled); err != nil {
 | `agent.yaml` | Agent configuration | `dappco.re/go/agent` |
 | `zone.yaml` | Zone configuration | `dappco.re/go/config` |
 
-### Manifest Loading
+### Manifest loading
 
 ```go
 // Load a typed manifest
@@ -500,7 +494,7 @@ if err := cfg.Resolve("/path/to/test.yaml", &testConfig); err != nil {
 }
 ```
 
-### Manifest Structure Example
+### Manifest structure example
 
 ```yaml
 # build.yaml
@@ -519,9 +513,9 @@ go:
 
 ---
 
-## 🔐 Signature Verification
+## Signature verification
 
-### Signing Manifests
+### Signing manifests
 
 ```go
 // Sign a manifest
@@ -537,7 +531,7 @@ if err != nil {
 }
 ```
 
-### Verifying Manifests
+### Verifying manifests
 
 ```go
 // Verify a signed manifest
@@ -547,16 +541,16 @@ if err := config.Verify(manifest, signature, publicKey); err != nil {
 }
 ```
 
-### View vs Package Manifests
+### View vs package manifests
 
-- **View Manifests** — User-level configuration views
-- **Package Manifests** — Package-level metadata and signatures
+- **View manifests** — User-level configuration views
+- **Package manifests** — Package-level metadata and signatures
 
 ---
 
-## 👁️ Filesystem Watching
+## Filesystem watching
 
-### Watching Configuration
+### Watching configuration
 
 ```go
 // Watch for changes to a specific key
@@ -593,7 +587,7 @@ if err := cfg.Unwatch("", callback); err != nil {
 }
 ```
 
-### Watch Implementation
+### Watch implementation
 
 - Uses filesystem notifications (inotify on Linux, FSEvents on macOS, ReadDirectoryChangesW on Windows)
 - Callback triggered on file modification
@@ -601,9 +595,9 @@ if err := cfg.Unwatch("", callback); err != nil {
 
 ---
 
-## 🎨 Path Utilities
+## Path utilities
 
-### Path Resolution
+### Path resolution
 
 ```go
 // Resolve a path (expand ~, env vars, relative paths)
@@ -621,7 +615,7 @@ cleaned := config.Clean("/path/to/../file.txt")
 expanded, err := config.Expand("$HOME/projects/${USER}")
 ```
 
-### XDG Compliance
+### XDG compliance
 
 ```go
 // Get XDG config home
@@ -641,7 +635,7 @@ home, err := config.UserDir()
 // Result: /home/user or /Users/user
 ```
 
-### Platform-Specific Paths
+### Platform-specific paths
 
 ```go
 // Get platform-specific config directory
@@ -654,9 +648,9 @@ dataDir, err := config.DataDir()
 
 ---
 
-## 🚀 Service Integration
+## Service integration
 
-### Running as a Core Service
+### Running as a Core service
 
 ```go
 // Create a service
@@ -681,7 +675,7 @@ if err := svc.Get("dev.editor", &editor); err != nil {
 }
 ```
 
-### Service Lifecycle
+### Service lifecycle
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -703,9 +697,9 @@ if err := svc.Get("dev.editor", &editor); err != nil {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 Following AX Standard with Good/Bad/Ugly test triplets:
 
@@ -765,7 +759,7 @@ Service Tests:
 └── service_example_test.go
 ```
 
-### Test Helpers
+### Test helpers
 
 ```go
 // Mock medium for testing
@@ -782,7 +776,7 @@ mockWatcher := &MockWatcher{
 }
 ```
 
-### Running Tests
+### Running tests
 
 ```bash
 # From go/ directory
@@ -806,25 +800,25 @@ cd go && core go qa full
 
 ---
 
-## 📈 Quality Metrics
+## Quality metrics
 
 | Metric | Status | Details |
 |--------|--------|---------|
-| **Dual-Viper Pattern** | ✅ | Prevents env variable leakage |
-| **Hierarchical Discovery** | ✅ | Walks up directory tree |
-| **Manifest Support** | ✅ | 6 manifest types |
-| **Signature Verification** | ✅ | ed25519 support |
-| **Feature Flags** | ✅ | Multi-source resolution |
-| **Filesystem Watching** | ✅ | Cross-platform support |
-| **Storage Abstraction** | ✅ | go-io Medium |
-| **Core Service Integration** | ✅ | Full lifecycle support |
-| **XDG Compliance** | ✅ | Platform-specific paths |
-| **Test Coverage** | ✅ | Good/Bad/Ugly pattern |
-| **Production Ready** | ✅ | Deployed in Core ecosystem |
+| **Dual-Viper Pattern** | Complete | Prevents env variable leakage |
+| **Hierarchical Discovery** | Complete | Walks up directory tree |
+| **Manifest Support** | Complete | 6 manifest types |
+| **Signature Verification** | Complete | ed25519 support |
+| **Feature Flags** | Complete | Multi-source resolution |
+| **Filesystem Watching** | Complete | Cross-platform support |
+| **Storage Abstraction** | Complete | go-io Medium |
+| **Core Service Integration** | Complete | Full lifecycle support |
+| **XDG Compliance** | Complete | Platform-specific paths |
+| **Test Coverage** | Complete | Good/Bad/Ugly pattern |
+| **Production Ready** | Complete | Deployed in Core ecosystem |
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 ### Dependencies
 
@@ -847,7 +841,7 @@ All Core services and tools that need configuration:
 - [go-ide](../ide/) — IDE configuration
 - [go-ml](../ml/) — ML configuration
 
-### Core Framework
+### Core framework
 
 | Package | Relationship |
 |---------|--------------|
@@ -855,7 +849,7 @@ All Core services and tools that need configuration:
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/config/](file:///Users/snider/Code/core/config/)
 2. **CLAUDE.md** — [~/Code/core/config/CLAUDE.md](file:///Users/snider/Code/core/config/CLAUDE.md)
@@ -865,10 +859,3 @@ All Core services and tools that need configuration:
 6. **Architecture** — [~/Code/core/config/docs/architecture.md](file:///Users/snider/Code/core/config/docs/architecture.md)
 7. **Development Guide** — [~/Code/core/config/docs/development.md](file:///Users/snider/Code/core/config/docs/development.md)
 8. **CoreGO INDEX** — [../../INDEX.md](file:///Users/snider/Code/meowmix/knowledge-packs/corego/INDEX.md)
-
----
-
-*Package documentation generated: 2026-06-18T00:15:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
-*Module: dappco.re/go/config*
-*Maintainer: Purberus <purberus@lthn.ai>*

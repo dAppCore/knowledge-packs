@@ -13,9 +13,7 @@ tags:
   - tls
   - websocket
 ---
-# go-proxy — Stratum Mining Proxy
-
-> **The authoritative Stratum protocol proxy for CryptoNote mining**
+# go-proxy — Stratum mining proxy
 
 **RFC:** [plans/code/core/go/proxy/RFC.md](../../../../../plans/code/core/go/proxy/RFC.md)
 **Source:** [~/Code/core/go-proxy/](file:///Users/snider/Code/core/go-proxy/)
@@ -24,34 +22,34 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-proxy` is a **CryptoNote Stratum protocol proxy library** that accepts miner connections over TCP (optionally TLS), and intelligently routes mining work to upstream pool connections. It supports two primary operating modes:
+`go-proxy` is a CryptoNote Stratum protocol proxy library that accepts miner connections over TCP (optionally TLS), and routes mining work to upstream pool connections. It supports two primary operating modes:
 
-1. **NiceHash mode** — Splits the 32-bit nonce space across up to 256 simultaneous miners per upstream pool connection, maximizing pool connection reuse
+1. **NiceHash mode** — Splits the 32-bit nonce space across up to 256 simultaneous miners per upstream pool connection, maximising pool connection reuse
 2. **Simple (passthrough) mode** — One upstream connection per miner group, with optional connection reuse on disconnect
 
-### Primary Use Cases
+### Primary use cases
 
 - **Mining pool operator** — Deploy as a public-facing proxy that connects to backend pools
-- **Mining farm** — Centralize management of multiple miners with load balancing
-- **NiceHash seller** — Maximize hashrate rental profitability with nonce-splitting
+- **Mining farm** — Centralise management of multiple miners with load balancing
+- **NiceHash seller** — Maximise hashrate rental profitability with nonce-splitting
 - **Private mining** — Route miners through a secure, monitored gateway
 
-### Design Philosophy
+### Design philosophy
 
 - **Zero-downtime hot-reload** — Configuration changes without restarting
-- **Connection reuse** — Minimize pool reconnection latency (NiceHash mode: 256 miners/pool)
+- **Connection reuse** — Minimise pool reconnection latency (NiceHash mode: 256 miners/pool)
 - **Protocol extensions** — Support for algorithm negotiation, RigID, custom difficulty
 - **Security-first** — TLS for both inbound (miners) and outbound (pools), rate limiting, access control
-- **Observability** — Comprehensive monitoring API, access logs, share logs
+- **Observability** — Monitoring API, access logs, share logs
 - **Resilience** — Primary/failover pool strategy with automatic reconnection
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Stack
+### Component stack
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -76,7 +74,7 @@ tags:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Import Graph (No Circular Dependencies)
+### Import graph (no circular dependencies)
 
 ```
 proxy (root)        — Shared types: Job, PoolConfig, Config, Miner, UpstreamStats, events
@@ -91,9 +89,9 @@ proxy (root)        — Shared types: Job, PoolConfig, Config, Miner, UpstreamSt
 
 ---
 
-## 📊 Data Flow
+## Data flow
 
-### Inbound Path (Miner → Proxy)
+### Inbound path (Miner → Proxy)
 
 ```
 Miner (TCP) → Server.accept()
@@ -108,7 +106,7 @@ Miner (TCP) → Server.accept()
                                 → if mapper active: miner.ForwardJob(currentJob)
 ```
 
-### Outbound Path (Pool → Proxy → Miners)
+### Outbound path (Pool → Proxy → Miners)
 
 ```
 Pool (TCP) → pool.StratumClient read loop → OnJob(job)
@@ -118,7 +116,7 @@ Pool (TCP) → pool.StratumClient read loop → OnJob(job)
                               → Miner sends JSON over TCP
 ```
 
-### Submit Path (Miner → Proxy → Pool)
+### Submit path (Miner → Proxy → Pool)
 
 ```
 Miner submit → Miner.handleSubmit()
@@ -137,7 +135,7 @@ Miner submit → Miner.handleSubmit()
 
 ---
 
-## 🎛️ Core Components
+## Core components
 
 ### 1. Config
 
@@ -154,7 +152,7 @@ if result := cfg.Validate(); !result.OK {
 }
 ```
 
-**Configuration Structure:**
+**Configuration structure:**
 
 ```go
 type Config struct {
@@ -177,7 +175,7 @@ type Config struct {
 }
 ```
 
-### 2. Proxy Orchestrator
+### 2. Proxy orchestrator
 
 Top-level component that wires all subsystems:
 
@@ -198,7 +196,7 @@ p.Stop()
 p.Reload(newCfg)
 ```
 
-**Proxy Structure:**
+**Proxy structure:**
 ```go
 type Proxy struct {
     config   *Config
@@ -213,7 +211,7 @@ type Proxy struct {
 }
 ```
 
-### 3. Server (TCP Listener)
+### 3. Server (TCP listener)
 
 Accepts miner connections with rate limiting:
 
@@ -234,7 +232,7 @@ if result.OK {
 }
 ```
 
-### 4. Miner State Machine
+### 4. Miner state machine
 
 Each TCP connection = one `Miner` with linear state transitions:
 
@@ -248,7 +246,7 @@ WaitLogin → WaitReady → Ready → Closing
 - `MinerStateReady` — Receiving jobs, accepting submits (600s inactivity timeout)
 - `MinerStateClosing` — TCP close in progress
 
-**Miner Structure:**
+**Miner structure:**
 ```go
 type Miner struct {
     id         int64      // Internal ID
@@ -275,7 +273,7 @@ type Miner struct {
 }
 ```
 
-### 5. Workers (Aggregate Stats)
+### 5. Workers (aggregate stats)
 
 Per-worker statistics with rolling hashrate windows:
 
@@ -305,13 +303,13 @@ type WorkerRecord struct {
 }
 ```
 
-**Hashrate Calculation:**
+**Hashrate calculation:**
 ```go
 record.Hashrate(60)   // H/s over last 60 seconds
 record.Hashrate(3600) // H/s over last hour
 ```
 
-### 6. Stats (Global Aggregates)
+### 6. Stats (global aggregates)
 
 Global counters and hashrate windows:
 
@@ -326,7 +324,7 @@ stats.Hashes()      // Total hashes (sum of difficulties)
 stats.Hashrate(60)  // Global H/s over last 60 seconds
 ```
 
-### 7. Event Bus
+### 7. Event bus
 
 Publish-subscribe for mining events:
 
@@ -350,7 +348,7 @@ sub := events.Subscribe(func(event proxy.Event) {
 sub.Unsubscribe()
 ```
 
-**Event Types:**
+**Event types:**
 - `LoginEvent` — Miner successfully logged in
 - `AcceptEvent` — Share accepted by pool
 - `RejectEvent` — Share rejected by pool
@@ -359,9 +357,9 @@ sub.Unsubscribe()
 
 ---
 
-## 🔀 Splitter Implementations
+## Splitter implementations
 
-### NiceHash Splitter (Nonce-Splitting Mode)
+### NiceHash splitter (nonce-splitting mode)
 
 Partitions 32-bit nonce space by fixing one byte (byte 39 of blob). Each `NonceMapper` manages one pool connection with 256 miner slots.
 
@@ -395,7 +393,7 @@ type NonceStorage struct {
 - Implements `pool.StratumListener` for job/result events
 - Tracks in-flight submissions via `SubmitContext`
 
-### Simple Splitter (Passthrough Mode)
+### Simple splitter (passthrough mode)
 
 One pool connection per miner, with optional reuse:
 
@@ -417,7 +415,7 @@ splitter.Connect()
 
 ---
 
-## 🏊 Pool Layer
+## Pool layer
 
 ### StratumClient
 
@@ -461,7 +459,7 @@ strategy := factory.NewStrategy()
 strategy.Connect()
 ```
 
-**Reconnection Logic:**
+**Reconnection logic:**
 1. Try primary pool
 2. On failure: Try next pool in order
 3. Wait `RetryPause` seconds between attempts
@@ -470,9 +468,9 @@ strategy.Connect()
 
 ---
 
-## 📝 Logging Layer
+## Logging layer
 
-### Access Log
+### Access log
 
 Connection-level logging (open/close):
 
@@ -490,7 +488,7 @@ log.LogClose(miner, reason)
 
 **Format:** JSON lines with timestamp, event type, IP, user, duration, bytes
 
-### Share Log
+### Share log
 
 Share-level logging (accept/reject):
 
@@ -510,7 +508,7 @@ log.LogReject(event)
 
 ---
 
-## 🌐 HTTP Monitoring API
+## HTTP monitoring API
 
 Lightweight HTTP API for monitoring and management:
 
@@ -528,7 +526,7 @@ cfg.HTTP.Restricted = true  // Read-only GET only
 // GET /1/miners     — Active miner connections
 ```
 
-**Response Format:** JSON
+**Response format:** JSON
 
 **Example /1/summary:**
 ```json
@@ -545,24 +543,24 @@ cfg.HTTP.Restricted = true  // Read-only GET only
 
 ---
 
-## 🛡️ Security Features
+## Security features
 
-### TLS Support
+### TLS support
 
-**Inbound (Miner-facing):**
+**Inbound (miner-facing):**
 ```go
 cfg.TLS.Enabled = true
 cfg.TLS.CertFile = "/etc/proxy/cert.pem"
 cfg.TLS.KeyFile = "/etc/proxy/key.pem"
 ```
 
-**Outbound (Pool-facing):**
+**Outbound (pool-facing):**
 ```go
 poolCfg.TLS = true
 poolCfg.TLSFingerprint = "abc123..."  // SHA-256 of pool cert
 ```
 
-### Rate Limiting
+### Rate limiting
 
 Per-IP connection rate limiting with token bucket:
 
@@ -571,30 +569,30 @@ cfg.RateLimit.MaxConnectionsPerMinute = 30
 cfg.RateLimit.BanDurationSeconds = 300  // 5 minute ban on exceed
 ```
 
-### Access Control
+### Access control
 
-**Login Password:**
+**Login password:**
 ```go
 cfg.AccessPassword = "secret123"
 // Miners must include in login: {"login": "WALLET", "pass": "secret123", ...}
 ```
 
-**HTTP API Authentication:**
+**HTTP API authentication:**
 ```go
 cfg.HTTP.AccessToken = "bearer-token"
 // Requests must include: Authorization: Bearer bearer-token
 ```
 
-**Restricted Mode:**
+**Restricted mode:**
 ```go
 cfg.HTTP.Restricted = true  // Only GET requests allowed
 ```
 
 ---
 
-## 📊 Statistics & Monitoring
+## Statistics and monitoring
 
-### Hashrate Windows
+### Hashrate windows
 
 Rolling hashrate calculated over multiple time windows:
 - **60 seconds** — Real-time hashrate
@@ -605,7 +603,7 @@ Rolling hashrate calculated over multiple time windows:
 
 **Calculation:** `hashrate = (sum of share difficulties) / (window duration in seconds)`
 
-### Worker Identification
+### Worker identification
 
 Workers are identified by configurable fields from login:
 
@@ -620,7 +618,7 @@ const (
 )
 ```
 
-### Custom Difficulty
+### Custom difficulty
 
 Per-miner difficulty override:
 
@@ -634,9 +632,9 @@ cfg.CustomDiff = 50000
 
 ---
 
-## 🎯 Protocol Extensions
+## Protocol extensions
 
-### Algorithm Negotiation
+### Algorithm negotiation
 
 Forward algorithm field from miners to pools:
 
@@ -647,7 +645,7 @@ cfg.AlgoExtension = true
 // Proxy forwards algo to pool in submit requests
 ```
 
-### RigID Extension
+### RigID extension
 
 Track miners by rig identifier:
 
@@ -660,7 +658,7 @@ cfg.Workers = proxy.WorkersByRigID
 
 ---
 
-## 🔧 Configuration Example
+## Configuration example
 
 **config.json:**
 ```json
@@ -720,7 +718,7 @@ cfg.Workers = proxy.WorkersByRigID
 
 ---
 
-## 📁 File Structure
+## File structure
 
 ```
 go-proxy/
@@ -764,9 +762,9 @@ go-proxy/
 
 ---
 
-## 🚀 Usage Examples
+## Usage examples
 
-### Basic Proxy
+### Basic proxy
 
 ```go
 package main
@@ -794,7 +792,7 @@ func main() {
 }
 ```
 
-### Custom Splitter
+### Custom splitter
 
 ```go
 // Create custom splitter
@@ -805,7 +803,7 @@ p := proxy.NewWithSplitter(cfg, splitter)
 p.Start()
 ```
 
-### Event Handling
+### Event handling
 
 ```go
 // Subscribe to events
@@ -838,7 +836,7 @@ p, _ := proxy.New(cfg)
 
 ---
 
-## 📊 Performance Characteristics
+## Performance characteristics
 
 | Metric | NiceHash Mode | Simple Mode |
 |--------|---------------|-------------|
@@ -850,7 +848,7 @@ p, _ := proxy.New(cfg)
 
 ---
 
-## 🔍 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -858,20 +856,6 @@ p, _ := proxy.New(cfg)
 | go-blockchain | [../blockchain/](../blockchain/) | Blockchain implementation (uses go-proxy for mining) |
 | go-io | [../io/](../io/) | I/O abstraction (used for log file storage) |
 | core/go | [../../../../../corego/README.md](../../../../../README.md) | Foundation framework (required dependency) |
-
----
-
-## 📈 Statistics
-
-- **Total Files:** 80+ Go files
-- **Test Coverage:** High (Good/Bad/Ugly triplets)
-- **Subpackages:** 5 (pool, nicehash, simple, log, api)
-- **Lines of Code:** ~10,000 (estimated)
-- **Dependencies:** core/go, core/api
-- **Protocol:** Stratum (JSON-RPC over TCP/TLS)
-- **Modes:** 2 (NiceHash, Simple)
-- **Hashrate Windows:** 5 (60s, 600s, 3600s, 12h, 24h)
-- **Worker Identification:** 6 modes (rig-id, user, password, agent, ip, disabled)
 
 ---
 

@@ -8,40 +8,24 @@
 
 ---
 
-## 📚 Table of Contents
+## Table of contents
 
-- [📋 Overview](#-overview)
-- [🏗️ Architecture](#-architecture)
-- [📦 Packages](#-packages)
-- [🚀 Commands](#-commands)
-- [📝 Usage Patterns](#-usage-patterns)
-- [🧪 Testing](#-testing)
-- [📖 API Reference](#-api-reference)
-- [🔗 Related Documentation](#-related-documentation)
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Packages](#packages)
+- [Commands](#commands)
+- [Usage patterns](#usage-patterns)
+- [Testing](#testing)
+- [API reference](#api-reference)
+- [Related documentation](#related-documentation)
 
 ---
 
-## 📋 Overview
+## Overview
 
 **go-ai** is the AI host surface in the Core CLI ecosystem, providing a composition and serving layer for AI capabilities. It serves as the facade between the Core CLI and heavy ML packages (go-ml, go-inference, go-rag).
 
-### 🎯 Design Principle
-
-> **go-ai is a composition and serving point, not a model-maths library.**
-
-### 📊 Key Statistics
-
-| Category | Count |
-|----------|-------|
-| **Total Go Files** | 150+ |
-| **Total Lines** | ~200,000 |
-| **Test Files** | 50+ |
-| **MCP Tools** | 50+ (20+ core + 30+ external) |
-| **CLI Commands** | 11 |
-| **Sub-packages** | 40+ |
-| **Provider Implementations** | 1+ (OpenAI-compatible) |
-
-### 🎯 Key Features
+### Key features
 
 | Feature | Description |
 |---------|-------------|
@@ -58,9 +42,9 @@
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Repository Structure
+### Repository structure
 
 ```
 core/go-ai/
@@ -147,7 +131,7 @@ core/go-ai/
 └── .forgejo/                  # Forgejo CI configuration
 ```
 
-### Module Paths
+### Module paths
 
 | Module | Path | Purpose |
 |--------|------|---------|
@@ -178,7 +162,7 @@ core/go-ai/
 
 ---
 
-## 📦 Packages
+## Packages
 
 ### ai/ — Library Facade Package
 
@@ -286,7 +270,7 @@ const (
 | `transport_tcp.go` | - | TCP transport |
 | `transport_unix.go` | - | Unix socket transport |
 
-#### Service Type
+#### Service type
 
 ```go
 type Service struct {
@@ -302,7 +286,7 @@ func (s *Service) RegisterTool(tool Tool)
 func (s *Service) RegisterTools(tools ...Tool)
 ```
 
-#### Tool Type
+#### Tool type
 
 ```go
 type Tool struct {
@@ -312,7 +296,7 @@ type Tool struct {
 }
 ```
 
-#### Transport Types
+#### Transport types
 
 ```go
 // stdio Transport
@@ -337,7 +321,7 @@ type Transport interface {
 }
 ```
 
-#### Core Tools (20+)
+#### Core tools (20+)
 
 **File Operations:**
 - `files_read` — Read file contents
@@ -370,7 +354,7 @@ type Transport interface {
 - `log_message` — Log messages
 - `log_error` — Log errors
 
-#### External Tools (30+)
+#### External tools (30+)
 
 **RAG Tools (5):**
 - `rag_query` — Query vector database
@@ -414,7 +398,7 @@ type Transport interface {
 
 ### pkg/ — Extended Packages (40+)
 
-#### pkg/welfare/ — Content Welfare
+#### pkg/welfare/ — Content welfare
 
 **Files:**
 - `welfare.go` — Main welfare logic
@@ -441,7 +425,7 @@ func Detect(content string) DetectResult
 3. **Mediate** — Modify/redact problematic content
 4. **Feedback** — Provide user feedback on decisions
 
-#### pkg/sessionkv/ — Session KV Storage
+#### pkg/sessionkv/ — Session KV storage
 
 **Files:**
 - `session.go` — Session type and methods
@@ -465,7 +449,7 @@ func (s *Session) Save() core.Result
 func (s *Session) Load(id string) core.Result
 ```
 
-#### pkg/chathistory/ — Conversation History
+#### pkg/chathistory/ — Conversation history
 
 **Files:**
 - `history.go` — History type and methods
@@ -492,7 +476,7 @@ func (h *History) Save(path string) core.Result
 func (h *History) Load(path string) core.Result
 ```
 
-#### pkg/driver/ — Model Drivers
+#### pkg/driver/ — Model drivers
 
 **Files:**
 - `driver.go` — Driver interface
@@ -510,7 +494,7 @@ type Driver interface {
 }
 ```
 
-#### pkg/api/ — HTTP API Surface
+#### pkg/api/ — HTTP API surface
 
 **Files:**
 - `api.go` — HTTP handler
@@ -528,7 +512,7 @@ POST /api/ai/session       - Create session
 GET  /api/ai/session/{id}  - Get session
 ```
 
-#### pkg/batch/ — Batch Processing
+#### pkg/batch/ — Batch processing
 
 **Files:**
 - `batch.go` — Batch processor
@@ -556,7 +540,7 @@ type BatchResult struct {
 func (bp *BatchProcessor) Process(ctx context.Context, tasks []Task) BatchResult
 ```
 
-#### pkg/budget/ — Budget Management
+#### pkg/budget/ — Budget management
 
 **Files:**
 - `budget.go` — Budget type
@@ -575,7 +559,7 @@ func (b *Budget) CanUse(tokens int) bool
 func (b *Budget) Use(tokens int) error
 ```
 
-#### pkg/chat/ — Chat Processing
+#### pkg/chat/ — Chat processing
 
 **Files:**
 - `chat.go` — Chat processor
@@ -599,7 +583,7 @@ type ChatOptions struct {
 func (cp *ChatProcessor) Process(ctx context.Context, messages []Message) core.Result
 ```
 
-#### pkg/creds/ — Credential Management
+#### pkg/creds/ — Credential management
 
 **Files:**
 - `creds.go` — Credential store
@@ -623,7 +607,7 @@ func (cs *CredentialStore) Get(name string) (Credential, core.Result)
 func (cs *CredentialStore) Delete(name string) core.Result
 ```
 
-#### pkg/embed/ — Embedding Utilities
+#### pkg/embed/ — Embedding utilities
 
 **Files:**
 - `embed.go` — Embedder interface
@@ -637,19 +621,19 @@ type Embedder interface {
 }
 ```
 
-#### pkg/fusion/ — Model Fusion
+#### pkg/fusion/ — Model fusion
 
 **Files:**
 - `fusion.go` — Fusion strategies
 - `ensemble.go` — Ensemble methods
 
-**Fusion Strategies:**
+**Fusion strategies:**
 - Ensemble voting
 - Weighted averaging
 - Majority voting
 - Confidence-based selection
 
-#### pkg/kvtier/ — KV Tier Storage
+#### pkg/kvtier/ — KV tier storage
 
 **Files:**
 - `kvtier.go` — Multi-tier KV storage
@@ -662,7 +646,7 @@ type Embedder interface {
 2. **Disk** — Persistent, local
 3. **Remote** — Distributed, scalable
 
-#### pkg/lora/ — LoRA Adapters
+#### pkg/lora/ — LoRA adapters
 
 **Files:**
 - `lora.go` — LoRA configuration
@@ -678,7 +662,7 @@ type LoRAConfig struct {
 }
 ```
 
-#### pkg/modality/ — Multi-Modal Support
+#### pkg/modality/ — Multi-modal support
 
 **Files:**
 - `modality.go` — Modality types
@@ -695,7 +679,7 @@ type LoRAConfig struct {
 - Video
 - Structured data
 
-#### pkg/pipeline/ — Processing Pipelines
+#### pkg/pipeline/ — Processing pipelines
 
 **Files:**
 - `pipeline.go` — Pipeline type
@@ -717,7 +701,7 @@ type Step struct {
 func (p *Pipeline) Run() core.Result
 ```
 
-#### pkg/prompt/ — Prompt Engineering
+#### pkg/prompt/ — Prompt engineering
 
 **Files:**
 - `prompt.go` — Prompt builder
@@ -735,7 +719,7 @@ func (pb *PromptBuilder) Build() string
 func (pb *PromptBuilder) WithContext(context string) string
 ```
 
-#### pkg/session/ — Session Management
+#### pkg/session/ — Session management
 
 **Files:**
 - `session.go` — Session type
@@ -780,7 +764,7 @@ type Stream struct {
 func (sh *StreamHandler) Handle(ctx context.Context, stream Stream) error
 ```
 
-#### pkg/structured/ — Structured Outputs
+#### pkg/structured/ — Structured outputs
 
 **Files:**
 - `structured.go` — Output formatting
@@ -790,14 +774,14 @@ func (sh *StreamHandler) Handle(ctx context.Context, stream Stream) error
 - `csv.go` — CSV output
 - `markdown.go` — Markdown tables
 
-**Output Types:**
+**Output types:**
 - JSON
 - YAML
 - XML
 - CSV
 - Markdown tables
 
-#### pkg/tools/ — Tool Utilities
+#### pkg/tools/ — Tool utilities
 
 **Files:**
 - `tools.go` — Tool manager
@@ -826,7 +810,7 @@ func (tm *ToolManager) Invoke(name string, args map[string]any) core.Result
 - `text.go` — Text transformations
 - `json.go` — JSON transformations
 
-#### pkg/usage/ — Usage Tracking
+#### pkg/usage/ — Usage tracking
 
 **Files:**
 - `usage.go` — Usage tracker
@@ -836,7 +820,7 @@ func (tm *ToolManager) Invoke(name string, args map[string]any) core.Result
 
 ### providers/ — Provider Implementations
 
-#### providers/openai/ — OpenAI-Compatible Provider
+#### providers/openai/ — OpenAI-compatible provider
 
 **Files:**
 - `client.go` — Client implementation
@@ -874,7 +858,7 @@ func (c *Client) Chat(ctx context.Context, messages []Message) core.Result
 
 **Total Commands:** 11 command groups
 
-#### cmd/ai/ — Unified AI Commands
+#### cmd/ai/ — Unified AI commands
 
 **Purpose:** Unified entry point for AI operations.
 
@@ -894,7 +878,7 @@ func (c *Client) Chat(ctx context.Context, messages []Message) core.Result
 --max-tokens int     Maximum tokens to generate
 ```
 
-#### cmd/metrics/ — Metrics Viewer Command
+#### cmd/metrics/ — Metrics viewer command
 
 **Purpose:** Display recorded AI metrics.
 
@@ -925,7 +909,7 @@ core ai metrics --json
 core ai metrics --since 168h
 ```
 
-#### cmd/rag/ — RAG Commands
+#### cmd/rag/ — RAG commands
 
 **Purpose:** Re-export RAG commands from `go-rag`.
 
@@ -953,7 +937,7 @@ core ai rag index --collection my-docs --file ./docs/*.md --recursive
 core ai rag stats --collection hostuk-docs
 ```
 
-#### cmd/security/ — GitHub Security Scanning (5 subcommands)
+#### cmd/security/ — GitHub security scanning (5 subcommands)
 
 **Purpose:** GitHub security scanning via `gh` CLI.
 
@@ -1022,7 +1006,7 @@ core ai security scan --repo myorg/myrepo --sarif scan.sarif
 core ai security secrets --push
 ```
 
-#### cmd/lab/ — Homelab Monitoring Dashboard
+#### cmd/lab/ — Homelab monitoring dashboard
 
 **Purpose:** Homelab monitoring dashboard.
 
@@ -1053,7 +1037,7 @@ core ai lab
 core ai lab --port 3000
 ```
 
-#### cmd/embed-bench/ — Embedding Model Benchmarks
+#### cmd/embed-bench/ — Embedding model benchmarks
 
 **Purpose:** Benchmark embedding models for performance and accuracy.
 
@@ -1086,7 +1070,7 @@ core ai embed-bench --models ollama:llama3,ollama:mistral
 core ai embed-bench --output benchmark-results.json
 ```
 
-#### cmd/daemon/ — Background Daemon
+#### cmd/daemon/ — Background daemon
 
 **Purpose:** Run AI services as background daemon.
 
@@ -1119,7 +1103,7 @@ core ai daemon --config /etc/ai-daemon.yaml
 core ai daemon --log-level debug
 ```
 
-#### cmd/lthn-ai/ — Lethean AI Host
+#### cmd/lthn-ai/ — Lethean AI host
 
 **Purpose:** Lethean AI host with MCP + embeddings + vector + State.
 
@@ -1150,7 +1134,7 @@ core ai lthn-ai
 core ai lthn-ai --mcp-port 9090 --embed-port 12345 --vector-port 7334
 ```
 
-#### cmd/lem-runtime/ — Contained Model Service
+#### cmd/lem-runtime/ — Contained model service
 
 **Purpose:** Contained model service with curated catalogue.
 
@@ -1182,7 +1166,7 @@ core ai lem-runtime --model-path /models
 core ai lem-runtime --port 9000
 ```
 
-#### cmd/lem-desktop/ — Wails Desktop App
+#### cmd/lem-desktop/ — Wails desktop app
 
 **Purpose:** Desktop application with Wails framework.
 
@@ -1202,9 +1186,9 @@ core ai lem-runtime --port 9000
 
 ---
 
-## 🚀 Usage Patterns
+## Usage patterns
 
-### Pattern 1: Basic Metrics Recording
+### Pattern 1: Basic metrics recording
 
 ```go
 package main
@@ -1232,7 +1216,7 @@ func main() {
 }
 ```
 
-### Pattern 2: RAG-Enhanced Task
+### Pattern 2: RAG-enhanced task
 
 ```go
 package main
@@ -1260,7 +1244,7 @@ func main() {
 }
 ```
 
-### Pattern 3: MCP Server with Custom Tools
+### Pattern 3: MCP server with custom tools
 
 ```go
 package main
@@ -1308,7 +1292,7 @@ func main() {
 }
 ```
 
-### Pattern 4: Full AI Workflow with Metrics and RAG
+### Pattern 4: Full AI workflow with metrics and RAG
 
 ```go
 package main
@@ -1357,7 +1341,7 @@ func processTask(task ai.TaskInfo) core.Result {
 }
 ```
 
-### Pattern 5: Session Management with KV Storage
+### Pattern 5: Session management with KV storage
 
 ```go
 package main
@@ -1392,7 +1376,7 @@ func main() {
 }
 ```
 
-### Pattern 6: Chat History Tracking
+### Pattern 6: Chat history tracking
 
 ```go
 package main
@@ -1433,7 +1417,7 @@ func main() {
 }
 ```
 
-### Pattern 7: Content Welfare Check
+### Pattern 7: Content welfare check
 
 ```go
 package main
@@ -1459,9 +1443,9 @@ func checkContent(content string) bool {
 
 ---
 
-## 📝 Configuration
+## Configuration
 
-### Environment Variables
+### Environment variables
 
 | Variable | Description | Default | Used By |
 |----------|-------------|---------|---------|
@@ -1469,7 +1453,7 @@ func checkContent(content string) bool {
 | `HOME` | User home directory | System default | Fallback for CORE_HOME |
 | `USERPROFILE` | Windows user profile | System default | Windows fallback |
 
-### Metrics Storage
+### Metrics storage
 
 **Location:** `~/.core/ai/metrics/`
 
@@ -1493,7 +1477,7 @@ func checkContent(content string) bool {
 - Auto-rotation: Daily files
 - Cleanup: Old files not automatically deleted (manual cleanup recommended)
 
-### Default Endpoints
+### Default endpoints
 
 | Service | Endpoint | Port | Purpose |
 |---------|----------|------|---------|
@@ -1503,9 +1487,9 @@ func checkContent(content string) bool {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 All packages follow the **AX-7 Triplet Pattern**:
 
@@ -1529,7 +1513,7 @@ cmd/metrics/
 └── stdlib_assert_test.go
 ```
 
-### Test Categories
+### Test categories
 
 | Category | Pattern | Purpose | Count |
 |----------|---------|---------|-------|
@@ -1538,7 +1522,7 @@ cmd/metrics/
 | Ugly | `Test*_Ugly` | Edge cases, unusual conditions | 10+ |
 | Example | `Test*_Example` | Usage examples | 15+ |
 
-### Key Test Files
+### Key test files
 
 | File | Purpose |
 |------|---------|
@@ -1555,7 +1539,7 @@ cmd/metrics/
 | `cmd/security/cmd_scan_test.go` | Security scanning command |
 | `cmd/security/cmd_jobs_test.go` | Security jobs command |
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -1587,7 +1571,7 @@ cd go
 go test -v ./ai
 ```
 
-### Benchmark Examples
+### Benchmark examples
 
 ```bash
 # Run all benchmarks
@@ -1609,9 +1593,9 @@ go test -bench=. -cpuprofile=cpu.prof ./mcp
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Type Index
+### Type index
 
 | Type | Package | Description |
 |------|---------|-------------|
@@ -1631,7 +1615,7 @@ go test -bench=. -cpuprofile=cpu.prof ./mcp
 | `Driver` | `pkg/driver` | Model driver interface |
 | `DetectResult` | `pkg/welfare` | Welfare detection result |
 
-### Function Index
+### Function index
 
 | Function | Package | Description |
 |----------|---------|-------------|
@@ -1648,7 +1632,7 @@ go test -bench=. -cpuprofile=cpu.prof ./mcp
 | `AddMessage()` | `pkg/chathistory` | Add message to history |
 | `Generate()` | `pkg/driver` | Generate text with driver |
 
-### Constant Index
+### Constant index
 
 | Constant | Package | Value | Description |
 |----------|---------|-------|-------------|
@@ -1664,9 +1648,9 @@ go test -bench=. -cpuprofile=cpu.prof ./mcp
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### RFC Documents
+### RFC documents
 
 | Document | Location | Description | Size |
 |----------|----------|-------------|------|
@@ -1677,7 +1661,7 @@ go test -bench=. -cpuprofile=cpu.prof ./mcp
 | Imports RFC | [`RFC.imports.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/ai/RFC.imports.md) | Import specifications | 479 bytes |
 | CLAUDE.md | [`CLAUDE.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/ai/CLAUDE.md) | Claude-specific notes | 3KB |
 
-### Repository Documentation
+### Repository documentation
 
 | Document | Location | Description |
 |----------|----------|-------------|
@@ -1689,7 +1673,7 @@ go test -bench=. -cpuprofile=cpu.prof ./mcp
 | TEST-RESULTS.md | [`TEST-RESULTS.md`](file:///Users/snider/Code/core/go-ai/TEST-RESULTS.md) | Test results | 9KB |
 | LICENCE | [`LICENCE`](file:///Users/snider/Code/core/go-ai/LICENCE) | EUPL-1.2 license | 14KB |
 
-### Knowledge Pack Documentation
+### Knowledge pack documentation
 
 | Document | Location | Description |
 |----------|----------|-------------|
@@ -1698,9 +1682,9 @@ go test -bench=. -cpuprofile=cpu.prof ./mcp
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
-### Package Information
+### Package information
 
 ```yaml
 name: go-ai
@@ -1713,7 +1697,7 @@ status: Production
 maintainer: Purberus <purberus@lthn.ai>
 ```
 
-### Document Information
+### Document information
 
 ```yaml
 title: go-ai Package Index
@@ -1727,7 +1711,7 @@ commit: 3cc71f7
 date: 2026-06-17
 ```
 
-### Related Packages
+### Related packages
 
 | Package | Relationship | Purpose |
 |---------|--------------|---------|
@@ -1741,15 +1725,3 @@ date: 2026-06-17
 | `go-i18n` | Dependency | Internationalization |
 
 ---
-
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Initial knowledge pack documentation | 3cc71f7 |
-
----
-
-*This INDEX.md file is part of the CoreGo Knowledge Pack, maintained by Purberus <purberus@lthn.ai>*  
-*Knowledge Pack Version: CoreGo v1.2.0*  
-*Last Updated: 2026-06-17*

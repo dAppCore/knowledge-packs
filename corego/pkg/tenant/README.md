@@ -4,16 +4,15 @@
 > **Repository:** [`github.com/dappcore/go-tenant`](https://github.com/dappcore/go-tenant)  
 > **Spec:** [`plans/code/core/go/tenant/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/tenant/RFC.md)  
 > **Maintainer:** Purberus <purberus@lthn.ai>  
-> **Status:** ✅ Production Ready  
 > **Module:** `dappco.re/go/tenant`
 
 ---
 
-## 📋 Overview
+## Overview
 
 **go-tenant** provides CoreGO tenant service primitives for multi-tenancy support. It handles workspace resolution, user context management, feature entitlements, usage tracking, and PHP tenant API integration. The Go module acts as a consumer — PHP owns the database and business logic. Go calls PHP's REST API for all mutations and queries, then caches the results locally via go-store.
 
-### 🎯 Key Capabilities
+### Key capabilities
 
 | Category | Features | Description |
 |----------|----------|-------------|
@@ -25,7 +24,7 @@
 | **Local Caching** | go-store integration | Cache PHP responses locally |
 | **CoreGo Service** | Full service integration | Works as a CoreGo service |
 
-### 🏗️ Architecture
+### Architecture
 
 ### Design Philosophy
 
@@ -109,7 +108,7 @@ core/go-tenant/
 
 ---
 
-## 📦 Packages
+## Packages
 
 ### Core Components
 
@@ -185,7 +184,7 @@ Caching layer using go-store:
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Service Options
 
@@ -249,7 +248,7 @@ user := userResult.Value.(*tenant.User)
 
 ---
 
-## 🚀 Commands
+## Commands
 
 While primarily a library, go-tenant can be integrated into CLI tools:
 
@@ -271,7 +270,7 @@ core tenant user --id 123
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
 ### 1. Basic Feature Check
 
@@ -398,7 +397,7 @@ service.Entitlements = customService
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Structure
 
@@ -440,7 +439,7 @@ go tool cover -html=coverage.out
 
 ---
 
-## 📖 API Reference
+## API reference
 
 ### Core Types
 
@@ -600,7 +599,7 @@ var (
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
 ### Internal Documentation
 
@@ -616,82 +615,3 @@ var (
 | Module | [pkg.go.dev/dappco.re/go/tenant](https://pkg.go.dev/dappco.re/go/tenant) |
 | PHP Backend | (Internal) PHP API for tenant management |
 
----
-
-## 📊 Statistics
-
-### Code Metrics
-
-```
-Total Repository Size:    ~10 MB
-
-Go Source Files:         15+
-  ├── tenant.go:         ~400 lines
-  ├── user.go:           ~200 lines
-  ├── workspace.go:      ~200 lines
-  ├── feature.go:        ~150 lines
-  ├── entitlement.go:    ~200 lines
-  ├── boost.go:          ~150 lines
-  ├── scope.go:          ~100 lines
-  ├── cache.go:          ~150 lines
-  ├── package.go:        ~150 lines
-  └── service.go:        ~200 lines
-
-Test Files:             15+
-Example Files:          10+
-Documentation Files:   5+
-
-Total Lines of Code:    ~2,500
-  ├── Production:         ~1,800
-  ├── Tests:              ~700
-  └── Documentation:      ~500
-```
-
-### Feature Coverage
-
-| Feature | Status | Details |
-|---------|--------|---------|
-| Multi-Tenancy | ✅ Complete | Workspace and user isolation |
-| User Context | ✅ Complete | Inject and retrieve from context |
-| Workspace Resolution | ✅ Complete | Resolve workspaces by ID or path |
-| Feature Entitlements | ✅ Complete | Tier-based access control |
-| Usage Tracking | ✅ Complete | Track resource consumption |
-| Usage Alerts | ✅ Complete | Alert on usage thresholds |
-| PHP API Client | ✅ Complete | REST client for PHP backend |
-| Local Caching | ✅ Complete | go-store integration |
-| Boost Support | ✅ Complete | Boosted limits for premium users |
-| Scope Management | ✅ Complete | User, workspace, global scopes |
-| CoreGo Service | ✅ Complete | Full service integration |
-
-### Test Statistics
-
-| Type | Count | Coverage |
-|------|-------|----------|
-| Unit Tests | 50+ | >80% |
-| Example Tests | 15+ | N/A |
-| Total | 65+ | >80% |
-
-### Dependency Analysis
-
-```
-Direct Dependencies:    3
-  ├── dappco.re/go v0.10.4
-  ├── dappco.re/go/store v0.9.0
-  └── github.com/google/uuid v1.6.0
-
-Indirect Dependencies: 20+
-  ├── github.com/apache/arrow-go/v18 v18.1.0
-  ├── github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
-  ├── github.com/goccy/go-json v0.10.6
-  └── modernc.org/sqlite v1.47.0
-```
-
----
-
-## 🏷️ Tags
-
-#tenant #multi-tenancy #workspace #user #authentication #authorization #feature-entitlements #usage-tracking #quota #tier #php-api #rest #caching #go-store #context #dependency-injection #service #corego #agent-first #ax-standard
-
----
-
-*Last updated: 2026-06-18 | Maintainer: Purberus <purberus@lthn.ai>*

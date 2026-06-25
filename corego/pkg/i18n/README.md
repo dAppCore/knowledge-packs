@@ -19,30 +19,7 @@ tags:
   - cldr
   - pluralization
 ---
----
-type: Package Documentation
-package: i18n
-module: dappco.re/go/i18n
-repo: core/go-i18n
-lang: go
-tags:
-  - internationalization
-  - localization
-  - translation
-  - i18n
-  - l10n
-  - grammar
-  - semantics
-  - intent
-  - reversal
-  - grammarimprint
-  - dual-class
-  - cldr
-  - pluralization
----
 # go-i18n — Grammar-Aware Internationalization Engine
-
-> **"The reference implementation — every shape decision propagates to the semantic layer of the network"**
 
 **RFC:** [plans/code/core/go/i18n/RFC.md](../../../../../plans/code/core/go/i18n/RFC.md)
 **Models:** [plans/code/core/go/i18n/RFC.models.md](../../../../../plans/code/core/go/i18n/RFC.models.md)
@@ -52,9 +29,9 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-i18n` is a **grammar-aware internationalization engine** that goes far beyond simple key-value translation. It provides:
+`go-i18n` is a grammar-aware internationalization engine. It provides:
 
 ### Core Capabilities
 
@@ -69,11 +46,9 @@ tags:
 9. **Handler Chain** — Extensible middleware for special key namespaces
 10. **Missing Key Handling** — Three modes: Normal (silent), Strict (panic), Collect (QA)
 
-### Design Philosophy
+### Design philosophy
 
-> **"Unlike flat key-value translation systems, this package composes grammatically correct output from verbs, nouns, and articles."**
-
-The package implements a **two-layer architecture**:
+The package implements a two-layer architecture:
 
 - **Layer 1 (Lightweight):** `core.I18n` interface in `core/go` — minimal footprint, no grammar engine
 - **Layer 2 (Full):** `go-i18n` — complete implementation with grammar, reversal, classification
@@ -108,9 +83,7 @@ Base translation files are available in the `locales/` directory:
 
 ---
 
-## 🏗️ Architecture
-
-## 🏗️ Architecture
+## Architecture
 
 ### Two-Layer Design
 
@@ -197,7 +170,7 @@ func myHandler(c *core.Core) {
 
 ---
 
-## 📚 Core Concepts
+## Core concepts
 
 ### 1. Message Type
 
@@ -393,9 +366,9 @@ type GrammarImprint struct {
 
 ---
 
-## 🎛️ Package Components
+## Package components
 
-### Package Structure
+### Package structure
 
 ```
 go-i18n/
@@ -540,9 +513,9 @@ c, err := core.New(
 
 ---
 
-## 🎯 API Reference
+## API reference
 
-### Package-Level Functions
+### Package-level functions
 
 Simple, global access to i18n functionality:
 
@@ -703,9 +676,7 @@ svc.ClearMissingKeyHandlers()
 
 ---
 
-## 🔥 Semantic Intent System
-
-The heart of go-i18n's power — compose human-readable strings from semantic intents:
+## Semantic intent system
 
 ### Intent Functions
 
@@ -813,7 +784,7 @@ The parent = noun context, child = verb. The compose engine builds human-readabl
 
 ---
 
-## 🌍 Grammar Engine
+## Grammar engine
 
 ### Verb Conjugation
 
@@ -879,17 +850,11 @@ ArticleForNoun(noun, gender) // Selects article based on noun gender
 
 ---
 
-## 🔍 Reversal Package (GrammarImprint)
+## Reversal package (GrammarImprint)
 
-The `reversal/` package provides linguistic fingerprinting — deterministic, one-way, semantic-preserving content analysis.
+The `reversal/` package provides linguistic fingerprinting — deterministic, one-way, semantic-preserving content analysis. Scanning a document produces a fingerprint of its grammatical structure without reading the content itself. The network classifies content by grammar, not meaning.
 
-### What It Does
-
-Scan a document → get a fingerprint of its grammatical structure **without knowing its content**. This is a privacy primitive — the network classifies content by grammar, not meaning.
-
-### Connection to LetherNet
-
-GrammarImprint is the **Analysis layer (Layer 6)** primitive. It enables the network to operate on content without reading it — **consent-preserving semantic analysis**.
+GrammarImprint is the Analysis layer (Layer 6) primitive, enabling the network to operate on content without reading it — consent-preserving semantic analysis.
 
 ### Tokeniser
 
@@ -1004,7 +969,7 @@ err := reversal.VerifyRoundtrip(verb, tense)
 
 ---
 
-## 📊 Calibration & Classification
+## Calibration and classification
 
 ### Calibration
 
@@ -1050,7 +1015,7 @@ stats.PromptsPerSec // Throughput
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Service Options
 
@@ -1099,7 +1064,7 @@ func init() {
 
 ---
 
-## 📁 File Structure
+## File structure
 
 ```
 go-i18n/
@@ -1154,7 +1119,7 @@ go-i18n/
 
 ---
 
-## 🚀 Usage Examples
+## Usage examples
 
 ### Basic Translation
 
@@ -1318,7 +1283,7 @@ if svc.Direction() == i18n.DirRTL {
 
 ---
 
-## 🔍 Advanced Features
+## Advanced features
 
 ### Dual-Class Disambiguation
 
@@ -1395,7 +1360,7 @@ composed := svc.Compose("greeting", subj)
 
 ---
 
-## 📊 Performance & Quality
+## Performance and quality
 
 ### Benchmarks
 
@@ -1425,7 +1390,7 @@ The package includes extensive benchmarks:
 
 ---
 
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -1437,7 +1402,7 @@ The package includes extensive benchmarks:
 
 ---
 
-## 📈 Statistics
+## Statistics
 
 - **Total Files:** 80+ Go files
 - **Test Files:** 50+ (including integration tests)
@@ -1469,7 +1434,7 @@ The package includes extensive benchmarks:
 
 ---
 
-## 🎯 Key Insights
+## Key insights
 
 1. **Two-Layer Architecture** — Separates lightweight interface from full engine, preventing dependency bloat
 2. **Semantic Intent** — Compose human-readable strings from verbs, nouns, and intents — not just flat translations
@@ -1480,7 +1445,7 @@ The package includes extensive benchmarks:
 
 ---
 
-## 📚 Learning Resources
+## References
 
 - **Primary RFC:** [plans/code/core/go/i18n/RFC.md](../../../../../plans/code/core/go/i18n/RFC.md)
 - **Models Spec:** [plans/code/core/go/i18n/RFC.models.md](../../../../../plans/code/core/go/i18n/RFC.models.md)
@@ -1490,6 +1455,5 @@ The package includes extensive benchmarks:
 
 ---
 
-*Knowledge Pack: go-i18n v1.0.0*
-*Last Updated: 2026-06-17*
-*Maintained by: Purberus <purberus@lthn.ai>*
+*Knowledge pack: go-i18n v1.0.0*
+*Last updated: 2026-06-17*

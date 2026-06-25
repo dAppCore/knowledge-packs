@@ -14,11 +14,9 @@ created: 2026-06-18T07:00:00Z
 
 # go-mlx — Native Apple Metal GPU Inference & Training Engine
 
-> **"An agent should be able to load models, run stateful sessions, and train adapters from this document alone."**
-
 `dappco.re/go/mlx` is the **native Apple Metal GPU inference and training engine** for Apple Silicon (M1-M4) macOS systems. Built on **mlx-c CGO bindings**, it implements the `inference.Backend` and `inference.TextModel` contracts from `dappco.re/go/inference` with full Metal compute shader acceleration.
 
-This is the **production-grade Metal backend** for the Lethean AI platform, providing:
+This is the **Metal backend** for the Lethean AI platform, providing:
 - **Inference:** Buffered/streaming generation, chat, embeddings with full sampling control
 - **State Engine:** Persistent sessions with Wake/Sleep KV state capture and restore
 - **Training:** Native SFT, LoRA, and SSD (self-distillation) on Metal
@@ -31,7 +29,7 @@ This is the **production-grade Metal backend** for the Lethean AI platform, prov
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### What it is
 
@@ -135,7 +133,7 @@ mlx (facade) → pkg/metal (engine) → mlx-c (CGO) → MLX Framework → Metal 
 
 ---
 
-## 📦 Quick Start
+## Quick start
 
 ### Basic Model Loading & Generation
 
@@ -245,7 +243,7 @@ model, err = mlx.LoadModelFromMedium(hfMedium, "",
 
 ---
 
-## 🏗️ Architecture Deep Dive
+## Architecture deep dive
 
 ### Facade Layer (Root Package)
 
@@ -507,7 +505,7 @@ Full detail: **[RFC.serving.md](file:///Users/snider/Code/meowmix/plans/code/cor
 
 ---
 
-## 🎯 LEK Content Scorer
+## LEK content scorer
 
 The tier-1 non-LLM content scorer (`pkg/score/`):
 
@@ -543,7 +541,7 @@ hostilityScore := result.HostilityScore
 
 ---
 
-## 📊 Quantisation
+## Quantisation
 
 ### AutoRound Quantisation (`quant/autoround/`)
 
@@ -577,7 +575,7 @@ model, err = mlx.LoadModel(path,
 
 ---
 
-## 🔄 FFN-Memory Pretraining
+## FFN-memory pretraining
 
 Hierarchical memory pretraining for feed-forward layers:
 
@@ -610,7 +608,7 @@ result, err := mlx.MemoryPretrain(pretrainConfig)
 
 ---
 
-## 🎯 Tokenisation
+## Tokenisation
 
 Pure Go SentencePiece tokeniser (no external dependencies):
 
@@ -641,7 +639,7 @@ padToken := tokenizer.PadToken()
 
 ---
 
-## 🔧 Memory Management
+## Memory management
 
 **CRITICAL:** Metal memory is manual at the boundary. Failure to follow these causes OOM crashes and GPU hangs.
 
@@ -707,7 +705,7 @@ if caps.SupportsAttention {
 
 ---
 
-## 📈 Sampling & Generation Options
+## Sampling & generation options
 
 ### Sampling Strategies
 
@@ -756,7 +754,7 @@ const (
 
 ---
 
-## 🔌 CoreGO & Inference Integration
+## CoreGO & inference integration
 
 ### Inference Contract
 
@@ -815,7 +813,7 @@ err := ml.ModelWorkflow{
 
 ---
 
-## 📦 CLI Tools
+## CLI tools
 
 ### `cmd/mlx` — Primary Entry Point (`lthn-mlx`)
 
@@ -900,7 +898,7 @@ server.ListenAndServe()
 
 ---
 
-## 🎯 Pluggable Component Contracts (`pkg/scheme/`)
+## Pluggable component contracts (`pkg/scheme/`)
 
 Three-registry contract layer for extensible components:
 
@@ -936,7 +934,7 @@ scheme.RegisterCacheScheme(&CacheScheme{ID: "q8", StateKind: StateKVCache})
 
 ---
 
-## 🔄 State & Bundle Management
+## State & bundle management
 
 ### Session State (`session/`)
 
@@ -1028,7 +1026,7 @@ cache.WarmKVFromBlockRef(blockRef)
 
 ---
 
-## 📊 Observability & Probing
+## Observability & probing
 
 ### Probe System (`probe/`)
 
@@ -1082,7 +1080,7 @@ bus.AddSink(sink)
 
 ---
 
-## 🏷️ Model Operations
+## Model operations
 
 ### Model Packing (`pack/`)
 
@@ -1137,7 +1135,7 @@ model.RestoreKVSnapshot(loadedSnapshot)
 
 ---
 
-## 🎨 Code Examples
+## Code examples
 
 ### Example: Complete Inference Application
 
@@ -1400,7 +1398,7 @@ log.Printf("Phonetic: %.2f", result.PhoneticScore)
 
 ---
 
-## 🔧 Build & Development
+## Build & development
 
 ### Prerequisites
 
@@ -1472,7 +1470,7 @@ go build
 
 ---
 
-## 📊 Performance Considerations
+## Performance considerations
 
 ### Model Loading
 
@@ -1503,9 +1501,9 @@ go test -bench=BenchmarkKVCache ./...
 
 ---
 
-## 🏆 Key Features Summary
+## Key features summary
 
-### ✅ What go-mlx Provides
+### What go-mlx provides
 
 1. **Native Metal Acceleration** — Direct Metal compute shader execution
 2. **Inference Backend** — Full `inference.Backend` contract implementation
@@ -1524,7 +1522,7 @@ go test -bench=BenchmarkKVCache ./...
 15. **Daemon Infrastructure** — Unix socket server for local inference
 16. **Pluggable Components** — Quant, mixer, cache scheme registries
 
-### ❌ What go-mlx Does NOT Do
+### What go-mlx does not do
 
 1. **No Cross-Platform** — macOS arm64 only (stub returns false on other platforms)
 2. **No Non-Apple GPU** — Use go-cuda for NVIDIA, go-rocm for AMD
@@ -1534,7 +1532,7 @@ go test -bench=BenchmarkKVCache ./...
 
 ---
 
-## 📚 Testing
+## Testing
 
 ### Test Patterns
 
@@ -1576,7 +1574,7 @@ Internal/Metal Tests:
 
 ---
 
-## 📖 References
+## References
 
 ### RFC Specifications
 
@@ -1634,7 +1632,7 @@ lib/mlx/ (submodule)            # Upstream MLX v0.31.1 (pinned)
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -1658,7 +1656,7 @@ lib/mlx/ (submodule)            # Upstream MLX v0.31.1 (pinned)
 
 ---
 
-## 🎯 Subpackage Overview
+## Subpackage overview
 
 | Subpackage | Purpose | Files |
 |------------|---------|-------|

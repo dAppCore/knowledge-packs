@@ -1,179 +1,82 @@
-# Lethean Knowledge Packs
+# Lethean knowledge packs
 
-> **"for yourself, thanks!"** — Knowledge packs for agent self-education
+Curated reference material for the Lethean (dAppCore) frameworks. Each pack is a
+self-contained knowledge base an agent or a developer can read to understand a
+framework, find the right package, and work with it correctly.
 
-This directory contains **knowledge packs** — curated collections of information, specifications, and examples for each major Lethean framework. These packs enable agents to understand, navigate, and contribute to the dAppCore ecosystem autonomously.
+These packs are written for agents: factual, navigable, and kept close to the
+source. They complement the canonical specifications in `plans/` rather than
+replacing them.
 
----
+## Available packs
 
-## 🎯 Purpose
+| Framework | Description | Repository |
+|-----------|-------------|------------|
+| [CoreGo](corego/README.md) | Zero-dependency Go framework | `forge.lthn.sh/core/go` |
+| [CoreGUI](coregui/README.md) | Wails v2 GUI framework | `forge.lthn.sh/core/gui` |
+| [CoreTS](corets/README.md) | TypeScript frontend framework | `forge.lthn.sh/core/ts` |
+| [CoreCLI](corecli/README.md) | CLI framework | `forge.lthn.sh/core/cli` |
+| [CorePlay](coreplay/README.md) | Fullstack framework (Go + TS) | `forge.lthn.sh/core/play` |
+| [CorePHP](corephp/README.md) | PHP framework | `forge.lthn.sh/core/php` |
 
-Knowledge packs serve as **self-contained knowledge bases** for:
+## Pack structure
 
-1. **Agent Onboarding** — New agents can quickly understand each framework
-2. **Agent Navigation** — Agents can discover available tools and patterns
-3. **Agent Contribution** — Agents can understand how to contribute to each framework
-4. **Human Reference** — Developers can browse organized documentation
-
----
-
-## 📚 Available Knowledge Packs
-
-| Framework | Description | Repository | Status |
-|-----------|-------------|------------|--------|
-| [CoreGo](corego/README.md) | Zero-dependency Go framework | `forge.lthn.sh/core/go` | ✅ v1.0.0 |
-| [CoreGUI](coregui/README.md) | Wails v2 GUI framework | `forge.lthn.sh/core/gui` | ✅ v1.0.0 |
-| [CoreTS](corets/README.md) | TypeScript frontend framework | `forge.lthn.sh/core/ts` | ✅ v1.0.0 |
-| [CoreCLI](corecli/README.md) | CLI framework | `forge.lthn.sh/core/cli` | ✅ v1.0.0 |
-| [CorePlay](coreplay/README.md) | Fullstack framework (Go + TS) | `forge.lthn.sh/core/play` | ✅ v1.0.0 |
-| [CorePHP](corephp/README.md) | PHP framework | `forge.lthn.sh/core/php` | ✅ v1.0.0 |
-
----
-
-## 🏗️ Knowledge Pack Structure
-
-Each knowledge pack follows a consistent structure:
+Each pack follows a consistent layout:
 
 ```
 knowledge-packs/<framework>/
-├── README.md              # Framework overview and usage
-├── INDEX.md               # Package/component catalog (optional)
-├── SPEC.md                # Framework specification (if not in plans)
-└── examples/              # Example code and patterns (future)
+├── README.md     Framework overview and usage
+├── INDEX.md      Package or component catalogue (optional)
+├── SPEC.md       Framework specification, where not held in plans/
+└── examples/     Example code and patterns (where present)
 ```
 
-**README.md contains:**
-- Framework overview and purpose
-- Key statistics
-- Architecture diagram
-- Core components
-- Getting started guide
-- Use cases (when to use/not use)
-- Agent tips
-- Related knowledge packs
+A README covers the framework's purpose, architecture, core components, a
+getting-started path, when to use it (and when not to), and links to related
+packs.
 
----
+## Relationship to plans
 
-## 🔗 Relationship to Plans
-
-Knowledge packs **complement** the canonical specifications in [`plans/`](../plans/):
+Knowledge packs sit between the canonical specifications and the OKF bundle.
 
 | Location | Purpose | Audience |
 |----------|---------|----------|
-| `plans/` | **Canonical specs** — RFCs, design documents | Humans + Agents |
-| `knowledge-packs/` | **Curated knowledge** — organized, agent-optimized | Agents + Humans |
-| `skills-okf/` | **OKF bundle** — interoperable knowledge format | Agents + Tools |
+| `plans/` | Canonical specifications — RFCs, design documents | Humans and agents |
+| `knowledge-packs/` | Curated, agent-oriented reference | Agents and humans |
+| `skills-okf/` | OKF bundle — interoperable knowledge format | Agents and tools |
 
-**Source of Truth Hierarchy:**
-```
-plans/ (canonical)
-    ↓
-knowledge-packs/ (curated)
-    ↓
-skills-okf/ (OKF format)
-```
+Source-of-truth order: `plans/` → `knowledge-packs/` → `skills-okf/`.
 
----
+## Framework comparison
 
-## 📊 Statistics
+| Framework | Language | Purpose | Notes |
+|-----------|----------|---------|-------|
+| CoreGo | Go | Backend primitives | Zero-dependency, SPOR, Result pattern |
+| CoreGUI | Go + TS | Desktop apps | Wails v2, provider mounting, window management |
+| CoreTS | TypeScript | Frontend | Deno, React, Lit, GrammarImprint |
+| CoreCLI | Go | CLI tools | Cobra, semantic output |
+| CorePlay | Go + TS | Fullstack | Protobuf, gRPC, hot reload |
+| CorePHP | PHP | Web apps | Laravel-like, modular, 25+ repos |
 
-| Metric | Count |
-|--------|-------|
-| Total knowledge packs | 6 |
-| Total frameworks | 6 |
-| Total repos covered | 100+ |
-| Total packages | 200+ |
-| Lines of documentation | 50K+ |
+## Reading order
 
----
+1. Start with CoreGo. It is the foundation the other frameworks build on.
+2. Check a framework's purpose before reaching for it; use the one that fits the job.
+3. Follow the RFC links to the canonical spec when you need authoritative detail.
+4. Cross-reference related packs, linked at the foot of each README.
 
-## 🚀 Usage
+## Usage
 
-### For Agents
+Each README is plain Markdown — read it directly, or load it as context. Packs are
+addressed by framework name under `knowledge-packs/<framework>/`.
 
-```python
-# Load a knowledge pack
-from pathlib import Path
+## Maintenance
 
-pack_dir = Path("/Users/snider/Code/meowmix/knowledge-packs/corego")
-readme = pack_dir / "README.md"
+Updated when frameworks are added or change, or when patterns settle. Original
+drafts by Mistral Vibe.
 
-# Parse frontmatter and content
-with open(readme) as f:
-    content = f.read()
+## Related
 
-# Use for context, tool selection, navigation
-```
-
-### For Humans
-
-Just browse the directory structure! Each README.md is fully readable.
-
----
-
-## 🔍 Framework Comparison
-
-| Framework | Language | Purpose | Key Feature |
-|-----------|----------|---------|-------------|
-| **CoreGo** | Go | Backend primitives | Zero-dependency, SPOR, Result pattern |
-| **CoreGUI** | Go + TS | Desktop apps | Wails v2, provider mounting, window management |
-| **CoreTS** | TypeScript | Frontend | Deno, React, Lit, GrammarImprint |
-| **CoreCLI** | Go | CLI tools | Cobra, semantic output, AI-native |
-| **CorePlay** | Go + TS | Fullstack | Protobuf, gRPC, hot-reload |
-| **CorePHP** | PHP | Web apps | Laravel-like, modular, 25+ repos |
-
----
-
-## 💡 Agent Navigation Tips
-
-1. **Start with CoreGo** — It's the foundation for all other frameworks
-2. **Check the framework's purpose** — Use the right tool for the job
-3. **Follow the RFC links** — Always read the canonical spec first
-4. **Use examples** — Look at example code in each framework
-5. **Cross-reference** — Related knowledge packs are linked in each README
-
----
-
-## 📝 Maintenance
-
-Knowledge packs are maintained by **Mistral Vibe** and updated when:
-
-- New frameworks are added
-- Existing frameworks are updated
-- New patterns emerge
-- Agent capabilities improve
-
----
-
-## 🎉 Recent Additions
-
-### 2026-06-17
-
-✅ **All 6 knowledge packs created:**
-- CoreGo
-- CoreGUI
-- CoreTS
-- CoreCLI
-- CorePlay
-- CorePHP
-
-✅ **RFC gaps filled:**
-- go-cuda RFC and INDEX
-- go-tpu RFC and INDEX
-- Updated go/INDEX.md
-
----
-
-## 🔗 Related
-
-- [plans/](../plans/) — Canonical specifications
-- [skills-okf/](../skills-okf/) — OKF knowledge bundle
-- [scripts/](../scripts/) — Automation scripts
-- [docs/](../docs/) — Project documentation
-
----
-
-*Knowledge Packs v1.0.0*
-*Created: 2026-06-17*
-*Author: Mistral Vibe*
-*Project: Lethean*
+- `plans/` — canonical specifications
+- `skills-okf/` — OKF knowledge bundle
+- `scripts/` — automation scripts

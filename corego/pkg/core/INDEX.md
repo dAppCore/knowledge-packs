@@ -1,17 +1,17 @@
 ---
 type: Package Index
-title: CoreGo Framework - Complete Index
+title: CoreGo Framework — complete index
 package: core
 domain: dappco.re/go
 ---
 
-# CoreGo Framework — Complete Package Index
+# CoreGo Framework — Complete package index
 
-> **The Foundation.** 272 files. Zero dependencies. 100% SPOR compliant.
+**272 files. Zero dependencies. 100% SPOR compliant.**
 
 ---
 
-## 📦 Package Overview
+## Package overview
 
 | Aspect | Detail |
 |--------|--------|
@@ -19,17 +19,17 @@ domain: dappco.re/go
 | **Repository** | `github.com/dappcore/go` |
 | **Files** | 272 Go files in root package |
 | **Dependencies** | Zero external dependencies (pure Go stdlib) |
-| **Go Version** | 1.26.0+ |
-| **SPOR Compliance** | 100% — Every stdlib package has exactly one owner |
-| **Test Coverage** | High — Test triplets (_test.go + _example_test.go + _bench_test.go) for all packages |
+| **Go version** | 1.26.0+ |
+| **SPOR compliance** | 100% — Every stdlib package has exactly one owner |
+| **Test coverage** | High — Test triplets (_test.go + _example_test.go + _bench_test.go) for all packages |
 
 ---
 
-## 🎯 Core Framework Files
+## Core framework files
 
-### Foundation Types (5 files)
+### Foundation types (5 files)
 
-| File | Purpose | Lines | Key Types/Functions |
+| File | Purpose | Lines | Key types/functions |
 |------|---------|-------|---------------------|
 | [`core.go`](file:///Users/snider/Code/core/go/core.go) | **Main Core struct + lifecycle** | ~400 | `Core`, `Run()`, `RunResult()`, `WithContext()` |
 | [`options.go`](file:///Users/snider/Code/core/go/options.go) | **Universal input types** | ~200 | `Options`, `Option`, `Result`, `NewOptions()`, `NewResult()` |
@@ -37,7 +37,7 @@ domain: dappco.re/go
 | [`contract.go`](file:///Users/snider/Code/core/go/contract.go) | **IPC types + interfaces** | ~300 | `Message`, `Query`, `QueryHandler`, `Startable`, `Stoppable` |
 | [`registry.go`](file:///Users/snider/Code/core/go/registry.go) | **Thread-safe named collections** | ~200 | `Registry[T]`, `NewRegistry()`, `Set()`, `Get()`, `Lock()`, `Seal()` |
 
-**Core Struct Fields (25 total):**
+**Core struct fields (25 total):**
 - `options` → `*Options` — Input configuration
 - `app` → `*App` — Application identity
 - `data` → `*Data` — Embedded asset registry
@@ -58,14 +58,14 @@ domain: dappco.re/go
 - `entitlementChecker` → `EntitlementChecker` — Permission boundaries
 - `usageRecorder` → `UsageRecorder` — Usage tracking
 - `taskIDCounter` → `AtomicUint64` — Task ID generation
-- `waitGroup` → `WaitGroup` — Lifecycle synchronization
+- `waitGroup` → `WaitGroup` — Lifecycle synchronisation
 - `shutdown` → `AtomicBool` — Shutdown flag
 
 ---
 
-## 🏗️ Service & Action System (8 files)
+## Service and action system (8 files)
 
-| File | Purpose | Lines | Key Types/Functions |
+| File | Purpose | Lines | Key types/functions |
 |------|---------|-------|---------------------|
 | [`service.go`](file:///Users/snider/Code/core/go/service.go) | **Service lifecycle management** | ~300 | `Service`, `ServiceRegistry`, `ServiceStartup()`, `ServiceShutdown()` |
 | [`action.go`](file:///Users/snider/Code/core/go/action.go) | **Named action registry** | ~250 | `Action`, `ActionHandler`, `ActionRegistry`, `Run()`, `Exists()` |
@@ -76,7 +76,7 @@ domain: dappco.re/go
 | [`entitlement.go`](file:///Users/snider/Code/core/go/entitlement.go) | **Permission system** | ~100 | `EntitlementChecker`, `EntitlementResult`, `SetEntitlementChecker()` |
 | [`task.go`](file:///Users/snider/Code/core/go/task.go) | **Task management** | ~150 | `Task`, `TaskRegistry`, `StartTask()`, `TaskStatus` |
 
-### Service Lifecycle Hooks
+### Service lifecycle hooks
 
 ```go
 type Service struct {
@@ -89,25 +89,25 @@ type Service struct {
 }
 ```
 
-**Hook Execution:**
+**Hook execution:**
 1. `OnStart` — Called in registration order during `ServiceStartup()`
 2. `OnStop` — Called in reverse order during `ServiceShutdown()`
 3. `OnReload` — Called when configuration changes
 
-**Service Lock States:**
+**Service lock states:**
 - **Open** — Can add/remove services
 - **Sealed** — No new services, existing can be modified
 - **Locked** — Fully frozen via `WithServiceLock()`
 
-### IPC Patterns
+### IPC patterns
 
-| Pattern | Description | Method | Handler Type |
+| Pattern | Description | Method | Handler type |
 |---------|-------------|--------|---------------|
 | ACTION | Broadcast to all handlers | `c.ACTION(msg)` | `func(*Core, Message) Result` |
 | QUERY | First handler to return OK wins | `c.QUERY(q)` | `QueryHandler` |
 | QUERYALL | Collect all OK responses | `c.QUERYALL(q)` | `QueryHandler` |
 
-**Built-in Messages:**
+**Built-in messages:**
 - `ActionServiceStartup` — Service finished startup
 - `ActionServiceShutdown` — Core shutting down
 - `ActionTaskStarted` — Async task began
@@ -116,9 +116,9 @@ type Service struct {
 
 ---
 
-## 📝 Configuration & Data (7 files)
+## Configuration and data (7 files)
 
-| File | Purpose | Lines | Key Types/Functions |
+| File | Purpose | Lines | Key types/functions |
 |------|---------|-------|---------------------|
 | [`config.go`](file:///Users/snider/Code/core/go/config.go) | **Configuration management** | ~350 | `Config`, `NewConfig()`, `String()`, `Int()`, `Bool()`, `Enable()`, `Disable()` |
 | [`data.go`](file:///Users/snider/Code/core/go/data.go) | **Embedded data registry** | ~200 | `Data`, `Registry[*Embed]`, `AddAsset()`, `GetAsset()`, `ReadString()` |
@@ -128,13 +128,14 @@ type Service struct {
 | [`info.go`](file:///Users/snider/Code/core/go/info.go) | **System information** | ~150 | `SysInfo`, `Env()`, `Hostname()`, `OS()`, `Arch()` |
 | [`env.go`](file:///Users/snider/Code/core/go/env.go) | **Environment variables** | ~100 | `Env()`, `Getenv()`, `Setenv()`, `Unsetenv()` |
 
-### Configuration Sources (priority order):
+### Configuration sources (priority order)
+
 1. CLI flags
 2. Environment variables
 3. Config files
 4. Defaults
 
-**Config Features:**
+**Config features:**
 - Hierarchical key access: `c.Config().String("database.host")`
 - Feature flags: `c.Config().Enable("debug")`
 - Watching: `c.Config().Watch(func(key string, value any) {...})`
@@ -142,9 +143,9 @@ type Service struct {
 
 ---
 
-## 📢 Logging & Error System (6 files)
+## Logging and error system (6 files)
 
-| File | Purpose | Lines | Key Types/Functions |
+| File | Purpose | Lines | Key types/functions |
 |------|---------|-------|---------------------|
 | [`error.go`](file:///Users/snider/Code/core/go/error.go) | **Error system** | ~400 | `Err`, `NewError()`, `NewCode()`, `E()`, `Wrap()`, `WrapCode()`, `Is()`, `As()` |
 | [`log.go`](file:///Users/snider/Code/core/go/log.go) | **Structured logging** | ~300 | `ErrorLog`, `NewErrorLog()`, `Info()`, `Error()`, `Warn()`, `Debug()` |
@@ -153,9 +154,9 @@ type Service struct {
 | [`format.go`](file:///Users/snider/Code/core/go/format.go) | **String formatting** | ~150 | `Sprintf()`, `Printf()`, `Println()`, `Print()` |
 | [`assert.go`](file:///Users/snider/Code/core/go/assert.go) | **Assertions** | ~50 | `Assert()`, `Assertf()`, `Must()` |
 
-### Error System
+### Error system
 
-**Mandatory Error Creation:** All errors MUST use Core's error system.
+**Mandatory error creation:** All errors must use Core's error system.
 
 ```go
 // Error constructors
@@ -176,16 +177,16 @@ type Err struct {
 }
 ```
 
-**Error Codespace:** Flat keyspace for grepping
+**Error codespace:** Flat keyspace for grepping
 - `fs.notfound`, `fs.permission`, `fs.read`
 - `json.invalid`, `json.marshal`, `json.unmarshal`
 - `http.timeout`, `http.refused`, `http.notfound`
 - `crypto.algo.unsupported`, `crypto.sign`
 - `core.Service`, `action.Run`, `config.missing`
 
-### Logging System
+### Logging system
 
-**Mandatory Logging:** All errors MUST be logged through Core's logging system.
+**Mandatory logging:** All errors must be logged through Core's logging system.
 
 ```go
 // Log levels
@@ -199,13 +200,13 @@ r := c.LogError(err, "service.Start", "database connection failed")
 r := c.LogWarn(err, "config.Load", "using defaults")
 ```
 
-**Log Levels:** Info, Error, Warn, Debug
+**Log levels:** Info, Error, Warn, Debug
 
 ---
 
-## 🔗 Network & I/O (12 files)
+## Network and I/O (12 files)
 
-| File | Purpose | Lines | Key Types/Functions |
+| File | Purpose | Lines | Key types/functions |
 |------|---------|-------|---------------------|
 | [`net.go`](file:///Users/snider/Code/core/go/net.go) | **Network primitives** | ~200 | `IP`, `IPNet`, `ParseIP()`, `ParseCIDR()`, `NetDial()` |
 | [`api.go`](file:///Users/snider/Code/core/go/api.go) | **REST API framework** | ~400 | `API`, `Request`, `Response`, `Handler`, `HTTPServer`, `HTTPClient` |
@@ -220,7 +221,7 @@ r := c.LogWarn(err, "config.Load", "using defaults")
 | [`template.go`](file:///Users/snider/Code/core/go/template.go) | **Template rendering** | ~150 | `Template`, `NewTemplate()`, `ParseTemplate()`, `ExecuteTemplate()` |
 | [`table.go`](file:///Users/snider/Code/core/go/table.go) | **Table formatting** | ~100 | `Table`, `NewTable()`, `AddRow()`, `Render()` |
 
-### API Framework
+### API framework
 
 ```go
 // Server
@@ -243,9 +244,9 @@ resp := core.HTTPDo(req)
 
 ---
 
-## 🧮 Data Structures & Utilities (15+ files)
+## Data structures and utilities (15+ files)
 
-| File | Purpose | Lines | Key Types/Functions |
+| File | Purpose | Lines | Key types/functions |
 |------|---------|-------|---------------------|
 | [`string.go`](file:///Users/snider/Code/core/go/string.go) | **String utilities** | ~150 | `Concat()`, `Join()`, `Split()`, `Lower()`, `Upper()`, `Contains()` |
 | [`slice.go`](file:///Users/snider/Code/core/go/slice.go) | **Slice utilities** | ~200 | `SliceContains()`, `SliceIndex()`, `SliceSort()`, `SliceUniq()` |
@@ -268,11 +269,11 @@ resp := core.HTTPDo(req)
 | [`unsafe.go`](file:///Users/snider/Code/core/go/unsafe.go) | **Unsafe** | ~50 | Safe unsafe operations |
 | [`utils.go`](file:///Users/snider/Code/core/go/utils.go) | **Utilities** | ~100 | Misc utilities |
 
-### SPOR (Single Point Of Responsibility) Ownership
+### SPOR (Single Point Of Responsibility) ownership
 
 Each stdlib package has **exactly one** owner file in CoreGo:
 
-| Stdlib Package | Owner File | Core Wrapper |
+| Stdlib package | Owner file | Core wrapper |
 |----------------|------------|--------------|
 | `bufio` | scanner.go | `NewLineScanner`, `NewBufReader` |
 | `bytes` | io.go | `NewBuffer`, `NewBufferString` |
@@ -306,9 +307,9 @@ Each stdlib package has **exactly one** owner file in CoreGo:
 
 ---
 
-## 🧪 Testing Infrastructure
+## Testing infrastructure
 
-### Test Triplets
+### Test triplets
 
 Every package in CoreGo has **three test files:**
 
@@ -321,7 +322,7 @@ Every package in CoreGo has **three test files:**
 - `action_example_test.go` — Example tests
 - `action_bench_test.go` — Benchmark tests
 
-### Test Patterns
+### Test patterns
 
 ```go
 // Unit test
@@ -361,7 +362,7 @@ func BenchmarkActionRun(b *testing.B) {
 }
 ```
 
-### Test Utilities
+### Test utilities
 
 | File | Purpose |
 |------|---------|
@@ -370,24 +371,24 @@ func BenchmarkActionRun(b *testing.B) {
 
 ---
 
-## 📚 Additional Framework Files
+## Additional framework files
 
-### Specialized Components (10 files)
+### Specialised components (10 files)
 
 | File | Purpose | Lines |
 |------|---------|-------|
 | [`context.go`](file:///Users/snider/Code/core/go/context.go) | Context utilities | ~150 |
 | [`signal.go`](file:///Users/snider/Code/core/go/signal.go) | Signal handling | ~100 |
 | [`runtime.go`](file:///Users/snider/Code/core/go/runtime.go) | Runtime utilities | ~100 |
-| [`sync.go`](file:///Users/snider/Code/core/go/sync.go) | Synchronization primitives | ~150 |
+| [`sync.go`](file:///Users/snider/Code/core/go/sync.go) | Synchronisation primitives | ~150 |
 | [`atomic.go`](file:///Users/snider/Code/core/go/atomic.go) | Atomic operations | ~100 |
 | [`iter.go`](file:///Users/snider/Code/core/go/iter.go) | Iterator utilities | ~100 |
-| [`i18n.go`](file:///Users/snider/Code/core/go/i18n.go) | Internationalization | ~200 |
+| [`i18n.go`](file:///Users/snider/Code/core/go/i18n.go) | Internationalisation | ~200 |
 | [`html.go`](file:///Users/snider/Code/core/go/html.go) | HTML utilities | ~50 |
 | [`lsp.go`](file:///Users/snider/Code/core/go/lsp.go) | LSP support | ~100 |
 | [`info.go`](file:///Users/snider/Code/core/go/info.go) | System info | ~150 |
 
-### Internal & Test Files
+### Internal and test files
 
 - **Internal test files:** `*_internal_test.go` — Internal implementation tests
 - **Fuzz tests:** `*_fuzz_test.go` — Fuzz testing for parsing/validation
@@ -395,29 +396,29 @@ func BenchmarkActionRun(b *testing.B) {
 
 ---
 
-## 🔍 Complete File List
+## Complete file list
 
-### By Category
+### By category
 
-**Framework Core (10 files):**
+**Framework core (10 files):**
 - core.go, options.go, result.go, service.go, action.go, ipc.go, contract.go, registry.go, command.go, process.go
 
 **Configuration (7 files):**
 - config.go, data.go, drive.go, fs.go, app.go, info.go, env.go
 
-**Error & Logging (6 files):**
+**Error and logging (6 files):**
 - error.go, log.go, panic.go, exit.go, format.go, assert.go
 
-**Network & I/O (12 files):**
+**Network and I/O (12 files):**
 - net.go, api.go, io.go, http.go, url.go, socket.go, tls.go, proxy.go, stream.go, scanner.go, template.go, table.go
 
-**Data Structures (15+ files):**
+**Data structures (15+ files):**
 - string.go, slice.go, map.go, array.go, math.go, random.go, hash.go, hmac.go, sha3.go, encode.go, json.go, reflect.go, regexp.go, path.go, os.go, time.go, unicode.go, sql.go, unsafe.go, utils.go
 
-**Specialized (10 files):**
+**Specialised (10 files):**
 - context.go, signal.go, runtime.go, sync.go, atomic.go, iter.go, i18n.go, html.go, lsp.go
 
-**Test Files (272 total - ~80 production):**
+**Test files (272 total — ~80 production):**
 - `_test.go` — Unit tests (~90 files)
 - `_example_test.go` — Example tests (~90 files)
 - `_bench_test.go` — Benchmark tests (~90 files)
@@ -426,7 +427,7 @@ func BenchmarkActionRun(b *testing.B) {
 
 ---
 
-## 📊 Statistics
+## Code metrics
 
 ```
 Total Files:                    272
@@ -453,9 +454,9 @@ Log Levels:                   4 (Info, Error, Warn, Debug)
 
 ---
 
-## 🎯 Quick Reference
+## Quick reference
 
-### Most Used Types
+### Most used types
 
 1. **`Core`** — The central framework object
 2. **`Result`** — Universal return type (replaces `(T, error)`)
@@ -468,7 +469,7 @@ Log Levels:                   4 (Info, Error, Warn, Debug)
 9. **`Query`** — IPC request type
 10. **`Command`** — CLI command
 
-### Most Used Functions
+### Most used functions
 
 1. **`core.New()`** — Create new Core instance
 2. **`c.Run()`** — Start services + CLI + shutdown
@@ -481,22 +482,22 @@ Log Levels:                   4 (Info, Error, Warn, Debug)
 9. **`c.QUERY(q)`** — Send query
 10. **`c.Config().String(key)`** — Get config value
 
-### Most Used Patterns
+### Most used patterns
 
-1. **Service Registration** — `c.Service("name", Service{OnStart: ...})`
-2. **Action Registration** — `c.Action("name", func(ctx, opts) Result {...})`
-3. **Result Chaining** — `if !r.OK { return r }`
-4. **IPC Broadcast** — `c.ACTION(MyMessage{...})`
+1. **Service registration** — `c.Service("name", Service{OnStart: ...})`
+2. **Action registration** — `c.Action("name", func(ctx, opts) Result {...})`
+3. **Result chaining** — `if !r.OK { return r }`
+4. **IPC broadcast** — `c.ACTION(MyMessage{...})`
 5. **Configuration** — `c.Config().String("key")`
-6. **Error Creation** — `return core.Fail(core.E("fs.notfound", "file missing", nil))`
+6. **Error creation** — `return core.Fail(core.E("fs.notfound", "file missing", nil))`
 7. **Logging** — `c.Log().Info("msg", "key", value)`
-8. **Context Propagation** — `c.WithContext(ctx)`
-9. **Service Discovery** — `svc, ok := core.ServiceFor[*T](c, "name")`
-10. **Options Passing** — `core.NewOptions(core.Option{Key: "k", Value: "v"})`
+8. **Context propagation** — `c.WithContext(ctx)`
+9. **Service discovery** — `svc, ok := core.ServiceFor[*T](c, "name")`
+10. **Options passing** — `core.NewOptions(core.Option{Key: "k", Value: "v"})`
 
 ---
 
-## 📖 See Also
+## See also
 
 - **[README.md](./README.md)** — Complete CoreGo Framework deep dive
 - **[dAppCore Knowledge Packs](../..)** — All documented packages
@@ -505,7 +506,7 @@ Log Levels:                   4 (Info, Error, Warn, Debug)
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
 ```yaml
 package: core
@@ -525,7 +526,3 @@ knowledge_pack: CoreGo v1.3.0
 indexed_by: Purberus <purberus@lthn.ai>
 indexed_at: 2026-06-17
 ```
-
----
-
-*Purrr... The foundation is now fully indexed. Build upon it.* 🐱

@@ -13,7 +13,7 @@ title: go-blockchain Package Documentation Index
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description |
 |----------|-------------|
@@ -24,7 +24,7 @@ title: go-blockchain Package Documentation Index
 
 ---
 
-## 🗂️ Subpackage Catalog
+## Subpackage catalog
 
 ### Core Packages
 
@@ -85,7 +85,7 @@ title: go-blockchain Package Documentation Index
 
 ---
 
-## 🎯 Quick Links
+## Quick links
 
 ### Key Types
 
@@ -139,21 +139,7 @@ type TransactionHash [32]byte
 
 ---
 
-## 📊 Statistics
-
-- **Total Go Files:** 200+
-- **Subpackages:** 12
-- **C++ Files:** 50+
-- **CLOC (Go):** 50,000+
-- **CLOC (C++):** 20,000+
-- **Test Files:** 100+
-- **Test Coverage:** High
-- **RPC Methods:** 50+
-- **P2P Commands:** 20+
-
----
-
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -163,5 +149,3 @@ type TransactionHash [32]byte
 
 ---
 
-*Knowledge Pack: go-blockchain v1.0.0*
-*Last Updated: 2026-06-17*

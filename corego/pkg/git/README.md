@@ -4,16 +4,16 @@
 > **Repository:** [`github.com/dappcore/go-git`](https://github.com/dappcore/go-git)  
 > **Spec:** [`plans/code/core/go/git/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/git/RFC.md)  
 > **Maintainer:** Purberus <purberus@lthn.ai>  
-> **Status:** ✅ Production Ready  
+> **Status:** Production Ready  
 > **Module:** `dappco.re/go/git`
 
 ---
 
-## 📋 Overview
+## Overview
 
-**go-git** is a minimal in-house Git wrapper for multi-repository operations. It provides parallel git status checks, push/pull operations across multiple repositories, and integrates seamlessly with the CoreGo framework as a service. Designed for AI agent consumption following the AX standard.
+**go-git** is a minimal in-house Git wrapper for multi-repository operations. It provides parallel git status checks, push/pull operations across multiple repositories, and integrates with the CoreGo framework as a service. Designed for AI agent consumption following the AX standard.
 
-### 🎯 Key Capabilities
+### Key capabilities
 
 | Category | Features | Description |
 |----------|----------|-------------|
@@ -24,9 +24,9 @@
 | **Result Handling** | Comprehensive | Detailed error reporting with git stderr |
 | **Path Validation** | Security-first | Validates paths, prevents directory traversal |
 
-### 🏗️ Architecture
+### Architecture
 
-### Module Structure
+### Module structure
 
 ```
 core/go-git/
@@ -53,7 +53,7 @@ core/go-git/
 └── LICENCE
 ```
 
-### Core Design Principles
+### Core design principles
 
 1. **Minimal Wrapper** — Thin layer over git CLI, not a full git implementation
 2. **Parallel Execution** — All multi-repo operations run in parallel
@@ -63,9 +63,9 @@ core/go-git/
 
 ---
 
-## 📦 Packages
+## Packages
 
-### Core Operations (`git.go`)
+### Core operations (`git.go`)
 
 #### Status Checking
 
@@ -92,7 +92,7 @@ core/go-git/
 - **`IsNonFastForward`** — Check if error is due to non-fast-forward merge
 - **Error handling** — Comprehensive error types with git stderr
 
-### CoreGo Service (`service.go`)
+### CoreGo service (`service.go`)
 
 The `Service` provides git operations as a CoreGo service with:
 
@@ -123,9 +123,9 @@ The `Service` provides git operations as a CoreGo service with:
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### Service Options
+### Service options
 
 ```go
 // ServiceOptions configures the git service
@@ -145,7 +145,7 @@ core.New(
 )
 ```
 
-### Path Validation
+### Path validation
 
 The service validates all paths:
 - Must be absolute paths
@@ -155,7 +155,7 @@ The service validates all paths:
 
 ---
 
-## 🚀 Commands
+## Commands
 
 While go-git is primarily a library, it can be integrated into CLI tools:
 
@@ -174,7 +174,7 @@ core git pull /path/to/repos
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
 ### 1. Basic Status Checking
 
@@ -336,22 +336,22 @@ if !result.OK {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 Each file follows the AX standard with:
 - `_test.go` — Unit tests with mocked git commands
 - `_example_test.go` — Usage examples as tests
 
-### Test Coverage
+### Test coverage
 
 | File | Functions | Lines | Coverage |
 |------|-----------|-------|----------|
 | `git.go` | 9 public functions | ~540 | >80% |
 | `service.go` | 15+ public methods | ~480 | >80% |
 
-### Test Commands
+### Test commands
 
 ```bash
 # All tests
@@ -368,17 +368,17 @@ go test -coverprofile=coverage.out ./...
 go tool cover -html=coverage.out
 ```
 
-### AX Standard Compliance
+### AX standard compliance
 
-✅ **All packages follow AX standard:**
+All packages follow AX standard:
 - `git.go` → `git_test.go` + `git_example_test.go`
 - `service.go` → `service_test.go` + `service_example_test.go`
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Core Types
+### Core types
 
 ```go
 // RepoStatus represents the git status of a single repository
@@ -423,7 +423,7 @@ type GitError struct {
 func (e *GitError) Error() string
 ```
 
-### Status Options
+### Status options
 
 ```go
 // StatusOptions configures the status check
@@ -437,7 +437,7 @@ func Status(ctx core.Context, opts StatusOptions) []RepoStatus
 func StatusIter(ctx core.Context, opts StatusOptions) iter.Seq[RepoStatus]
 ```
 
-### Push/Pull Functions
+### Push/pull functions
 
 ```go
 // Single repository operations
@@ -454,7 +454,7 @@ func PullMultipleIter(ctx core.Context, paths []string, names map[string]string)
 func IsNonFastForward(err error) bool
 ```
 
-### Service Types
+### Service types
 
 ```go
 // Query types for service
@@ -507,16 +507,16 @@ func (s *Service) BehindRepos() []RepoStatus
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### Internal Documentation
+### Internal documentation
 
 | Resource | Description | Location |
 |----------|-------------|----------|
 | RFC | Package specification | [plans/code/core/go/git/RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/git/RFC.md) |
 | LLM Index | AI training data | [llms.txt](file:///Users/snider/Code/core/go-git/llms.txt) |
 
-### External References
+### External references
 
 | Resource | URL |
 |----------|-----|
@@ -524,49 +524,3 @@ func (s *Service) BehindRepos() []RepoStatus
 | Module | [pkg.go.dev/dappco.re/go/git](https://pkg.go.dev/dappco.re/go/git) |
 | Git | [git-scm.com](https://git-scm.com) |
 
----
-
-## 📊 Statistics
-
-### File Counts
-
-```
-Total Files:          10+
-  └── Go Files:        8
-      ├── git.go:        539 lines
-      ├── service.go:    482 lines
-      └── tests:         4 files
-  └── Documentation:   5+
-
-Lines of Code:
-  └── Go:              ~1,500
-  └── Markdown:        ~500
-  └── Total:           ~2,000
-```
-
-### Test Coverage Breakdown
-
-| Category | Count | Coverage |
-|----------|-------|----------|
-| Unit Tests | 20+ | >80% |
-| Example Tests | 8+ | N/A |
-| Total Tests | 28+ | >80% |
-
-### Dependency Statistics
-
-```
-Direct Dependencies:    1
-  └── dappco.re/go v0.10.4
-
-Indirect Dependencies: 0
-```
-
----
-
-## 🏷️ Tags
-
-#git #multi-repo #parallel #status #push #pull #corego #service #agent-first #ax-standard #minimal-wrapper
-
----
-
-*Last updated: 2026-06-18 | Maintainer: Purberus <purberus@lthn.ai>*

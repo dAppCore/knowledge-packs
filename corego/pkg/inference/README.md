@@ -18,12 +18,10 @@ tags:
 ---
 # go-inference — Shared ML Inference Interfaces
 
-> **Zero-dependency shared contract for text generation backends in the Core Go ecosystem**
-
 **Module:** `dappco.re/go/inference`
 **Module Path:** `dappco.re/go/inference`
 **Repository:** [~/Code/core/go-inference/](file:///Users/snider/Code/core/go-inference/)
-**Status:** ✅ Production-Ready
+**Status:** Production
 **License:** EUPL-1.2
 **Language:** Go 1.25+
 **Dependencies:** Zero external (stdlib only)
@@ -36,9 +34,9 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-inference` is the **shared interface contract** for text generation backends in the Core Go ecosystem. It defines the `TextModel`, `Backend`, `Token`, `Message`, and associated configuration types that GPU-specific backends implement and consumers depend on.
+`go-inference` is the shared interface contract for text generation backends in the Core Go ecosystem. It defines the `TextModel`, `Backend`, `Token`, `Message`, and associated configuration types that GPU-specific backends implement and consumers depend on.
 
 ### Key Characteristics
 
@@ -60,7 +58,7 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Component Layers
 
@@ -144,7 +142,7 @@ model, err := inference.LoadModel(path, inference.WithBackend("metal"))
 
 ---
 
-## 🔌 Core Interfaces
+## Core interfaces
 
 ### TextModel Interface
 
@@ -212,7 +210,7 @@ type Adapter interface {
 
 ---
 
-## 📦 Configuration Types
+## Configuration types
 
 ### GenerateConfig
 
@@ -254,7 +252,7 @@ func WithDevice(device string) inference.LoadOption
 
 ---
 
-## 🔥 Streaming with iter.Seq
+## Streaming with iter.Seq
 
 Go 1.23+ range-over-function iterators:
 
@@ -290,7 +288,7 @@ for token := range model.Chat(ctx, messages) {
 
 ---
 
-## 🎯 Model Discovery
+## Model discovery
 
 ### Discover Function
 
@@ -328,7 +326,7 @@ type ModelInfo struct {
 
 ---
 
-## 🔍 Capability Detection
+## Capability detection
 
 ```go
 // Check if backend supports specific capability
@@ -346,7 +344,7 @@ if attention, ok := model.(inference.AttentionInspector); ok {
 
 ---
 
-## 📊 Backend Implementations
+## Backend implementations
 
 ### go-mlx (Apple Metal)
 
@@ -390,7 +388,7 @@ if attention, ok := model.(inference.AttentionInspector); ok {
 
 ---
 
-## 🚀 Usage Examples
+## Usage examples
 
 ### Basic Generation
 
@@ -482,7 +480,7 @@ for _, info := range models {
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Structure
 
@@ -524,20 +522,20 @@ go test -bench=. ./...
 
 ---
 
-## 📈 Quality Metrics
+## Quality metrics
 
-- ✅ **Zero Dependencies** — Stdlib only, no external packages
-- ✅ **Cross-Platform** — Compiles on all platforms
-- ✅ **Stable Contract** — Strict stability rules for interface changes
-- ✅ **Well-Tested** — Good/Bad/Ugly test pattern
-- ✅ **Streaming Support** — Go 1.23+ iter.Seq
-- ✅ **Backend-Agnostic** — Multiple backend implementations
-- ✅ **Auto-Selection** — Smart backend priority
-- ✅ **Type-Safe** — Strong Go typing throughout
+- Zero dependencies — Stdlib only, no external packages
+- Cross-platform — Compiles on all platforms
+- Stable contract — Strict stability rules for interface changes
+- Well-tested — Good/Bad/Ugly test pattern
+- Streaming support — Go 1.23+ iter.Seq
+- Backend-agnostic — Multiple backend implementations
+- Auto-selection — Smart backend priority
+- Type-safe — Strong Go typing throughout
 
 ---
 
-## 📝 Stability Rules
+## Stability rules
 
 This package is the shared contract. Changes affect multiple backends simultaneously:
 
@@ -549,7 +547,7 @@ This package is the shared contract. Changes affect multiple backends simultaneo
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -562,7 +560,7 @@ This package is the shared contract. Changes affect multiple backends simultaneo
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/go-inference/](file:///Users/snider/Code/core/go-inference/)
 2. **CLAUDE.md** — [~/Code/core/go-inference/CLAUDE.md](file:///Users/snider/Code/core/go-inference/CLAUDE.md)
@@ -575,7 +573,6 @@ This package is the shared contract. Changes affect multiple backends simultaneo
 
 ---
 
-*Package documentation generated: 2026-06-17T23:30:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
+*Package documentation: 2026-06-17T23:30:00Z*
+*Knowledge pack: CoreGo v1.2.0*
 *Module: dappco.re/go/inference*
-*Maintainer: Purberus <purberus@lthn.ai>*

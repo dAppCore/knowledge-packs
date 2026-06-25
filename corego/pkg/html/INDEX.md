@@ -15,7 +15,7 @@ module: dappco.re/go/core/html
 
 ---
 
-## 📚 Quick Links
+## Quick links
 
 - **[README.md](./README.md)** — Complete package documentation
 - **[RFC Specification](file:///Users/snider/Code/meowmix/plans/code/core/go/html/RFC.md)** — Technical specification
@@ -36,7 +36,7 @@ module: dappco.re/go/core/html
 
 ---
 
-## 🗂️ File Structure
+## File structure
 
 ### Source Files (Core Package)
 
@@ -113,7 +113,7 @@ module: dappco.re/go/core/html
 
 ---
 
-## 🔧 Public API Surface
+## Public API surface
 
 ### Node Interface
 
@@ -212,7 +212,7 @@ All apply recursively through wrapper nodes:
 
 ---
 
-## 🏷️ Node Type Catalog
+## Node type catalog
 
 ### Content Nodes
 
@@ -252,7 +252,7 @@ All apply recursively through wrapper nodes:
 
 ---
 
-## 🎨 HLCRF Layout Catalog
+## HLCRF layout catalog
 
 ### Slot Definitions
 
@@ -297,7 +297,7 @@ Block IDs follow the slot structure:
 
 ---
 
-## ⚡ WASM Integration
+## WASM integration
 
 ### JavaScript API
 
@@ -343,7 +343,7 @@ make wasm
 
 ---
 
-## 🧠 Grammar Pipeline
+## Grammar pipeline
 
 ### Components
 
@@ -387,7 +387,7 @@ scores := html.CompareVariants(responsive, ctx)
 
 ---
 
-## 🎭 Web Component Codegen
+## Web Component codegen
 
 ### CLI Usage
 
@@ -437,7 +437,7 @@ customElements.define('nav-bar', NavBar);
 
 ---
 
-## 📊 Statistics
+## Statistics
 
 ### Code Metrics
 
@@ -476,7 +476,7 @@ Attribute helpers:      6 (Attr, AriaLabel, AltText, TabIndex, AutoFocus, Role)
 
 ---
 
-## 🏷️ Tags & Categories
+## Tags and categories
 
 ### Technology Tags
 
@@ -518,7 +518,7 @@ Attribute helpers:      6 (Attr, AriaLabel, AltText, TabIndex, AutoFocus, Role)
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
 ### Internal Dependencies
 
@@ -544,7 +544,7 @@ Attribute helpers:      6 (Attr, AriaLabel, AltText, TabIndex, AutoFocus, Role)
 
 ---
 
-## 🎯 Usage Patterns
+## Usage patterns
 
 ### Pattern 1: Basic Page Layout
 
@@ -589,7 +589,7 @@ gohtml.renderToString("HCF", "en-GB", { H: "<nav>...</nav>", C: "<main>...</main
 
 ---
 
-## 📋 Compliance Summary
+## Compliance summary
 
 ### Coding Standards
 
@@ -632,7 +632,7 @@ bash /Users/snider/Code/core/go/tests/cli/v090-upgrade/audit.sh .
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author**: Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created**: 2026-06-18T01:00:00Z
@@ -651,4 +651,4 @@ bash /Users/snider/Code/core/go/tests/cli/v090-upgrade/audit.sh .
 
 ---
 
-*Package index generated: 2026-06-18T01:00:00Z*
+*Package index: 2026-06-18T01:00:00Z*

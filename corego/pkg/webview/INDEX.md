@@ -8,17 +8,14 @@ description: Chrome DevTools Protocol browser automation package
 
 # go-webview Package Index
 
-> **Browser Automation via Chrome DevTools Protocol**
-
 **Repository:** `core/go-webview`  
 **Module:** `dappco.re/go/webview`  
-**Status:** ✅ Complete Documentation  
 **Last Updated:** 2026-06-17  
 **Maintainer:** Purberus <purberus@lthn.ai>
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -27,22 +24,11 @@ description: Chrome DevTools Protocol browser automation package
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
 **go-webview** provides complete browser automation via Chrome DevTools Protocol (CDP). It enables programmatic control of Chrome/Chromium instances for web scraping, form automation, frontend testing, and GUI automation.
 
-### Key Features
-
-- ✅ Chrome DevTools Protocol client
-- ✅ 30+ high-level automation methods
-- ✅ 20+ declarative action types
-- ✅ Angular-specific helpers
-- ✅ Console and exception watching
-- ✅ Screenshot capture
-- ✅ CoreGO service integration
-- ✅ Security features (URL validation, SSRF protection)
-
-### Architecture Layers
+### Architecture layers
 
 1. **Application Layer** — Browser automation, testing, scraping
 2. **High-Level API** — Webview, Actions, Console watchers, Angular helpers
@@ -51,9 +37,9 @@ description: Chrome DevTools Protocol browser automation package
 
 ---
 
-## 🏗️ Components
+## Components
 
-### Core Types
+### Core types
 
 | Type | File | Purpose |
 |------|------|---------|
@@ -67,7 +53,7 @@ description: Chrome DevTools Protocol browser automation package
 | `ExceptionWatcher` | `console.go` | JavaScript error tracking |
 | `Service` | `service.go` | CoreGO service registration |
 
-### Action Types (20+)
+### Action types (20+)
 
 | Action | Description |
 |--------|-------------|
@@ -94,7 +80,7 @@ description: Chrome DevTools Protocol browser automation package
 
 ---
 
-## 📁 File Structure
+## File structure
 
 ```
 go-webview/
@@ -124,7 +110,7 @@ go-webview/
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
 ### Installation
 
@@ -133,7 +119,7 @@ cd ~/Code/core/go-webview
 go mod tidy
 ```
 
-### Basic Example
+### Basic example
 
 ```go
 package main
@@ -167,9 +153,9 @@ chrome --remote-debugging-port=9222 --headless=new
 
 ---
 
-## 🎓 Use Cases
+## Use cases
 
-### 1. Web Scraping
+### 1. Web scraping
 
 ```go
 wv, _ := webview.New(webview.WithDebugURL("http://localhost:9222"))
@@ -179,7 +165,7 @@ wv.Navigate("https://example.com/products")
 elements, _ := wv.QuerySelectorAll(".product-item")
 ```
 
-### 2. Form Automation
+### 2. Form automation
 
 ```go
 actions := []webview.Action{
@@ -190,7 +176,7 @@ actions := []webview.Action{
 }
 ```
 
-### 3. Angular Testing
+### 3. Angular testing
 
 ```go
 webview.WaitForAngularStable(ctx, wv)
@@ -198,7 +184,7 @@ webview.AngularNavigate(ctx, wv, "/dashboard")
 value, _ := webview.AngularGetProperty(ctx, wv, "app-root", "userName")
 ```
 
-### 4. Screenshot Capture
+### 4. Screenshot capture
 
 ```go
 wv.Navigate("https://example.com")
@@ -207,7 +193,7 @@ png, _ := wv.Screenshot()
 os.WriteFile("screenshot.png", png, 0644)
 ```
 
-### 5. CoreGO Service
+### 5. CoreGO service
 
 ```go
 c, _ := core.New(
@@ -221,9 +207,9 @@ svc.Webview.Navigate("https://example.com")
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### ServiceOptions
+### Service options
 
 ```go
 type ServiceOptions struct {
@@ -233,7 +219,7 @@ type ServiceOptions struct {
 }
 ```
 
-### Webview Options
+### Webview options
 
 ```go
 // Constructor options
@@ -244,15 +230,15 @@ webview.WithConsoleLimit(200)
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Coverage
+### Test coverage
 
 All files have test triplets:
 - `_test.go` — Unit tests
 - `_example_test.go` — Example-based tests
 
-### Running Tests
+### Running tests
 
 ```bash
 cd ~/Code/core/go-webview/go
@@ -267,7 +253,7 @@ go test -cover ./...
 go test -run Example -v
 ```
 
-### Test Files
+### Test files
 
 | File | Tests |
 |------|-------|
@@ -280,7 +266,7 @@ go test -run Example -v
 
 ---
 
-## 📊 Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -294,7 +280,7 @@ go test -run Example -v
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -303,33 +289,3 @@ go test -run Example -v
 | [go-api](../api/) | REST framework | ../api/ |
 | [CoreGO INDEX](../../INDEX.md) | Package catalog | ../../INDEX.md |
 
----
-
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Initial deep dive documentation | N/A |
-| 2026-06-17 | Package INDEX created | N/A |
-
----
-
-## 🎯 Tags
-
-```yaml
-- webview
-- browser-automation
-- chrome-devtools-protocol
-- cdp
-- web-scraping
-- gui-automation
-- angular
-- frontend-testing
-- headless-chrome
-- websocket
-```
-
----
-
-*Package index generated: 2026-06-17T15:30:00Z*
-*Knowledge Pack: CoreGo v1.1.0*

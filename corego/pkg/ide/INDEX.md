@@ -22,15 +22,13 @@ tags:
 ---
 # go-ide Package Index
 
-> **Lethean Desktop IDE — The compile target for the Lethean Desktop native umbrella product**
-
 **Repository:** `core/ide`  
 **Module:** `dappco.re/go/ide`  
 **Binary:** `core-ide` (ships as **Lethean Desktop**)  
 **Frontend:** Angular 20+ Custom Elements  
 **Backend:** Wails v3 + Go  
 **RFC:** [plans/project/lthn/desktop/RFC.md](file:///Users/snider/Code/meowmix/plans/project/lthn/desktop/RFC.md)  
-**Status:** ✅ Production-Ready  
+**Status:** Production  
 **License:** EUPL-1.2  
 **Test Pattern:** Good/Bad/Ugly (AX Standard)  
 **Last Updated:** 2026-06-17  
@@ -38,7 +36,7 @@ tags:
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -51,9 +49,9 @@ tags:
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-`go-ide` is the **Lethean Desktop compile target** — a native umbrella product that provides a comprehensive IDE experience across macOS (Darwin), Linux, Windows, iOS, and iPadOS. It composes multiple Core ecosystem packages into a unified desktop application with a thin Wails shell.
+`go-ide` is the Lethean Desktop compile target — a native umbrella product that provides an IDE experience across macOS (Darwin), Linux, Windows, iOS, and iPadOS. It composes multiple Core ecosystem packages into a unified desktop application with a thin Wails shell.
 
 ### What This Binary IS
 
@@ -91,9 +89,9 @@ Vi is the **spine of the desktop shell** — not a chat widget. It's a Control P
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Thin Wails Shell
+### Thin Wails shell
 
 The IDE uses a **thin Wails shell** that wires ecosystem packages via `core.Core` dependency injection. Three operating modes are supported:
 
@@ -216,7 +214,7 @@ curl -H "Authorization: Bearer your-secret-token" \
 
 ---
 
-## 📦 Repository Structure
+## Repository structure
 
 ### Go Backend (go/)
 
@@ -299,7 +297,7 @@ core/ide/
 
 ---
 
-## 🎯 Running Modes
+## Running modes
 
 ### Mode Comparison
 
@@ -344,7 +342,7 @@ CORE_DAEMON=1 core-ide
 
 ---
 
-## 🚀 MCP Tools (19 Tools)
+## MCP tools (19 tools)
 
 The IDE exposes **19 MCP tools** with **action parity** enforced in `pkg/server/integration_action_parity_test.go`.
 
@@ -398,7 +396,7 @@ This ensures consistent behavior across all interfaces.
 
 ---
 
-## 🏗️ Core Services
+## Core services
 
 The IDE composes multiple Core services via dependency injection:
 
@@ -440,9 +438,9 @@ The IDE composes multiple Core services via dependency injection:
 
 ---
 
-## 🎨 Vi Control Panel
+## Vi Control Panel
 
-### Design System
+### Design system
 
 The **Lethean-3 unified design system** defines the visual appearance and behavior:
 
@@ -503,7 +501,7 @@ All modes are **runtime-switchable** and **fully customisable**:
 
 ---
 
-## 🔌 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -552,7 +550,7 @@ ide:
 
 ---
 
-## 🚀 Build & Development
+## Build and development
 
 ### Prerequisites
 
@@ -626,7 +624,7 @@ CORE_BRAIN_INTEGRATION=1 \
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Structure
 
@@ -676,7 +674,7 @@ npm run test
 
 ---
 
-## 📊 Statistics
+## Statistics
 
 | Metric | Value |
 |--------|-------|
@@ -693,7 +691,7 @@ npm run test
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -706,21 +704,21 @@ npm run test
 
 ---
 
-## 📈 Quality Metrics
+## Quality metrics
 
-- ✅ **MCP Specification Compliance** — Full MCP v1.0 implementation
-- ✅ **Action Parity** — 19 tools with MCP/action consistency
-- ✅ **Security Hardened** — Bearer auth, loopback-only, size limits, timeouts
-- ✅ **Test Coverage** — Good/Bad/Ugly pattern
-- ✅ **Parity Testing** — Integration tests for all tools
-- ✅ **Documentation** — Complete README + INDEX
-- ✅ **Core Integration** — Full CoreGO framework support
-- ✅ **Multi-Platform** — macOS, Linux, Windows, iOS, iPadOS
-- ✅ **Production Ready** — Deployed as Lethean Desktop
+- MCP Specification Compliance — Full MCP v1.0 implementation
+- Action Parity — 19 tools with MCP/action consistency
+- Security hardened — Bearer auth, loopback-only, size limits, timeouts
+- Test coverage — Good/Bad/Ugly pattern
+- Parity testing — Integration tests for all tools
+- Documentation — Complete README + INDEX
+- Core integration — Full CoreGO framework support
+- Multi-platform — macOS, Linux, Windows, iOS, iPadOS
+- Production — Deployed as Lethean Desktop
 
 ---
 
-## 📝 Changelog
+## Changelog
 
 | Date | Change | Author |
 |------|--------|--------|
@@ -732,7 +730,7 @@ npm run test
 
 ---
 
-## 🎯 Tags
+## Tags
 
 ```yaml
 # Core Identity
@@ -822,7 +820,7 @@ npm run test
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/ide/](file:///Users/snider/Code/core/ide/)
 2. **CLAUDE.md** — [~/Code/core/ide/CLAUDE.md](file:///Users/snider/Code/core/ide/CLAUDE.md)
@@ -837,7 +835,6 @@ npm run test
 
 ---
 
-*Package index generated: 2026-06-17T23:15:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
+*Package index: 2026-06-17T23:15:00Z*
+*Knowledge pack: CoreGo v1.2.0*
 *Binary: Lethean Desktop (core-ide)*
-*Maintainer: Purberus <purberus@lthn.ai>*

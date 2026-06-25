@@ -1,33 +1,31 @@
-# go-rag — Retrieval-Augmented Generation
+# go-rag — Retrieval-augmented generation
 
 > **Package:** `dappco.re/go/rag`  
 > **Repository:** [`github.com/dappcore/go-rag`](https://github.com/dappcore/go-rag)  
 > **Spec:** [`plans/code/core/go/rag/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/rag/RFC.md)  
 > **Maintainer:** Purberus <purberus@lthn.ai>  
-> **Status:** ✅ Production Ready  
+> **Status:** Production ready  
 > **Module:** `forge.lthn.ai/core/go-rag`
 
 ---
 
-## 📋 Overview
+## Overview
 
-**go-rag** is a comprehensive Retrieval-Augmented Generation (RAG) library for Go. It provides document chunking with multiple strategies, embedding generation via Ollama, vector storage and similarity search via Qdrant, TF-IDF keyword fallback, and result formatting in multiple output formats. Designed around decoupled `Embedder` and `VectorStore` interfaces for maximum flexibility and testability.
+**go-rag** is a Retrieval-Augmented Generation (RAG) library for Go. It provides document chunking with multiple strategies, embedding generation via Ollama, vector storage and similarity search via Qdrant, TF-IDF keyword fallback, and result formatting in multiple output formats. Designed around decoupled `Embedder` and `VectorStore` interfaces for flexibility and testability.
 
-### 🎯 Key Capabilities
+### Key capabilities
 
 | Category | Features | Description |
 |----------|----------|-------------|
 | **Chunking** | 3-level Markdown splitting + sentence/paragraph chunkers | Configurable overlap, multiple strategies |
 | **Embeddings** | Ollama integration | Local LLM embedding generation |
-| **Vector Storage** | Qdrant gRPC | Vector database with cosine similarity search |
+| **Vector storage** | Qdrant gRPC | Vector database with cosine similarity search |
 | **Fallback** | TF-IDF keyword search | Boosts relevance when vector search is unavailable |
-| **Post-Filtering** | Keyword boosting | Enhances results based on keyword matches |
-| **Output Formats** | Plain text, XML, JSON | Flexible result formatting for LLM prompt injection |
+| **Post-filtering** | Keyword boosting | Enhances results based on keyword matches |
+| **Output formats** | Plain text, XML, JSON | Flexible result formatting for LLM prompt injection |
 | **Interfaces** | Embedder, VectorStore | Decoupled design for easy mocking and testing |
 
-### 🏗️ Architecture
-
-### Module Structure
+### Module structure
 
 ```
 core/go-rag/
@@ -68,44 +66,44 @@ core/go-rag/
 └── LICENCE
 ```
 
-### Core Design Principles
+### Core design principles
 
-1. **Interface-First** — `Embedder` and `VectorStore` interfaces decouple implementation from business logic
-2. **Mock-Based Testing** — All operations can be tested without external services
-3. **Multiple Chunking Strategies** — 3-level Markdown, sentence-based, paragraph-based
-4. **Fallback Support** — TF-IDF keyword search when vector search is unavailable
-5. **AX Standard** — Each `.go` file has `_test.go` and `_example_test.go`
+1. **Interface-first** — `Embedder` and `VectorStore` interfaces decouple implementation from business logic
+2. **Mock-based testing** — All operations can be tested without external services
+3. **Multiple chunking strategies** — 3-level Markdown, sentence-based, paragraph-based
+4. **Fallback support** — TF-IDF keyword search when vector search is unavailable
+5. **AX standard** — Each `.go` file has `_test.go` and `_example_test.go`
 
 ---
 
-## 📦 Packages
+## Packages
 
-### Chunking Strategies
+### Chunking strategies
 
-#### Markdown Chunking
-- **3-Level Splitting** — Document → Sections → Chunks
-- **Configurable Overlap** — Adjustable chunk overlap for better context
-- **Semantic Boundaries** — Respects Markdown structure (headers, code blocks, etc.)
+#### Markdown chunking
+- **3-level splitting** — Document → Sections → Chunks
+- **Configurable overlap** — Adjustable chunk overlap for better context
+- **Semantic boundaries** — Respects Markdown structure (headers, code blocks, etc.)
 
-#### Sentence-Based Chunking
+#### Sentence-based chunking
 - **NLTK-inspired** — Splits on sentence boundaries
-- **Configurable Length** — Adjustable sentence count per chunk
-- **Context Preservation** — Maintains document flow
+- **Configurable length** — Adjustable sentence count per chunk
+- **Context preservation** — Maintains document flow
 
-#### Paragraph-Based Chunking
-- **Simple & Effective** — Splits on paragraph breaks
-- **Configurable Size** — Adjustable paragraph count per chunk
-- **Fast Processing** — Minimal computational overhead
+#### Paragraph-based chunking
+- **Simple and effective** — Splits on paragraph breaks
+- **Configurable size** — Adjustable paragraph count per chunk
+- **Fast processing** — Minimal computational overhead
 
-### Embedding Generation
+### Embedding generation
 
-**Ollama Integration:**
+**Ollama integration:**
 - Local LLM embedding models
 - Batch embedding generation
 - Configurable model selection
 - Error handling and retries
 
-### Vector Storage (Qdrant)
+### Vector storage (Qdrant)
 
 **Features:**
 - gRPC-based communication
@@ -114,23 +112,23 @@ core/go-rag/
 - Vector indexing and querying
 - Result filtering and pagination
 
-### Fallback Mechanisms
+### Fallback mechanisms
 
-#### TF-IDF Keyword Search
+#### TF-IDF keyword search
 - Traditional keyword-based search
 - Automatic fallback when vector search fails
 - Configurable keyword extraction
 
-#### Keyword Boosting
+#### Keyword boosting
 - Post-filtering enhancement
 - Boosts results matching specific keywords
 - Configurable boost factors
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### Client Initialization
+### Client initialisation
 
 ```go
 import "dappco.re/go/rag"
@@ -149,7 +147,7 @@ store, err = rag.NewQdrantClient(rag.QdrantConfig{
 })
 ```
 
-### Query Configuration
+### Query configuration
 
 ```go
 cfg := rag.QueryConfig{
@@ -163,9 +161,9 @@ cfg := rag.QueryConfig{
 
 ---
 
-## 🚀 Commands
+## Commands
 
-### CLI Integration
+### CLI integration
 
 ```bash
 # Ingest documents
@@ -183,9 +181,9 @@ core rag collections stats my-collection
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
-### 1. Basic Ingestion and Query
+### 1. Basic ingestion and query
 
 ```go
 import "dappco.re/go/rag"
@@ -207,7 +205,7 @@ if err != nil {
 fmt.Println(context)
 ```
 
-### 2. Interface-Based Usage
+### 2. Interface-based usage
 
 ```go
 // Use interfaces for dependency injection
@@ -228,7 +226,7 @@ for _, result := range results {
 }
 ```
 
-### 3. Advanced Query with Options
+### 3. Advanced query with options
 
 ```go
 ctx := context.Background()
@@ -252,7 +250,7 @@ if err != nil {
 fmt.Printf("Collection has %d documents\n", stats.DocumentCount)
 ```
 
-### 4. Ingestion with Custom Chunker
+### 4. Ingestion with custom chunker
 
 ```go
 ctx := context.Background()
@@ -273,7 +271,7 @@ if !result.OK {
 }
 ```
 
-### 5. Streaming Query Results
+### 5. Streaming query results
 
 ```go
 ctx := context.Background()
@@ -288,15 +286,15 @@ for result := range rag.QueryContextIter(ctx, "query", "collection", 5) {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 Each file follows the AX standard:
 - `_test.go` — Unit tests with mocked services
 - `_example_test.go` — Usage examples as tests
 
-### Test Coverage
+### Test coverage
 
 | File | Functions | Lines | Coverage |
 |------|-----------|-------|----------|
@@ -307,7 +305,7 @@ Each file follows the AX standard:
 | `vectorstore.go` | 10+ | ~200 | >75% |
 | `service.go` | 10+ | ~200 | >75% |
 
-### Test Tags
+### Test tags
 
 ```bash
 # Unit tests only (no external services)
@@ -326,9 +324,9 @@ go tool cover -html=coverage.out
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Core Types
+### Core types
 
 ```go
 // QueryConfig - Configuration for query operations
@@ -369,7 +367,7 @@ func NewQdrantStore(endpoint string) core.Result
 func NewQdrantClient(cfg QdrantConfig) core.Result
 ```
 
-### Main Functions
+### Main functions
 
 ```go
 // Ingestion
@@ -413,18 +411,18 @@ type Embedder interface {
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### Internal Documentation
+### Internal documentation
 
 | Resource | Description | Location |
 |----------|-------------|----------|
 | RFC | Package specification | [plans/code/core/go/rag/RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/rag/RFC.md) |
 | Architecture | Interfaces, chunking strategy, pipelines | [docs/architecture.md](file:///Users/snider/Code/core/go-rag/docs/architecture.md) |
-| Development Guide | Prerequisites, build, test patterns | [docs/development.md](file:///Users/snider/Code/core/go-rag/docs/development.md) |
-| Project History | Completed phases, known limitations | [docs/history.md](file:///Users/snider/Code/core/go-rag/docs/history.md) |
+| Development guide | Prerequisites, build, test patterns | [docs/development.md](file:///Users/snider/Code/core/go-rag/docs/development.md) |
+| Project history | Completed phases, known limitations | [docs/history.md](file:///Users/snider/Code/core/go-rag/docs/history.md) |
 
-### External References
+### External references
 
 | Resource | URL |
 |----------|-----|
@@ -435,43 +433,7 @@ type Embedder interface {
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
-
-```
-Total Repository Size:    ~20 MB
-Go Source Files:         15+
-Test Files:             15+
-Example Files:          10+
-Total Go Lines:          ~5,000
-Test Lines:             ~3,000
-Documentation:          ~1,000 lines
-```
-
-### Feature Coverage
-
-| Feature | Status | Details |
-|---------|--------|---------|
-| Chunking Strategies | ✅ Complete | 3-level Markdown, sentence, paragraph |
-| Embedding Generation | ✅ Complete | Ollama integration |
-| Vector Storage | ✅ Complete | Qdrant gRPC |
-| Similarity Search | ✅ Complete | Cosine similarity |
-| Keyword Fallback | ✅ Complete | TF-IDF search |
-| Keyword Boosting | ✅ Complete | Post-filter enhancement |
-| Output Formats | ✅ Complete | Plain text, XML, JSON |
-| Service Integration | ✅ Complete | CoreGo service |
-| CLI Commands | ✅ Complete | Ingest, query, collections |
-
-### Test Statistics
-
-| Type | Count | Coverage |
-|------|-------|----------|
-| Unit Tests | 50+ | >80% |
-| Example Tests | 15+ | N/A |
-| Integration Tests | 10+ | >75% |
-
-### Dependency Statistics
+## Dependencies
 
 ```
 Direct Dependencies:    4
@@ -482,12 +444,6 @@ Direct Dependencies:    4
 
 Indirect Dependencies: 15+
 ```
-
----
-
-## 🏷️ Tags
-
-#rag #retrieval-augmented-generation #llm #embeddings #vector-database #qdrant #ollama #chunking #similarity-search #cosine-similarity #tf-idf #keyword-boosting #document-processing #markdown #pdf #ai #machine-learning #agent-first #ax-standard
 
 ---
 

@@ -16,7 +16,7 @@ module: dappco.re/go/core/stream
 
 ---
 
-## 📚 Quick Links
+## Quick links
 
 - **[README.md](./README.md)** — Complete package documentation
 - **[RFC Specification](file:///Users/snider/Code/meowmix/plans/code/core/go/stream/RFC.md)** — Technical specification (self-contained, agent-implementable)
@@ -45,7 +45,7 @@ The RFC includes comprehensive sub-specifications:
 
 ---
 
-## 🗂️ File Structure
+## File structure
 
 ### Core Package Files (`go/`)
 
@@ -128,7 +128,7 @@ Integration and end-to-end tests.
 
 ---
 
-## 🔧 Public API Surface
+## Public API surface
 
 ### Stream Interface
 
@@ -358,7 +358,7 @@ type HubStats struct {
 
 ---
 
-## 🔐 Authentication API
+## Authentication API
 
 ### HTTP Authenticator (WebSocket, SSE)
 
@@ -407,7 +407,7 @@ func (f ConnAuthenticatorFunc) AuthenticateConn(handshake []byte) AuthResult
 
 ---
 
-## 🔌 Adapter APIs
+## Adapter APIs
 
 ### WebSocket Adapter
 
@@ -568,7 +568,7 @@ func (rc *ReconnectingTCP) Close() error
 
 ---
 
-## 🔄 Pipe & Composition
+## Pipe and composition
 
 ```go
 // Stream interface Pipe method
@@ -584,7 +584,7 @@ func (h *Hub) SubscribeBroadcast(handler func([]byte)) func()
 
 ---
 
-## 🎯 Utility Functions
+## Utility functions
 
 ```go
 // Internal helpers (exported for adapter use)
@@ -598,7 +598,7 @@ func onceFunction(handler func()) func()
 
 ---
 
-## 🏷️ Component Catalog
+## Component catalogue
 
 ### Core Components
 
@@ -644,7 +644,7 @@ func onceFunction(handler func()) func()
 
 ---
 
-## 📊 Transport Comparison
+## Transport comparison
 
 | Feature | WebSocket | SSE | Redis | ZeroMQ | TCP |
 |---------|-----------|-----|--------|--------|-----|
@@ -659,7 +659,7 @@ func onceFunction(handler func()) func()
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
 ### Internal Dependencies
 
@@ -696,43 +696,7 @@ The following are **banned** in stream package code:
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
-
-```
-Total Go files:           35+
-Total source lines:    ~3,000+
-Total test lines:      ~5,000+
-Public API symbols:     ~50
-Transport adapters:      5 (WebSocket, SSE, Redis, ZeroMQ, TCP)
-Auth implementations:    6 (APIKey, Bearer, Query, Custom, Conn, ConnCustom)
-Reconnecting clients:    2 (WebSocket, TCP)
-```
-
-### Test Coverage
-
-| Category | Files | Tests | Status |
-|----------|-------|-------|--------|
-| Hub | 1 | 30+ | ✅ Complete (Good/Bad/Ugly) |
-| Auth | 1 | 20+ | ✅ Complete |
-| WebSocket adapter | 4 | 50+ | ✅ Complete |
-| SSE adapter | 4 | 40+ | ✅ Complete |
-| Redis bridge | 4 | 30+ | ✅ Complete |
-| ZeroMQ adapter | 4 | 30+ | ✅ Complete |
-| TCP adapter | 6 | 60+ | ✅ Complete |
-
-### Performance Characteristics
-
-| Metric | WebSocket | SSE | Redis | ZeroMQ | TCP |
-|--------|-----------|-----|-------|--------|-----|
-| Messages/sec | ~10,000 | ~15,000 | ~5,000 | ~50,000 | ~20,000 |
-| Latency | < 1ms | < 1ms | < 5ms | < 0.1ms | < 0.5ms |
-| Memory/peer | ~1 KB | ~500 B | N/A | ~1 KB | ~1 KB |
-
----
-
-## 🎯 Usage Patterns
+## Usage patterns
 
 ### Pattern 1: Basic Pub/Sub
 
@@ -817,7 +781,7 @@ hub := stream.NewHubWithConfig(stream.HubConfig{
 
 ---
 
-## 📋 Compliance Summary
+## Compliance summary
 
 ### Coding Standards
 
@@ -863,7 +827,7 @@ gofmt -l .
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author:** Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created:** 2026-06-18T03:00:00Z
@@ -888,48 +852,3 @@ gofmt -l .
 - **gorilla/websocket:** WebSocket implementation
 - **go-zeromq/zmq4:** ZeroMQ implementation (pure Go)
 
----
-
-## 🏷️ Tags & Categories
-
-### Technology Tags
-
-- `streaming` — Primary tag
-- `websocket` — WebSocket transport
-- `sse` — Server-Sent Events
-- `zeromq` — ZeroMQ IPC
-- `tcp` — Raw TCP transport
-- `redis` — Redis pub/sub
-- `realtime` — Real-time communication
-- `transport` — Transport abstraction
-- `hub` — Central broker
-- `pubsub` — Publish/subscribe pattern
-- `ipc` — Inter-process communication
-
-### Feature Tags
-
-- `authentication` — Auth interfaces and implementations
-- `authorization` — Channel-level access control
-- `broadcast` — One-to-many messaging
-- `subscription` — Channel subscription management
-- `piping` — Stream composition
-- `multiplexing` — Multiple transports on one hub
-- `reconnection` — Automatic reconnection
-- `echo-prevention` — Loop prevention
-- `monitoring` — Statistics and metrics
-- `scalability` — High-concurrency design
-
-### Consumer Tags
-
-- `core-api` — Primary consumer
-- `go-pool` — Mining pool
-- `go-miner` — Mining client
-- `go-p2p` — Peer-to-peer networking
-- `core-mcp` — Agent communication
-- `browser` — WebSocket clients
-- `cluster` — Multi-instance deployments
-
----
-
-*Package index generated: 2026-06-18T03:00:00Z*
-*Knowledge Pack: CoreGo v1.3.0*

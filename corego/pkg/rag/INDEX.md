@@ -8,38 +8,23 @@
 
 ---
 
-## 📚 Table of Contents
+## Overview
 
-- [📋 Overview](#-overview)
-- [🏗️ Architecture](#-architecture)
-- [📦 Subpackages](#-subpackages)
-- [🔧 Configuration](#-configuration)
-- [🚀 Commands](#-commands)
-- [📝 Usage Patterns](#-usage-patterns)
-- [🧪 Testing](#-testing)
-- [📖 API Reference](#-api-reference)
-- [🔗 Related Documentation](#-related-documentation)
-- [📊 Statistics](#-statistics)
+**go-rag** provides Retrieval-Augmented Generation capabilities for Go applications. It implements document chunking (3-level Markdown, sentence-based, paragraph-based), embedding generation via Ollama, vector storage and similarity search via Qdrant gRPC, TF-IDF keyword fallback, keyword boosting post-filtering, and flexible output formatting (plain text, XML, JSON) — all designed around decoupled `Embedder` and `VectorStore` interfaces for testability and flexibility.
 
----
-
-## 📋 Overview
-
-**go-rag** provides comprehensive Retrieval-Augmented Generation capabilities for Go applications. It implements document chunking (3-level Markdown, sentence-based, paragraph-based), embedding generation via Ollama, vector storage and similarity search via Qdrant gRPC, TF-IDF keyword fallback, keyword boosting post-filtering, and flexible output formatting (plain text, XML, JSON) — all designed around decoupled `Embedder` and `VectorStore` interfaces for maximum testability and flexibility.
-
-### 🎯 Key Features
+### Key features
 
 | Category | Count | Description |
 |----------|-------|-------------|
-| **Chunking Strategies** | 3 | 3-level Markdown, sentence-based, paragraph-based |
-| **Embedding Backends** | 1 | Ollama (extensible via interface) |
-| **Vector Databases** | 1 | Qdrant gRPC (extensible via interface) |
-| **Fallback Mechanisms** | 2 | TF-IDF keyword search, keyword boosting |
-| **Output Formats** | 3 | Plain text, XML, JSON |
-| **CLI Commands** | 4 | ingest, query, collections list, collections stats |
+| **Chunking strategies** | 3 | 3-level Markdown, sentence-based, paragraph-based |
+| **Embedding backends** | 1 | Ollama (extensible via interface) |
+| **Vector databases** | 1 | Qdrant gRPC (extensible via interface) |
+| **Fallback mechanisms** | 2 | TF-IDF keyword search, keyword boosting |
+| **Output formats** | 3 | Plain text, XML, JSON |
+| **CLI commands** | 4 | ingest, query, collections list, collections stats |
 | **Interfaces** | 2 | Embedder, VectorStore |
 
-### 📊 Package Statistics
+### Package metadata
 
 | Metric | Value |
 |--------|-------|
@@ -55,9 +40,9 @@
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Interface-First Design
+### Interface-first design
 
 **go-rag** follows a clean interface-based architecture:
 
@@ -97,16 +82,11 @@
             └───────────┘   └───────────┘   └───────────┘
 ```
 
-### AX Standard Compliance
+### AX standard compliance
 
-✅ **100% AX Compliant:**
-- Every `.go` file has corresponding `_test.go`
-- Every `.go` file has corresponding `_example_test.go`
-- Comments are agent-first, not human-first
-- SPOR (Single Point of Responsibility) per file
-- Decoupled interfaces enable mock-based testing
+Every `.go` file has corresponding `_test.go` and `_example_test.go`. Comments are agent-first. SPOR (Single Point of Responsibility) per file. Decoupled interfaces enable mock-based testing.
 
-### Module Structure
+### Module structure
 
 ```
 core/go-rag/
@@ -152,20 +132,20 @@ core/go-rag/
 
 ---
 
-## 📦 Subpackages
+## Subpackages
 
-### Core Components
+### Core components
 
 | Package | Description | Files | Status |
 |---------|-------------|-------|--------|
-| [qdrant.go](file:///Users/snider/Code/core/go-rag/go/qdrant.go) | **Qdrant Vector Store** | ~400 lines | Production |
-| [query.go](file:///Users/snider/Code/core/go-rag/go/query.go) | **Query Operations** | ~600 lines | Production |
-| [ingest.go](file:///Users/snider/Code/core/go-rag/go/ingest.go) | **Document Ingestion** | ~500 lines | Production |
-| [chunk.go](file:///Users/snider/Code/core/go-rag/go/chunk.go) | **Chunking Strategies** | ~300 lines | Production |
-| [vectorstore.go](file:///Users/snider/Code/core/go-rag/go/vectorstore.go) | **VectorStore Interface** | ~200 lines | Production |
-| [service.go](file:///Users/snider/Code/core/go-rag/go/service.go) | **CoreGo Service** | ~200 lines | Production |
+| [qdrant.go](file:///Users/snider/Code/core/go-rag/go/qdrant.go) | Qdrant vector store | ~400 lines | Production |
+| [query.go](file:///Users/snider/Code/core/go-rag/go/query.go) | Query operations | ~600 lines | Production |
+| [ingest.go](file:///Users/snider/Code/core/go-rag/go/ingest.go) | Document ingestion | ~500 lines | Production |
+| [chunk.go](file:///Users/snider/Code/core/go-rag/go/chunk.go) | Chunking strategies | ~300 lines | Production |
+| [vectorstore.go](file:///Users/snider/Code/core/go-rag/go/vectorstore.go) | VectorStore interface | ~200 lines | Production |
+| [service.go](file:///Users/snider/Code/core/go-rag/go/service.go) | CoreGo service | ~200 lines | Production |
 
-### CLI Commands
+### CLI commands
 
 | Command | Description | File |
 |---------|-------------|------|
@@ -176,9 +156,9 @@ core/go-rag/
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### Qdrant Configuration
+### Qdrant configuration
 
 ```go
 type QdrantConfig struct {
@@ -209,7 +189,7 @@ store, err := rag.NewQdrantClient(rag.QdrantConfig{
 })
 ```
 
-### Query Configuration
+### Query configuration
 
 ```go
 type QueryConfig struct {
@@ -229,7 +209,7 @@ func DefaultQueryConfig() QueryConfig {
 }
 ```
 
-### Ingestion Configuration
+### Ingestion configuration
 
 ```go
 type IngestOptions struct {
@@ -248,9 +228,9 @@ func DefaultIngestOptions() IngestOptions {
 
 ---
 
-## 🚀 Commands
+## Commands
 
-### CLI Commands
+### CLI commands
 
 ```bash
 # Ingest a directory
@@ -277,9 +257,9 @@ core rag query "search term" my-collection --keywords
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
-### 1. Quick Start
+### 1. Quick start
 
 ```go
 import "dappco.re/go/rag"
@@ -296,7 +276,7 @@ context, err := rag.QueryDocsContext(ctx, "your query", "my-collection", 5)
 prompt := "Answer the question using this context:\n" + context + "\n\nQuestion: " + query
 ```
 
-### 2. Interface-Based Testing
+### 2. Interface-based testing
 
 ```go
 // Mock implementations for testing
@@ -327,7 +307,7 @@ func (m *mockVectorStore) Query(ctx context.Context, collection string, queryVec
 results, err := rag.QueryWith(ctx, &mockVectorStore{}, &mockEmbedder{}, "test", "test-collection", 5)
 ```
 
-### 3. Custom Chunking
+### 3. Custom chunking
 
 ```go
 // Sentence-based chunking
@@ -348,7 +328,7 @@ chunker := rag.NewParagraphChunker(rag.ParagraphChunkerConfig{
 })
 ```
 
-### 4. Batch Operations
+### 4. Batch operations
 
 ```go
 // Ingest multiple files
@@ -372,7 +352,7 @@ for _, result := range results {
 }
 ```
 
-### 5. Collection Management
+### 5. Collection management
 
 ```go
 // List all collections
@@ -394,9 +374,9 @@ fmt.Printf("Average Vector Size: %d\n", stats.AvgVectorSize)
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Coverage by File
+### Test coverage by file
 
 | File | Functions | Lines | Coverage |
 |------|-----------|-------|----------|
@@ -408,7 +388,7 @@ fmt.Printf("Average Vector Size: %d\n", stats.AvgVectorSize)
 | `service.go` | 10+ | ~200 | >75% |
 | `cmd/rag/*.go` | 20+ | ~500 | >75% |
 
-### Test Tags
+### Test tags
 
 ```bash
 # Unit tests (no external services required)
@@ -428,15 +408,13 @@ go test -coverprofile=coverage.out ./...
 go tool cover -html=coverage.out -o coverage.html
 ```
 
-### Mock-Based Testing
-
 All core functionality can be tested without external services using mock implementations of `Embedder` and `VectorStore` interfaces.
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Core Types
+### Core types
 
 ```go
 // QueryConfig - Query configuration
@@ -475,7 +453,7 @@ type CollectionStats struct {
 }
 ```
 
-### Qdrant Configuration
+### Qdrant configuration
 
 ```go
 type QdrantConfig struct {
@@ -490,7 +468,7 @@ func NewQdrantStore(endpoint string) core.Result
 func NewQdrantClient(cfg QdrantConfig) core.Result
 ```
 
-### Main Functions
+### Main functions
 
 ```go
 // Ingestion
@@ -550,18 +528,18 @@ type Chunker interface {
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### Internal Documentation
+### Internal documentation
 
 | Resource | Description | Location |
 |----------|-------------|----------|
 | RFC | Package specification and design | [plans/code/core/go/rag/RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/rag/RFC.md) |
 | Architecture | Interfaces, chunking strategy, ingestion and query pipelines | [docs/architecture.md](file:///Users/snider/Code/core/go-rag/docs/architecture.md) |
-| Development Guide | Prerequisites, build, test patterns, coding standards | [docs/development.md](file:///Users/snider/Code/core/go-rag/docs/development.md) |
-| Project History | Completed phases with commit hashes, known limitations | [docs/history.md](file:///Users/snider/Code/core/go-rag/docs/history.md) |
+| Development guide | Prerequisites, build, test patterns, coding standards | [docs/development.md](file:///Users/snider/Code/core/go-rag/docs/development.md) |
+| Project history | Completed phases with commit hashes, known limitations | [docs/history.md](file:///Users/snider/Code/core/go-rag/docs/history.md) |
 
-### External References
+### External references
 
 | Resource | URL |
 |----------|-----|
@@ -573,51 +551,7 @@ type Chunker interface {
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
-
-```
-Total Repository Size:    ~20 MB
-  └── Go Source:          ~5,000 lines
-  └── Tests:              ~3,000 lines
-  └── Documentation:      ~1,000 lines
-
-Files:
-  └── Go Source Files:    15+
-  └── Test Files:         15+
-  └── Example Files:      10+
-  └── Documentation:      10+
-```
-
-### Feature Coverage
-
-| Feature | Status | Details |
-|---------|--------|---------|
-| 3-Level Markdown Chunking | ✅ Complete | Document → Sections → Chunks |
-| Sentence-Based Chunking | ✅ Complete | Configurable sentences per chunk |
-| Paragraph-Based Chunking | ✅ Complete | Configurable paragraphs per chunk |
-| Ollama Embedder | ✅ Complete | Local LLM embedding generation |
-| Qdrant VectorStore | ✅ Complete | gRPC-based vector database |
-| Cosine Similarity | ✅ Complete | Vector similarity search |
-| TF-IDF Fallback | ✅ Complete | Keyword-based search |
-| Keyword Boosting | ✅ Complete | Post-filter enhancement |
-| Plain Text Output | ✅ Complete | Simple text formatting |
-| XML Output | ✅ Complete | LLM prompt injection ready |
-| JSON Output | ✅ Complete | Structured result format |
-| CoreGo Service | ✅ Complete | Full service integration |
-| CLI Commands | ✅ Complete | Ingest, query, collections |
-
-### Test Statistics
-
-| Type | Count | Coverage |
-|------|-------|----------|
-| Unit Tests | 50+ | >80% |
-| Example Tests | 15+ | N/A |
-| Integration Tests | 10+ | >75% |
-| Total | 75+ | >80% |
-
-### Dependency Analysis
+## Dependency analysis
 
 ```
 Direct Dependencies:    4
@@ -632,12 +566,6 @@ Indirect Dependencies: 15+
   ├── gonum.org/v1/gonum v0.17.0
   └── gopkg.in/yaml.v3 v3.0.1
 ```
-
----
-
-## 🏷️ Tags
-
-#rag #retrieval-augmented-generation #llm #ai #embeddings #vector-database #qdrant #ollama #chunking #markdown #pdf #similarity-search #cosine-similarity #tf-idf #keyword-boosting #document-processing #search #interface-first #mock-testing #agent-first #ax-standard
 
 ---
 

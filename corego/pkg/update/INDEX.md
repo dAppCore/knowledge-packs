@@ -15,7 +15,7 @@ module: dappco.re/go/update
 
 ---
 
-## 📚 Quick Links
+## Quick links
 
 - **[README.md](./README.md)** — Complete package documentation
 - **[RFC Specification](file:///Users/snider/Code/meowmix/plans/code/core/go/update/RFC.md)** — Technical specification
@@ -31,7 +31,7 @@ module: dappco.re/go/update
 
 ---
 
-## 🗂️ File Structure
+## File structure
 
 ### Source Files
 
@@ -55,7 +55,7 @@ module: dappco.re/go/update
 
 ---
 
-## 🔧 Public API Surface
+## Public API surface
 
 ### Version Management
 
@@ -189,7 +189,7 @@ Registers:
 
 ---
 
-## 📦 Component Catalog
+## Component catalogue
 
 ### Version Management
 
@@ -249,7 +249,7 @@ go build -ldflags="-X dappco.re/go/update.Version=v1.2.3"
 
 ---
 
-## 📊 Channels
+## Channels
 
 ### Supported Channels
 
@@ -271,7 +271,7 @@ v2.0.0-rc.1     → prerelease (matches by prerelease flag)
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
 ### Internal Dependencies
 
@@ -292,68 +292,8 @@ v2.0.0-rc.1     → prerelease (matches by prerelease flag)
 
 ---
 
-## 📊 Statistics
 
-### Code Metrics
-
-```
-Total Go files:           10+
-Total lines (source):    ~1,500
-Total lines (tests):     ~1,000
-Public API symbols:      ~15
-Supported platforms:     2 (Unix, Windows)
-Supported channels:      4 (stable, beta, alpha, empty)
-Supported sources:       2 (GitHub, HTTP)
-```
-
-### Test Coverage
-
-| Component | Files | Tests | Status |
-|-----------|-------|-------|--------|
-| Version | 1 | 10+ | ✅ Complete |
-| GitHub | 1 | 20+ | ✅ Complete |
-| Updater | 1 | 15+ | ✅ Complete |
-| Generic HTTP | 1 | 10+ | ✅ Complete |
-| Unix CMD | 1 | 5+ | ✅ Complete |
-| Windows CMD | 1 | 5+ | ✅ Complete |
-| Service | 1 | 10+ | ✅ Complete |
-| CLI | 1 | 5+ | ✅ Complete |
-
----
-
-## 🏷️ Tags & Categories
-
-### Technology Tags
-
-- `updates` — Primary tag
-- `versioning` — Version management
-- `releases` — Release management
-- `distribution` — Binary distribution
-- `self-update` — Self-updating binaries
-- `binary` — Binary management
-- `github` — GitHub integration
-- `http` — HTTP downloads
-- `rollback` — Rollback support
-
-### Feature Tags
-
-- `version` — Version management
-- `update` — Update checking
-- `download` — Binary download
-- `apply` — Update application
-- `channel` — Release channels
-- `semver` — Semantic versioning
-- `atomic` — Atomic operations
-
-### Platform Tags
-
-- `unix` — Unix/Linux/macOS support
-- `windows` — Windows support
-- `cross-platform` — Cross-platform support
-
----
-
-## 🎯 Usage Patterns
+## Usage patterns
 
 ### Pattern 1: Automatic Updates
 
@@ -402,7 +342,7 @@ config := update.UpdateServiceConfig{
 
 ---
 
-## 📋 Compliance Summary
+## Compliance summary
 
 ### Coding Standards
 
@@ -424,7 +364,7 @@ config := update.UpdateServiceConfig{
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author:** Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created:** 2026-06-18T02:00:00Z
@@ -443,4 +383,3 @@ config := update.UpdateServiceConfig{
 
 ---
 
-*Package index generated: 2026-06-18T02:00:00Z*

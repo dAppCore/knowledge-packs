@@ -16,8 +16,6 @@ tags:
 ---
 # go-ws — WebSocket Hub for Real-Time Event Streaming
 
-> **The authoritative WebSocket hub for real-time event broadcasting in the Lethean ecosystem**
-
 **RFC:** [plans/code/core/go/ws/RFC.md](../../../../../plans/code/core/go/ws/RFC.md)
 **Source:** [~/Code/core/go-ws/](file:///Users/snider/Code/core/go-ws/)
 **Module:** `dappco.re/go/ws`
@@ -26,7 +24,7 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
 `go-ws` provides a **complete WebSocket hub** for real-time event broadcasting from CoreGO services to frontend clients. It implements:
 
@@ -50,12 +48,12 @@ tags:
 - **Single-goroutine hub** — All state mutations serialized through channels
 - **Channel-based routing** — Clients subscribe to named channels
 - **Security-first** — Optional authentication, origin checking, input validation
-- **Scalable** — Redis bridge enables horizontal scaling
+- **Horizontal scaling** — Redis bridge enables multi-instance deployments
 - **Resilient** — Reconnecting client with exponential backoff
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Component Stack
 
@@ -98,7 +96,7 @@ The `Hub` is the central component that:
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 go-ws/
@@ -121,7 +119,7 @@ go-ws/
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
 ### Basic Hub Setup
 
@@ -191,7 +189,7 @@ hub := svc.Hub
 
 ---
 
-## 🔧 Core Types
+## Core types
 
 ### Message
 
@@ -355,7 +353,7 @@ type ReconnectingClient struct {
 
 ---
 
-## 🔐 Authentication
+## Authentication
 
 ### Authenticator Interface
 
@@ -440,7 +438,7 @@ type AuthResult struct {
 
 ---
 
-## 🔄 Redis Pub/Sub Bridge
+## Redis pub/sub bridge
 
 Cross-instance message coordination via Redis.
 
@@ -497,7 +495,7 @@ The bridge uses these Redis channels:
 
 ---
 
-## 📡 Channel Subscriptions
+## Channel subscriptions
 
 ### Subscribing from Client
 
@@ -543,7 +541,7 @@ hub := ws.NewHubWithConfig(ws.HubConfig{
 
 ---
 
-## 🎯 Process Integration
+## Process integration
 
 ### Streaming Process Output
 
@@ -576,7 +574,7 @@ core.RegisterAction(func(c *core.Core, msg core.Message) error {
 
 ---
 
-## 🔌 Reconnecting Client
+## Reconnecting client
 
 Client-side WebSocket connection with auto-reconnect.
 
@@ -630,7 +628,7 @@ for msg := range client.Receive() {
 
 ---
 
-## 🛡️ Security Features
+## Security features
 
 ### Origin Checking
 
@@ -676,7 +674,7 @@ hub := ws.NewHubWithConfig(ws.HubConfig{
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Triplets
 
@@ -717,7 +715,7 @@ go test -bench . -benchmem
 
 ---
 
-## 📊 Performance Considerations
+## Performance considerations
 
 ### Throughput
 
@@ -739,7 +737,7 @@ go test -bench . -benchmem
 
 ---
 
-## 🎯 Best Practices
+## Best practices
 
 ### 1. Always Configure Allowed Origins
 
@@ -824,7 +822,7 @@ hub := ws.NewHubWithConfig(ws.HubConfig{
 
 ---
 
-## 📚 Examples
+## Examples
 
 ### Example 1: Basic WebSocket Server
 
@@ -939,7 +937,7 @@ func ExampleReconnectingClient() {
 
 ---
 
-## 🐛 Debugging
+## Debugging
 
 ### Enable Debug Logging
 
@@ -981,7 +979,7 @@ hub := ws.NewHubWithConfig(ws.HubConfig{
 
 ---
 
-## 📊 Metrics & Monitoring
+## Metrics and monitoring
 
 ### Built-in Callbacks
 
@@ -1010,7 +1008,7 @@ totalSubscriptions := hub.GetTotalSubscriptions()
 
 ---
 
-## 📝 Notes
+## Notes
 
 - **Repository:** `forge.lthn.sh/core/go-ws`
 - **Primary Spec:** [RFC.md](../../../../../plans/code/core/go/ws/RFC.md)
@@ -1021,7 +1019,7 @@ totalSubscriptions := hub.GetTotalSubscriptions()
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -1031,26 +1029,3 @@ totalSubscriptions := hub.GetTotalSubscriptions()
 | [go-netops](../netops/) | Network operations | ../netops/ |
 | [CoreGO INDEX](../../INDEX.md) | Package catalog | ../../INDEX.md |
 
----
-
-## 🎯 Tags
-
-```yaml
-- websocket
-- realtime
-- streaming
-- hub
-- pubsub
-- redis
-- authentication
-- reconnect
-- process-output
-- event-broadcast
-- channel-subscription
-```
-
----
-
-*Package documentation generated: 2026-06-17T16:00:00Z*
-*Knowledge Pack: CoreGo v1.1.0*
-*Maintainer: Purberus <purberus@lthn.ai>*

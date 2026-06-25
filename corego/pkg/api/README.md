@@ -21,7 +21,6 @@ tags:
 ---
 # go-api — REST Framework with OpenAPI Generation
 
-> **The REST framework for the Lethean ecosystem — Gin-based HTTP engine with OpenAPI, WebSocket, SSE, and ToolBridge**
 
 **Source:** [~/Code/core/api/](file:///Users/snider/Code/core/api/)
 **Module:** `dappco.re/go/api`
@@ -32,9 +31,9 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-api` is the **REST framework** for CoreGO applications, providing a Gin-based HTTP engine with comprehensive features including OpenAPI/Swagger generation, WebSocket support, Server-Sent Events (SSE), ToolBridge for MCP integration, authentication (Authentik OIDC + Bearer tokens), rate limiting, webhooks, GraphQL, chat completions, and more.
+`go-api` is the **REST framework** for CoreGO applications, providing a Gin-based HTTP engine with OpenAPI/Swagger generation, WebSocket support, Server-Sent Events (SSE), ToolBridge for MCP integration, authentication (Authentik OIDC + Bearer tokens), rate limiting, webhooks, GraphQL, chat completions, and more.
 
 ### Primary Use Cases
 
@@ -58,7 +57,7 @@ tags:
 - **Extensible** — Middleware chain and functional options pattern
 - **Observable** — OpenTelemetry tracing, metrics, pprof
 - **Secure** — SSRF protection, input validation, rate limiting
-- **Developer-Friendly** — Auto-generated docs, SDKs, and examples
+- **Developer-friendly** — Auto-generated docs, SDKs, and examples
 - **Production-Ready** — Graceful shutdown, health checks, caching
 
 ### Repository Layout
@@ -76,7 +75,7 @@ core/api/
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Component Stack
 
@@ -127,7 +126,7 @@ core/api/
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 core/api/go/
@@ -351,7 +350,7 @@ core/api/go/
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
 ### Basic HTTP Server
 
@@ -469,7 +468,7 @@ func main() {
 
 ---
 
-## 🔧 Core Types
+## Core types
 
 ### Engine
 
@@ -585,7 +584,7 @@ type DescribableGroup interface {
 
 ---
 
-## 📡 Features
+## Features
 
 ### OpenAPI / Swagger
 
@@ -775,7 +774,7 @@ engine.AddUpstream("backend2", "http://localhost:8081")
 
 ---
 
-## 🛡️ Security Features
+## Security features
 
 ### SSRF Guard
 
@@ -812,7 +811,7 @@ engine, _ := api.New(
 
 ---
 
-## 📦 Middleware
+## Middleware
 
 ### Built-in Middleware
 
@@ -854,7 +853,7 @@ group.Use(api.RequireGroup("admin"))
 
 ---
 
-## 🌐 Response Helpers
+## Response helpers
 
 Standardized response formatting with metadata support.
 
@@ -886,9 +885,9 @@ c.JSON(api.ResponseWithMeta{
 
 ---
 
-## 🧪 Testing
+## Testing
 
-Comprehensive test coverage with Good/Bad/Ugly pattern.
+Test coverage follows the Good/Bad/Ugly pattern.
 
 ### Running Tests
 
@@ -918,7 +917,7 @@ go test -run TestAuthentik ./...
 
 ---
 
-## 🚀 Command-Line Interface
+## Command-line interface
 
 ### Build Commands
 
@@ -958,7 +957,7 @@ core go qa full
 
 ---
 
-## 📊 Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -975,7 +974,7 @@ core go qa full
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -987,17 +986,7 @@ core go qa full
 
 ---
 
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | N/A |
-| 2026-05-XX | OpenAPI generation finalized | N/A |
-| 2026-04-30 | CLAUDE.md guidance created | N/A |
-
----
-
-## 🎯 Tags
+## Tags
 
 ```yaml
 - rest
@@ -1039,7 +1028,7 @@ core go qa full
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/api/](file:///Users/snider/Code/core/api/)
 2. **CLAUDE.md** — [~/Code/core/api/CLAUDE.md](file:///Users/snider/Code/core/api/CLAUDE.md)
@@ -1047,8 +1036,3 @@ core go qa full
 4. **Gin Framework** — [github.com/gin-gonic/gin](https://github.com/gin-gonic/gin)
 5. **OpenAPI Specification** — [spec.openapis.org](https://spec.openapis.org)
 
----
-
-*Package documentation generated: 2026-06-17T20:00:00Z*
-*Knowledge Pack: CoreGo v1.1.0*
-*Maintainer: Purberus <purberus@lthn.ai>*

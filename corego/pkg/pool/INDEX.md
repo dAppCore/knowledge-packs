@@ -8,8 +8,6 @@ description: ProgPoWZ mining pool backend for Lethean blockchain
 
 # go-pool Package Index
 
-> **ProgPoWZ Mining Pool Backend**
-
 **Repository:** `core/go-pool`  
 **Module:** `dappco.re/go/pool`  
 **Algorithm:** ProgPoWZ (Lethean / Zano)  
@@ -20,7 +18,7 @@ description: ProgPoWZ mining pool backend for Lethean blockchain
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -29,25 +27,25 @@ description: ProgPoWZ mining pool backend for Lethean blockchain
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
 **go-pool** is a complete Stratum mining pool backend for the Lethean blockchain. It implements a production-ready pool with Stratum TCP server, ProgPoWZ share validation via CGo, variable difficulty, IP banning, Redis state store, HTTP API, webhook notifications, and clustering support.
 
 ### Key Features
 
-- ✅ **Stratum TCP server** — Multi-port with per-port difficulty (plain + TLS)
-- ✅ **ProgPoWZ share validation** — CGo wrapper around `zano-node-util`
-- ✅ **Variable difficulty (vardiff)** — Per-miner ring buffer retargeting
-- ✅ **Share trust algorithm** — Probability decay to reduce CPU usage
-- ✅ **IP banning** — Time-based, triggered by invalid share ratio
-- ✅ **Block template management** — Daemon RPC polling + ZMQ fallback
-- ✅ **Payout system** — RBPPS (proportional) and solo modes
-- ✅ **Redis state store** — Miners, hashrates, shares, blocks, payments, charts
-- ✅ **HTTP API** — 17 endpoints, wire-compatible with Node.js pool
-- ✅ **Server-Sent Events** — Real-time `/live_stats` streaming
-- ✅ **Webhook notifications** — Block events, payments
-- ✅ **Clustering** — Horizontal scaling via Redis pub/sub
-- ✅ **Wire-compatible** — HTTP API matches Node.js pool byte-for-byte
+- **Stratum TCP server** — Multi-port with per-port difficulty (plain + TLS)
+- **ProgPoWZ share validation** — CGo wrapper around `zano-node-util`
+- **Variable difficulty (vardiff)** — Per-miner ring buffer retargeting
+- **Share trust algorithm** — Probability decay to reduce CPU usage
+- **IP banning** — Time-based, triggered by invalid share ratio
+- **Block template management** — Daemon RPC polling + ZMQ fallback
+- **Payout system** — RBPPS (proportional) and solo modes
+- **Redis state store** — Miners, hashrates, shares, blocks, payments, charts
+- **HTTP API** — 17 endpoints, wire-compatible with Node.js pool
+- **Server-Sent Events** — Real-time `/live_stats` streaming
+- **Webhook notifications** — Block events, payments
+- **Clustering** — Horizontal scaling via Redis pub/sub
+- **Wire-compatible** — HTTP API matches Node.js pool byte-for-byte
 
 ### Architecture Layers
 
@@ -66,7 +64,7 @@ description: ProgPoWZ mining pool backend for Lethean blockchain
 
 ---
 
-## 🏗️ Components
+## Components
 
 ### Orchestrator
 
@@ -139,7 +137,7 @@ description: ProgPoWZ mining pool backend for Lethean blockchain
 
 ---
 
-## 📁 File Structure
+## File structure
 
 ```
 go-pool/
@@ -191,7 +189,7 @@ go-pool/
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
 ### Basic Setup
 
@@ -228,7 +226,7 @@ go build -o go-pool ./cmd/go-pool
 
 ---
 
-## 🎓 Use Cases
+## Use cases
 
 ### 1. Run a Lethean Mining Pool
 
@@ -286,7 +284,7 @@ Webhook: pool.WebhookConfig{
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### StratumConfig
 
@@ -372,7 +370,7 @@ type APIConfig struct {
 
 ---
 
-## 🌐 Stratum Protocol
+## Stratum protocol
 
 ### Connection Flow
 
@@ -397,7 +395,7 @@ Variable difficulty uses ring buffer retargeting with configurable:
 
 ---
 
-## 💰 Payout System
+## Payout system
 
 ### Modes
 
@@ -414,7 +412,7 @@ Variable difficulty uses ring buffer retargeting with configurable:
 
 ---
 
-## 🗄️ Redis State Store
+## Redis state store
 
 ### Key Patterns
 
@@ -427,7 +425,7 @@ Variable difficulty uses ring buffer retargeting with configurable:
 
 ---
 
-## 🌐 HTTP API
+## HTTP API
 
 ### 17 Wire-Compatible Endpoints
 
@@ -458,7 +456,7 @@ Variable difficulty uses ring buffer retargeting with configurable:
 
 ---
 
-## 🔄 Clustering
+## Clustering
 
 Multiple pool instances share state via Redis pub/sub:
 - Event broadcasting
@@ -468,7 +466,7 @@ Multiple pool instances share state via Redis pub/sub:
 
 ---
 
-## 📡 Webhook Notifications
+## Webhook notifications
 
 Async HTTP POST notifications for:
 - Block found
@@ -478,7 +476,7 @@ Async HTTP POST notifications for:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 All subsystems have comprehensive tests:
 - Stratum layer tests
@@ -502,7 +500,7 @@ go test -bench . -benchmem
 
 ---
 
-## 📊 Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -518,7 +516,7 @@ go test -bench . -benchmem
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -531,16 +529,7 @@ go test -bench . -benchmem
 
 ---
 
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Initial deep dive documentation | N/A |
-| 2026-06-17 | Package INDEX created | N/A |
-
----
-
-## 🎯 Tags
+## Tags
 
 ```yaml
 - mining-pool
@@ -562,20 +551,6 @@ go test -bench . -benchmem
 - production-ready
 - wire-compatible
 ```
-
----
-
-## 📈 Statistics
-
-| Metric | Value |
-|--------|-------|
-| Shares/sec | ~10K-50K |
-| Max connections | ~10K miners |
-| Block propagation | < 1 second |
-| Payout processing | < 100ms/block |
-| Redis storage | ~10 MB/10K miners |
-| Memory usage | ~100 MB base |
-| Network | ~1 KB/miner/sec |
 
 ---
 

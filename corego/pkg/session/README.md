@@ -14,9 +14,7 @@ tags:
   - video-rendering
   - search
 ---
-# go-session — Claude Code Session Parser & Analytics
-
-> **The authoritative package for parsing, analyzing, and rendering Claude Code session transcripts**
+# go-session — Claude Code session parser and analytics
 
 **RFC:** [plans/code/core/go/session/RFC.md](../../../../../plans/code/core/go/session/RFC.md)
 **Source:** [~/Code/core/go-session/](file:///Users/snider/Code/core/go-session/)
@@ -25,25 +23,25 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-session` provides a **complete pipeline** for working with Claude Code JSONL transcript files:
+`go-session` provides a complete pipeline for working with Claude Code JSONL transcript files:
 
 - **Parser** — Parse Claude Code JSONL session files into structured Session/Event types
 - **Analytics** — Compute statistics: tool counts, error rates, latency, token estimates
-- **HTML Renderer** — Generate self-contained HTML with dark theme, collapsible panels, and search
-- **Video Renderer** — Create VHS tape scripts for MP4 video generation
+- **HTML renderer** — Generate self-contained HTML with dark theme, collapsible panels, and search
+- **Video renderer** — Create VHS tape scripts for MP4 video generation
 - **Search** — Cross-session text search for finding specific interactions
 
-### Primary Use Cases
+### Primary use cases
 
-1. **Session Analysis** — Understand tool usage patterns, errors, and performance
-2. **Session Replay** — Visualize sessions in HTML format for review
-3. **Training Data** — Extract and process session data for model training
-4. **Session Search** — Find specific interactions across multiple sessions
-5. **Video Creation** — Generate video replays of sessions
+1. **Session analysis** — Understand tool usage patterns, errors, and performance
+2. **Session replay** — Visualise sessions in HTML format for review
+3. **Training data** — Extract and process session data for model training
+4. **Session search** — Find specific interactions across multiple sessions
+5. **Video creation** — Generate video replays of sessions
 
-### Design Philosophy
+### Design philosophy
 
 - **Pure library** — No CLI, no config, no I/O beyond file read/write
 - **Explicit paths** — All functions accept explicit file paths
@@ -52,7 +50,7 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Pipeline
 
@@ -70,7 +68,7 @@ Analytics  HTML   Video  Search
                       File      File
 ```
 
-### Component Stack
+### Component stack
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -94,7 +92,7 @@ Analytics  HTML   Video  Search
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 go-session/
@@ -125,9 +123,9 @@ go-session/
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
-### Parse a Session
+### Parse a session
 
 ```go
 package main
@@ -157,7 +155,7 @@ func main() {
 }
 ```
 
-### List All Sessions
+### List all sessions
 
 ```go
 import "dappco.re/go/session"
@@ -173,7 +171,7 @@ for _, sess := range sessions {
 }
 ```
 
-### CoreGO Service Integration
+### CoreGO service integration
 
 ```go
 import (
@@ -197,7 +195,7 @@ sessions, _ := svc.ListSessions()
 
 ---
 
-## 🔧 Core Types
+## Core types
 
 ### Event
 
@@ -268,7 +266,7 @@ type ToolStats struct {
 
 ---
 
-## 📝 Parser
+## Parser
 
 ### ParseFile
 
@@ -311,9 +309,9 @@ count, err := session.PruneSessions("/path/to/.claude", session.PruneOptions{
 
 ---
 
-## 📊 Analytics
+## Analytics
 
-### Compute Analytics
+### Compute analytics
 
 ```go
 // Get analytics for a session
@@ -333,7 +331,7 @@ for tool, stats := range analytics.ToolStats {
 }
 ```
 
-### Error Rate
+### Error rate
 
 ```go
 // Get error rate for a tool
@@ -341,7 +339,7 @@ stats := analytics.ToolStats["Bash"]
 errorRate := stats.ErrorRate
 ```
 
-### Token Estimation
+### Token estimation
 
 ```go
 // Total tokens in session
@@ -350,9 +348,9 @@ fmt.Printf("Tokens: %d\n", analytics.TotalTokens)
 
 ---
 
-## 🎨 HTML Rendering
+## HTML rendering
 
-### Render Session to HTML
+### Render session to HTML
 
 ```go
 // Generate self-contained HTML
@@ -368,7 +366,7 @@ html, err := session.RenderHTML(sess, session.HTMLOptions{
 os.WriteFile("session.html", []byte(html), 0644)
 ```
 
-### HTML Options
+### HTML options
 
 ```go
 type HTMLOptions struct {
@@ -391,9 +389,9 @@ type HTMLOptions struct {
 
 ---
 
-## 🎥 Video Rendering
+## Video rendering
 
-### Create VHS Tape
+### Create VHS tape
 
 ```go
 // Generate VHS tape script
@@ -416,7 +414,7 @@ cmd := exec.Command("vhs", "session.tape", "session.mp4")
 cmd.Run()
 ```
 
-### Video Options
+### Video options
 
 ```go
 type VideoOptions struct {
@@ -431,7 +429,7 @@ type VideoOptions struct {
 }
 ```
 
-### VHS Commands
+### VHS commands
 
 The generated tape script includes:
 - `set width/height/fps` — Video configuration
@@ -442,9 +440,9 @@ The generated tape script includes:
 
 ---
 
-## 🔍 Search
+## Search
 
-### Search Sessions
+### Search sessions
 
 ```go
 // Search across multiple sessions
@@ -463,7 +461,7 @@ for _, result := range results {
 }
 ```
 
-### Search in Single Session
+### Search in single session
 
 ```go
 // Search within a session
@@ -477,7 +475,7 @@ for _, match := range matches {
 }
 ```
 
-### Search Options
+### Search options
 
 ```go
 type SearchOptions struct {
@@ -490,9 +488,9 @@ type SearchOptions struct {
 
 ---
 
-## 📊 Performance Considerations
+## Performance considerations
 
-### Parser Performance
+### Parser performance
 
 - **Parse speed:** ~1-2 MB/sec (depends on file size)
 - **Memory usage:** ~2x file size (events stored in memory)
@@ -505,7 +503,7 @@ type SearchOptions struct {
 - **Multiple sessions:** List/parse thousands of sessions
 - **Search:** Linear scan, O(n) where n = total events
 
-### Optimization Tips
+### Optimisation tips
 
 ```go
 // Use streaming parser for large sessions
@@ -529,9 +527,9 @@ wg.Wait()
 
 ---
 
-## 🎯 Best Practices
+## Best practices
 
-### 1. Always Validate Session Paths
+### 1. Always validate session paths
 
 ```go
 // Check if session file exists and is readable
@@ -542,7 +540,7 @@ if _, err := os.Stat(path); os.IsNotExist(err) {
 sess, err := session.ParseFile(path)
 ```
 
-### 2. Handle Truncation
+### 2. Handle truncation
 
 Tool inputs/outputs are truncated:
 - Input: max 500 chars
@@ -557,7 +555,7 @@ if len(event.Output) == 2000 {
 }
 ```
 
-### 3. Use Iterators for Large Sessions
+### 3. Use iterators for large sessions
 
 ```go
 // Use EventsSeq for memory-efficient iteration
@@ -567,7 +565,7 @@ for evt := range sess.EventsSeq() {
 }
 ```
 
-### 4. Cache Parsed Sessions
+### 4. Cache parsed sessions
 
 ```go
 // Cache parsed sessions to avoid re-parsing
@@ -586,7 +584,7 @@ func getSession(path string) (*session.Session, error) {
 }
 ```
 
-### 5. Filter Events by Type
+### 5. Filter events by type
 
 ```go
 // Get only tool_use events
@@ -599,9 +597,9 @@ for evt := range sess.EventsSeq() {
 
 ---
 
-## 📚 Examples
+## Examples
 
-### Example 1: Parse and Analyze Session
+### Example 1: Parse and analyse session
 
 ```go
 func ExampleParse() {
@@ -616,7 +614,7 @@ func ExampleParse() {
 }
 ```
 
-### Example 2: List All Sessions
+### Example 2: List all sessions
 
 ```go
 func ExampleListSessions() {
@@ -644,7 +642,7 @@ func ExampleRenderHTML() {
 }
 ```
 
-### Example 4: Search Sessions
+### Example 4: Search sessions
 
 ```go
 func ExampleSearch() {
@@ -659,7 +657,7 @@ func ExampleSearch() {
 }
 ```
 
-### Example 5: Compute Statistics
+### Example 5: Compute statistics
 
 ```go
 func ExampleAnalytics() {
@@ -676,9 +674,9 @@ func ExampleAnalytics() {
 
 ---
 
-## 🐛 Debugging
+## Debugging
 
-### Enable Debug Logging
+### Enable debug logging
 
 ```go
 import "dappco.re/go/log"
@@ -689,7 +687,7 @@ log.SetLevel(log.LevelDebug)
 sess, err := session.ParseFile("session.jsonl")
 ```
 
-### Common Issues
+### Common issues
 
 | Issue | Solution |
 |-------|----------|
@@ -699,7 +697,7 @@ sess, err := session.ParseFile("session.jsonl")
 | Slow parsing | Use streaming parser for large files |
 | Out of memory | Limit max events or use streaming |
 
-### Debugging Parser
+### Debugging parser
 
 ```go
 // Enable parser debug mode
@@ -711,9 +709,9 @@ sess, err := session.ParseFile("session.jsonl")
 
 ---
 
-## 📊 Metrics & Monitoring
+## Metrics and monitoring
 
-### Session Statistics
+### Session statistics
 
 ```go
 // Collect statistics across multiple sessions
@@ -729,7 +727,7 @@ for _, sess := range sessions {
 fmt.Printf("Total: %d events, %d errors\n", totalEvents, totalErrors)
 ```
 
-### Performance Metrics
+### Performance metrics
 
 ```go
 // Time parsing
@@ -745,17 +743,17 @@ fmt.Printf("Events/sec: %.1f\n", eps)
 
 ---
 
-## 📝 Notes
+## Notes
 
 - **Repository:** `forge.lthn.sh/core/go-session`
-- **Primary Spec:** [RFC.md](../../../../../plans/code/core/go/session/RFC.md)
+- **Primary spec:** [RFC.md](../../../../../plans/code/core/go/session/RFC.md)
 - **Dependencies:** `dappco.re/go` only
-- **Pure Library:** No CLI, no external I/O dependencies
-- **File Format:** Claude Code JSONL transcript format
+- **Pure library:** No CLI, no external I/O dependencies
+- **File format:** Claude Code JSONL transcript format
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -764,61 +762,5 @@ fmt.Printf("Events/sec: %.1f\n", eps)
 
 ---
 
-## 🎯 Tags
-
-```yaml
-- session
-- claude-code
-- transcript
-- parser
-- analytics
-- html-rendering
-- video-rendering
-- search
-- jsonl
-- vhs
-```
-
----
-
-*Package documentation generated: 2026-06-17T17:30:00Z*
 *Knowledge Pack: CoreGo v1.1.0*
 *Maintainer: Purberus <purberus@lthn.ai>*
-
----
-
-**Note:** This package is specialized for Claude Code session files. It provides a complete pipeline for parsing, analyzing, and rendering sessions in multiple formats.
-
-**Recommendation:** Use this package for session analysis, replay, and training data extraction. The HTML renderer is particularly useful for session reviews.
-
-**Video:** The video renderer requires the [vhs](https://github.com/charmbracelet/vhs) CLI tool to be installed for MP4 generation.
-
-**Performance:** For very large sessions (10K+ events), consider using the streaming parser or processing events incrementally.
-
-**Memory:** Parsed sessions are stored in memory. For analysis of many large sessions, implement caching or streaming.
-
-**Search:** The search functionality is case-insensitive by default and supports cross-session searches.
-
-**Truncation:** Be aware that tool inputs and outputs are truncated in the Event type. Use GetFullOutput for complete content.
-
-**Validation:** All session paths should be validated before parsing to avoid errors.
-
-**Error Handling:** Always check for errors when parsing sessions, as JSONL files can be corrupted or malformed.
-
-**Concurrency:** The parser is not thread-safe for the same Session instance. Create separate Session instances for concurrent access.
-
-**Testing:** The package includes comprehensive tests for all functionality, including example-based tests.
-
-**Integration:** Use CoreGO service registration for easy integration into CoreGO applications.
-
-**Customization:** The HTML and video renderers support various options for customization.
-
-**Extensibility:** The package is designed to be extended with additional renderers or analytics as needed.
-
-**Documentation:** All types and functions are documented with examples in the test files.
-
-**Maintenance:** This package is actively maintained and used throughout the Lethean ecosystem.
-
-**Compatibility:** Works with all versions of Claude Code that use the JSONL transcript format.
-
-**Future:** Potential enhancements include additional export formats (Markdown, PDF) and more advanced analytics.

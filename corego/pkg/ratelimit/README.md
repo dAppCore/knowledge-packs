@@ -1,33 +1,31 @@
-# go-ratelimit — Provider-Agnostic Rate Limiting
+# go-ratelimit — Provider-agnostic rate limiting
 
 > **Package:** `dappco.re/go/core/go-ratelimit`  
 > **Repository:** [`github.com/dappcore/go-ratelimit`](https://github.com/dappcore/go-ratelimit)  
 > **Spec:** [`plans/code/core/go/ratelimit/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/ratelimit/RFC.md)  
 > **Maintainer:** Purberus <purberus@lthn.ai>  
-> **Status:** ✅ Production Ready  
+> **Status:** Production ready  
 > **Module:** `dappco.re/go/core/go-ratelimit`
 
 ---
 
-## 📋 Overview
+## Overview
 
 **go-ratelimit** is a provider-agnostic sliding window rate limiter for LLM API calls. It enforces requests per minute (RPM), tokens per minute (TPM), and requests per day (RPD) quotas per model using an in-memory sliding window algorithm. State persists across process restarts via YAML (single-process) or SQLite (multi-process, WAL mode). Includes default quota profiles for Gemini, OpenAI, Anthropic, and local inference providers, plus a Gemini-specific token counting helper.
 
-### 🎯 Key Capabilities
+### Key capabilities
 
 | Category | Features | Description |
 |----------|----------|-------------|
-| **Rate Limiting** | Sliding window algorithm | Accurate quota enforcement |
-| **Quota Types** | 3 types | RPM, TPM, RPD per model |
-| **Provider Profiles** | 4 built-in | Gemini, OpenAI, Anthropic, Local |
+| **Rate limiting** | Sliding window algorithm | Accurate quota enforcement |
+| **Quota types** | 3 types | RPM, TPM, RPD per model |
+| **Provider profiles** | 4 built-in | Gemini, OpenAI, Anthropic, Local |
 | **Persistence** | 2 backends | YAML (single-process), SQLite (multi-process) |
-| **Token Counting** | Built-in | Gemini-specific token counter via HTTP API |
-| **Migration** | YAML → SQLite | Seamless backend migration |
-| **Agent Workflows** | Structured decisions | Retry guidance with structured verdicts |
+| **Token counting** | Built-in | Gemini-specific token counter via HTTP API |
+| **Migration** | YAML → SQLite | Backend migration |
+| **Agent workflows** | Structured decisions | Retry guidance with structured verdicts |
 
-### 🏗️ Architecture
-
-### Module Structure
+### Module structure
 
 ```
 core/go-ratelimit/
@@ -65,28 +63,28 @@ core/go-ratelimit/
 └── LICENCE
 ```
 
-### Core Design Principles
+### Core design principles
 
-1. **Provider-Agnostic** — Works with any LLM provider, not just built-in profiles
-2. **Sliding Window** — Accurate quota tracking without fixed time buckets
-3. **Persistent State** — Survives process restarts via YAML or SQLite
-4. **Multi-Process Safe** — SQLite backend with WAL mode for concurrent access
-5. **AX Standard** — Each `.go` file has `_test.go` and `_example_test.go`
-6. **Agent-First** — Structured decisions with retry guidance for AI workflows
+1. **Provider-agnostic** — Works with any LLM provider, not just built-in profiles
+2. **Sliding window** — Accurate quota tracking without fixed time buckets
+3. **Persistent state** — Survives process restarts via YAML or SQLite
+4. **Multi-process safe** — SQLite backend with WAL mode for concurrent access
+5. **AX standard** — Each `.go` file has `_test.go` and `_example_test.go`
+6. **Agent-first** — Structured decisions with retry guidance for AI workflows
 
 ---
 
-## 📦 Packages
+## Packages
 
-### Core Rate Limiting (`ratelimit.go`)
+### Core rate limiting (`ratelimit.go`)
 
-#### Quota Types
+#### Quota types
 
 - **RPM (Requests Per Minute)** — Rate limit based on request count
 - **TPM (Tokens Per Minute)** — Rate limit based on token count
 - **RPD (Requests Per Day)** — Daily quota limit
 
-#### Provider Profiles
+#### Provider profiles
 
 Built-in profiles for popular LLM providers:
 
@@ -97,38 +95,38 @@ Built-in profiles for popular LLM providers:
 | **Anthropic** | claude-3-sonnet, claude-3-haiku, etc. | Varies by model | Varies by model | Varies by model |
 | **Local** | ollama, mlx, llama.cpp | High/Unlimited | High/Unlimited | Unlimited |
 
-#### Sliding Window Algorithm
+#### Sliding window algorithm
 
-- **Accurate Tracking** — No fixed time bucket artifacts
+- **Accurate tracking** — No fixed time bucket artefacts
 - **Efficient** — O(1) operations for most checks
-- **Thread-Safe** — Concurrent access protected
-- **Memory Efficient** — Only stores recent requests
+- **Thread-safe** — Concurrent access protected
+- **Memory efficient** — Only stores recent requests
 
-### Persistence Backends
+### Persistence backends
 
-#### YAML Backend (Default, Single-Process)
+#### YAML backend (default, single-process)
 
 - **File-based** — Simple YAML file storage
 - **Fast** — Low latency for single-process use
-- **Human-Readable** — Easy to inspect and debug
-- **Default Location** — `~/.core/ratelimits.yaml`
+- **Human-readable** — Easy to inspect and debug
+- **Default location** — `~/.core/ratelimits.yaml`
 
-#### SQLite Backend (Multi-Process)
+#### SQLite backend (multi-process)
 
-- **WAL Mode** — Concurrent read/write support
+- **WAL mode** — Concurrent read/write support
 - **Persistent** — Survives process restarts
-- **Scalable** — Handles high request volumes
-- **Migration Support** — Can migrate from YAML
+- **Handles high request volumes** — Suitable for busy workloads
+- **Migration support** — Can migrate from YAML
 
-### Token Counting
+### Token counting
 
-**Gemini-Specific Token Counter:**
+**Gemini-specific token counter:**
 - Counts tokens via HTTP API
 - Accurate for Gemini models
 - Handles batch counting
 - Error resilient
 
-### CoreGo Service Integration (`service.go`)
+### CoreGo service integration (`service.go`)
 
 Full CoreGo service with:
 - Query handlers for rate limit checks
@@ -138,9 +136,9 @@ Full CoreGo service with:
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### Basic Initialization
+### Basic initialisation
 
 ```go
 import "dappco.re/go/core/go-ratelimit"
@@ -159,7 +157,7 @@ if err != nil {
 defer rl.Close()
 ```
 
-### Custom Configuration
+### Custom configuration
 
 ```go
 cfg := ratelimit.Config{
@@ -177,7 +175,7 @@ cfg := ratelimit.Config{
 rl, err := ratelimit.NewWithConfig(cfg)
 ```
 
-### Default Provider Profiles
+### Default provider profiles
 
 ```go
 // Get default profiles for all providers
@@ -194,7 +192,7 @@ cfg := ratelimit.Config{
 
 ---
 
-## 🚀 Commands
+## Commands
 
 While primarily a library, go-ratelimit can be integrated into CLI tools:
 
@@ -214,9 +212,9 @@ core ratelimit reset
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
-### 1. Simple Rate Limit Check
+### 1. Simple rate limit check
 
 ```go
 import "dappco.re/go/core/go-ratelimit"
@@ -233,7 +231,7 @@ if rl.CanSend("gemini-2.0-flash", 1500) {
 }
 ```
 
-### 2. Structured Decision for Agents
+### 2. Structured decision for agents
 
 ```go
 decision := rl.Decide("gemini-2.0-flash", 1500)
@@ -247,7 +245,7 @@ if !decision.Allowed {
 }
 ```
 
-### 3. Token Counting
+### 3. Token counting
 
 ```go
 // Count tokens for a prompt (uses HTTP API for Gemini)
@@ -262,7 +260,7 @@ if rl.CanSend("gemini-2.0-flash", tokenCount) {
 }
 ```
 
-### 4. Batch Token Counting
+### 4. Batch token counting
 
 ```go
 // Count tokens for multiple prompts
@@ -277,7 +275,7 @@ for i, count := range tokenCounts {
 }
 ```
 
-### 5. Custom Quotas
+### 5. Custom quotas
 
 ```go
 // Set custom quota for a model
@@ -330,15 +328,15 @@ if err != nil {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 Each file follows the AX standard:
 - `_test.go` — Unit tests
 - `_example_test.go` — Usage examples as tests
 
-### Test Coverage
+### Test coverage
 
 | File | Functions | Lines | Coverage |
 |------|-----------|-------|----------|
@@ -346,7 +344,7 @@ Each file follows the AX standard:
 | `sqlite.go` | 15+ | ~300 | >80% |
 | `service.go` | 10+ | ~200 | >80% |
 
-### Test Commands
+### Test commands
 
 ```bash
 # All tests
@@ -365,9 +363,9 @@ go tool cover -html=coverage.out
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Core Types
+### Core types
 
 ```go
 // Provider - LLM provider identifier
@@ -410,10 +408,10 @@ type Decision struct {
 }
 ```
 
-### Main Functions
+### Main functions
 
 ```go
-// Initialization
+// Initialisation
 func New() (*RateLimiter, error)
 func NewWithSQLite(path string) (*RateLimiter, error)
 func NewWithConfig(cfg Config) (*RateLimiter, error)
@@ -445,7 +443,7 @@ func DefaultProfiles() map[Provider]ProviderProfile
 func DefaultConfig() Config
 ```
 
-### Configuration Functions
+### Configuration functions
 
 ```go
 // Config helpers
@@ -455,73 +453,29 @@ func SaveConfig(path string, cfg Config) error
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### Internal Documentation
+### Internal documentation
 
 | Resource | Description | Location |
 |----------|-------------|----------|
 | RFC | Package specification | [plans/code/core/go/ratelimit/RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/ratelimit/RFC.md) |
 | Architecture | Sliding window algorithm, provider quotas, backends | [docs/architecture.md](file:///Users/snider/Code/core/go-ratelimit/docs/architecture.md) |
-| Development Guide | Prerequisites, test patterns, coding standards | [docs/development.md](file:///Users/snider/Code/core/go-ratelimit/docs/development.md) |
-| Project History | Completed phases, known limitations | [docs/history.md](file:///Users/snider/Code/core/go-ratelimit/docs/history.md) |
-| Threat Analysis | Security considerations | [threats.md](file:///Users/snider/Code/core/go-ratelimit/threats.md) |
+| Development guide | Prerequisites, test patterns, coding standards | [docs/development.md](file:///Users/snider/Code/core/go-ratelimit/docs/development.md) |
+| Project history | Completed phases, known limitations | [docs/history.md](file:///Users/snider/Code/core/go-ratelimit/docs/history.md) |
+| Threat analysis | Security considerations | [threats.md](file:///Users/snider/Code/core/go-ratelimit/threats.md) |
 
-### External References
+### External references
 
 | Resource | URL |
 |----------|-----|
 | Repository | [github.com/dappcore/go-ratelimit](https://github.com/dappcore/go-ratelimit) |
 | Module | [pkg.go.dev/dappco.re/go/core/go-ratelimit](https://pkg.go.dev/dappco.re/go/core/go-ratelimit) |
-| Sliding Window Algorithm | [Wikipedia](https://en.wikipedia.org/wiki/Sliding_window) |
+| Sliding window algorithm | [Wikipedia](https://en.wikipedia.org/wiki/Sliding_window) |
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
-
-```
-Total Repository Size:    ~15 MB
-Go Source Files:         8+
-Test Files:             8+
-Example Files:          4+
-Documentation:          1000+ lines
-
-Lines of Code:
-  └── Go:              ~1,500
-  └── Tests:           ~1,000
-  └── Documentation:    ~1,000
-  └── Total:           ~3,500
-```
-
-### Feature Coverage
-
-| Feature | Status | Details |
-|---------|--------|---------|
-| Sliding Window Rate Limiting | ✅ Complete | Accurate, efficient, thread-safe |
-| RPM Limiting | ✅ Complete | Requests per minute |
-| TPM Limiting | ✅ Complete | Tokens per minute |
-| RPD Limiting | ✅ Complete | Requests per day |
-| YAML Backend | ✅ Complete | Single-process persistence |
-| SQLite Backend | ✅ Complete | Multi-process persistence with WAL |
-| Token Counting | ✅ Complete | Gemini-specific via HTTP API |
-| Batch Token Counting | ✅ Complete | Multiple texts at once |
-| Structured Decisions | ✅ Complete | Agent-friendly verdicts |
-| Provider Profiles | ✅ Complete | Gemini, OpenAI, Anthropic, Local |
-| Custom Quotas | ✅ Complete | Per-model quota configuration |
-| State Migration | ✅ Complete | YAML to SQLite migration |
-| CoreGo Service | ✅ Complete | Full service integration |
-
-### Test Statistics
-
-| Type | Count | Coverage |
-|------|-------|----------|
-| Unit Tests | 50+ | >85% |
-| Example Tests | 10+ | N/A |
-| Total | 60+ | >85% |
-
-### Dependency Statistics
+## Dependencies
 
 ```
 Direct Dependencies:    2
@@ -534,12 +488,6 @@ Indirect Dependencies: 10+
   ├── golang.org/x/text v0.36.0
   └── gopkg.in/yaml.v3 v3.0.1
 ```
-
----
-
-## 🏷️ Tags
-
-#ratelimit #rate-limiting #llm #ai #throttling #quota #sliding-window #rpm #tpm #rpd #yaml #sqlite #persistence #multi-process #token-counting #gemini #openai #anthropic #local-inference #agent-first #ax-standard #provider-agnostic
 
 ---
 

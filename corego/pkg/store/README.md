@@ -1,7 +1,6 @@
 ---
 type: Package Deep Dive
 title: go-store — SQLite Key-Value Store with Multi-Layer Architecture
-description: Complete documentation for go-store — SQLite-backed key-value store with TTL, namespace isolation, reactive events, DuckDB workspaces, InfluxDB journal, and cold archive
 description: Pure Go SQLite KV store with TTL expiry (triple-layered), namespace isolation via ScopedStore, reactive Watch/OnChange events, DuckDB workspace buffering, InfluxDB time-series journal, compressed JSONL cold archive, and io.Medium transport abstraction
 module: dappco.re/go/store
 repo: core/go-store
@@ -14,15 +13,13 @@ created: 2026-06-18T05:00:00Z
 
 # go-store — SQLite Key-Value Store with Multi-Layer Architecture
 
-> **"An agent should be able to implement this library from this document alone."**
-
 `dappco.re/go/store` is the **SQLite-backed key-value store** with **TTL expiry**, **namespace isolation**, **reactive events**, **DuckDB workspace buffering**, **InfluxDB time-series journal**, and **cold archive** capabilities for the Lethean agent platform. Pure Go (no CGO).
 
 Used by `core/ide` for memory caching, by agents for workspace state, and across the platform for durable, portable storage that integrates with the CoreGO framework's `core.Result` and `io.Medium` transport abstraction.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### What it is
 
@@ -130,7 +127,7 @@ Data Flow:
 
 ---
 
-## 📦 Quick Start
+## Quick start
 
 ### Basic Store Usage
 
@@ -205,7 +202,7 @@ result = store.New("app.db", store.WithMedium(cubeMedium))
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Core Components
 
@@ -347,7 +344,7 @@ func (s *Store) RenderWithData(templateText string, data map[string]any) (string
 
 ---
 
-## 🔔 Event System
+## Event system
 
 ### Watch API (Channel-Based)
 
@@ -392,7 +389,7 @@ defer unregister()
 
 ---
 
-## 🗂️ ScopedStore - Namespace Isolation
+## ScopedStore — namespace isolation
 
 ### Overview
 
@@ -495,7 +492,7 @@ type ScopedStoreTransaction struct {
 
 ---
 
-## 💼 Workspace - DuckDB Buffer System
+## Workspace — DuckDB buffer system
 
 ### Overview
 
@@ -630,7 +627,7 @@ for _, orphan := range orphans {
 
 ---
 
-## 📊 Journal - InfluxDB Time-Series
+## Journal — InfluxDB time-series
 
 ### Overview
 
@@ -677,7 +674,7 @@ The store automatically translates Flux queries to SQLite-compatible SQL:
 
 ---
 
-## 🗃️ Cold Archive
+## Cold archive
 
 ### Overview
 
@@ -726,7 +723,7 @@ Compressed with gzip or zstd, each line is a self-contained JSON object.
 
 ---
 
-## 🔌 io.Medium Integration
+## io.Medium integration
 
 ### Overview
 
@@ -776,7 +773,7 @@ The store never touches the filesystem directly — everything goes through the 
 
 ---
 
-## 🔧 Import/Export
+## Import/Export
 
 ### Import Data
 
@@ -814,7 +811,7 @@ store.Export(ws, io.Local("/data/training/"), "dataset.jsonl")
 
 ---
 
-## 📝 Transactions
+## Transactions
 
 ### Transaction API
 
@@ -859,7 +856,7 @@ result := st.Transaction(func(tx *store.Transaction) core.Result {
 
 ---
 
-## 🔒 Lifecycle Management
+## Lifecycle management
 
 ### Store Lifecycle
 
@@ -891,7 +888,7 @@ st, _ := store.New(":memory:", store.WithPurgeInterval(30*time.Second))
 
 ---
 
-## 📊 Use Cases
+## Use cases
 
 | Scenario | Configuration | Use Case |
 |----------|--------------|----------|
@@ -905,7 +902,7 @@ st, _ := store.New(":memory:", store.WithPurgeInterval(30*time.Second))
 
 ---
 
-## 🎯 Consumers
+## Consumers
 
 | Package | Usage |
 |---------|-------|
@@ -916,34 +913,7 @@ st, _ := store.New(":memory:", store.WithPurgeInterval(30*time.Second))
 
 ---
 
-## 🏆 Key Features Summary
-
-### ✅ What go-store Provides
-
-1. **TTL Expiry** — Three-layer enforcement (lazy delete, query filter, background purge)
-2. **Namespace Isolation** — `ScopedStore` with quota enforcement
-3. **Reactive Events** — `Watch()` channels + `OnChange()` callbacks
-4. **Workspace Buffering** — DuckDB mutable accumulation, atomic commit
-5. **Time-Series Journal** — InfluxDB integration with Flux query support
-6. **Cold Archive** — Compressed JSONL (gzip/zstd) for long-term storage
-7. **Transport Abstraction** — `io.Medium` for hot-swapping storage backends
-8. **SQL Injection Protection** — `escapeLike()` for LIKE queries
-9. **Single-Connection Design** — `MaxOpenConns(1)` for SQLite pragmas
-10. **Orphan Recovery** — Automatic detection and recovery of crashed workspaces
-11. **Atomic Transactions** — Full SQLite transaction support
-12. **Template Rendering** — `text/template` integration with store values
-
-### ❌ What go-store Does NOT Do
-
-1. **No CGO** — Pure Go implementation (uses `modernc.org/sqlite`)
-2. **No connection pooling** — Single-connection by design for SQLite
-3. **No distributed coordination** — Single-instance; use go-p2p for multi-node
-4. **No schema migrations** — Schema is fixed at initialization
-5. **No external dependencies** — Except `modernc.org/sqlite` and `influxdb-client-go`
-
----
-
-## 📚 Testing
+## Testing
 
 ### Test Patterns
 
@@ -989,7 +959,7 @@ transaction_example_test.go # Transaction examples
 
 ---
 
-## 🎨 Code Examples
+## Code examples
 
 ### Example: Session Management
 
@@ -1115,7 +1085,7 @@ trainingStore.CommitToJournal("training-metadata", map[string]any{
 
 ---
 
-## 📖 References
+## References
 
 ### RFC Specification
 
@@ -1145,7 +1115,7 @@ dappco.re/go               # CoreGO framework
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -1165,6 +1135,3 @@ dappco.re/go               # CoreGO framework
 | **Version** | 1.0.0 |
 
 ---
-
-*Documentation generated from source code analysis and RFC specification.*
-*Last updated: 2026-06-18T05:00:00Z*

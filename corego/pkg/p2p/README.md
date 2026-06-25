@@ -17,8 +17,6 @@ tags:
 ---
 # go-p2p — Peer-to-Peer Networking for Distributed Mining
 
-> **The authoritative P2P networking layer for multi-node mining management**
-
 **RFC:** [plans/code/core/go/p2p/RFC.md](../../../../../plans/code/core/go/p2p/RFC.md)
 **Source:** [~/Code/core/go-p2p/](file:///Users/snider/Code/core/go-p2p/)
 **Module:** `dappco.re/go/core/p2p`
@@ -26,7 +24,7 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
 `go-p2p` provides a **complete peer-to-peer networking layer** for multi-node mining management in the Lethean ecosystem. It handles:
 
@@ -37,13 +35,13 @@ tags:
 - **Multi-role architecture** — Controller nodes, worker nodes, and dual-role nodes
 - **Distributed mining coordination** — Remote miner management with statistics collection
 
-### Primary Use Cases
+### Primary use cases
 
 1. **Controller nodes** — Manage remote worker nodes, dispatch mining commands, collect statistics
 2. **Worker nodes** — Receive commands from controllers, run miners locally, report metrics
 3. **Dual-role nodes** — Operate as both controller and worker (default mode)
 
-### Design Philosophy
+### Design philosophy
 
 - **Decentralized control** — No single point of failure
 - **End-to-end encryption** — All messages encrypted via SMSG (X25519 ECDH + HMAC-SHA256)
@@ -54,9 +52,9 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Stack
+### Component stack
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -85,7 +83,7 @@ tags:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Node Roles
+### Node roles
 
 ```go
 type NodeRole int
@@ -116,7 +114,7 @@ const (
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 core/go-p2p/
@@ -166,9 +164,9 @@ core/go-p2p/
 
 ---
 
-## 👤 Node Identity & Key Management
+## Node identity & key management
 
-### NodeIdentity Structure
+### NodeIdentity structure
 
 ```go
 type NodeIdentity struct {
@@ -191,7 +189,7 @@ type NodeIdentity struct {
 }
 ```
 
-### NodeManager — Identity Operations
+### NodeManager — identity operations
 
 ```go
 type NodeManager struct {
@@ -220,7 +218,7 @@ func (m *NodeManager) DeriveSharedSecret(peerPublicKeyBase64 string) ([]byte, er
 - Private key: `~/.local/share/lethean-desktop/node/private.key` (mode 0600)
 - Public identity: `~/.config/lethean-desktop/node.json`
 
-### Challenge-Response Authentication
+### Challenge-response authentication
 
 Stateless authentication without transmitting shared secrets:
 
@@ -241,9 +239,9 @@ if VerifyChallenge(challenge, signature, sharedSecret) {
 
 ---
 
-## 👥 Peer Registry & Management
+## Peer registry & management
 
-### Peer Structure
+### Peer structure
 
 ```go
 type Peer struct {
@@ -265,7 +263,7 @@ type Peer struct {
 }
 ```
 
-### Authentication Modes
+### Authentication modes
 
 ```go
 type PeerAuthMode int
@@ -276,7 +274,7 @@ const (
 )
 ```
 
-### PeerRegistry Operations
+### PeerRegistry operations
 
 ```go
 type PeerRegistry struct {
@@ -310,7 +308,7 @@ func (r *PeerRegistry) Save() error  // Persist to JSON
 func (r *PeerRegistry) Load() error  // Load from JSON
 ```
 
-### Poindexter KD-Tree Spatial Indexing
+### Poindexter KD-tree spatial indexing
 
 **Purpose:** Intelligent peer selection based on network topology and geographic proximity.
 
@@ -328,13 +326,13 @@ nearby, err := registry.FindNearby(51.5074, -0.1278, 5, 10)  // London coordinat
 
 ---
 
-## 📡 Messages & Payloads
+## Messages & payloads
 
-### Message Types
+### Message types
 
 16 message types cover connection lifecycle, miner operations, deployment, and logging:
 
-#### Connection Lifecycle
+#### Connection lifecycle
 | Type | Purpose | Direction |
 |------|---------|-----------|
 | `MsgHandshake` | Connection establishment | Both |
@@ -343,7 +341,7 @@ nearby, err := registry.FindNearby(51.5074, -0.1278, 5, 10)  // London coordinat
 | `MsgPong` | Ping response | Both |
 | `MsgDisconnect` | Graceful disconnection | Both |
 
-#### Miner Operations
+#### Miner operations
 | Type | Purpose | Direction |
 |------|---------|-----------|
 | `MsgStartMiner` | Start a miner instance | Controller → Worker |
@@ -364,12 +362,12 @@ nearby, err := registry.FindNearby(51.5074, -0.1278, 5, 10)  // London coordinat
 | `MsgGetLogs` | Request logs | Controller → Worker |
 | `MsgLogs` | Logs response | Worker → Controller |
 
-#### Error Handling
+#### Error handling
 | Type | Purpose | Direction |
 |------|---------|-----------|
 | `MsgError` | Error response | Both |
 
-### Message Structure
+### Message structure
 
 ```go
 type Message struct {
@@ -392,7 +390,7 @@ func (msg *Message) Reply(msgType MessageType, payload any) (*Message, error)
 func (msg *Message) ParsePayload(v any) error
 ```
 
-### Payload Types
+### Payload types
 
 #### Handshake
 ```go
@@ -424,7 +422,7 @@ type PongPayload struct {
 }
 ```
 
-#### Miner Operations
+#### Miner operations
 ```go
 type StartMinerPayload struct {
     MinerType string          `json:"minerType"`    // Required: "xmrig", "tt-miner", etc.
@@ -512,9 +510,9 @@ const (
 
 ---
 
-## 🌐 WebSocket Transport
+## WebSocket transport
 
-### Transport Configuration
+### Transport configuration
 
 ```go
 type TransportConfig struct {
@@ -535,7 +533,7 @@ config.TLSCertPath = "/path/to/cert.pem"
 config.TLSKeyPath = "/path/to/key.pem"
 ```
 
-### Transport Lifecycle
+### Transport lifecycle
 
 ```go
 type Transport struct {
@@ -614,9 +612,9 @@ err := peerConn.GracefulClose("shutdown", 1000)
 
 ---
 
-## 🔐 Security Features
+## Security features
 
-### SMSG Message Encryption
+### SMSG message encryption
 
 **Algorithm:** X25519 ECDH key exchange + HMAC-SHA256 for authentication
 
@@ -628,7 +626,7 @@ err := peerConn.GracefulClose("shutdown", 1000)
 
 **Important:** Encryption/decryption happens transparently in `Send()` and the read loop. Agents do NOT call encryption/decryption directly.
 
-### Message Deduplication
+### Message deduplication
 
 Prevents replay attacks by tracking message IDs:
 
@@ -654,7 +652,7 @@ dedup.Mark(msgID)
 dedup.Cleanup()
 ```
 
-### Rate Limiting
+### Rate limiting
 
 Per-peer rate limiting prevents flood attacks:
 
@@ -678,9 +676,9 @@ if limiter.Allow(peerID) {
 
 ---
 
-## 📦 Deployment Bundles
+## Deployment bundles
 
-### Bundle Structure
+### Bundle structure
 
 ```go
 type Bundle struct {
@@ -704,7 +702,7 @@ const (
 )
 ```
 
-### Miner Configuration
+### Miner configuration
 
 ```go
 type MinerConfig struct {
@@ -719,7 +717,7 @@ type MinerConfig struct {
 }
 ```
 
-### Miner Profile
+### Miner profile
 
 ```go
 type MinerProfile struct {
@@ -754,9 +752,9 @@ type WalletConfig struct {
 
 ---
 
-## 🎯 Usage Examples
+## Usage examples
 
-### Basic Setup
+### Basic setup
 
 ```go
 package main
@@ -787,7 +785,7 @@ func main() {
 }
 ```
 
-### Controller Node
+### Controller node
 
 ```go
 package main
@@ -856,7 +854,7 @@ func main() {
 }
 ```
 
-### Worker Node
+### Worker node
 
 ```go
 package main
@@ -922,7 +920,7 @@ func main() {
 }
 ```
 
-### Full Mesh Network
+### Full mesh network
 
 ```go
 package main
@@ -992,11 +990,11 @@ func main() {
 
 ---
 
-## 🌍 UDP Extended Protocol Support (UEPS)
+## UDP extended protocol support (UEPS)
 
 UEPS provides additional P2P capabilities:
 
-### Packet Structure
+### Packet structure
 
 ```go
 type UEPacket struct {
@@ -1031,7 +1029,7 @@ case UEPSTypeData:
 
 ---
 
-## ⚙️ Core Actions
+## Core actions
 
 All actions are registered with the Core action system:
 
@@ -1051,7 +1049,7 @@ All actions are registered with the Core action system:
 
 ---
 
-## 📈 Performance Characteristics
+## Performance characteristics
 
 ### Throughput
 
@@ -1086,7 +1084,7 @@ All actions are registered with the Core action system:
 
 ---
 
-## 🛡️ Security Considerations
+## Security considerations
 
 ### Encryption
 
@@ -1110,9 +1108,9 @@ All actions are registered with the Core action system:
 
 ---
 
-## 🔄 Protocol Compatibility
+## Protocol compatibility
 
-### CryptoNote Levin Protocol
+### CryptoNote Levin protocol
 
 go-p2p is compatible with the CryptoNote Levin protocol:
 
@@ -1126,7 +1124,7 @@ go-p2p is compatible with the CryptoNote Levin protocol:
 
 **Note:** go-p2p enhances the basic Levin protocol with SMSG encryption and additional message types for mining coordination.
 
-### Backwards Compatibility
+### Backwards compatibility
 
 - Protocol version negotiation
 - Graceful degradation for older nodes
@@ -1134,9 +1132,9 @@ go-p2p is compatible with the CryptoNote Levin protocol:
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Coverage
+### Test coverage
 
 All packages follow the **triplet pattern** (`_test.go`, `_example_test.go`):
 
@@ -1146,7 +1144,7 @@ All packages follow the **triplet pattern** (`_test.go`, `_example_test.go`):
 | `node` (p2p) | `protocol_test.go`, `protocol_example_test.go`, `message_test.go`, etc. | All protocol + message handling |
 | `ueps` | `packet_test.go`, `packet_example_test.go`, `reader_test.go`, `bench_test.go` | UEPS packet handling |
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -1166,7 +1164,7 @@ go test -bench=. ./go/ueps/...
 
 ---
 
-## 📖 RFC Compliance
+## RFC compliance
 
 | RFC Section | Status | Notes |
 |-------------|--------|-------|
@@ -1183,16 +1181,16 @@ go test -bench=. ./go/ueps/...
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
-### Internal Dependencies
+### Internal dependencies
 
 | Package | Module | Purpose |
 |---------|--------|---------|
 | `dappco.re/core/go` | Core framework | Result pattern, logging |
 | `dappco.re/go/api` | go-api | HTTP utilities (for monitoring API) |
 
-### External Dependencies
+### External dependencies
 
 | Package | Purpose | Version |
 |---------|---------|---------|
@@ -1201,9 +1199,9 @@ go test -bench=. ./go/ueps/...
 
 ---
 
-## 🎯 Use Cases
+## Use cases
 
-### 1. Distributed Mining Farm
+### 1. Distributed mining farm
 
 ```go
 // Controller node
@@ -1221,7 +1219,7 @@ stats := controller.CollectStats()
 fmt.Printf("Total hashrate: %.2f H/s\n", stats.TotalHashrate)
 ```
 
-### 2. Remote Mining Management
+### 2. Remote mining management
 
 ```go
 // Connect to remote node
@@ -1245,7 +1243,7 @@ if err != nil {
 }
 ```
 
-### 3. Peer Discovery Network
+### 3. Peer discovery network
 
 ```go
 // Setup peer registry with spatial indexing
@@ -1261,7 +1259,7 @@ registry.AddPeerWithLocation(peer, 35.6762, 139.6503) // Tokyo
 nearby := registry.FindNearby(51.5074, -0.1278, 3, 5)  // London, 3 hops, 5 results
 ```
 
-### 4. Monitoring Dashboard
+### 4. Monitoring dashboard
 
 ```go
 // Setup monitoring endpoint
@@ -1285,19 +1283,7 @@ type P2PStats struct {
 
 ---
 
-## 📊 Quick Stats
-
-- **Go files:** 40+ (implementation + tests + examples)
-- **Subpackages:** 2 (node, ueps)
-- **Message types:** 16
-- **Node roles:** 3 (Controller, Worker, Dual)
-- **Error codes:** 10+
-- **Test files:** 20+ (100% triplet coverage)
-- **CLOC (estimated):** 8,000+
-
----
-
-## 📅 Roadmap
+## Roadmap
 
 | Milestone | Priority | Status | Target |
 |----------|----------|--------|--------|
@@ -1309,7 +1295,7 @@ type P2PStats struct {
 
 ---
 
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -1321,7 +1307,7 @@ type P2PStats struct {
 
 ---
 
-## 💡 Agent Tips
+## Agent tips
 
 1. **Use NodeManager for identity** — Never manage keys directly
 2. **Always use PeerConnection for sending** — Handles encryption automatically
@@ -1334,7 +1320,7 @@ type P2PStats struct {
 
 ---
 
-## 📚 Additional Resources
+## Additional resources
 
 ### Standards
 - **[RFC 7539](https://datatracker.ietf.org/doc/html/rfc7539)** — ChaCha20 and Poly1305 (SMSG reference)
@@ -1342,12 +1328,12 @@ type P2PStats struct {
 - **[X25519](https://datatracker.ietf.org/doc/html/rfc7748)** — Elliptic Curve Diffie-Hellman
 - **[Ed25519](https://datatracker.ietf.org/doc/html/rfc8032)** — Edwards-curve Digital Signature Algorithm
 
-### Lethean Projects
+### Lethean projects
 - **[go-blockchain](file:///Users/snider/Code/core/go-blockchain/)** — Uses P2P for blockchain sync
 - **[Core Framework](file:///Users/snider/Code/core/go/RFC.md)** — SPOR and Result pattern
 - **[Lethean](https://lethean.io)** — Main project website
 
-### External Projects
+### External projects
 - **[gorilla/websocket](https://github.com/gorilla/websocket)** — WebSocket implementation
 - **[CryptoNote](https://cryptonote.org/)** — Original protocol specification
 

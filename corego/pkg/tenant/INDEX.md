@@ -8,26 +8,11 @@
 
 ---
 
-## 📚 Table of Contents
-
-- [📋 Overview](#-overview)
-- [🏗️ Architecture](#-architecture)
-- [📦 Subpackages](#-subpackages)
-- [🔧 Configuration](#-configuration)
-- [🚀 Commands](#-commands)
-- [📝 Usage Patterns](#-usage-patterns)
-- [🧪 Testing](#-testing)
-- [📖 API Reference](#-api-reference)
-- [🔗 Related Documentation](#-related-documentation)
-- [📊 Statistics](#-statistics)
-
----
-
-## 📋 Overview
+## Overview
 
 **go-tenant** provides CoreGO multi-tenancy primitives for workspace resolution, user context management, feature entitlements, and usage tracking. It follows a consumer architecture where PHP owns the database and business logic, while Go acts as a client that calls PHP's REST API for all mutations and queries, caching results locally via go-store for performance.
 
-### 🎯 Key Features
+### Key features
 
 | Category | Count | Description |
 |----------|-------|-------------|
@@ -38,23 +23,9 @@
 | **PHP API Methods** | 5 | GetUser, GetWorkspace, ListWorkspaces, CheckFeature, TrackUsage |
 | **Usage Tracking** | 2 | RecordUsage, Usage Alerts |
 
-### 📊 Package Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Module** | `dappco.re/go/tenant` |
-| **Go Version** | 1.26.0 |
-| **Total Files** | 30+ |
-| **Go Source Files** | 15+ |
-| **Test Files** | 15+ |
-| **Example Files** | 10+ |
-| **Total Lines** | ~2,500 |
-| **Test Coverage** | >80% |
-| **Dependencies** | 3 direct, 20+ indirect |
-
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Consumer Architecture
 
@@ -183,7 +154,7 @@ Request → Middleware → Context Setup
 
 ---
 
-## 📦 Subpackages
+## Subpackages
 
 ### Core Components
 
@@ -214,7 +185,7 @@ Request → Middleware → Context Setup
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Tenant Options
 
@@ -293,7 +264,7 @@ func (t UserTier) HasFeature(code string) bool
 
 ---
 
-## 🚀 Commands
+## Commands
 
 CLI integration examples (pseudo-commands):
 
@@ -322,7 +293,7 @@ core tenant cache reset
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
 ### 1. Basic Feature Check
 
@@ -483,7 +454,7 @@ featureResult := client.CheckFeature(ctx, 123, "api_access")
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Coverage by File
 
@@ -522,7 +493,7 @@ go test -v ./go/tenant/...
 
 ---
 
-## 📖 API Reference
+## API reference
 
 ### User Types
 
@@ -714,7 +685,7 @@ var (
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
 ### Internal Documentation
 
@@ -731,75 +702,3 @@ var (
 | PHP Backend | (Internal) PHP API for tenant management |
 | go-store | [dappco.re/go/store](dappco.re/go/store) — Caching backend |
 
----
-
-## 📊 Statistics
-
-### Code Metrics
-
-```
-Total Repository Size:    ~10 MB
-
-Files:
-  └── Go Source:          15+ files
-  └── Test Files:         15+ files
-  └── Example Files:      10+ files
-  └── Documentation:      5+ files
-
-Lines of Code:
-  └── Production:         ~1,800
-  └── Tests:              ~700
-  └── Documentation:      ~500
-  └── Total:              ~3,000
-```
-
-### Feature Coverage
-
-| Feature | Status | Details |
-|---------|--------|---------|
-| Multi-Tenancy Support | ✅ Complete | Workspace and user isolation |
-| User Context Management | ✅ Complete | Inject/retrieve from context |
-| Workspace Resolution | ✅ Complete | Resolve by ID or path |
-| Tier System | ✅ Complete | Free, Apollo, Hades tiers |
-| Feature Entitlements | ✅ Complete | Tier-based access control |
-| Usage Tracking | ✅ Complete | Track resource consumption |
-| Usage Alerts | ✅ Complete | Alert on thresholds |
-| PHP API Integration | ✅ Complete | Full REST API client |
-| Local Caching | ✅ Complete | go-store integration |
-| Boost Support | ✅ Complete | Boosted limits for premium |
-| Scope Management | ✅ Complete | User, workspace, global scopes |
-| Package Management | ✅ Complete | Package-level features |
-| CoreGo Service | ✅ Complete | Full service integration |
-
-### Test Statistics
-
-| Type | Count | Coverage |
-|------|-------|----------|
-| Unit Tests | 50+ | >80% |
-| Example Tests | 15+ | N/A |
-| Total Tests | 65+ | >80% |
-
-### Dependency Analysis
-
-```
-Direct Dependencies:    3
-  ├── dappco.re/go v0.10.4          # Core utilities
-  ├── dappco.re/go/store v0.9.0    # Caching backend
-  └── github.com/google/uuid v1.6.0 # UUID generation
-
-Indirect Dependencies: 20+
-  ├── github.com/apache/arrow-go/v18 v18.1.0
-  ├── github.com/davecgh/go-spew v1.1.2
-  ├── modernc.org/sqlite v1.47.0
-  └── other transitive dependencies
-```
-
----
-
-## 🏷️ Tags
-
-#tenant #multi-tenancy #workspace #user #authentication #authorization #feature-entitlements #usage-tracking #quota #tier #free #apollo #hades #php-api #rest-api #caching #go-store #context #middleware #service #corego #agent-first #ax-standard #dependency-injection #scope
-
----
-
-*Last updated: 2026-06-18 | Maintainer: Purberus <purberus@lthn.ai>*

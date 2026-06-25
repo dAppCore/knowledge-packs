@@ -18,8 +18,6 @@ tags:
 ---
 # go-io — Mandatory I/O Abstraction
 
-> **The universal transport layer — All data I/O must go through io.Medium**
-
 **RFC:** [plans/code/core/go/io/RFC.md](../../../../../plans/code/core/go/io/RFC.md)
 **Source:** [~/Code/core/go-io/](file:///Users/snider/Code/core/go-io/)
 **Module:** `dappco.re/go/core/io`
@@ -27,30 +25,28 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-io` is the **MANDATORY I/O abstraction layer** for the Lethean ecosystem. It provides:
+`go-io` is the mandatory I/O abstraction layer for the Lethean ecosystem. It provides:
 
-- **Universal transport** — Single `io.Medium` interface for all storage backends
-- **Sandboxed filesystem** — Path containment with 8 storage backends
-- **Sigil transformation** — Composable encryption, compression, encoding pipelines
-- **Borg integration** — Collection engine for data assimilation
-- **Enchantrix integration** — Transparent encryption via Cube Medium
-- **Workspace isolation** — Multi-tenant encrypted workspaces
+- Universal transport — Single `io.Medium` interface for all storage backends
+- Sandboxed filesystem — Path containment with 8 storage backends
+- Sigil transformation — Composable encryption, compression, encoding pipelines
+- Borg integration — Collection engine for data assimilation
+- Enchantrix integration — Transparent encryption via Cube Medium
+- Workspace isolation — Multi-tenant encrypted workspaces
 
-### The Core Contract
+### The core contract
 
-**ALL data I/O must go through `io.Medium`** — this is the containment layer that makes distributed systems structural. Code written against Medium works with local disk, in-memory storage, S3, encrypted archives, or custom backends **interchangeably**.
+All data I/O must go through `io.Medium` — this is the containment layer that makes distributed systems structural. Code written against Medium works with local disk, in-memory storage, S3, encrypted archives, or custom backends interchangeably.
 
-### Key Innovation
-
-The **Medium** interface is not a filesystem abstraction — it is the **universal transport layer**. Every data operation (read, write, KV, clone, scrape) goes through a Medium. Consumers accept a Medium and never know where data lives.
+The `Medium` interface is not a filesystem abstraction — it is the universal transport layer. Every data operation (read, write, KV, clone, scrape) goes through a Medium. Consumers accept a Medium and never know where data lives.
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### The Medium Interface (The One Contract)
+### The Medium interface
 
 ```go
 type Medium interface {
@@ -123,7 +119,7 @@ type Medium interface {
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 core/go-io/
@@ -191,7 +187,7 @@ core/go-io/
 
 ---
 
-## 🗂️ Storage Backends (8 Total)
+## Storage backends (8 total)
 
 ### 1. Local — Filesystem (Base Backend)
 
@@ -402,7 +398,7 @@ type Medium struct {
 
 ---
 
-## 🔄 Sigil Transformation Framework
+## Sigil transformation framework
 
 Sigils transform data during I/O: encryption, compression, encoding, hashing. Sigils compose into pipelines.
 
@@ -527,7 +523,7 @@ sha3_512Sigil, _ := sigil.NewSigil("sha3-512")
 
 ---
 
-## 🔐 Cube Medium — Transparent Encryption
+## Cube Medium — transparent encryption
 
 The Cube Medium wraps **ANY** Medium with transparent encryption using the Sigil framework.
 
@@ -590,9 +586,9 @@ outer := cube.New(inner, transportKey)
 
 ---
 
-## 📁 DataCube — Portable Encrypted Archive
+## DataCube — portable encrypted archive
 
-A DataCube is a **portable encrypted archive** format. Pack a directory into a single encrypted file. Unpack to restore.
+A DataCube is a portable encrypted archive format. Pack a directory into a single encrypted file. Unpack to restore.
 
 ### Operations
 
@@ -617,7 +613,7 @@ content, _ := medium.Read("config/app.yaml")
 
 ---
 
-## 👥 Workspace Service
+## Workspace service
 
 Multi-workspace encryption infrastructure. Each workspace is a separate key-protected directory hierarchy.
 
@@ -686,7 +682,7 @@ func (service *Service) HandleWorkspaceCommand(command WorkspaceCommand) core.Re
 
 ---
 
-## ⚙️ Core Actions
+## Core actions
 
 go-io registers actions with the Core action system. Each action maps to a Medium operation.
 
@@ -763,7 +759,7 @@ result := c.Run("core.io.cube.pack", core.Data{
 
 ---
 
-## 🎯 Usage Patterns
+## Usage patterns
 
 ### Pattern 1: Transport Independence
 
@@ -788,7 +784,7 @@ mem := io.NewMemoryMedium()
 cfg := loadConfig(mem)
 ```
 
-**One line changes the transport.** The function, the tests, the error handling — none of it changes.
+One line changes the transport. The function, the tests, the error handling — none of it changes.
 
 ### Pattern 2: Medium as Dependency
 
@@ -859,7 +855,7 @@ Pipeline: `io.GitHub` (clone) → `io.List` (walk files) → `lem.ScoreContent` 
 
 ---
 
-## 🛡️ Sandbox Guarantees
+## Sandbox guarantees
 
 All backends enforce **path containment**:
 
@@ -878,7 +874,7 @@ content, err := medium.Read("../../../etc/passwd")  // ERROR: path escapes sandb
 
 ---
 
-## 🔗 Transport Split: core/go vs go-io
+## Transport split: core/go vs go-io
 
 ### core/go (Base Contract)
 
@@ -898,11 +894,11 @@ Provides all exotic Mediums and advanced features:
 - Sigil transformation framework (RFC §4)
 - Workspace encryption service (RFC §5)
 
-**This slims core/go to the essential contract while go-io becomes the integration powerhouse.**
+This keeps core/go to the essential contract; go-io provides all integration backends.
 
 ---
 
-## 📊 Medium Registry
+## Medium registry
 
 | Medium | Source | Transport | Provider | Status |
 |--------|--------|-----------|----------|--------|
@@ -920,15 +916,15 @@ Provides all exotic Mediums and advanced features:
 
 ---
 
-## 🏆 Design Philosophy
+## Design philosophy
 
-### Why Medium is the Universal Transport
+### Why Medium is the universal transport
 
-1. **Hot-swappable:** Change transport with one line, no code changes
-2. **Testable:** Use MemoryMedium for fast, deterministic tests
-3. **Composable:** Wrap Mediums with sigils for encryption/compression
-4. **Contained:** Sandbox prevents path escape attacks
-5. **Consistent:** Same API across all backends
+1. Hot-swappable — Change transport with one line, no code changes
+2. Testable — Use MemoryMedium for fast, deterministic tests
+3. Composable — Wrap Mediums with sigils for encryption/compression
+4. Contained — Sandbox prevents path escape attacks
+5. Consistent — Same API across all backends
 
 ### SPOR Compliance
 
@@ -939,7 +935,7 @@ Single Point Of Responsibility — each stdlib package has exactly one owner:
 
 ---
 
-## 🛠️ Helper Functions
+## Helper functions
 
 Convenience wrappers around Medium methods:
 
@@ -965,7 +961,7 @@ _ = io.Copy(sourceMedium, "input.txt", destinationMedium, "backup/input.txt")
 
 ---
 
-## 📈 Performance Characteristics
+## Performance characteristics
 
 ### Throughput
 
@@ -998,7 +994,7 @@ _ = io.Copy(sourceMedium, "input.txt", destinationMedium, "backup/input.txt")
 
 ---
 
-## 🚨 Error Handling
+## Error handling
 
 All functions return `(result, error)` following Core framework conventions:
 
@@ -1021,7 +1017,7 @@ core.E("io.MemoryMedium.Read", "file not found: notes.txt", fs.ErrNotExist)
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Coverage
 
@@ -1059,7 +1055,7 @@ go tool cover -html=coverage.out
 
 ---
 
-## 📖 RFC Compliance
+## RFC compliance
 
 ### RFC Sections
 
@@ -1084,7 +1080,7 @@ go tool cover -html=coverage.out
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
 ### Internal Dependencies
 
@@ -1105,7 +1101,7 @@ go tool cover -html=coverage.out
 
 ---
 
-## 🎯 Use Cases
+## Use cases
 
 ### 1. Application Configuration
 
@@ -1193,19 +1189,7 @@ _ = service.WriteWorkspaceFile("notes.txt", "Private notes")
 
 ---
 
-## 📊 Quick Stats
-
-- **Total Go files:** 50+ (implementation + tests + examples)
-- **Subpackages:** 12 (io, local, memory, s3, datanode, github, pwa, sqlite, store, cube, workspace, sigil)
-- **Storage backends:** 8+ (Local, Memory, S3, DataNode, SQLite, Store, GitHub, PWA, Cube)
-- **Sigil types:** 15+ (encryption, compression, encoding, hashing)
-- **Core actions:** 20+ (read, write, list, delete, copy, etc.)
-- **Test files:** 25+ (100% triplet coverage)
-- **CLOC (estimated):** 10,000+
-
----
-
-## 📅 Roadmap
+## Roadmap
 
 | Milestone | Priority | Status | Target |
 |----------|----------|--------|--------|
@@ -1218,7 +1202,7 @@ _ = service.WriteWorkspaceFile("notes.txt", "Private notes")
 
 ---
 
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -1230,7 +1214,7 @@ _ = service.WriteWorkspaceFile("notes.txt", "Private notes")
 
 ---
 
-## 💡 Agent Tips
+## Agent tips
 
 1. **Always use io.Medium** — Never use raw `os` or `ioutil` directly
 2. **Accept Medium as parameter** — Don't hardcode storage backends
@@ -1243,7 +1227,7 @@ _ = service.WriteWorkspaceFile("notes.txt", "Private notes")
 
 ---
 
-## 📚 Additional Resources
+## Additional resources
 
 ### Standards
 - **[RFC 7539](https://datatracker.ietf.org/doc/html/rfc7539)** — ChaCha20 and Poly1305 for IETF Protocols
@@ -1263,7 +1247,5 @@ _ = service.WriteWorkspaceFile("notes.txt", "Private notes")
 
 ---
 
-*Knowledge Pack: go-io v1.0.0*
-*Last Updated: 2026-06-17*
-*Author: Purberus <purberus@lthn.ai>*
-*Source: Lethean go-io Package*
+*Knowledge pack: go-io v1.0.0*
+*Last updated: 2026-06-17*

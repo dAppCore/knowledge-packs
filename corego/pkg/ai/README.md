@@ -3,25 +3,22 @@
 > **Package:** `dappco.re/go/ai`  
 > **Repository:** [`github.com/dappcore/go-ai`](https://github.com/dappcore/go-ai)  
 > **Spec:** [`plans/code/core/go/ai/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/ai/RFC.md)  
-> **Maintainer:** Purberus <purberus@lthn.ai>  
-> **Status:** ✅ Production Ready  
+> **Maintainer:** Purberus <purberus@lthn.ai>
 
 ---
 
-## 📋 Overview
+## Overview
 
 **go-ai** is the AI host surface in the Core CLI ecosystem, serving as the composition and serving point for AI capabilities. It provides a facade layer, JSONL metrics logging, RAG query wrappers, provider routing, differential model loading, and integrates with the MCP (Model Context Protocol) server.
 
-### 🎯 Design Principle
-
-> **go-ai is a composition and serving point, not a model-maths library.**
+### Design principle
 
 Library subsystems wrap specialized packages with minimal API surfaces. Heavy model logic remains in:
 - `go-ml` — Scoring engine, heuristics, probes
 - `go-inference` — Shared ML backend interfaces  
 - `go-rag` — Qdrant vector DB + Ollama embeddings
 
-### 🏗️ Architecture
+### Architecture
 
 **Module Path:** `dappco.re/go/ai`  
 **Repository Structure:**
@@ -111,26 +108,15 @@ core/go-ai/
 └── .forgejo/                  # Forgejo CI configuration
 ```
 
-### 📊 Statistics
-
-| Metric | Value |
-|--------|-------|
-| Total Go Files | 150+ |
-| Total Lines | ~200K |
-| Test Files | 50+ |
-| MCP Tools | 50+ (20+ core + 30+ external) |
-| CLI Commands | 11 |
-| Sub-packages | 40+ |
-
 ---
 
-## 🔍 Package Deep Dive
+## Package deep dive
 
 ### ai/ — Library Facade Package
 
 The core library package providing the AI facade surface.
 
-#### ai.go — Canonical AI Facade
+#### ai.go — Canonical AI facade
 
 ```go
 // Package ai provides the canonical AI facade for the core CLI.
@@ -151,7 +137,7 @@ package ai
 
 This file serves as the package documentation entry point with usage examples.
 
-#### metrics.go — JSONL Event Logging
+#### metrics.go — JSONL event logging
 
 **Purpose:** Append-only JSONL event storage for agent activity and security scan results.
 
@@ -234,7 +220,7 @@ events := eventsResult.Value.([]ai.Event)
 summary := ai.Summary(events)
 ```
 
-#### rag.go — RAG Query Facade
+#### rag.go — RAG query facade
 
 **Purpose:** Thin wrapper around `go-rag` Qdrant vector search with Ollama embeddings.
 
@@ -296,7 +282,7 @@ context := contextResult.Value.(string)
 // Use context in LLM prompt
 ```
 
-#### context.go — RAG Context Assembly
+#### context.go — RAG context assembly
 
 **Purpose:** Adapts package RAG helper to provider context injection.
 
@@ -311,7 +297,7 @@ func (a *RAGContextAssembler) Assemble(ctx context.Context, task TaskInfo) core.
 
 Ensures retrieved documentation lands in the prompt the provider sees.
 
-#### provider_router.go — Provider Routing
+#### provider_router.go — Provider routing
 
 **Purpose:** Describes local or external models that can satisfy chat requests via shared inference contract.
 
@@ -332,13 +318,13 @@ func RouteRequest(request RequestInfo) ProviderRoute
 func GetRoutes() []ProviderRoute
 ```
 
-**Routing Features:**
+**Routing features:**
 - Preferences management
 - Fallback chains
 - Batching support
 - Load balancing
 
-#### differential_loader.go — Differential Model Loading
+#### differential_loader.go — Differential model loading
 
 **Purpose:** Stages base/fine-tune model pairs before research or agentic workflows.
 
@@ -361,7 +347,7 @@ Consumes the base/adapter diff that `go-ml`'s LQL `diff` path produces.
 
 **Module:** `dappco.re/go/ai/mcp`
 
-#### service.go — MCP Service Host
+#### service.go — MCP service host
 
 **Service Type:**
 ```go
@@ -382,7 +368,7 @@ func (s *Service) RegisterTool(tool Tool)
 func (s *Service) RegisterTools(tools ...Tool)
 ```
 
-#### jsonrpc.go — JSON-RPC Transport
+#### jsonrpc.go — JSON-RPC transport
 
 **JSONRPC Handler:**
 ```go
@@ -394,7 +380,7 @@ func (h *JSONRPCHandler) HandleRequest(request jsonrpc.Request) jsonrpc.Response
 func (h *JSONRPCHandler) HandleStreamRequest(request jsonrpc.StreamRequest) jsonrpc.StreamResponse
 ```
 
-#### tools_core.go — Core Tools (20+)
+#### tools_core.go — Core tools (20+)
 
 Core tools provide fundamental MCP capabilities:
 
@@ -421,7 +407,7 @@ Core tools provide fundamental MCP capabilities:
 | `log_message` | Log messages |
 | `log_error` | Log errors |
 
-#### tools_external.go — External Tools (30+)
+#### tools_external.go — External tools (30+)
 
 External tools provide specialized AI capabilities:
 
@@ -448,7 +434,7 @@ External tools provide specialized AI capabilities:
 - `browser_navigate` — Navigate to URL
 - `browser_screenshot` — Capture screenshot
 
-#### Transport Layers
+#### Transport layers
 
 **stdio Transport:**
 ```go
@@ -480,7 +466,7 @@ func (t *UnixTransport) Run(ctx context.Context) core.Result
 
 ### pkg/ — Extended Packages (40+)
 
-#### pkg/welfare/ — Content Welfare
+#### pkg/welfare/ — Content welfare
 
 **Purpose:** Per-turn content welfare for served chats.
 
@@ -503,7 +489,7 @@ func Detect(content string) DetectResult
 
 **Slur Lexicon:** Located at `pkg/welfare/slurs/`
 
-#### pkg/sessionkv/ — Session KV Storage
+#### pkg/sessionkv/ — Session KV storage
 
 **Purpose:** session.kv (State) memory for AI sessions.
 
@@ -524,7 +510,7 @@ func (s *Session) Save() core.Result
 func (s *Session) Load(id string) core.Result
 ```
 
-#### pkg/chathistory/ — Conversation History
+#### pkg/chathistory/ — Conversation history
 
 **Purpose:** Maintain chat conversation history.
 
@@ -553,7 +539,7 @@ func (h *History) Save(path string) core.Result
 func (h *History) Load(path string) core.Result
 ```
 
-#### pkg/driver/ — Model Drivers
+#### pkg/driver/ — Model drivers
 
 **Purpose:** Unified driver interface for different AI providers.
 
@@ -572,7 +558,7 @@ type RemoteDriver struct {}     // Remote APIs (OpenAI, etc.)
 type BatchDriver struct {}      // Batch processing
 ```
 
-#### pkg/api/ — HTTP API Surface
+#### pkg/api/ — HTTP API surface
 
 **Purpose:** REST API for AI services.
 
@@ -587,7 +573,7 @@ POST /api/ai/session       - Create session
 GET  /api/ai/session/{id}  - Get session
 ```
 
-#### pkg/batch/ — Batch Processing
+#### pkg/batch/ — Batch processing
 
 **Purpose:** Batch AI operations.
 
@@ -601,7 +587,7 @@ type BatchProcessor struct {
 func (bp *BatchProcessor) Process(ctx context.Context, tasks []Task) BatchResult
 ```
 
-#### pkg/budget/ — Budget Management
+#### pkg/budget/ — Budget management
 
 **Purpose:** Track and manage AI usage budgets.
 
@@ -618,7 +604,7 @@ func (b *Budget) CanUse(tokens int) bool
 func (b *Budget) Use(tokens int) error
 ```
 
-#### pkg/chat/ — Chat Processing
+#### pkg/chat/ — Chat processing
 
 **Purpose:** Chat message processing utilities.
 
@@ -633,7 +619,7 @@ type ChatProcessor struct {
 func (cp *ChatProcessor) Process(ctx context.Context, messages []Message) core.Result
 ```
 
-#### pkg/creds/ — Credential Management
+#### pkg/creds/ — Credential management
 
 **Purpose:** Secure credential storage and retrieval.
 
@@ -648,7 +634,7 @@ func (cs *CredentialStore) Get(name string) (Credential, core.Result)
 func (cs *CredentialStore) Delete(name string) core.Result
 ```
 
-#### pkg/embed/ — Embedding Utilities
+#### pkg/embed/ — Embedding utilities
 
 **Purpose:** Text embedding operations.
 
@@ -660,7 +646,7 @@ type Embedder interface {
 }
 ```
 
-#### pkg/fusion/ — Model Fusion
+#### pkg/fusion/ — Model fusion
 
 **Purpose:** Combine multiple model outputs.
 
@@ -670,7 +656,7 @@ type Embedder interface {
 - Majority voting
 - Confidence-based selection
 
-#### pkg/kvtier/ — KV Tier Storage
+#### pkg/kvtier/ — KV tier storage
 
 **Purpose:** Multi-tier key-value storage.
 
@@ -679,7 +665,7 @@ type Embedder interface {
 - Disk (persistent, local)
 - Remote (distributed, scalable)
 
-#### pkg/lora/ — LoRA Adapters
+#### pkg/lora/ — LoRA adapters
 
 **Purpose:** Low-rank adaptation support.
 
@@ -693,7 +679,7 @@ type LoRAConfig struct {
 }
 ```
 
-#### pkg/modality/ — Multi-Modal Support
+#### pkg/modality/ — Multi-modal support
 
 **Purpose:** Handle different input/output modalities.
 
@@ -704,7 +690,7 @@ type LoRAConfig struct {
 - Video
 - Structured data
 
-#### pkg/pipeline/ — Processing Pipelines
+#### pkg/pipeline/ — Processing pipelines
 
 **Purpose:** Define and execute AI processing pipelines.
 
@@ -719,7 +705,7 @@ type Pipeline struct {
 func (p *Pipeline) Run() core.Result
 ```
 
-#### pkg/prompt/ — Prompt Engineering
+#### pkg/prompt/ — Prompt engineering
 
 **Purpose:** Prompt construction and optimization.
 
@@ -734,7 +720,7 @@ func (pb *PromptBuilder) Build() string
 func (pb *PromptBuilder) WithContext(context string) string
 ```
 
-#### pkg/session/ — Session Management
+#### pkg/session/ — Session management
 
 **Purpose:** Manage AI chat sessions.
 
@@ -762,7 +748,7 @@ type StreamHandler struct {
 func (sh *StreamHandler) Handle(ctx context.Context, stream Stream) error
 ```
 
-#### pkg/structured/ — Structured Outputs
+#### pkg/structured/ — Structured outputs
 
 **Purpose:** Generate structured outputs from AI models.
 
@@ -773,7 +759,7 @@ func (sh *StreamHandler) Handle(ctx context.Context, stream Stream) error
 - CSV
 - Markdown tables
 
-#### pkg/tools/ — Tool Utilities
+#### pkg/tools/ — Tool utilities
 
 **Purpose:** Tool invocation and management.
 
@@ -788,7 +774,7 @@ func (tm *ToolManager) Invoke(name string, args map[string]any) core.Result
 
 ### providers/ — Provider Implementations
 
-#### providers/openai/ — OpenAI-Compatible Provider
+#### providers/openai/ — OpenAI-compatible provider
 
 **Purpose:** OpenAI API compatible provider implementation.
 
@@ -807,7 +793,7 @@ func (c *Client) Chat(ctx context.Context, messages []Message) core.Result
 
 ### cmd/ — CLI Commands (11 commands)
 
-#### cmd/ai/ — Unified AI Commands
+#### cmd/ai/ — Unified AI commands
 
 **Purpose:** Unified entry point for AI operations.
 
@@ -819,7 +805,7 @@ func (c *Client) Chat(ctx context.Context, messages []Message) core.Result
 - `ai complete` — Text completion
 - `ai embed` — Generate embeddings
 
-#### cmd/metrics/ — Metrics Viewer
+#### cmd/metrics/ — Metrics viewer
 
 **Purpose:** Display recorded AI metrics.
 
@@ -836,7 +822,7 @@ func (c *Client) Chat(ctx context.Context, messages []Message) core.Result
 2. Calls `ai.Summary(events)`
 3. Renders table or JSON to stdout
 
-#### cmd/rag/ — RAG Commands
+#### cmd/rag/ — RAG commands
 
 **Purpose:** Re-export RAG commands from `go-rag`.
 
@@ -849,7 +835,7 @@ func (c *Client) Chat(ctx context.Context, messages []Message) core.Result
 - `rag delete` — Delete from index
 - `rag stats` — Show index statistics
 
-#### cmd/security/ — GitHub Security Scanning (5 subcommands)
+#### cmd/security/ — GitHub security scanning (5 subcommands)
 
 **Purpose:** GitHub security scanning via `gh` CLI.
 
@@ -895,7 +881,7 @@ core ai security jobs [--repo OWNER/REPO] [--status queued|in_progress|completed
 - Lists security scan jobs
 - Filters by status
 
-#### cmd/lab/ — Homelab Monitoring Dashboard
+#### cmd/lab/ — Homelab monitoring dashboard
 
 **Purpose:** Homelab monitoring dashboard (build:ignore).
 
@@ -909,7 +895,7 @@ core ai security jobs [--repo OWNER/REPO] [--status queued|in_progress|completed
 - Model serving status
 - Performance metrics
 
-#### cmd/embed-bench/ — Embedding Model Benchmarks
+#### cmd/embed-bench/ — Embedding model benchmarks
 
 **Purpose:** Benchmark embedding models.
 
@@ -920,7 +906,7 @@ core ai security jobs [--repo OWNER/REPO] [--status queued|in_progress|completed
 - Measure latency and throughput
 - Test accuracy on various datasets
 
-#### cmd/daemon/ — Background Daemon
+#### cmd/daemon/ — Background daemon
 
 **Purpose:** Run AI services as background daemon.
 
@@ -931,7 +917,7 @@ core ai security jobs [--repo OWNER/REPO] [--status queued|in_progress|completed
 - Automatic restart on failure
 - Logging and monitoring
 
-#### cmd/lthn-ai/ — Lethean AI Host
+#### cmd/lthn-ai/ — Lethean AI host
 
 **Purpose:** Lethean AI host with MCP + embeddings + vector + State.
 
@@ -942,7 +928,7 @@ core ai security jobs [--repo OWNER/REPO] [--status queued|in_progress|completed
 - Session state management
 - Multi-model support
 
-#### cmd/lem-runtime/ — Contained Model Service
+#### cmd/lem-runtime/ — Contained model service
 
 **Purpose:** Contained model service with curated catalogue.
 
@@ -954,7 +940,7 @@ core ai security jobs [--repo OWNER/REPO] [--status queued|in_progress|completed
 
 **Note:** Includes `lem-runtime` binary (144MB)
 
-#### cmd/lem-desktop/ — Wails Desktop App
+#### cmd/lem-desktop/ — Wails desktop app
 
 **Purpose:** Desktop application with Wails framework.
 
@@ -972,9 +958,9 @@ core ai security jobs [--repo OWNER/REPO] [--status queued|in_progress|completed
 
 ---
 
-## 🚀 Usage Patterns
+## Usage patterns
 
-### Pattern 1: Basic RAG Query
+### Pattern 1: Basic RAG query
 
 ```go
 package main
@@ -999,7 +985,7 @@ func main() {
 }
 ```
 
-### Pattern 2: Metrics Recording
+### Pattern 2: Metrics recording
 
 ```go
 package main
@@ -1037,7 +1023,7 @@ func main() {
 }
 ```
 
-### Pattern 3: MCP Server
+### Pattern 3: MCP server
 
 ```go
 package main
@@ -1075,7 +1061,7 @@ func main() {
 }
 ```
 
-### Pattern 4: Full AI Pipeline
+### Pattern 4: Full AI pipeline
 
 ```go
 package main
@@ -1117,9 +1103,9 @@ func main() {
 
 ---
 
-## 📝 Configuration
+## Configuration
 
-### Environment Variables
+### Environment variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -1127,7 +1113,7 @@ func main() {
 | `HOME` | User home directory | System default |
 | `USERPROFILE` | Windows user profile | System default |
 
-### Metrics Storage
+### Metrics storage
 
 **Location:** `~/.core/ai/metrics/`
 
@@ -1137,7 +1123,7 @@ func main() {
 - Compression: None (plain text)
 - Retention: 365 days max
 
-### Default Endpoints
+### Default endpoints
 
 | Service | Endpoint | Port |
 |---------|----------|------|
@@ -1146,9 +1132,9 @@ func main() {
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
-### CoreGo Dependencies
+### CoreGo dependencies
 
 ```go
 import (
@@ -1163,7 +1149,7 @@ import (
 )
 ```
 
-### External Dependencies
+### External dependencies
 
 ```
 # From go.mod
@@ -1171,7 +1157,7 @@ github.com/urfave/cli/v3           - CLI framework
 golang.org/x/oauth2                 - OAuth2 support
 ```
 
-### Sibling Modules
+### Sibling modules
 
 | Module | Purpose |
 |--------|---------|
@@ -1184,9 +1170,9 @@ golang.org/x/oauth2                 - OAuth2 support
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 All packages follow the **AX-7 Triplet Pattern**:
 
@@ -1198,7 +1184,7 @@ ai/
 └── stdlib_assert_test.go     # Standard library compliance
 ```
 
-### Test Coverage
+### Test coverage
 
 **Key Test Files:**
 - `ai/metrics_test.go` — Metrics recording and reading
@@ -1210,7 +1196,7 @@ ai/
 - `cmd/metrics/cmd_test.go` — Metrics CLI command
 - `cmd/security/*_test.go` — Security commands
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -1236,9 +1222,9 @@ go test -bench=. ./mcp/
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Key Types
+### Key types
 
 | Type | Package | Description |
 |------|---------|-------------|
@@ -1251,7 +1237,7 @@ go test -bench=. ./mcp/
 | `Message` | `pkg/chathistory` | Chat message |
 | `Driver` | `pkg/driver` | Model driver interface |
 
-### Key Functions
+### Key functions
 
 | Function | Package | Description |
 |----------|---------|-------------|
@@ -1265,9 +1251,9 @@ go test -bench=. ./mcp/
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### RFC Documents
+### RFC documents
 
 | Document | Location | Description |
 |----------|----------|-------------|
@@ -1278,7 +1264,7 @@ go test -bench=. ./mcp/
 | Imports RFC | [`RFC.imports.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/ai/RFC.imports.md) | Import specifications |
 | CLAUDE.md | [`CLAUDE.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/ai/CLAUDE.md) | Claude-specific notes |
 
-### Repository Documentation
+### Repository documentation
 
 | Document | Location | Description |
 |----------|----------|-------------|
@@ -1291,7 +1277,7 @@ go test -bench=. ./mcp/
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
 ```yaml
 name: go-ai
@@ -1306,7 +1292,3 @@ last_updated: 2026-06-17
 ```
 
 ---
-
-*Documentation generated by Purberus for the CoreGo Knowledge Pack*  
-*Knowledge Pack Version: CoreGo v1.2.0*  
-*Commit: 3cc71f7*

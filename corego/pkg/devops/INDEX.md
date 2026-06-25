@@ -8,26 +8,26 @@
 
 ---
 
-## 📚 Table of Contents
+## Table of contents
 
-- [📋 Overview](#-overview)
-- [🏗️ Architecture](#-architecture)
-- [📦 Subpackages](#-subpackages)
-- [🔧 Configuration](#-configuration)
-- [🚀 Commands](#-commands)
-- [📝 Usage Patterns](#-usage-patterns)
-- [🧪 Testing](#-testing)
-- [📖 API Reference](#-api-reference)
-- [🔗 Related Documentation](#-related-documentation)
-- [📊 Statistics](#-statistics)
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Subpackages](#subpackages)
+- [Configuration](#configuration)
+- [Commands](#commands)
+- [Usage patterns](#usage-patterns)
+- [Testing](#testing)
+- [API reference](#api-reference)
+- [Related documentation](#related-documentation)
+- [Statistics](#statistics)
 
 ---
 
-## 📋 Overview
+## Overview
 
-**go-devops** is the comprehensive infrastructure and build automation library for the Lethean ecosystem. It provides a native Go Ansible playbook executor, multi-target build pipeline, code signing, release orchestration, container/VM management, SDK generation, and a developer toolkit — all designed for AI agent consumption and following the AX standard.
+**go-devops** is the infrastructure and build automation library for the Lethean ecosystem. It provides a native Go Ansible playbook executor, multi-target build pipeline, code signing, release orchestration, container/VM management, SDK generation, and a developer toolkit — all designed for AI agent consumption and following the AX standard.
 
-### 🎯 Key Features
+### Key features
 
 | Category | Count | Description |
 |----------|-------|-------------|
@@ -41,7 +41,7 @@
 | **Ansible Modules** | ~30 | Pure Go implementations |
 | **DevKit Tools** | 3 | Coverage analysis, secret scanning, complexity analysis |
 
-### 📊 Package Statistics
+### Package statistics
 
 | Metric | Value |
 |--------|-------|
@@ -56,9 +56,9 @@
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Multi-Service Design
+### Multi-service design
 
 **go-devops** follows Mantis #1336/#1379 design principles as a multi-Service repository:
 
@@ -67,7 +67,7 @@
 - **Pure-utility subpackages** intentionally have no Service wiring
 - **No shared mutable state** between services
 
-### Service Registration Pattern
+### Service registration pattern
 
 ```go
 // Each service registers itself
@@ -80,7 +80,7 @@ if err := service.Register(container); err != nil {
 container := core.New(core.WithServiceLock())
 ```
 
-### Module Dependencies
+### Module dependencies
 
 ```
 Primary (from go.mod):
@@ -102,28 +102,28 @@ Core Framework:
 
 ---
 
-## 📦 Subpackages
+## Subpackages
 
-### 🎭 Core Packages
+### Core packages
 
 | Package | Description | Service | Files | Status |
 |---------|-------------|---------|-------|--------|
-| [ansible](file:///Users/snider/Code/core/go-devops/go/ansible) | **Pure Go Ansible Executor** | No | ~20 | Production |
-| [build](file:///Users/snider/Code/core/go-devops/go/build) | **Multi-Target Build Pipeline** | No | ~15 | Production |
-| [release](file:///Users/snider/Code/core/go-devops/go/release) | **Release Orchestration** | No | ~10 | Production |
-| [deploy](file:///Users/snider/Code/core/go-devops/go/deploy) | **Deployment Utilities** | Yes | ~10 | Production |
-| [devkit](file:///Users/snider/Code/core/go-devops/go/devkit) | **Developer Toolkit** | Yes | ~10 | Production |
-| [snapshot](file:///Users/snider/Code/core/go-devops/go/snapshot) | **Snapshot Management** | No | ~5 | Production |
-| [locales](file:///Users/snider/Code/core/go-devops/go/locales) | **Localization Support** | No | ~2 | Production |
+| [ansible](file:///Users/snider/Code/core/go-devops/go/ansible) | Pure Go Ansible Executor | No | ~20 | Production |
+| [build](file:///Users/snider/Code/core/go-devops/go/build) | Multi-Target Build Pipeline | No | ~15 | Production |
+| [release](file:///Users/snider/Code/core/go-devops/go/release) | Release Orchestration | No | ~10 | Production |
+| [deploy](file:///Users/snider/Code/core/go-devops/go/deploy) | Deployment Utilities | Yes | ~10 | Production |
+| [devkit](file:///Users/snider/Code/core/go-devops/go/devkit) | Developer Toolkit | Yes | ~10 | Production |
+| [snapshot](file:///Users/snider/Code/core/go-devops/go/snapshot) | Snapshot Management | No | ~5 | Production |
+| [locales](file:///Users/snider/Code/core/go-devops/go/locales) | Localisation Support | No | ~2 | Production |
 
-### 📁 Deploy Subpackages
+### Deploy subpackages
 
 | Package | Description | Files | Status |
 |---------|-------------|-------|--------|
-| [deploy/coolify](file:///Users/snider/Code/core/go-devops/go/deploy/coolify) | **Coolify Deployment** | ~5 | Production |
-| [deploy/python](file:///Users/snider/Code/core/go-devops/go/deploy/python) | **Python Deployment** | ~3 | Production |
+| [deploy/coolify](file:///Users/snider/Code/core/go-devops/go/deploy/coolify) | Coolify Deployment | ~5 | Production |
+| [deploy/python](file:///Users/snider/Code/core/go-devops/go/deploy/python) | Python Deployment | ~3 | Production |
 
-### 🧰 CLI Commands
+### CLI commands
 
 | Command | Description | Package | Files |
 |---------|-------------|---------|-------|
@@ -134,9 +134,9 @@ Core Framework:
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### File Locations
+### File locations
 
 | File | Purpose |
 |------|---------|
@@ -146,7 +146,7 @@ Core Framework:
 | `playbooks/*.yml` | Ansible playbooks |
 | `inventory.yml` | Ansible inventory |
 
-### Configuration Schema
+### Configuration schema
 
 ```yaml
 # .core/devops.yaml example
@@ -206,7 +206,7 @@ devkit:
     max: 25
 ```
 
-### Environment Variables
+### Environment variables
 
 | Variable | Description | Required |
 |----------|-------------|----------|
@@ -220,7 +220,7 @@ devkit:
 
 ---
 
-## 🚀 Commands
+## Commands
 
 ### Deployment (`core devops deploy`)
 
@@ -248,9 +248,9 @@ devkit:
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
-### 1. Ansible Playbook Execution
+### 1. Ansible playbook execution
 
 ```go
 import "forge.lthn.ai/core/go-devops/ansible"
@@ -263,7 +263,7 @@ inv, _ := ansible.ParseInventory("inventory.yml")
 result := pb.Run(ctx, inv)
 ```
 
-### 2. Multi-Target Build
+### 2. Multi-target build
 
 ```go
 import "forge.lthn.ai/core/go-devops/build"
@@ -277,7 +277,7 @@ artifacts, err := build.Build(ctx, ".",
 )
 ```
 
-### 3. Release Publishing
+### 3. Release publishing
 
 ```go
 import "forge.lthn.ai/core/go-devops/release"
@@ -295,7 +295,7 @@ if err := release.Publish(ctx, cfg, artifacts...); err != nil {
 }
 ```
 
-### 4. Secret Scanning
+### 4. Secret scanning
 
 ```go
 import "forge.lthn.ai/core/go-devops/devkit"
@@ -308,7 +308,7 @@ for _, s := range secrets {
 }
 ```
 
-### 5. Coverage Analysis
+### 5. Coverage analysis
 
 ```go
 import "forge.lthn.ai/core/go-devops/devkit"
@@ -321,9 +321,9 @@ fmt.Printf("Coverage: %.2f%%\n", report.Percent)
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Coverage Summary
+### Test coverage summary
 
 | Package | Functions | Coverage |
 |---------|-----------|----------|
@@ -334,7 +334,7 @@ fmt.Printf("Coverage: %.2f%%\n", report.Percent)
 | `release/` | ~70 | >80% |
 | `snapshot/` | ~20 | >70% |
 
-### Test Commands
+### Test commands
 
 ```bash
 # All tests
@@ -354,9 +354,9 @@ go tool cover -html=coverage.out -o coverage.html
 go test -v ./go/ansible/...
 ```
 
-### AX Standard Compliance
+### AX standard compliance
 
-✅ **All packages follow AX standard:**
+All packages follow AX standard:
 - Each `.go` file has corresponding `_test.go`
 - Each `.go` file has corresponding `_example_test.go`
 - Comments are agent-first, not human-first
@@ -364,9 +364,9 @@ go test -v ./go/ansible/...
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Ansible Package
+### Ansible package
 
 ```go
 // Core types
@@ -395,7 +395,7 @@ func (pb *Playbook) Run(ctx context.Context, inv *Inventory) *PlaybookResult
 func (pb *Playbook) Validate() error
 ```
 
-### DevKit Package
+### DevKit package
 
 ```go
 type CoverageReport struct {
@@ -422,7 +422,7 @@ func ScanSecrets(ctx context.Context, root string, opts ...ScanOption) ([]Secret
 func ScanComplexity(ctx context.Context, root string) ([]ComplexityResult, error)
 ```
 
-### Build Package
+### Build package
 
 ```go
 type Builder interface {
@@ -445,7 +445,7 @@ func RegisterBuilder(b Builder)
 func GetBuilder(projectType string) Builder
 ```
 
-### Release Package
+### Release package
 
 ```go
 type Publisher interface {
@@ -467,9 +467,9 @@ func RegisterPublisher(p Publisher)
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### Internal Documentation
+### Internal documentation
 
 | File | Description | Location |
 |------|-------------|----------|
@@ -480,22 +480,22 @@ func RegisterPublisher(p Publisher)
 | Publishers | Publisher backends documentation | [docs/publishers.md](file:///Users/snider/Code/core/go-devops/docs/publishers.md) |
 | SDK Generation | SDK generation guide | [docs/sdk-generation.md](file:///Users/snider/Code/core/go-devops/docs/sdk-generation.md) |
 | Index | Main documentation index | [docs/index.md](file:///Users/snider/Code/core/go-devops/docs/index.md) |
-| Sync | Synchronization mechanisms | [docs/sync.md](file:///Users/snider/Code/core/go-devops/docs/sync.md) |
+| Sync | Synchronisation mechanisms | [docs/sync.md](file:///Users/snider/Code/core/go-devops/docs/sync.md) |
 
-### External References
+### External references
 
 | Resource | URL |
 |----------|-----|
 | Repository | [github.com/dappcore/go-devops](https://github.com/dappcore/go-devops) |
 | Module | [pkg.go.dev/dappco.re/go/devops](https://pkg.go.dev/dappco.re/go/devops) |
 | RFC | [plans/code/core/go/devops/RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/devops/RFC.md) |
-| Forgeljo | [forge.lthn.ai/core/go-devops](forge.lthn.ai/core/go-devops) |
+| Forgejo | [forge.lthn.ai/core/go-devops](forge.lthn.ai/core/go-devops) |
 
 ---
 
-## 📊 Statistics
+## Statistics
 
-### File Counts
+### File counts
 
 ```
 Total Files:          200+
@@ -514,7 +514,7 @@ Lines of Code:
   └── Total:           ~18,500
 ```
 
-### Test Coverage Breakdown
+### Test coverage breakdown
 
 | Category | Count | Coverage |
 |----------|-------|----------|
@@ -522,7 +522,7 @@ Lines of Code:
 | Example Tests | 25+ | N/A |
 | Integration Tests | 10+ | >75% |
 
-### Dependency Analysis
+### Dependency analysis
 
 ```
 Total Dependencies:    15+
@@ -530,13 +530,3 @@ Total Dependencies:    15+
   └── External:         7 (gitea-sdk, go-embed-python, yaml, term, text, httpsig, cobra)
   └── Indirect:         30+
 ```
-
----
-
-## 🏷️ Tags
-
-#devops #ansible #automation #build #release #deployment #infrastructure #hetzner #cloudns #qemu #hyperkit #linuxkit #signing #sdk #coverage #secrets #complexity #toolkit #agent-first
-
----
-
-*Last updated: 2026-06-18 | Maintainer: Purberus <purberus@lthn.ai>*

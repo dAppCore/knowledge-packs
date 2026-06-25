@@ -14,15 +14,13 @@ created: 2026-06-18T06:00:00Z
 
 # go-miner — Mining Software Controller Library
 
-> **"An agent should be able to implement this library from this document alone."**
-
-`dappco.re/go/core/miner` is the **mining software controller library** that wraps **XMRig**, **TT-Miner**, and **simulated miners** behind a unified `Miner` interface. It extracted from `forge.lthn.ai/Snider/Mining/pkg/mining` and provides subprocess lifecycle management, real-time events through `go-stream`, profile persistence through `go-store`, and robust utilities like circuit breakers and rate limiters.
+`dappco.re/go/core/miner` is the **mining software controller library** that wraps **XMRig**, **TT-Miner**, and **simulated miners** behind a unified `Miner` interface. It extracted from `forge.lthn.ai/Snider/Mining/pkg/mining` and provides subprocess lifecycle management, real-time events through `go-stream`, profile persistence through `go-store`, and resilience utilities like circuit breakers and rate limiters.
 
 Used by the Lethean mining desktop and fleet applications to manage CPU and GPU mining across multiple algorithms and pools.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### What it is
 
@@ -32,7 +30,7 @@ Used by the Lethean mining desktop and fleet applications to manage CPU and GPU 
 - **Real-Time Events** — Event bus broadcasting miner lifecycle and stats via `go-stream`
 - **Profile Management** — CRUD operations backed by `go-store` for saved mining configs
 - **Hashrate History** — Two-tier retention: 10s high-res (5 min) + 1 min low-res (24h)
-- **Robust Utilities** — CircuitBreaker, RateLimiter, TaskSupervisor, LogBuffer
+- **Resilience utilities** — CircuitBreaker, RateLimiter, TaskSupervisor, LogBuffer
 - **HTTP Stats Polling** — Generic `FetchJSONStats[T]` for miner API integration
 - **CoreGO Integration** — Full framework integration with `core.Result` and `core.Action`
 
@@ -137,7 +135,7 @@ Data Flow:
 
 ---
 
-## 📦 Quick Start
+## Quick start
 
 ### Basic Miner Usage
 
@@ -287,7 +285,7 @@ if err != nil {
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Core Components
 
@@ -564,7 +562,7 @@ _ = profileManager.DeleteProfile("My-LTHN-Config")
 
 ---
 
-## 📡 Event System
+## Event system
 
 ### EventBus
 
@@ -625,7 +623,7 @@ go func() {
 
 ---
 
-## 📊 Configuration
+## Configuration
 
 ### Config Structure
 
@@ -734,7 +732,7 @@ config := &miner.Config{
 
 ---
 
-## 📈 Metrics & Monitoring
+## Metrics & monitoring
 
 ### PerformanceMetrics
 
@@ -797,7 +795,7 @@ log.Printf("Total: %d H/s from %d miners",
 
 ---
 
-## 🛡️ Robust Utilities
+## Resilience utilities
 
 ### CircuitBreaker
 
@@ -931,7 +929,7 @@ strings := logBuffer.GetStrings()
 
 ---
 
-## 🔌 CoreGO Integration
+## CoreGO integration
 
 ### Service Integration
 
@@ -991,7 +989,7 @@ if result.OK {
 
 ---
 
-## 📦 Installation & Distribution
+## Installation & distribution
 
 ### Binary Management
 
@@ -1043,9 +1041,9 @@ Windows: %APPDATA%\lethean-desktop\miners\
 
 ---
 
-## 🏆 Features Summary
+## Features summary
 
-### ✅ What go-miner Provides
+### What go-miner provides
 
 1. **Unified Interface** — Single `Miner` interface for all supported miners
 2. **Multi-Miner Support** — XMRig (CPU/GPU), TT-Miner (NVIDIA GPU), Simulated
@@ -1053,14 +1051,14 @@ Windows: %APPDATA%\lethean-desktop\miners\
 4. **Real-Time Events** — Event bus with go-stream integration
 5. **Profile Management** — CRUD with go-store persistence
 6. **Hashrate Tracking** — Two-tier history with automatic reduction
-7. **Robust Utilities** — CircuitBreaker, RateLimiter, TaskSupervisor, LogBuffer
+7. **Resilience utilities** — CircuitBreaker, RateLimiter, TaskSupervisor, LogBuffer
 8. **HTTP Stats** — Generic stats fetching with type safety
 9. **CoreGO Integration** — Full framework integration
 10. **Cross-Platform** — Linux, macOS, Windows support
 11. **Algorithm Support** — RandomX, CryptoNight, KawPow, Ethash, and more
 12. **GPU Support** — NVIDIA CUDA, AMD/Intel OpenCL
 
-### ❌ What go-miner Does NOT Do
+### What go-miner does not do
 
 1. **No Wails Integration** — Desktop GUI is separate concern (`core/gui`)
 2. **No Wallet Management** — Only mining control, no wallet tracking
@@ -1070,7 +1068,7 @@ Windows: %APPDATA%\lethean-desktop\miners\
 
 ---
 
-## 📚 Testing
+## Testing
 
 ### Test Patterns
 
@@ -1128,7 +1126,7 @@ service_impl_example_test.go # Service integration examples
 
 ---
 
-## 🎨 Code Examples
+## Code examples
 
 ### Example: Complete Mining Application
 
@@ -1290,7 +1288,7 @@ _ = simMiner.Uninstall()
 
 ---
 
-## 📖 References
+## References
 
 ### RFC Specification
 
@@ -1323,11 +1321,11 @@ dappco.re/go/store              # Profile persistence
 
 ### External Dependencies
 
-None! The package only interfaces with external miner binaries (XMRig, TT-Miner) via subprocess and HTTP API. The binaries themselves are downloaded at runtime.
+None. The package only interfaces with external miner binaries (XMRig, TT-Miner) via subprocess and HTTP API. The binaries themselves are downloaded at runtime.
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|

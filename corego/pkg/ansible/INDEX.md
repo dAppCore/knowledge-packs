@@ -14,7 +14,7 @@ module: dappco.re/go/ansible
 
 ---
 
-## 📚 Quick Links
+## Quick links
 
 - **[README.md](./README.md)** — Complete package documentation
 - **[RFC Specification](file:///Users/snider/Code/meowmix/plans/code/core/go/ansible/RFC.md)** — Technical specification
@@ -23,7 +23,7 @@ module: dappco.re/go/ansible
 
 ---
 
-## 🗂️ File Structure
+## File structure
 
 ### Source Files
 
@@ -82,7 +82,7 @@ module: dappco.re/go/ansible
 
 ---
 
-## 🔌 Module Catalog (45 handlers)
+## Module catalogue (45 handlers)
 
 ### Command Execution (4)
 
@@ -174,39 +174,7 @@ module: dappco.re/go/ansible
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
-
-```
-Total Go files:           14
-Total lines (source):    ~280,000
-Total lines (tests):     ~150,000
-Total module handlers:    45+
-Total test files:        12+
-```
-
-### Test Coverage
-
-| Category | Count | Status |
-|----------|-------|--------|
-| Good tests (happy path) | 100+ | ✅ Complete |
-| Bad tests (errors) | 100+ | ✅ Complete |
-| Ugly tests (edge cases) | 50+ | ✅ Complete |
-| Example tests | 20+ | ✅ Complete |
-
-### Complexity
-
-| Component | Complexity | Status |
-|-----------|------------|--------|
-| Executor | 68 methods | ✅ Well-documented |
-| Parser | 15 methods | ✅ Well-documented |
-| SSH Client | 20+ methods | ✅ Well-documented |
-| Module Handlers | 45 handlers | ✅ Well-documented |
-
----
-
-## 🏷️ Tags & Categories
+## Tags & categories
 
 ### Module Categories
 
@@ -231,7 +199,7 @@ Total test files:        12+
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
 ### Internal Dependencies
 
@@ -253,7 +221,7 @@ Total test files:        12+
 
 ---
 
-## 📁 Related Packages
+## Related packages
 
 | Package | Relationship | Location |
 |---------|--------------|----------|
@@ -264,7 +232,7 @@ Total test files:        12+
 
 ---
 
-## 🎯 Usage Patterns
+## Usage patterns
 
 ### Primary Use Cases
 
@@ -281,7 +249,7 @@ Total test files:        12+
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author**: Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created**: 2026-06-17T23:30:00Z
@@ -290,6 +258,4 @@ Total test files:        12+
 - **Licence**: EUPL-1.2
 - **Repository**: `forge.lthn.sh/core/go-ansible`
 
----
 
-*Package index generated: 2026-06-17T23:30:00Z*

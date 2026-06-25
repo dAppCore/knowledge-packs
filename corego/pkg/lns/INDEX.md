@@ -5,15 +5,13 @@ title: go-lns Package Documentation Index
 ---
 # go-lns Package Documentation
 
-> **Lethean Name System** — Native CoreGO implementation
-
 **Module:** `dappco.re/go/lns`
 **Repository:** `core/go-lns`
 **RFC:** [../../../../../plans/code/core/go/lns/RFC.md](../../../../../plans/code/core/go/lns/RFC.md)
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description |
 |----------|-------------|
@@ -23,7 +21,7 @@ title: go-lns Package Documentation Index
 
 ---
 
-## 🗂️ Subpackages
+## Subpackages
 
 ### Core Subpackages
 
@@ -49,7 +47,7 @@ title: go-lns Package Documentation Index
 
 ---
 
-## 🎯 Quick Links
+## Quick links
 
 ### RFC Actions
 - **Name Management:** `lns.name.*` (register, renew, transfer, revoke, lookup)
@@ -90,7 +88,7 @@ type NameRecord struct {
 
 ---
 
-## 🔍 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -102,15 +100,17 @@ type NameRecord struct {
 
 ---
 
-## 📊 Statistics
+## Statistics
 
-- **Total Subpackages:** 11
-- **Core Actions:** 30+
-- **Covenant States:** 8
-- **DNS Record Types:** 6
-- **Test Coverage:** High (Good/Bad/Ugly triplets)
+| Metric | Value |
+|--------|-------|
+| Total subpackages | 11 |
+| Core actions | 30+ |
+| Covenant states | 8 |
+| DNS record types | 6 |
+| Test coverage | Good/Bad/Ugly triplets |
 
 ---
 
-*Knowledge Pack: go-lns v1.0.0*
-*Last Updated: 2026-06-17*
+*Knowledge pack: go-lns v1.0.0*
+*Last updated: 2026-06-17*

@@ -8,26 +8,25 @@
 
 ---
 
-## 📚 Table of Contents
+## Table of contents
 
-- [📋 Overview](#-overview)
-- [🏗️ Architecture](#-architecture)
-- [📦 API Endpoints](#-api-endpoints)
-- [🔧 Configuration](#-configuration)
-- [🚀 Commands](#-commands)
-- [📝 Usage Patterns](#-usage-patterns)
-- [🧪 Testing](#-testing)
-- [📖 API Reference](#-api-reference)
-- [🔗 Related Documentation](#-related-documentation)
-- [📊 Statistics](#-statistics)
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [API endpoints](#api-endpoints)
+- [Configuration](#configuration)
+- [Commands](#commands)
+- [Usage patterns](#usage-patterns)
+- [Testing](#testing)
+- [API reference](#api-reference)
+- [Related documentation](#related-documentation)
 
 ---
 
-## 📋 Overview
+## Overview
 
-**go-forge** is a comprehensive, zero-dependency Go client for the Forgejo API, providing type-safe access to ~450 endpoints across all major Forgejo/Gitea features. Designed for AI agent consumption following the AX standard, it offers complete coverage of repository management, issue tracking, pull requests, project management, organization management, and more.
+**go-forge** is a zero-dependency Go client for the Forgejo API, providing type-safe access to ~450 endpoints across all major Forgejo/Gitea features. Designed for AI agent consumption following the AX standard, it covers repository management, issue tracking, pull requests, project management, organisation management, and more.
 
-### 🎯 Key Features
+### Key features
 
 | Category | Endpoints | Status |
 |----------|-----------|--------|
@@ -46,7 +45,7 @@
 
 **Total: ~280 primary endpoints** (README mentions ~450 including variations)
 
-### 📊 Package Statistics
+### Package statistics
 
 | Metric | Value |
 |--------|-------|
@@ -63,9 +62,9 @@
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Zero-Dependency Design
+### Zero-dependency design
 
 **go-forge** maintains minimal dependencies:
 
@@ -77,16 +76,16 @@ Module Dependencies:
 No other external dependencies — pure standard library + CoreGo
 ```
 
-### AX Standard Compliance
+### AX standard compliance
 
-✅ **100% AX Compliant:**
+100% AX compliant:
 - Every `.go` file has corresponding `_test.go`
 - Every `.go` file has corresponding `_example_test.go`
 - Comments are agent-first, not human-first
 - SPOR (Single Point of Responsibility) per file
 - Type-safe with comprehensive type definitions
 
-### Module Structure
+### Module structure
 
 ```
 core/go-forge/
@@ -194,9 +193,9 @@ core/go-forge/
 
 ---
 
-## 📦 API Endpoints
+## API endpoints
 
-### Repository Management (`repos.go`, `contents.go`, `branches.go`, `commits.go`)
+### Repository management (`repos.go`, `contents.go`, `branches.go`, `commits.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -212,7 +211,7 @@ core/go-forge/
 | `AddCollaborator` | Add collaborator | PUT /repos/{owner}/{repo}/collaborators/{username} |
 | `RemoveCollaborator` | Remove collaborator | DELETE /repos/{owner}/{repo}/collaborators/{username} |
 
-### Repository Contents (`contents.go`)
+### Repository contents (`contents.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -222,7 +221,7 @@ core/go-forge/
 | `UpdateFile` | Update a file | PUT /repos/{owner}/{repo}/contents/{path} |
 | `DeleteFile` | Delete a file | DELETE /repos/{owner}/{repo}/contents/{path} |
 
-### Branch Management (`branches.go`)
+### Branch management (`branches.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -231,7 +230,7 @@ core/go-forge/
 | `CreateBranch` | Create a new branch | POST /repos/{owner}/{repo}/branches |
 | `DeleteBranch` | Delete a branch | DELETE /repos/{owner}/{repo}/branches/{branch} |
 
-### Commit Access (`commits.go`)
+### Commit access (`commits.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -240,7 +239,7 @@ core/go-forge/
 | `GetCommitDiff` | Get commit diff | GET /repos/{owner}/{repo}/commits/{sha}.diff |
 | `GetCommitPatch` | Get commit patch | GET /repos/{owner}/{repo}/commits/{sha}.patch |
 
-### Issue Tracking (`issues.go`)
+### Issue tracking (`issues.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -255,7 +254,7 @@ core/go-forge/
 | `UpdateIssueComment` | Update issue comment | PATCH /repos/{owner}/{repo}/issues/{index}/comments/{id} |
 | `DeleteIssueComment` | Delete issue comment | DELETE /repos/{owner}/{repo}/issues/{index}/comments/{id} |
 
-### Label Management (`labels.go`)
+### Label management (`labels.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -265,7 +264,7 @@ core/go-forge/
 | `UpdateRepoLabel` | Update repository label | PATCH /repos/{owner}/{repo}/labels/{id} |
 | `DeleteRepoLabel` | Delete repository label | DELETE /repos/{owner}/{repo}/labels/{id} |
 
-### Milestone Tracking (`milestones.go`)
+### Milestone tracking (`milestones.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -275,7 +274,7 @@ core/go-forge/
 | `UpdateMilestone` | Update milestone | PATCH /repos/{owner}/{repo}/milestones/{id} |
 | `DeleteMilestone` | Delete milestone | DELETE /repos/{owner}/{repo}/milestones/{id} |
 
-### Pull Request Management (`pulls.go`)
+### Pull request management (`pulls.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -291,7 +290,7 @@ core/go-forge/
 | `ApprovePullRequest` | Approve a PR | POST /repos/{owner}/{repo}/pulls/{index}/reviews |
 | `RequestChanges` | Request changes | POST /repos/{owner}/{repo}/pulls/{index}/reviews |
 
-### Project Management (`misc.go`)
+### Project management (`misc.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -305,7 +304,7 @@ core/go-forge/
 | `ListCards` | List project cards | GET /projects/{id}/columns/{id}/cards |
 | `CreateCard` | Create project card | POST /projects/{id}/columns/{id}/cards |
 
-### Organization Management (`orgs.go`)
+### Organisation management (`orgs.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -319,7 +318,7 @@ core/go-forge/
 | `AddOrgMember` | Add organization member | PUT /orgs/{org}/members/{username} |
 | `RemoveOrgMember` | Remove organization member | DELETE /orgs/{org}/members/{username} |
 
-### Team Management (`orgs.go` — Teams section)
+### Team management (`orgs.go` — Teams section)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -331,7 +330,7 @@ core/go-forge/
 | `ListTeamMembers` | List team members | GET /orgs/{org}/teams/{team}/members |
 | `AddTeamMember` | Add team member | PUT /orgs/{org}/teams/{team}/members/{username} |
 
-### User Management (`users.go`)
+### User management (`users.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -347,7 +346,7 @@ core/go-forge/
 | `FollowUser` | Follow a user | PUT /users/{username}/following/{target} |
 | `UnfollowUser` | Unfollow a user | DELETE /users/{username}/following/{target} |
 
-### Webhook Management (`webhooks.go`)
+### Webhook management (`webhooks.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -359,7 +358,7 @@ core/go-forge/
 | `ListOrgWebhooks` | List organization webhooks | GET /orgs/{org}/hooks |
 | `CreateOrgWebhook` | Create organization webhook | POST /orgs/{org}/hooks |
 
-### Release Management (`releases.go`)
+### Release management (`releases.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -380,7 +379,7 @@ core/go-forge/
 | `MarkNotificationsRead` | Mark notifications as read | PUT /notifications |
 | `DeleteNotification` | Delete a notification | DELETE /notifications/threads/{id} |
 
-### Activity & Feeds (`activitypub.go`, `misc.go`)
+### Activity and feeds (`activitypub.go`, `misc.go`)
 
 | Function | Description | HTTP Method |
 |----------|-------------|-------------|
@@ -422,9 +421,9 @@ core/go-forge/
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### Client Options
+### Client options
 
 ```go
 type ClientOption func(*Client)
@@ -438,7 +437,7 @@ func WithTimeout(timeout time.Duration) ClientOption
 func WithDebug(debug bool) ClientOption
 ```
 
-### Example Configurations
+### Example configurations
 
 ```go
 // Basic client with token
@@ -462,7 +461,7 @@ client := forge.NewClient(
 
 ---
 
-## 🚀 Commands
+## Commands
 
 While go-forge is primarily a library, it can be integrated into CLI tools:
 
@@ -489,7 +488,7 @@ core forge org get my-org
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
 ### 1. Repository Lifecycle
 
@@ -606,9 +605,9 @@ if err != nil {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 Each API file follows the AX standard with three files:
 
@@ -618,7 +617,7 @@ actions_test.go         # Unit tests (100% coverage target)
 actions_example_test.go # Usage examples as tests
 ```
 
-### Test Coverage by File
+### Test coverage by file
 
 | File | Functions | Lines | Coverage |
 |------|-----------|-------|----------|
@@ -648,7 +647,7 @@ actions_example_test.go # Usage examples as tests
 | webhooks.go | 15+ | ~500 | >85% |
 | wiki.go | 10+ | ~300 | >80% |
 
-### Test Commands
+### Test commands
 
 ```bash
 # Run all tests
@@ -670,9 +669,9 @@ go test -v ./go/...
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Error Types
+### Error types
 
 ```go
 // Sentinel errors
@@ -713,7 +712,7 @@ type Response struct {
 }
 ```
 
-### Common Request Options
+### Common request options
 
 ```go
 type CreateRepoOptions struct {
@@ -752,15 +751,15 @@ type CreatePullRequestOptions struct {
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### Internal Documentation
+### Internal documentation
 
 | Resource | Description | Location |
 |----------|-------------|----------|
 | RFC | Package specification and design | [plans/code/core/go/forge/RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/forge/RFC.md) |
 
-### External References
+### External references
 
 | Resource | URL |
 |----------|-----|
@@ -770,64 +769,3 @@ type CreatePullRequestOptions struct {
 | Gitea | [gitea.io](https://gitea.io) |
 | Codeberg | [codeberg.org](https://codeberg.org) |
 
----
-
-## 📊 Statistics
-
-### Code Metrics
-
-```
-Total Repository Size:    ~10 MB
-Go Source Files:         90+
-Type Definition Files:  50+
-Test Files:             40+
-Example Files:          30+
-Total Go Lines:          ~35,000
-Test Lines:             ~25,000
-Documentation Lines:     ~1,000
-```
-
-### Endpoint Coverage
-
-| Category | Total | Implemented | Coverage |
-|----------|-------|-------------|----------|
-| Repository | ~50 | 50 | 100% |
-| Issues | ~40 | 40 | 100% |
-| Pull Requests | ~35 | 35 | 100% |
-| Projects | ~25 | 25 | 100% |
-| Organizations | ~30 | 30 | 100% |
-| Users | ~20 | 20 | 100% |
-| Webhooks | ~15 | 15 | 100% |
-| Releases | ~10 | 10 | 100% |
-| Activity | ~20 | 20 | 100% |
-| Admin | ~15 | 15 | 100% |
-| Actions | ~20 | 20 | 100% |
-| **Total** | **~280** | **~280** | **100%** |
-
-### Test Statistics
-
-| Type | Count | Coverage |
-|------|-------|----------|
-| Unit Tests | 200+ | >85% |
-| Example Tests | 30+ | N/A |
-| Total Tests | 230+ | >85% |
-
-### Dependency Statistics
-
-```
-Direct Dependencies:    2
-  ├── dappco.re/go v0.10.4
-  └── github.com/goccy/go-json v0.10.6
-
-Indirect Dependencies: 0 (go-json has no dependencies)
-```
-
----
-
-## 🏷️ Tags
-
-#forgejo #gitea #codeberg #api #client #go #golang #git #repository #issues #pull-requests #projects #organizations #users #webhooks #releases #notifications #activitypub #admin #actions #ci #cd #type-safe #zero-dependencies #agent-first #ax-standard
-
----
-
-*Last updated: 2026-06-18 | Maintainer: Purberus <purberus@lthn.ai>*

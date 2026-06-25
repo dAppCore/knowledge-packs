@@ -1,7 +1,6 @@
 ---
 type: Package Deep Dive
 title: go-crypt — Cryptographic Primitives & Agent Trust
-description: Complete documentation for go-crypt — cryptographic primitives, authentication, and trust policy engine
 description: ChaCha20-Poly1305, AES-256-GCM encryption, Argon2id KDF, OpenPGP auth, 3-tier agent access control, capability-based policies, approval workflows, audit trails
 module: dappco.re/go/crypt
 repo: core/go-crypt
@@ -14,9 +13,7 @@ version: 1.0.0
 
 # go-crypt — Cryptographic Primitives & Agent Trust
 
-> **"An agent should be able to implement symmetric encryption or trust policies from this document alone."**
-
-`dappco.re/go/crypt` is the **cryptographic foundation and trust management system** for the Lethean agent platform. It provides three independent but integrated subsystems:
+`dappco.re/go/crypt` is the cryptographic foundation and trust management system for the Lethean agent platform. It provides three independent but integrated subsystems:
 
 1. **Cryptography** — Symmetric encryption (ChaCha20-Poly1305, AES-256-GCM), Argon2id key derivation, HMAC, checksums, RSA
 2. **Authentication** — OpenPGP challenge-response authentication, session storage (SQLite), hardware token management
@@ -26,22 +23,22 @@ Used by `go-io` (encrypted Medium backends), Borg (SMSG/STIM/STMF), Mining (UEPS
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### What it is
 
-- **Cryptography Suite** — Production-grade symmetric encryption with two cipher suites
-- **Key Derivation** — Argon2id with configurable parameters (2 iterations, 64 MiB memory, 4 threads)
-- **Hashing & Signatures** — HMAC-SHA256, MD5/SHA256 checksums, RSA-2048, OpenPGP signatures
-- **Authentication System** — OpenPGP challenge-response (online + air-gapped courier mode)
-- **Session Management** — SQLite-backed session store with TTL and revocation
-- **Trust Model** — 3-tier agent hierarchy (Untrusted, Verified, Full)
-- **Policy Engine** — Capability-based access control with repo scoping
-- **Approval Workflow** — Multi-step approval for sensitive operations
-- **Audit Trail** — Immutable log of all trust decisions
-- **CLI Tools** — 5 commands: `keygen`, `encrypt`, `decrypt`, `hash`, `checksum`
+- **Cryptography suite** — Symmetric encryption with two cipher suites
+- **Key derivation** — Argon2id with configurable parameters (2 iterations, 64 MiB memory, 4 threads)
+- **Hashing and signatures** — HMAC-SHA256, MD5/SHA256 checksums, RSA-2048, OpenPGP signatures
+- **Authentication system** — OpenPGP challenge-response (online + air-gapped courier mode)
+- **Session management** — SQLite-backed session store with TTL and revocation
+- **Trust model** — 3-tier agent hierarchy (Untrusted, Verified, Full)
+- **Policy engine** — Capability-based access control with repo scoping
+- **Approval workflow** — Multi-step approval for sensitive operations
+- **Audit trail** — Immutable log of all trust decisions
+- **CLI tools** — 5 commands: `keygen`, `encrypt`, `decrypt`, `hash`, `checksum`
 
-### The Three Subsystems
+### The three subsystems
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -86,7 +83,7 @@ Used by `go-io` (encrypted Medium backends), Borg (SMSG/STIM/STMF), Mining (UEPS
 Subsystems can be used independently or together
 ```
 
-### Architecture Layers
+### Architecture layers
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -120,9 +117,9 @@ Subsystems can be used independently or together
 
 ---
 
-## 📦 Quick Start
+## Quick start
 
-### Basic Encryption
+### Basic encryption
 
 ```go
 import "dappco.re/go/crypt/crypt"
@@ -146,7 +143,7 @@ plaintext, err := crypt.DecryptAES(ciphertext, []byte("password"))
 
 **Format:** `salt (16 bytes) + nonce (24 for ChaCha20, 12 for AES) + ciphertext`
 
-### Key Derivation
+### Key derivation
 
 ```go
 import "dappco.re/go/crypt/crypt"
@@ -163,7 +160,7 @@ hash, err := crypt.HashPassword("password")
 valid := crypt.VerifyPassword("password", hash)
 ```
 
-**Argon2id Parameters:**
+**Argon2id parameters:**
 - Time: 2 iterations
 - Memory: 64 MiB
 - Parallelism: 4 threads
@@ -194,11 +191,11 @@ sum := crypt.MD5Sum([]byte("data"))
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Cryptography Subsystem
+### Cryptography subsystem
 
-#### Symmetric Encryption
+#### Symmetric encryption
 
 Two cipher suites with identical APIs:
 
@@ -214,14 +211,14 @@ ciphertext, err := crypt.EncryptAES(plaintext, passphrase)
 plaintext, err := crypt.DecryptAES(ciphertext, passphrase)
 ```
 
-**Key Derivation Flow:**
+**Key derivation flow:**
 1. Generate random 16-byte salt
 2. Derive key from passphrase + salt using Argon2id
 3. Generate random nonce (24 bytes for ChaCha20, 12 bytes for AES)
 4. Encrypt plaintext with key + nonce
 5. Prepend salt + nonce to ciphertext
 
-#### RSA Operations
+#### RSA operations
 
 ```go
 import "dappco.re/go/crypt/crypt/rsa"
@@ -261,7 +258,7 @@ sig, err := svc.Sign(data, privKey)
 valid, err := svc.Verify(data, sig, pubKey)
 ```
 
-#### LTHN Quasi-Salted Hash
+#### LTHN quasi-salted hash
 
 Lethean's custom hash algorithm (RFC-0004):
 
@@ -280,11 +277,11 @@ valid := lthn.Verify("input-string", hash)
 
 ---
 
-## 🔐 Authentication Subsystem
+## Authentication subsystem
 
-### OpenPGP Challenge-Response Flow
+### OpenPGP challenge-response flow
 
-#### Online Mode (HTTP)
+#### Online mode (HTTP)
 
 ```
 1. Client → Server: POST /auth/challenge {public_key: "..."}
@@ -299,7 +296,7 @@ valid := lthn.Verify("input-string", hash)
 10. Server → Client: {token: "...", expires_at: "..."}
 ```
 
-#### Air-Gapped / Courier Mode
+#### Air-gapped / courier mode
 
 Same crypto, but challenge/response exchanged via files on a Medium:
 
@@ -314,7 +311,7 @@ users/
   {userID}.lthn     # LTHN password hash (legacy, migrated on login)
 ```
 
-### Session Management
+### Session management
 
 ```go
 import "dappco.re/go/crypt/auth"
@@ -336,7 +333,7 @@ store.RevokeSession(token)
 store.CleanupExpired()
 ```
 
-**SQLite Schema:**
+**SQLite schema:**
 ```sql
 CREATE TABLE sessions (
     id TEXT PRIMARY KEY,
@@ -347,7 +344,7 @@ CREATE TABLE sessions (
 )
 ```
 
-### Hardware Tokens (FIDO2/WebAuthn)
+### Hardware tokens (FIDO2/WebAuthn)
 
 ```go
 import "dappco.re/go/crypt/auth"
@@ -356,7 +353,7 @@ import "dappco.re/go/crypt/auth"
 // Currently a stub that returns ErrNotImplemented
 ```
 
-### Password Authentication
+### Password authentication
 
 ```go
 import "dappco.re/go/crypt/auth"
@@ -377,9 +374,9 @@ session, err := auth.VerifyResponse(challenge, signature, user.PublicKey)
 
 ---
 
-## 🛡️ Trust Subsystem
+## Trust subsystem
 
-### Trust Tiers
+### Trust tiers
 
 Three-tier agent hierarchy:
 
@@ -462,7 +459,7 @@ agents := registry.All()
 registry.Remove("Hypnos")
 ```
 
-### Policy Engine
+### Policy engine
 
 ```go
 import "dappco.re/go/crypt/trust"
@@ -493,7 +490,7 @@ case trust.NeedsApproval:
 }
 ```
 
-**Policy Structure:**
+**Policy structure:**
 ```go
 type Policy struct {
     Tier           trust.Tier
@@ -504,7 +501,7 @@ type Policy struct {
 }
 ```
 
-### Approval Workflow
+### Approval workflow
 
 Multi-step approval for sensitive operations:
 
@@ -538,7 +535,7 @@ pending := workflow.Pending()
 approved := workflow.Approved()
 ```
 
-**SQLite Schema:**
+**SQLite schema:**
 ```sql
 CREATE TABLE approvals (
     id TEXT PRIMARY KEY,
@@ -553,7 +550,7 @@ CREATE TABLE approvals (
 )
 ```
 
-### Audit Trail
+### Audit trail
 
 Immutable log of all trust decisions:
 
@@ -576,7 +573,7 @@ entries := audit.Since(time.Now().Add(-24 * time.Hour))
 allEntries := audit.All()
 ```
 
-**Audit Entry:**
+**Audit entry:**
 ```go
 type AuditEntry struct {
     ID        string
@@ -591,9 +588,9 @@ type AuditEntry struct {
 
 ---
 
-## 🎯 Service Integration
+## Service integration
 
-### OpenPGP Service (CoreGO IPC)
+### OpenPGP service (CoreGO IPC)
 
 The `crypt/openpgp` package integrates with CoreGO's IPC system:
 
@@ -623,11 +620,11 @@ c, _ := core.New(
 
 ---
 
-## 🔌 CLI Commands
+## CLI commands
 
 The `cmd/crypt` package provides CLI tools via `core crypt` namespace:
 
-### Command Overview
+### Command overview
 
 | Command | Description | Flags |
 |---------|-------------|-------|
@@ -637,7 +634,7 @@ The `cmd/crypt` package provides CLI tools via `core crypt` namespace:
 | `core crypt hash` | Hash a password | `--bcrypt` (use bcrypt instead of Argon2id) |
 | `core crypt checksum` | Compute checksum | `--sha512` (use SHA-512), `--verify` |
 
-### Usage Examples
+### Usage examples
 
 ```bash
 # Generate a 32-byte hex key
@@ -679,7 +676,7 @@ core crypt checksum --verify "expected-hash" file.txt
 
 ---
 
-## 📊 Sub-Packages
+## Sub-packages
 
 ### crypt/
 
@@ -731,16 +728,16 @@ core crypt checksum --verify "expected-hash" file.txt
 
 ---
 
-## 📈 Performance Characteristics
+## Performance characteristics
 
-### Encryption Throughput
+### Encryption throughput
 
 | Cipher | Speed (MB/s) | Memory | Security Level |
 |--------|--------------|--------|----------------|
 | ChaCha20-Poly1305 | ~500-800 | Low | Modern, Preferred |
 | AES-256-GCM | ~800-1200 | Low | NIST Standard |
 
-### Key Derivation
+### Key derivation
 
 | Algorithm | Time | Memory | Parallelism |
 |-----------|------|---------|-------------|
@@ -748,7 +745,7 @@ core crypt checksum --verify "expected-hash" file.txt
 
 **Throughput:** ~10-20 hashes/second on modern CPUs
 
-### Memory Usage
+### Memory usage
 
 - Session store: ~100 bytes per session
 - Audit log: ~200 bytes per entry
@@ -757,41 +754,39 @@ core crypt checksum --verify "expected-hash" file.txt
 
 ---
 
-## 🔒 Security Considerations
+## Security considerations
 
-### Encryption Best Practices
+### Encryption
 
-✅ **Use ChaCha20-Poly1305 for new code** — Modern, fast, no hardware acceleration needed
-✅ **Always use random salts** — Automatically generated, never reuse
-✅ **Use Argon2id for password hashing** — Memory-hard, resistant to GPU attacks
-✅ **Use HMAC-SHA256 for message authentication** — Never roll your own MAC
-✅ **Verify all inputs** — Passwords, hashes, signatures
+- Use ChaCha20-Poly1305 for new code — modern, fast, no hardware acceleration needed
+- Salts are always generated at random; never reuse
+- Use Argon2id for password hashing — memory-hard, resistant to GPU attacks
+- Use HMAC-SHA256 for message authentication
+- Never use MD5 for security — only for compatibility checksums
+- Never use SHA1 — cryptographically broken
+- Never store plaintext passwords
+- Always generate a new random nonce for each encryption
+- Never hardcode keys — use environment variables or secure stores
 
-❌ **Never use MD5 for security** — Only for compatibility checksums
-❌ **Never use SHA1** — Cryptographically broken
-❌ **Never store plaintext passwords** — Always hash with Argon2id
-❌ **Never reuse nonces** — Always generate new random nonce for each encryption
-❌ **Never hardcode keys** — Use environment variables or secure stores
+### Trust system
 
-### Trust System Security
+- Principle of least privilege — grant minimum required capabilities
+- Separation of duties — require approval for sensitive operations
+- Audit everything — immutable log of all trust decisions
+- Rotate credentials — regular key rotation for agents
+- Revoke compromised sessions immediately
 
-✅ **Principle of least privilege** — Grant minimum required capabilities
-✅ **Separation of duties** — Require approval for sensitive operations
-✅ **Audit everything** — Immutable log of all trust decisions
-✅ **Rotate credentials** — Regular key rotation for agents
-✅ **Revoke compromised sessions** — Immediate revocation on suspicion
+### Implementation
 
-### Implementation Security
-
-✅ **Use `crypto/rand` only** — Never `math/rand` for cryptographic operations
-✅ **Constant-time comparisons** — For signature verification
-✅ **Secure error messages** — Never include secrets in errors
-✅ **Rate limiting** — Prevent brute-force attacks
-✅ **Session expiration** — Automatic cleanup of expired sessions
+- Use `crypto/rand` only — never `math/rand` for cryptographic operations
+- Constant-time comparisons for signature verification
+- Errors never include secrets
+- Rate limiting prevents brute-force attacks
+- Automatic cleanup of expired sessions
 
 ---
 
-## 📦 File Structure
+## File structure
 
 ```
 go-crypt/
@@ -845,9 +840,9 @@ go-crypt/
 
 ---
 
-## 🎯 Usage Patterns
+## Usage patterns
 
-### Pattern 1: Secure File Encryption
+### Pattern 1: Secure file encryption
 
 ```go
 import "dappco.re/go/crypt/crypt"
@@ -862,7 +857,7 @@ ciphertext, _ := os.ReadFile("secrets.txt.enc")
 plaintext, _ := crypt.Decrypt(ciphertext, []byte(passphrase))
 ```
 
-### Pattern 2: Agent Authentication
+### Pattern 2: Agent authentication
 
 ```go
 import (
@@ -886,7 +881,7 @@ if session.Agent.Tier >= trust.TierVerified {
 }
 ```
 
-### Pattern 3: Capability-Based Authorization
+### Pattern 3: Capability-based authorisation
 
 ```go
 import "dappco.re/go/crypt/trust"
@@ -911,7 +906,7 @@ if result.Decision == trust.Allow {
 }
 ```
 
-### Pattern 4: Encrypted Medium (go-io Integration)
+### Pattern 4: Encrypted Medium (go-io integration)
 
 ```go
 import (
@@ -929,7 +924,7 @@ medium.Write("secrets.dat", []byte("sensitive data"))
 data, _ := medium.Read("secrets.dat")
 ```
 
-### Pattern 5: Secure Password Storage
+### Pattern 5: Secure password storage
 
 ```go
 import "dappco.re/go/crypt/crypt"
@@ -947,9 +942,9 @@ if valid {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Organization
+### Test organisation
 
 All packages follow the **Good/Bad/Ugly** triplet pattern:
 
@@ -980,7 +975,7 @@ policy_test.go:
   TestPolicyEngine_Evaluate_Ugly — Edge case tier
 ```
 
-### Test Commands
+### Test commands
 
 ```bash
 # Run all tests
@@ -1007,40 +1002,40 @@ go fmt ./...
 
 ---
 
-## 📋 Compliance Summary
+## Compliance summary
 
-### Coding Standards
+### Coding standards
 
-✅ **UK English:** colour, organisation, centre, artefact, licence, serialise
-✅ **Strict types:** All parameters and return types explicitly typed
-✅ **AX comments:** Usage examples, not prose descriptions
-✅ **Test triplets:** Good/Bad/Ugly pattern for all functions
-✅ **Licence:** EUPL-1.2 with SPDX identifier
-✅ **Error handling:** `coreerr.E("package.Function", "message", err)` exclusively
-✅ **Randomness:** `crypto/rand` only; never `math/rand`
+- UK English: colour, organisation, centre, artefact, licence, serialise
+- Strict types: all parameters and return types explicitly typed
+- AX comments: usage examples, not prose descriptions
+- Test triplets: Good/Bad/Ugly pattern for all functions
+- Licence: EUPL-1.2 with SPDX identifier
+- Error handling: `coreerr.E("package.Function", "message", err)` exclusively
+- Randomness: `crypto/rand` only; never `math/rand`
 
-### Security Rules
+### Security rules
 
-✅ **No secret leakage:** Errors never include secrets
-✅ **Constant-time operations:** For cryptographic comparisons
-✅ **Memory safety:** Zeroize sensitive data after use
-✅ **Input validation:** All inputs validated before processing
-✅ **Rate limiting:** Protect against brute-force attacks
+- No secret leakage: errors never include secrets
+- Constant-time operations: for cryptographic comparisons
+- Memory safety: zeroize sensitive data after use
+- Input validation: all inputs validated before processing
+- Rate limiting: protect against brute-force attacks
 
-### File Organization
+### File organisation
 
-✅ **Comments as examples:** Every exported type/function has usage comments
-✅ **SPOR compliance:** Single Point Of Responsibility for each file
-✅ **Test file pairing:** Every `.go` file has `_test.go` and `_example_test.go`
-✅ **No banned imports:** Uses CoreGO wrappers for stdlib
+- Comments as examples: every exported type/function has usage comments
+- SPOR compliance: Single Point Of Responsibility for each file
+- Test file pairing: every `.go` file has `_test.go` and `_example_test.go`
+- No banned imports: uses CoreGO wrappers for stdlib
 
-### Test Organization
+### Test organisation
 
-✅ **File-aware tests:** Each production file owns its test file
-✅ **Table-driven subtests:** Uses `t.Run()`
-✅ **Good/Bad/Ugly pattern:** Comprehensive test coverage
-✅ **Race-safe:** All tests pass with `-race`
-✅ **Concurrency tests:** 10 goroutines via WaitGroup
+- File-aware tests: each production file owns its test file
+- Table-driven subtests: uses `t.Run()`
+- Good/Bad/Ugly pattern: comprehensive test coverage
+- Race-safe: all tests pass with `-race`
+- Concurrency tests: 10 goroutines via WaitGroup
 
 ### Verification
 
@@ -1053,7 +1048,7 @@ gofmt -l .
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author:** Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created:** 2026-06-18T04:00:00Z
@@ -1063,7 +1058,7 @@ gofmt -l .
 - **Repository:** `forge.lthn.sh/core/go-crypt`
 - **Module:** `dappco.re/go/crypt`
 
-### Key Contacts
+### Key contacts
 
 - **Project Lead:** Hades (Lethean)
 - **Maintainer:** Purberus <purberus@lthn.ai>
@@ -1089,7 +1084,7 @@ gofmt -l .
 
 ---
 
-### Reference Material
+### Reference material
 
 | Resource | Location |
 |----------|----------|
@@ -1100,8 +1095,3 @@ gofmt -l .
 | **I/O Medium Interface** | [`plans/code/core/go/io/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/io/RFC.md) |
 | **Agent RFC** | [`plans/code/core/agent/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/agent/RFC.md) |
 | **Enchantrix Primitives** | [`code/snider/enchantrix/RFC.md`](file:///Users/snider/Code/snider/enchantrix/RFC.md) |
-
----
-
-*Documentation generated: 2026-06-18T04:00:00Z*
-*Knowledge Pack: CoreGo v1.3.0*

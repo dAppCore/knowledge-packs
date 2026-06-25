@@ -18,8 +18,6 @@ tags:
 ---
 # go-pool — ProgPoWZ Mining Pool Backend
 
-> **The complete Stratum mining pool backend for Lethean (LTHN) blockchain**
-
 **RFC:** [plans/code/core/go/pool/RFC.md](../../../../../plans/code/core/go/pool/RFC.md)
 **Source:** [~/Code/core/go-pool/](file:///Users/snider/Code/core/go-pool/)
 **Module:** `dappco.re/go/pool`
@@ -29,7 +27,7 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
 `go-pool` is a **complete Stratum mining pool backend** for the Lethean blockchain. It implements:
 
@@ -64,7 +62,7 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Component Stack
 
@@ -145,7 +143,7 @@ HTTP API → Stats Aggregator → Redis
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 go-pool/
@@ -197,7 +195,7 @@ go-pool/
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
 ### Basic Setup
 
@@ -319,7 +317,7 @@ go build -o go-pool ./cmd/go-pool
 
 ---
 
-## 🔧 Core Types
+## Core types
 
 ### Pool
 
@@ -450,7 +448,7 @@ type BlockTemplate struct {
 
 ---
 
-## 🌐 Stratum Protocol
+## Stratum protocol
 
 ### Connection Flow
 
@@ -495,7 +493,7 @@ vardiff := VardiffConfig{
 
 ---
 
-## 🔒 Share Validation
+## Share validation
 
 ### Share Trust Algorithm
 
@@ -538,7 +536,7 @@ if miner.InvalidCount > 0 &&
 
 ---
 
-## 💰 Payout System
+## Payout system
 
 ### RBPPS (Round-Based Proportional)
 
@@ -565,7 +563,7 @@ type PaymentsConfig struct {
 
 ---
 
-## 🗄️ Redis State Store
+## Redis state store
 
 ### Key Patterns
 
@@ -622,7 +620,7 @@ type RedisBlock struct {
 
 ---
 
-## 🌐 HTTP API
+## HTTP API
 
 ### Endpoints
 
@@ -714,7 +712,7 @@ curl -N http://localhost:8080/live_stats
 
 ---
 
-## 🔄 Clustering
+## Clustering
 
 ### Horizontal Scaling
 
@@ -752,7 +750,7 @@ Events published via Redis pub/sub:
 
 ---
 
-## 📡 Webhook Notifications
+## Webhook notifications
 
 ### Configuration
 
@@ -785,7 +783,7 @@ type WebhookConfig struct {
 
 ---
 
-## 📊 Charts & Monitoring
+## Charts & monitoring
 
 ### Chart Data Collection
 
@@ -812,7 +810,7 @@ type ChartsConfig struct {
 
 ---
 
-## 🛡️ Security
+## Security
 
 ### TLS Support
 
@@ -849,7 +847,7 @@ type RateLimitConfig struct {
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### Docker
 
@@ -931,7 +929,7 @@ spec:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Files
 
@@ -991,7 +989,7 @@ go test -bench . -benchmem
 
 ---
 
-## 📈 Performance
+## Performance
 
 ### Throughput
 
@@ -1030,7 +1028,7 @@ paymentsConfig := PaymentsConfig{
 
 ---
 
-## 🎯 Best Practices
+## Best practices
 
 ### 1. Use Multiple Ports
 
@@ -1105,7 +1103,7 @@ API: APIConfig{
 
 ---
 
-## 📚 Examples
+## Examples
 
 ### Example 1: Basic Pool Setup
 
@@ -1224,7 +1222,7 @@ func ExampleAdmin() {
 
 ---
 
-## 🐛 Debugging
+## Debugging
 
 ### Enable Debug Logging
 
@@ -1269,7 +1267,7 @@ journalctl -u go-pool -f
 
 ---
 
-## 📊 Monitoring
+## Monitoring
 
 ### Key Metrics
 
@@ -1315,7 +1313,7 @@ func init() {
 
 ---
 
-## 📝 Notes
+## Notes
 
 - **Repository:** `forge.lthn.sh/core/go-pool`
 - **Primary Spec:** [RFC.md](../../../../../plans/code/core/go/pool/RFC.md)
@@ -1325,7 +1323,7 @@ func init() {
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -1338,7 +1336,7 @@ func init() {
 
 ---
 
-## 🎯 Tags
+## Tags
 
 ```yaml
 - mining-pool
@@ -1365,52 +1363,3 @@ func init() {
 *Knowledge Pack: CoreGo v1.1.0*
 *Maintainer: Purberus <purberus@lthn.ai>*
 
----
-
-**Note:** This is a production-ready mining pool backend for Lethean blockchain. It replaces the legacy Node.js pool and provides wire-compatible HTTP API.
-
-**Recommendation:** Use multiple ports with different difficulties to cater to different miner hardware. Enable TLS for security.
-
-**Performance:** The pool can handle ~10K concurrent miners with proper hardware. Use Redis clustering for horizontal scaling.
-
-**Security:** Always use TLS for Stratum ports in production. Enable IP banning to prevent abuse. Use strong admin passwords.
-
-**Monitoring:** Set up comprehensive monitoring using the HTTP API and webhooks. The `/live_stats` endpoint provides real-time updates.
-
-**Payouts:** RBPPS (proportional) is the recommended payout mode for most pools. Configure payout thresholds based on your pool's volume.
-
-**Clustering:** Use Redis pub/sub for horizontal scaling. Multiple pool instances can share state via Redis.
-
-**Backup:** Regularly back up Redis data to prevent loss of miner balances and shares.
-
-**Maintenance:** Monitor pool health and restart instances as needed. Use the admin API for monitoring.
-
-**Compatibility:** The pool is wire-compatible with existing Node.js pool UIs, requiring no changes to frontend code.
-
-**Testing:** Thoroughly test with a small group of miners before deploying to production. Test payouts, banning, and failover scenarios.
-
-**Documentation:** Document your pool's configuration, fees, and payout thresholds for miners.
-
-**Support:** Provide clear instructions for miners to connect, including stratum URLs, ports, and difficulty settings.
-
-**Scaling:** Start with a single instance and scale horizontally as needed using Redis clustering and load balancing.
-
-**Optimization:** Monitor performance metrics and adjust configuration (vardiff, share trust) for optimal efficiency.
-
-**Security:** Keep pool software and dependencies updated. Monitor for and respond to security threats.
-
-**Compliance:** Ensure pool operation complies with all applicable regulations and blockchain rules.
-
-**Transparency:** Provide miners with clear visibility into pool fees, payouts, and statistics.
-
-**Community:** Build a community around your pool with Discord, Telegram, or other channels for support.
-
-**Marketing:** Promote your pool to attract miners. Highlight low fees, reliability, and good payout frequency.
-
-**Reliability:** Implement redundancy for all critical components (Redis, daemon, wallet). Use health checks and auto-restart.
-
-**Monitoring:** Set up alerts for critical issues (pool down, daemon disconnected, Redis down, high error rate).
-
-**Performance:** Optimize for low latency and high throughput. Use fast hardware and network connections.
-
-**Cost:** Monitor and optimize hosting costs. Use spot instances or dedicated hardware for best performance/cost ratio.

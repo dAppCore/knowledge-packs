@@ -5,17 +5,17 @@ description: Complete index of go-cgo package components and API surface
 module: dappco.re/go/cgo
 ---
 
-# go-cgo — Package Index
+# go-cgo — Package index
 
-> **Repository:** `core/go-cgo`
-> **Module:** `dappco.re/go/cgo`
-> **Type:** Library (CGo)
-> **Status:** Production
-> **Lines:** ~2,161 (source)
+**Repository:** `core/go-cgo`
+**Module:** `dappco.re/go/cgo`
+**Type:** Library (CGo)
+**Status:** Production
+**Lines:** ~2,161 (source)
 
 ---
 
-## 📚 Quick Links
+## Quick links
 
 - **[README.md](./README.md)** — Complete package documentation
 - **[RFC Specification](file:///Users/snider/Code/meowmix/plans/code/core/go/cgo/RFC.md)** — Technical specification
@@ -24,35 +24,35 @@ module: dappco.re/go/cgo
 
 ---
 
-## 🗂️ File Structure
+## File structure
 
-### Source Files (6)
+### Source files (6)
 
 | File | Lines | Purpose | Status |
 |------|-------|---------|--------|
-| `doc.go` | 23 | Package documentation and usage examples | ✅ Complete |
-| `buffer.go` | 161 | Buffer type: C-backed byte allocation with panic guards | ✅ Complete |
-| `scope.go` | 126 | Scope type: grouped C allocations with bulk cleanup | ✅ Complete |
-| `string_conversion.go` | 1,559 | C type conversions, string conversion, errno mapping | ✅ Complete |
-| `call.go` | 200+ | C function pointer dispatcher (0-18 args) | ✅ Complete |
-| `cstring.go` | 100+ | C string utilities | ✅ Complete |
-| `call_test_support.go` | 145 | C test harness with function call stubs | ✅ Complete |
+| `doc.go` | 23 | Package documentation and usage examples | Complete |
+| `buffer.go` | 161 | Buffer type: C-backed byte allocation with panic guards | Complete |
+| `scope.go` | 126 | Scope type: grouped C allocations with bulk cleanup | Complete |
+| `string_conversion.go` | 1,559 | C type conversions, string conversion, errno mapping | Complete |
+| `call.go` | 200+ | C function pointer dispatcher (0-18 args) | Complete |
+| `cstring.go` | 100+ | C string utilities | Complete |
+| `call_test_support.go` | 145 | C test harness with function call stubs | Complete |
 
-### Test Files (8)
+### Test files (8)
 
 | File | Purpose | Coverage |
 |------|---------|----------|
-| `buffer_test.go` | Buffer tests | ✅ Good/Bad/Ugly |
-| `buffer_example_test.go` | Buffer examples | ✅ Examples |
-| `scope_test.go` | Scope tests | ✅ Good/Bad/Ugly |
-| `scope_example_test.go` | Scope examples | ✅ Examples |
-| `call_test.go` | Call/Conversion tests | ✅ Good/Bad/Ugly |
-| `call_example_test.go` | Call examples | ✅ Examples |
-| `string_conversion_test.go` | String conversion tests | ✅ Good/Bad/Ugly |
-| `assert_test.go` | Assertion helpers | ✅ Complete |
-| `alloc_budget_test.go` | Allocation budget tests | ✅ Complete |
+| `buffer_test.go` | Buffer tests | Good/Bad/Ugly |
+| `buffer_example_test.go` | Buffer examples | Examples |
+| `scope_test.go` | Scope tests | Good/Bad/Ugly |
+| `scope_example_test.go` | Scope examples | Examples |
+| `call_test.go` | Call/Conversion tests | Good/Bad/Ugly |
+| `call_example_test.go` | Call examples | Examples |
+| `string_conversion_test.go` | String conversion tests | Good/Bad/Ugly |
+| `assert_test.go` | Assertion helpers | Complete |
+| `alloc_budget_test.go` | Allocation budget tests | Complete |
 
-### CLI Test Files
+### CLI test files
 
 | File | Purpose |
 |------|---------|
@@ -61,9 +61,9 @@ module: dappco.re/go/cgo
 
 ---
 
-## 🔧 Public API Surface
+## Public API surface
 
-### Buffer Type
+### Buffer type
 
 | Symbol | Type | Description |
 |--------|------|-------------|
@@ -77,19 +77,19 @@ module: dappco.re/go/cgo
 | `(*Buffer).Len` | `func() int` | Get allocated size |
 | `(*Buffer).IsFreed` | `func() bool` | Check if freed |
 
-### Scope Type
+### Scope type
 
 | Symbol | Type | Description |
 |--------|------|-------------|
 | `Scope` | `struct` | Grouped C allocations with bulk cleanup |
-| `NewScope` | `func() *Scope` | Create new scope with finalizer |
+| `NewScope` | `func() *Scope` | Create new scope with finaliser |
 | `(*Scope).FreeAll` | `func()` | Release all allocations |
 | `(*Scope).Close` | `func() error` | io.Closer interface |
 | `(*Scope).Buffer` | `func(size int) *Buffer` | Allocate managed buffer |
 | `(*Scope).CString` | `func(value string) *C.char` | Allocate managed C string |
 | `(*Scope).IsFreed` | `func() bool` | Check if freed |
 
-### Type Conversions
+### Type conversions
 
 | Symbol | Type | Description |
 |--------|------|-------------|
@@ -98,7 +98,7 @@ module: dappco.re/go/cgo
 | `Errno` | `func(rc C.int) error` | Convert C errno to Go error |
 | `WithErrno` | `func(fn func() C.int) (int, error)` | Call C function, return errno as error |
 
-### String Conversion
+### String conversion
 
 | Symbol | Type | Description |
 |--------|------|-------------|
@@ -106,7 +106,7 @@ module: dappco.re/go/cgo
 | `CString` | `func(s string) *C.char` | Convert Go string to C string |
 | `Free` | `func(ptr unsafe.Pointer)` | Release C-allocated memory |
 
-### Function Calls
+### Function calls
 
 | Symbol | Type | Description |
 |--------|------|-------------|
@@ -114,9 +114,7 @@ module: dappco.re/go/cgo
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
+## Code metrics
 
 ```
 Total source files:        6
@@ -127,30 +125,30 @@ Total lines (source):    ~2,161
 Total lines (tests):     ~3,000+
 ```
 
-### Test Coverage
+### Test coverage
 
 | Category | Count | Status |
 |----------|-------|--------|
-| Good tests (happy path) | 30+ | ✅ Complete |
-| Bad tests (expected errors) | 20+ | ✅ Complete |
-| Ugly tests (edge cases) | 15+ | ✅ Complete |
-| Example tests | 10+ | ✅ Complete |
+| Good tests (happy path) | 30+ | Complete |
+| Bad tests (expected errors) | 20+ | Complete |
+| Ugly tests (edge cases) | 15+ | Complete |
+| Example tests | 10+ | Complete |
 
 ### Complexity
 
 | Component | Methods | Status |
 |-----------|---------|--------|
-| Buffer | 7 | ✅ Well-documented |
-| Scope | 6 | ✅ Well-documented |
-| Type Conversions | 4 | ✅ Well-documented |
-| String Conversion | 3 | ✅ Well-documented |
-| Function Calls | 1 | ✅ Well-documented |
+| Buffer | 7 | Well-documented |
+| Scope | 6 | Well-documented |
+| Type Conversions | 4 | Well-documented |
+| String Conversion | 3 | Well-documented |
+| Function Calls | 1 | Well-documented |
 
 ---
 
-## 🏷️ Tags & Categories
+## Tags and categories
 
-### Technology Tags
+### Technology tags
 
 - `cgo` — Primary tag
 - `c-interop` — C/Go interoperability
@@ -159,7 +157,7 @@ Total lines (tests):     ~3,000+
 - `memory-management` — Memory allocation and cleanup
 - `unsafe` — Uses unsafe package
 
-### Usage Tags
+### Usage tags
 
 - `buffer` — C-backed byte buffers
 - `scope` — Grouped allocation management
@@ -168,9 +166,9 @@ Total lines (tests):     ~3,000+
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
-### Internal Dependencies
+### Internal dependencies
 
 | Package | Purpose | Import Path |
 |---------|---------|-------------|
@@ -178,7 +176,7 @@ Total lines (tests):     ~3,000+
 | syscall | Errno type | `syscall` |
 | unsafe | Pointer manipulation | `unsafe` |
 
-### External Dependencies
+### External dependencies
 
 None — Pure Go with CGO support.
 
@@ -186,7 +184,7 @@ Requires working C toolchain with `CGO_ENABLED=1`.
 
 ---
 
-## 📁 Consumers
+## Consumers
 
 go-cgo is used by these Core packages:
 
@@ -199,9 +197,9 @@ go-cgo is used by these Core packages:
 
 ---
 
-## 🎯 Usage Patterns
+## Usage patterns
 
-### Pattern 1: Scope-Based (Recommended)
+### Pattern 1: Scope-based (recommended)
 
 ```go
 scope := corecgo.NewScope()
@@ -215,7 +213,7 @@ str1 := scope.CString("hello")
 // Single cleanup call
 ```
 
-### Pattern 2: Manual Management
+### Pattern 2: Manual management
 
 ```go
 buffer := corecgo.NewBuffer(1024)
@@ -225,7 +223,7 @@ cStr := corecgo.CString("hello")
 defer corecgo.Free(unsafe.Pointer(cStr))
 ```
 
-### Pattern 3: C Function Calls
+### Pattern 3: C function calls
 
 ```go
 err := corecgo.Call(
@@ -236,7 +234,7 @@ err := corecgo.Call(
 )
 ```
 
-### Pattern 4: Error Handling
+### Pattern 4: Error handling
 
 ```go
 rc := C.my_function()
@@ -245,7 +243,7 @@ if err := corecgo.Errno(rc); err != nil {
 }
 ```
 
-### Pattern 5: WithErrno Closure
+### Pattern 5: WithErrno closure
 
 ```go
 result, err := corecgo.WithErrno(func() C.int {
@@ -255,20 +253,20 @@ result, err := corecgo.WithErrno(func() C.int {
 
 ---
 
-## 📋 Compliance Summary
+## Compliance summary
 
-### File Organization
+### File organisation
 
 | File | Owns Tests | Status |
 |------|------------|--------|
-| `buffer.go` | `buffer_test.go`, `buffer_example_test.go` | ✅ Compliant |
-| `scope.go` | `scope_test.go`, `scope_example_test.go` | ✅ Compliant |
-| `string_conversion.go` | `string_conversion_test.go`, `call_test.go` | ✅ Compliant |
-| `call.go` | `call_test.go`, `call_example_test.go` | ✅ Compliant |
+| `buffer.go` | `buffer_test.go`, `buffer_example_test.go` | Compliant |
+| `scope.go` | `scope_test.go`, `scope_example_test.go` | Compliant |
+| `string_conversion.go` | `string_conversion_test.go`, `call_test.go` | Compliant |
+| `call.go` | `call_test.go`, `call_example_test.go` | Compliant |
 
-### Import Restrictions
+### Import restrictions
 
-✅ **No banned imports:**
+No banned imports:
 - `fmt` → Use `core.Println`, `core.Printf`
 - `errors` → Use `core.E`
 - `strings` → Use `core.String`
@@ -279,16 +277,16 @@ result, err := corecgo.WithErrno(func() C.int {
 - `encoding/json` → Use `core.JSON`
 - `bytes` → Use `core.Bytes`
 
-### Test Organization
+### Test organisation
 
-✅ **File-aware triplets:**
+File-aware triplets:
 - Each production file has matching `_test.go` and `_example_test.go`
 - Tests use `Test<File>_<Symbol>_{Good,Bad,Ugly}` naming
 - Examples use Go's runnable `// Output:` form
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author**: Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created**: 2026-06-17T23:45:00Z
@@ -299,14 +297,10 @@ result, err := corecgo.WithErrno(func() C.int {
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
 - [CoreGo Framework](../../README.md) — Parent knowledge pack
 - [go-mlx Package](../mlx/README.md) — Uses go-cgo for MLX inference
 - [go-rocm Package](../rocm/README.md) — Uses go-cgo for ROCm
 - [go-blockchain Package](../blockchain/README.md) — Uses go-cgo for crypto
 - [go-inference Package](../inference/README.md) — Uses go-cgo for inference
-
----
-
-*Package index generated: 2026-06-17T23:45:00Z*

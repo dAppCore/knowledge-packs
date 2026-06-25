@@ -17,9 +17,7 @@ tags:
   - hlcrf
   - build-variants
 ---
-# core/cli — Semantic CLI Framework
-
-> **"Zero external dependencies for output. Self-registering commands. Semantic output."**
+# core/cli — Semantic CLI framework
 
 **RFC:** [plans/code/core/go/cli/RFC.md](../../../../../plans/code/core/go/cli/RFC.md)
 **Source:** [~/Code/core/cli/](file:///Users/snider/Code/core/cli/)
@@ -28,18 +26,18 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`core/cli` is a **semantic CLI framework** that replaces external dependencies (cobra, lipgloss, huh) with a zero-dependency, self-registering, AI-native command system. It's the foundation for all CoreGo CLI binaries.
+`core/cli` is a semantic CLI framework that replaces external dependencies (cobra, lipgloss, huh) with a zero-dependency, self-registering, AI-native command system. It is the foundation for all CoreGo CLI binaries.
 
-### Design Principles
+### Design principles
 
 1. **Zero external dependencies for output** — Consuming code imports `cli` only, never `fmt`, `lipgloss`, or `huh`
 2. **Self-registering commands** — Packages register via `init()`, build tags control what's compiled
 3. **Semantic output** — `cli.Success()`, `cli.Error()`, `cli.Progress()` replace raw `fmt.Printf`
 4. **Defence in depth** — Only compiled code exists in binary. No code = no vulnerabilities
 
-### Primary Use Cases
+### Primary use cases
 
 - **Core CLI binary** — The main `core` command with all subcommands
 - **Service CLIs** — Individual service binaries with semantic output
@@ -47,7 +45,7 @@ tags:
 - **Compatibility layers** — Drop-in replacements for other tools (ansible, terraform, kubectl)
 - **Embedded in applications** — Any Go application can use `cli` for consistent output
 
-### Key Innovation: Replaced Dependencies
+### Replaced dependencies
 
 | External Package | Transitive Deps | Replacement | Lines Saved |
 |-----------------|-----------------|-------------|-------------|
@@ -58,9 +56,9 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Stack
+### Component stack
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -100,7 +98,7 @@ tags:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Integration with Core Framework
+### Integration with Core framework
 
 ```go
 // Commands register via Core's Action system
@@ -120,9 +118,9 @@ func (s *MyService) OnStartup(ctx context.Context) core.Result {
 
 ---
 
-## 📚 Core Concepts
+## Core concepts
 
-### 1. Semantic Output Functions
+### 1. Semantic output functions
 
 Replace raw `fmt.Printf` with semantic functions that convey meaning:
 
@@ -141,7 +139,7 @@ cli.Success(i18n.T("build.complete"))
 cli.Echo(key, args...)  // Just print, no semantic meaning
 ```
 
-**Predefined Styles:**
+**Predefined styles:**
 ```go
 StyleSuccess = NewStyle().Bold().Foreground(ColourGreen500)
 StyleError   = NewStyle().Bold().Foreground(ColourRed500)
@@ -155,7 +153,7 @@ StyleCommand = NewStyle().Bold().Foreground(ColourCyan500)
 StylePath    = NewStyle().Underline().Foreground(ColourViolet400)
 ```
 
-### 2. AnsiStyle API (Zero-Dependency)
+### 2. AnsiStyle API (zero-dependency)
 
 ```go
 // Create custom style
@@ -175,7 +173,7 @@ cli.NewStyle().
 // Supported: bold, dim, italic, underline, 24-bit RGB/hex foreground and background
 ```
 
-### 3. Colour Palette (Tailwind CSS)
+### 3. Colour palette (Tailwind CSS)
 
 ```go
 // Primary colours (500 shade)
@@ -190,7 +188,7 @@ ColourCyan500   = "#06b6d4"
 // Grey scale: Grey50 to Grey900
 ```
 
-### 4. Glyph System
+### 4. Glyph system
 
 Three themes for different terminal capabilities:
 
@@ -212,7 +210,7 @@ ThemeEmoji   = GlyphTheme{Check: "✅", Cross: "❌", Warning: "⚠️", ...}
 ThemeASCII   = GlyphTheme{Check: "[ok]", Cross: "[err]", Warning: "[warn]", ...}
 ```
 
-**Auto-Detection:**
+**Auto-detection:**
 ```go
 func init() {
     if os.Getenv("NO_COLOR") != "" || os.Getenv("TERM") == "dumb" {
@@ -225,13 +223,13 @@ func init() {
 }
 ```
 
-**Inline Glyphs:**
+**Inline glyphs:**
 ```go
 cli.Print(":check: Done")        // ✓ Done (resolved at render time)
 cli.Print(":arrow: Next step")   // → Next step
 ```
 
-### 5. Structured Output
+### 5. Structured output
 
 ```go
 // Key-value pairs
@@ -254,7 +252,7 @@ p.Update(42)                           // Building [████░░░░░�
 p.Done()                               // Building [██████████] ✓
 ```
 
-### 6. Prompts (Replacing huh)
+### 6. Prompts (replacing huh)
 
 ```go
 // Text input with default
@@ -267,11 +265,11 @@ ok := cli.Confirm("Continue?")
 choice := cli.Select("Choose", []string{"a", "b", "c"})  // numbered list
 ```
 
-### 7. HLCRF Terminal Layout
+### 7. HLCRF terminal layout
 
 Port of RFC-001 HLCRF compositor for structured terminal output:
 
-**Simple Layout:**
+**Simple layout:**
 ```
 ┌─────────────────────────────────────┐
 │ Header: command name + version      │  H
@@ -284,7 +282,7 @@ Port of RFC-001 HLCRF compositor for structured terminal output:
 └─────────────────────────────────────┘
 ```
 
-**With Sidebar:**
+**With sidebar:**
 ```
 ┌─────────────────────────────────────┐
 │ Header                              │
@@ -308,9 +306,9 @@ layout.Footer("3 repos dirty • 12s")
 layout.Render()
 ```
 
-### 8. Command Registration
+### 8. Command registration
 
-**cobra is banned.** All command registration uses `cli.Command`:
+cobra is banned. All command registration uses `cli.Command`:
 
 ```go
 // Self-registering packages
@@ -336,7 +334,7 @@ func AddCommands(root *cli.Command) {
 }
 ```
 
-**Core.Command Integration (v0.8.0):**
+**Core.Command integration (v0.8.0):**
 ```go
 func (s *MyService) OnStartup(ctx context.Context) core.Result {
     c := s.Core()
@@ -346,11 +344,11 @@ func (s *MyService) OnStartup(ctx context.Context) core.Result {
 }
 ```
 
-### 9. Build Variants
+### 9. Build variants
 
 Control which packages are compiled using build tags:
 
-**Variant Files:**
+**Variant files:**
 ```
 cmd/
 ├── main.go
@@ -362,7 +360,7 @@ cmd/
     └── minimal.go   # core only
 ```
 
-**Full Variant (Default):**
+**Full variant (default):**
 ```go
 //go:build !ci && !php && !minimal && !agent
 
@@ -380,7 +378,7 @@ import (
 )
 ```
 
-**CI Variant:**
+**CI variant:**
 ```go
 //go:build ci
 
@@ -394,7 +392,7 @@ import (
 )
 ```
 
-**Build Commands:**
+**Build commands:**
 ```bash
 go build .                # full variant (default)
 go build -tags ci .       # CI variant
@@ -408,7 +406,7 @@ go build -tags agent .    # agent variant
 - Self-documenting — variant file lists exactly what's included
 - Defence in depth — no code = no vulnerabilities
 
-### 10. Built-in Commands
+### 10. Built-in commands
 
 All variants include cross-cutting commands:
 
@@ -420,7 +418,7 @@ core config list            # List all configuration
 core config path            # Show config file path
 ```
 
-**Configuration Keys (dot-separated namespaces):**
+**Configuration keys (dot-separated namespaces):**
 - `dev.editor` — editor for commit messages (vi, nano, code)
 - `dev.gpg` — GPG key ID for signing
 - `dev.pager` — pager for diffs (less, more, delta)
@@ -439,11 +437,11 @@ core doctor checks          # Run diagnostic checks
 core doctor install         # Install missing tools
 ```
 
-**Doctor Environment:** Shows OS, Go, PHP, Python, Git, container runtimes, shell
+**Doctor environment:** Shows OS, Go, PHP, Python, Git, container runtimes, shell
 
-**Doctor Commands:** Lists all core commands with status, binary location, version, variant
+**Doctor commands:** Lists all core commands with status, binary location, version, variant
 
-**Doctor Checks:**
+**Doctor checks:**
 - SSH key setup (SSH_AUTH_SOCK, keys loaded)
 - Git credentials (configured user, email)
 - Core installation (PATH, GOBIN)
@@ -453,14 +451,14 @@ core doctor install         # Install missing tools
 - Permissions (workspace dirs, git repos)
 - Language tools (golangci-lint, phpstan, biome availability)
 
-**Doctor Install:**
+**Doctor install:**
 - Creates `.core/` config directory
 - Generates default `.core/lint.yaml`
 - Installs required language tools
 - Sets up shell completions
 - Validates SSH and GPG keys
 
-### 11. Operations Safety Taxonomy
+### 11. Operations safety taxonomy
 
 | Category | Friction | Examples | SSH Gate |
 |----------|----------|---------|----------|
@@ -469,9 +467,9 @@ core doctor install         # Install missing tools
 | **Write-Remote** | Confirm | `push`, `pull`, `sync`, `merge`, `release` | Yes |
 | **Destructive** | Double confirm | `reset`, `clean`, `force-push`, `delete` | Yes |
 
-**SSH key passphrase is a FEATURE** — preserves human friction for remote operations.
+SSH key passphrase is a feature — preserves human friction for remote operations.
 
-### 12. AI-Native Convention
+### 12. AI-native convention
 
 The `--ai` flag convention: every command works WITHOUT AI. AI is opt-in, never forced.
 
@@ -483,7 +481,7 @@ AI-delegated:    core dispatch 42    → Send to agent, notify when done
 
 Human confirms all destructive operations. AI logs its work for human review.
 
-### 13. FrankenPHP Bridge
+### 13. FrankenPHP bridge
 
 Go calls PHP directly via FrankenPHP — no network hop, no separate server:
 
@@ -499,9 +497,9 @@ Single binary does CLI + server + MCP + PHP. Laravel services available to all G
 
 ---
 
-## 🎯 API Reference
+## API reference
 
-### Package-Level Functions
+### Package-level functions
 
 ```go
 // Semantic output
@@ -536,7 +534,7 @@ output := style.Render(text)
 cli.Print(":check: Done")   // uses active theme's check glyph
 ```
 
-### Command Types
+### Command types
 
 ```go
 type Command struct {
@@ -568,7 +566,7 @@ func (l *Layout) Footer(f string)
 func (l *Layout) Render()
 ```
 
-### Glyph Theme
+### Glyph theme
 
 ```go
 type GlyphTheme struct {
@@ -586,7 +584,7 @@ func SetGlyphTheme(theme GlyphTheme)
 func GetGlyphTheme() GlyphTheme
 ```
 
-### CLI Transformers (Compatibility Layer)
+### CLI transformers (compatibility layer)
 
 ```go
 // Transform foreign CLI args to Core args
@@ -607,14 +605,14 @@ func RegisterTransformer(t CLITransformerIn)
 func RegisterOutputTransformer(t CLITransformerOut)
 ```
 
-**Build Tag Convention:**
+**Build tag convention:**
 ```
 {tool}_compat     → full compatibility layer (in + out)
 {tool}_compat_in  → args translation only (Core output format)
 {tool}_compat_out → output translation only (Core args format)
 ```
 
-**Example: Ansible Compatibility**
+**Example: Ansible compatibility**
 ```go
 //go:build ansible_compat
 
@@ -641,7 +639,7 @@ go build -tags ansible_compat -o ansible-playbook
 
 ---
 
-## 📁 File Structure
+## File structure
 
 ```
 core/cli/
@@ -690,7 +688,7 @@ core/cli/
 
 ---
 
-## 🚀 Usage Examples
+## Usage examples
 
 ### Minimal CLI
 
@@ -709,7 +707,7 @@ func main() {
 }
 ```
 
-### With Structured Output
+### With structured output
 
 ```go
 cli.Field("Version", "1.0.0")
@@ -725,7 +723,7 @@ rows := [][]string{
 cli.Table(headers, rows)
 ```
 
-### With Progress
+### With progress
 
 ```go
 p := cli.Progress("Processing", 100)
@@ -736,7 +734,7 @@ for i := 0; i < 100; i++ {
 p.Done()
 ```
 
-### With Prompts
+### With prompts
 
 ```go
 name := cli.Prompt("Enter your name", "John Doe")
@@ -746,7 +744,7 @@ if cli.Confirm("Is this correct?") {
 }
 ```
 
-### Registering Commands
+### Registering commands
 
 ```go
 // In init()
@@ -764,7 +762,7 @@ func init() {
 }
 ```
 
-### With Layout
+### With layout
 
 ```go
 layout := cli.NewLayout()
@@ -778,7 +776,7 @@ layout.Footer("core status • 0.1s")
 layout.Render()
 ```
 
-### Build Variants
+### Build variants
 
 ```bash
 # Build full variant (all features)
@@ -794,7 +792,7 @@ go build -tags php .
 go build -tags minimal .
 ```
 
-### CLI Transformer
+### CLI transformer
 
 ```go
 // ansible_compat.go
@@ -840,9 +838,9 @@ func (t *AnsibleTransformer) Transform(args []string) (string, map[string]string
 
 ---
 
-## 🔍 Advanced Features
+## Advanced features
 
-### Custom Glyph Themes
+### Custom glyph themes
 
 ```go
 customTheme := cli.GlyphTheme{
@@ -859,7 +857,7 @@ customTheme := cli.GlyphTheme{
 cli.SetGlyphTheme(customTheme)
 ```
 
-### Custom Colour Palette
+### Custom colour palette
 
 ```go
 // Override specific colours
@@ -869,7 +867,7 @@ cli.ColourBlue500 = "#myblue"
 style := cli.NewStyle().Foreground("#custom")
 ```
 
-### Multiple Output Writers
+### Multiple output writers
 
 ```go
 // Write to custom writer
@@ -881,7 +879,7 @@ style := cli.NewStyle().Bold().Foreground(cli.ColourGreen500)
 style.RenderTo(writer, "Custom output")
 ```
 
-### Command Metadata
+### Command metadata
 
 ```go
 cmd := root.Command("deploy", "Deploy application")
@@ -898,7 +896,7 @@ cmd.Examples = []string{
 cmd.Aliases = []string{"deploy", "push", "publish"}
 ```
 
-### Safety Confirmations
+### Safety confirmations
 
 ```go
 // Simple confirmation
@@ -917,7 +915,7 @@ if !cli.Confirm("LAST CHANCE: Delete all data?") {
 
 ---
 
-## 📊 Performance & Quality
+## Performance and quality
 
 ### Benchmarks
 
@@ -926,7 +924,7 @@ if !cli.Confirm("LAST CHANCE: Delete all data?") {
 - Pooled buffers for progress bars
 - Pre-computed style codes
 
-### Test Coverage
+### Test coverage
 
 - Good/Bad/Ugly triplets for all packages
 - Example tests for API documentation
@@ -940,7 +938,7 @@ if !cli.Confirm("LAST CHANCE: Delete all data?") {
 
 ---
 
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -948,19 +946,12 @@ if !cli.Confirm("LAST CHANCE: Delete all data?") {
 | core/mcp | [../mcp/](../mcp/) | MCP server framework (uses CLI) |
 | core/agent | [../agent/](../agent/) | Agent dispatch (uses CLI for commands) |
 | core/api | [../api/](../api/) | REST framework (CLI ↔ HTTP bridge) |
-| go-i18n | [../i18n/](../i18n/) | Internationalization (used for CLI translations) |
+| go-i18n | [../i18n/](../i18n/) | Internationalisation (used for CLI translations) |
 
 ---
 
-## 📈 Statistics
+## Component summary
 
-- **Total Files:** 50+ Go files
-- **Lines of Code:** ~10,000 (estimated)
-- **Test Coverage:** High (Good/Bad/Ugly triplets)
-- **Dependencies:** 1 (core/go)
-- **External Dependencies:** 0 (zero transitive dependencies!)
-
-### Components
 - **Output Functions:** 5 (Success, Error, Warn, Info, Debug)
 - **Structured Output:** 4 (Field, List, Table, Progress)
 - **Prompt Functions:** 3 (Prompt, Confirm, Select)
@@ -971,38 +962,11 @@ if !cli.Confirm("LAST CHANCE: Delete all data?") {
 - **Build Variants:** 5 (full, ci, php, agent, minimal)
 - **Transformer Types:** 2 (In, Out)
 
-### Removed Dependencies
-- **lipgloss:** ~15 transitive deps replaced
-- **huh:** ~30 transitive deps replaced
-- **cobra:** ~20 transitive deps replaced
-- **Total:** ~65 transitive dependencies eliminated
-
 ---
 
-## 🎯 Key Takeaways
-
-1. **Zero Dependencies** — No external packages for styling or prompts. Everything is custom-implemented in ~100 lines of ANSI code.
-2. **Self-Registering** — Commands register via `init()` with build tags controlling inclusion.
-3. **Semantic Output** — Functions convey meaning (Success, Error, Warn) not just formatting.
-4. **Build Variants** — Different binaries with different feature sets, smaller attack surface.
-5. **AI-Native** — Opt-in AI assistance with `--ai` flag, human always in control.
-6. **Defence in Depth** — No code = no vulnerabilities. Build tags control attack surface.
-7. **Compatibility Layer** — Drop-in replacements for other tools via CLI transformers.
-8. **HLCRF Layout** — Structured terminal output with Header, Content, Footer, Left sidebar.
-9. **Glyph System** — Three themes (Unicode, Emoji, ASCII) with auto-detection.
-10. **Tailwind Palette** — Consistent colours with web UI.
-
----
-
-## 📚 Learning Resources
+## Learning resources
 
 - **Primary RFC:** [plans/code/core/go/cli/RFC.md](../../../../../plans/code/core/go/cli/RFC.md) (663 lines)
 - **HLCRF Compositor:** [RFC-001-HLCRF-COMPOSITOR.md](file:///Users/snider/Code/meowmix/plans/rfc/RFC-001-HLCRF-COMPOSITOR.md)
 - **AX Spec:** [RFC-025-AGENT-EXPERIENCE.md](file:///Users/snider/Code/core/docs/RFC-025-AGENT-EXPERIENCE.md)
 - **IPC Worker Bundles:** [code/core/go/ipc/RFC.md](../../../../../plans/code/core/go/ipc/RFC.md) §5
-
----
-
-*Knowledge Pack: core/cli v1.0.0*
-*Last Updated: 2026-06-17*
-*Maintained by: Purberus <purberus@lthn.ai>*

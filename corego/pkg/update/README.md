@@ -13,15 +13,13 @@ version: 1.0.0
 
 # go-update — Binary Self-Update Library
 
-> **"The authoritative spec for updating Go binaries. An agent should be able to implement auto-updates from this document alone."**
-
 `dappco.re/go/update` is a **self-updater library** for Go applications. It supports updates from GitHub releases and generic HTTP endpoints, with configurable startup behavior and version channel filtering.
 
 Used by `core CLI` and `core-agent` for automatic updates.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### What it is
 
@@ -30,7 +28,7 @@ Used by `core CLI` and `core-agent` for automatic updates.
 - **Generic HTTP** — Download from arbitrary HTTP endpoints
 - **Semantic versioning** — Proper semver comparison
 - **Channel support** — Stable, beta, alpha release channels
-- **Seamless replacement** — Atomic binary replacement with rollback on failure
+- **In-place replacement** — Atomic binary replacement with rollback on failure
 - **Cross-platform** — Unix and Windows support
 
 ### Architecture
@@ -42,20 +40,9 @@ Application → CheckForUpdates() → GitHub/HTTP → Download → Apply (binary
                         Channel selection
 ```
 
-### Key Features
-
-✅ **GitHub Releases** — Tag-based and channel-based filtering
-✅ **HTTP Downloads** — Generic URL-based binary download
-✅ **Semantic Versioning** — Proper semver comparison via `golang.org/x/mod/semver`
-✅ **Channel Tracking** — Stable, beta, alpha channels
-✅ **Atomic Updates** — Atomic binary replacement
-✅ **Rollback Support** — Automatic rollback on failure
-✅ **Cross-Platform** — Unix (atomic rename) and Windows support
-✅ **Dependency Injection** — Testable function variables for mocking
-
 ---
 
-## 📦 Quick Start
+## Quick start
 
 ### GitHub-Based Updates
 
@@ -125,7 +112,7 @@ func main() {
 
 ---
 
-## 🗂️ Package Structure
+## Package structure
 
 ```
 go-update/
@@ -144,7 +131,7 @@ go-update/
 
 ---
 
-## 📁 Core Components
+## Core components
 
 ### 1. Version Management
 
@@ -318,7 +305,7 @@ githubClient.HTTPClient = client
 
 ---
 
-## 🎛️ Update Service
+## Update service
 
 ### Configuration
 
@@ -379,7 +366,7 @@ service.ForceCheck()
 
 ---
 
-## 💻 CLI Commands
+## CLI commands
 
 ### Available Commands
 
@@ -417,7 +404,7 @@ core update status
 
 ---
 
-## 🔧 Dependency Injection
+## Dependency injection
 
 The update system uses **dependency injection** for testing. Core update logic is exposed as `var` function values that tests can replace:
 
@@ -454,7 +441,7 @@ update.NewAuthenticatedClient = func(token string) *http.Client {
 
 ---
 
-## ⚡ Concurrency & Safety
+## Concurrency and safety
 
 - **No goroutines** in core library (update operations are sequential)
 - **Atomic binary replacement** via OS rename (Unix) or delete+rename (Windows)
@@ -464,7 +451,7 @@ update.NewAuthenticatedClient = func(token string) *http.Client {
 
 ---
 
-## 📊 Channels
+## Channels
 
 ### Supported Channels
 
@@ -490,7 +477,7 @@ func matchesChannel(tagName, channel string) bool {
 
 ---
 
-## 🛡️ Error Handling
+## Error handling
 
 All errors use `coreerr.E()` from `forge.lthn.ai/core/go-log`:
 
@@ -519,7 +506,7 @@ return coreerr.E("FunctionName", "what failed", underlyingErr)
 
 ---
 
-## 📦 Dependencies
+## Dependencies
 
 ### Internal Dependencies
 
@@ -540,34 +527,7 @@ return coreerr.E("FunctionName", "what failed", underlyingErr)
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
-
-```
-Total Go files:           10+
-Total lines (source):    ~1,500
-Total lines (tests):     ~1,000
-Public API surface:      ~15 symbols
-Supported platforms:     Unix (Linux, macOS), Windows
-Supported channels:      4 (stable, beta, alpha, empty)
-Supported sources:       2 (GitHub, HTTP)
-```
-
-### Test Coverage
-
-| Component | Tests | Coverage |
-|-----------|-------|----------|
-| Version management | 10+ | ✅ Complete |
-| GitHub client | 20+ | ✅ Complete |
-| Update checker | 15+ | ✅ Complete |
-| Binary replacement | 10+ | ✅ Complete |
-| HTTP downloads | 10+ | ✅ Complete |
-| CLI commands | 5+ | ✅ Complete |
-
----
-
-## 🎯 Usage Patterns
+## Usage patterns
 
 ### Pattern 1: Automatic Updates on Startup
 
@@ -656,7 +616,7 @@ fmt.Printf("Current version: %s\n", update.Version)
 
 ---
 
-## 🎨 Code Examples
+## Code examples
 
 ### Complete Update Service Integration
 
@@ -763,7 +723,7 @@ if semver.Prerelease(current) != "" {
 
 ---
 
-## 📋 Compliance Rules
+## Compliance rules
 
 From `AGENTS.md` and `CLAUDE.md`:
 
@@ -787,7 +747,7 @@ From `AGENTS.md` and `CLAUDE.md`:
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
 - [CoreGo Framework](../../README.md) — Parent knowledge pack
 - [go-log Package](../log/README.md) — Error handling
@@ -805,7 +765,7 @@ From `AGENTS.md` and `CLAUDE.md`:
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author:** Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created:** 2026-06-18T02:00:00Z
@@ -822,6 +782,3 @@ From `AGENTS.md` and `CLAUDE.md`:
 - **Used by:** Core CLI, Core Agent
 
 ---
-
-*Package documentation created: 2026-06-18T02:00:00Z*
-*Source: dappco.re/go/update*

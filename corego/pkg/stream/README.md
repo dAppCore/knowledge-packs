@@ -14,15 +14,13 @@ version: 1.0.0
 
 # go-stream — Unified Stream Primitive
 
-> **"An agent should be able to implement this library from this document alone."**
-
-`dappco.re/go/core/stream` is the **transport-agnostic event and data pipe** for the CoreGO ecosystem. It generalises the WebSocket hub from go-ws into a pluggable adapter model so that the same `Stream` interface works over **WebSocket, SSE, Redis pub/sub, ZeroMQ, and raw TCP**.
+`dappco.re/go/core/stream` is the transport-agnostic event and data pipe for the CoreGO ecosystem. It generalises the WebSocket hub from go-ws into a pluggable adapter model so that the same `Stream` interface works over WebSocket, SSE, Redis pub/sub, ZeroMQ, and raw TCP.
 
 Consumers (`core/api`, `go-pool`, `go-miner`, `go-p2p`, `core/mcp`) call `Stream` — they **never import a specific transport**. Transport adapters are wired at startup.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### What it is
 
@@ -88,7 +86,7 @@ Consumer Usage:
 
 ---
 
-## 📦 Quick Start
+## Quick start
 
 ### Basic Hub Usage
 
@@ -171,7 +169,7 @@ http.Handle("/stream/events", sseAdapter.HandlerForChannel("hashrate"))
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Core Components
 
@@ -282,7 +280,7 @@ type Message struct {
 
 ---
 
-## 🔌 Transport Adapters
+## Transport adapters
 
 ### WebSocket Adapter (`adapter/ws`)
 
@@ -519,7 +517,7 @@ Maximum frame size: 65,535 bytes (enforced at read time).
 
 ---
 
-## 🔐 Authentication
+## Authentication
 
 ### HTTP Authenticator (WebSocket, SSE)
 
@@ -615,7 +613,7 @@ var (
 
 ---
 
-## 📊 Statistics & Monitoring
+## Statistics and monitoring
 
 ### HubStats
 
@@ -646,7 +644,7 @@ for ch := range hub.AllChannels() {
 
 ---
 
-## 🔄 Pipe & Composition
+## Pipe and composition
 
 ### Streaming Composition with Pipe
 
@@ -697,7 +695,7 @@ stop()  // Safe to call
 
 ---
 
-## 🎯 Consumer Usage Patterns
+## Consumer usage patterns
 
 ### Pattern 1: core/api — SSE Live Stats
 
@@ -797,7 +795,7 @@ defer unsub()
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Organization
 
@@ -859,7 +857,7 @@ go fmt ./...
 
 ---
 
-## 🔧 CoreGO Service Integration
+## CoreGO service integration
 
 The stream package provides full CoreGO service integration:
 
@@ -897,7 +895,7 @@ svc.Hub.Publish("alerts", []byte("direct message"))
 
 ---
 
-## 📈 Performance Characteristics
+## Performance characteristics
 
 ### Throughput
 
@@ -924,7 +922,7 @@ svc.Hub.Publish("alerts", []byte("direct message"))
 
 ---
 
-## 🔒 Security Considerations
+## Security considerations
 
 ### Authentication
 
@@ -947,7 +945,7 @@ svc.Hub.Publish("alerts", []byte("direct message"))
 
 ---
 
-## 🎯 Design Philosophy
+## Design philosophy
 
 ### AX Principles Applied
 
@@ -970,7 +968,7 @@ svc.Hub.Publish("alerts", []byte("direct message"))
 
 ---
 
-## 📋 Compliance Summary
+## Compliance summary
 
 ### Coding Standards
 
@@ -998,7 +996,7 @@ svc.Hub.Publish("alerts", []byte("direct message"))
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author:** Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created:** 2026-06-18T03:00:00Z
@@ -1030,6 +1028,3 @@ svc.Hub.Publish("alerts", []byte("direct message"))
 | **MCP Package** | [`plans/code/core/mcp/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/mcp/RFC.md) |
 
 ---
-
-*Documentation generated: 2026-06-18T03:00:00Z*
-*Knowledge Pack: CoreGo v1.3.0*

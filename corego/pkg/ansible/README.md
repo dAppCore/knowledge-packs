@@ -12,13 +12,11 @@ version: 1.0.0
 
 # go-ansible — Pure Go Ansible Playbook Engine
 
-> **"A agent should be able to use this package to execute Ansible playbooks from this document alone."**
-
 `dappco.re/go/ansible` is a **native Go implementation** of core Ansible playbook mechanics. It parses YAML playbooks, inventories, and roles, then executes tasks on remote hosts via SSH — **without any Python dependency**.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### What it is
 
@@ -35,7 +33,7 @@ version: 1.0.0
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 Playbook YAML ──► Parser ──► []Play ──► Executor ──► Module Handlers ──► SSH/Local Client ──► Remote/Local Host
@@ -57,7 +55,7 @@ Inventory YAML ──► Parser ──► Inventory        Callbacks (OnPlayStar
 
 ---
 
-## 📋 Quick Start
+## Quick start
 
 ### Basic Usage
 
@@ -86,7 +84,7 @@ core ansible playbook.yml -i inventory.yml -e release=2026.04
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ### Main Files
 
@@ -129,7 +127,7 @@ ansible/
 
 ---
 
-## 🎭 Playbook Execution Flow
+## Playbook execution flow
 
 ### Per-Play Order
 
@@ -149,7 +147,7 @@ ansible/
 
 ---
 
-## 🔌 Module Handlers (45 total)
+## Module handlers (45 total)
 
 ### Command Execution (4)
 
@@ -241,7 +239,7 @@ ansible/
 
 ---
 
-## 📝 Parser
+## Parser
 
 ### Custom YAML Parsing
 
@@ -278,7 +276,7 @@ YAML inventory supports:
 
 ---
 
-## 🎨 Templating & Variables
+## Templating & variables
 
 ### Jinja2-Compatible Templating
 
@@ -334,7 +332,7 @@ Executor supports:
 
 ---
 
-## 🔗 SSH & Local Execution
+## SSH & local execution
 
 ### SSH Client
 
@@ -367,7 +365,7 @@ Both SSH and local clients implement `sshExecutorClient`:
 
 ---
 
-## ⚙️ Executor API
+## Executor API
 
 ### Main Methods (68 total)
 
@@ -422,7 +420,7 @@ Executor exposes callbacks for integration:
 
 ---
 
-## 💻 CLI Integration
+## CLI integration
 
 Registered via `core/cli`:
 
@@ -455,7 +453,7 @@ Returns exit code 0 on success, 1 on failure.
 
 ---
 
-## ✨ Advanced Features
+## Advanced features
 
 ### Roles
 
@@ -523,7 +521,7 @@ Facts cached per-play and available as `ansible_*` variables. Disabled with `gat
 
 ---
 
-## 📦 I/O Medium Integration
+## I/O Medium integration
 
 Playbooks and inventory load from `io.Medium` — local files, Git repos, or S3. See `code/core/go/io/RFC.md §Medium`.
 
@@ -533,7 +531,7 @@ ansible.Run(ansible.WithInventory(io.GitHub("core/devops")))
 
 ---
 
-## 🔒 Adding a New Module
+## Adding a new module
 
 1. Add both FQCN and short form to `KnownModules` in `types.go`
 2. Add the dispatch case in `executeModule()` switch in `modules.go`
@@ -544,7 +542,7 @@ If adding new YAML keys to `Task`, update the `knownKeys` map in `Task.Unmarshal
 
 ---
 
-## 📊 Compliance Rules
+## Compliance rules
 
 From `AGENTS.md`:
 
@@ -581,7 +579,7 @@ From `AGENTS.md`:
 
 ---
 
-## 🎓 Examples
+## Examples
 
 ### Simple Playbook
 
@@ -654,7 +652,7 @@ From `AGENTS.md`:
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
 - [CoreGo Framework](../../README.md) — Parent knowledge pack
 - [go-io Package](../io/README.md) — I/O Medium interface
@@ -664,20 +662,3 @@ From `AGENTS.md`:
 - [go-ansible AGENTS.md](file:///Users/snider/Code/core/go-ansible/AGENTS.md) — Agent guidance
 - [go-ansible CLAUDE.md](file:///Users/snider/Code/core/go-ansible/CLAUDE.md) — Implementation details
 
----
-
-## 📈 Statistics
-
-```
-Total module handlers:     45+
-Test files:               12+
-Code lines:               ~28,000
-Test coverage:            High (file-by-file triplets)
-Production status:        Active (fleet management)
-```
-
----
-
-*Package documentation created: 2026-06-17T23:30:00Z*
-*Author: Mistral Vibe (Purberus <purberus@lthn.ai>)*
-*Source: dappco.re/go/ansible*

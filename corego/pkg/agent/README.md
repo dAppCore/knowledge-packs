@@ -21,9 +21,7 @@ tags:
   - chat-archive
   - monitoring
 ---
-# go-agent — AI Agent Orchestration Platform
-
-> **The authoritative agent dispatch and orchestration framework for the Core ecosystem**
+# go-agent — AI agent orchestration platform
 
 **RFC:** [plans/code/core/go/agent/RFC.md](../../../../../plans/code/core/go/agent/RFC.md)
 **Source:** [~/Code/core/agent/](file:///Users/snider/Code/core/agent/)
@@ -35,11 +33,11 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-agent` is the **AI agent orchestration platform** for the Core ecosystem, providing a single Go binary (`core-agent` or `lthn-agent`) that runs as an MCP server and CLI tool. It dispatches AI coding agents (Claude, Codex, Gemini, opencode) into sandboxed containers, runs an opencode-backed agent fleet, serves an MCP + hub control plane, and carries shared semantic memory (OpenBrain).
+`go-agent` is the AI agent orchestration platform for the Core ecosystem, providing a single Go binary (`core-agent` or `lthn-agent`) that runs as an MCP server and CLI tool. It dispatches AI coding agents (Claude, Codex, Gemini, opencode) into sandboxed containers, runs an opencode-backed agent fleet, serves an MCP + hub control plane, and carries shared semantic memory (OpenBrain).
 
-### Primary Use Cases
+### Primary use cases
 
 1. **Agent Dispatch** — Fan out tasks to sandboxed workers (Claude, Codex, Hermes, Google) running in `.core/workspace/`
 2. **MCP Server** — Model Context Protocol server for Claude Code, Cursor, and other IDE integrations
@@ -51,7 +49,7 @@ tags:
 8. **Chat Archive** — Per-user portable DuckDB chat archive for conversation history
 9. **Container Runtime** — Local and container-based runners with dispatch queue
 
-### Design Philosophy
+### Design philosophy
 
 - **Single Binary** — One binary (`core-agent`) with multiple modes (mcp, serve, hub, chat)
 - **Core-Native** — Full integration with CoreGO framework (ServiceRuntime, ACTION system, Result pattern)
@@ -63,9 +61,9 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Stack
+### Component stack
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -109,7 +107,7 @@ tags:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Binary Modes
+### Binary modes
 
 The `core-agent` binary supports multiple operation modes:
 
@@ -126,7 +124,7 @@ The `core-agent` binary supports multiple operation modes:
 | `models-job` | Poll model download status | Check download progress |
 | `run flow <path>` | Execute YAML workflow | Run predefined workflows |
 
-### Core Integration
+### Core integration
 
 The package integrates with CoreGO via:
 - **ServiceRuntime** — Standard Core service lifecycle for all subsystems
@@ -137,9 +135,9 @@ The package integrates with CoreGO via:
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
-### Repository Layout
+### Repository layout
 
 ```
 core/agent/
@@ -302,9 +300,9 @@ core/agent/
 
 ---
 
-## 🎯 Binary Modes Deep Dive
+## Binary modes
 
-### MCP Mode (`core-agent mcp`)
+### MCP mode (`core-agent mcp`)
 
 The stdio MCP server for coding-agent host integration. This is the default mode for Claude Code.
 
@@ -323,7 +321,7 @@ svc, _ := mcp.New(mcp.Options{WorkspaceRoot: "."})
 svc.Run(context.Background())
 ```
 
-### Serve Mode (`core-agent serve`)
+### Serve mode (`core-agent serve`)
 
 HTTP MCP daemon for cross-agent communication, CI, and remote use.
 
@@ -337,7 +335,7 @@ HTTP MCP daemon for cross-agent communication, CI, and remote use.
 - `MCP_HTTP_ADDR` — HTTP transport address (e.g., `localhost:8081`)
 - `MCP_AUTH_TOKEN` — Bearer token for authentication
 
-### Hub Mode (`core-agent hub`)
+### Hub mode (`core-agent hub`)
 
 Loopback control plane serving opencode control/proxy groups and brain.
 
@@ -348,7 +346,7 @@ Loopback control plane serving opencode control/proxy groups and brain.
 - Opencode control and proxy groups
 - Brain integration with semantic memory
 
-### Chat Mode (`core-agent chat --user=<id>`)
+### Chat mode (`core-agent chat --user=<id>`)
 
 REPL against the local LEM engine (lthn-mlx / lthn-ai driver).
 
@@ -358,7 +356,7 @@ REPL against the local LEM engine (lthn-mlx / lthn-ai driver).
 - Session persistence
 - Multi-turn conversations
 
-### Model Management
+### Model management
 
 **Commands:**
 - `serve-status` — Inspect local model engine status
@@ -369,13 +367,13 @@ REPL against the local LEM engine (lthn-mlx / lthn-ai driver).
 
 ---
 
-## 🏗️ Core Services
+## Core services
 
-### Agentic Service (`pkg/agentic/`)
+### Agentic service (`pkg/agentic/`)
 
-The **core orchestration engine** for agent dispatch and workspace management.
+The core orchestration engine for agent dispatch and workspace management.
 
-#### Key Components:
+#### Key components:
 
 **Workspace Management (`paths.go`):**
 - `WorkspaceRoot()` — Root workspace directory (`~/Lethean/workspace/`)
@@ -418,7 +416,7 @@ dispatch → agent works → closeout sequence (review → fix → simplify → 
     → push to GitHub → CodeRabbit reviews → merge or dispatch fix agent
 ```
 
-#### Agent Types Supported:
+#### Agent types supported:
 
 | Agent | Command | Use Case |
 |-------|---------|----------|
@@ -432,9 +430,9 @@ dispatch → agent works → closeout sequence (review → fix → simplify → 
 | `opencode` | `opencode run` | Sandboxed agent with local/free-compute models |
 | `local` | Codex + ollama bridge | Local OSS model via host `ollama` |
 
-### Brain Service (`pkg/brain/`)
+### Brain service (`pkg/brain/`)
 
-**OpenBrain integration** for semantic memory and cross-agent messaging.
+OpenBrain integration for semantic memory and cross-agent messaging.
 
 **Features:**
 - `brain_recall` — Recall from brain with tags and filters
@@ -450,9 +448,9 @@ dispatch → agent works → closeout sequence (review → fix → simplify → 
 - Scoped by workspace and agent
 - Persistent storage via Postgres + Qdrant + Ollama (homelab stack)
 
-### Lemma Service (`pkg/lemma/`)
+### Lemma service (`pkg/lemma/`)
 
-**Local LEM engine client** (lthn-mlx / lthn-ai driver).
+Local LEM engine client (lthn-mlx / lthn-ai driver).
 
 **Features:**
 - Chat sessions with local models
@@ -460,9 +458,9 @@ dispatch → agent works → closeout sequence (review → fix → simplify → 
 - Model profile management
 - Inference with GPU acceleration
 
-### Chat History Service (`pkg/chathistory/`)
+### Chat history service (`pkg/chathistory/`)
 
-**Per-user portable DuckDB chat archive**.
+Per-user portable DuckDB chat archive.
 
 **Features:**
 - Portable DuckDB database per user
@@ -476,9 +474,9 @@ dispatch → agent works → closeout sequence (review → fix → simplify → 
 - Session metadata (model, temperature, etc.)
 - Search and filter capabilities
 
-### Monitor Service (`pkg/monitor/`)
+### Monitor service (`pkg/monitor/`)
 
-**Background monitoring and repository synchronization**.
+Background monitoring and repository synchronisation.
 
 **Features:**
 - Repository health monitoring
@@ -493,9 +491,9 @@ dispatch → agent works → closeout sequence (review → fix → simplify → 
 - `harvest.go` — Data harvesting from workspaces
 - `register.go` — Service registration
 
-### Runner Service (`pkg/runner/`)
+### Runner service (`pkg/runner/`)
 
-**Local and container process runners** with dispatch queue.
+Local and container process runners with dispatch queue.
 
 **Features:**
 - Local command execution
@@ -509,9 +507,9 @@ dispatch → agent works → closeout sequence (review → fix → simplify → 
 - Docker volume mounts
 - Workspace path mapping
 
-### Setup Service (`pkg/setup/`)
+### Setup service (`pkg/setup/`)
 
-**Project detection and workspace scaffolding**.
+Project detection and workspace scaffolding.
 
 **Features:**
 - Project type detection
@@ -522,11 +520,11 @@ dispatch → agent works → closeout sequence (review → fix → simplify → 
 
 ---
 
-## 📡 MCP Tools
+## MCP tools
 
-The agent package exposes comprehensive MCP tools across multiple subsystems.
+The agent package exposes MCP tools across multiple subsystems.
 
-### Agentic Tools (Dispatch & Workspace)
+### Agentic tools (dispatch & workspace)
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -538,7 +536,7 @@ The agent package exposes comprehensive MCP tools across multiple subsystems.
 | `agentic_resume` | Resume previous session | session_id |
 | `agentic_watch` | Watch workspace | path |
 
-### Plan Management Tools
+### Plan management tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -548,7 +546,7 @@ The agent package exposes comprehensive MCP tools across multiple subsystems.
 | `agentic_plan_delete` | Delete plan | plan_id |
 | `agentic_plan_list` | List all plans | - |
 
-### PR & Review Tools
+### PR & review tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -557,14 +555,14 @@ The agent package exposes comprehensive MCP tools across multiple subsystems.
 | `agentic_create_epic` | Create epic | title, description, issues |
 | `agentic_review_queue` | Get review queue | - |
 
-### Mirror & Scan Tools
+### Mirror & scan tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
 | `agentic_mirror` | Mirror repository | source, target |
 | `agentic_scan` | Scan repository | repo, depth |
 
-### Brain Tools
+### Brain tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -574,7 +572,7 @@ The agent package exposes comprehensive MCP tools across multiple subsystems.
 | `brain_search` | Search brain | query, limit |
 | `brain_list` | List brain entries | tags, limit |
 
-### Messaging Tools
+### Messaging tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -582,7 +580,7 @@ The agent package exposes comprehensive MCP tools across multiple subsystems.
 | `agent_inbox` | Get agent inbox | agent |
 | `agent_conversation` | Get conversation | conversation_id |
 
-### File Tools
+### File tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -595,7 +593,7 @@ The agent package exposes comprehensive MCP tools across multiple subsystems.
 | `dir_list` | List directory | path |
 | `dir_create` | Create directory | path |
 
-### Language Tools
+### Language tools
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -604,11 +602,11 @@ The agent package exposes comprehensive MCP tools across multiple subsystems.
 
 ---
 
-## 🧩 Subsystems
+## Subsystems
 
-### Agentic Subsystem
+### Agentic subsystem
 
-**Dispatch and workflow management**.
+Dispatch and workflow management.
 
 **Files:**
 - `dispatch.go` — Task dispatch logic
@@ -627,9 +625,9 @@ The agent package exposes comprehensive MCP tools across multiple subsystems.
 - `write_atomic.go` — Atomic write operations
 - `repo_helpers.go` — Repository helper utilities
 
-### Brain Subsystem
+### Brain subsystem
 
-**OpenBrain integration** for semantic memory.
+OpenBrain integration for semantic memory.
 
 **Files:**
 - `brain.go` — Main brain subsystem
@@ -640,17 +638,17 @@ The agent package exposes comprehensive MCP tools across multiple subsystems.
 - `client/client.go` — Brain client implementation
 - `client/coreio_compat.go` — CoreIO compatibility
 
-### IDE Subsystem
+### IDE subsystem
 
-**IDE bridge** for Laravel backend (defined in go-mcp, referenced here).
+IDE bridge for Laravel backend (defined in go-mcp, referenced here).
 
 ---
 
-## 🌐 Provider Integrations
+## Provider integrations
 
-### Claude Code Provider (`provider/claude/`)
+### Claude Code provider (`provider/claude/`)
 
-**8 marketplace plugins:**
+Eight marketplace plugins:
 - `core` — Core capabilities
 - `core-go` — Core Go integration
 - `core-php` — Core PHP integration
@@ -667,23 +665,23 @@ The agent package exposes comprehensive MCP tools across multiple subsystems.
 - Commands for dispatch, status, review, recall, remember, scan
 - Skills for security, architecture, test review
 
-### Codex Provider (`provider/codex/`)
+### Codex provider (`provider/codex/`)
 
-**Codex CLI integration** with autonomous coding capabilities.
+Codex CLI integration.
 
-### Hermes Provider (`provider/hermes/`)
+### Hermes provider (`provider/hermes/`)
 
-**Hermes plugin** with skills for homelab agent.
+Hermes plugin with skills for homelab agent.
 
-### Google Provider (`provider/google/`)
+### Google provider (`provider/google/`)
 
-**Google Gemini integration** scaffolding.
+Google Gemini integration scaffolding.
 
 ---
 
-## 📁 Configuration
+## Configuration
 
-### Environment Variables
+### Environment variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -739,9 +737,9 @@ templates:
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
-### Basic Usage
+### Basic usage
 
 ```bash
 # Build the binary
@@ -764,7 +762,7 @@ MCP_HTTP_ADDR=localhost:8081 MCP_AUTH_TOKEN=secret ./core-agent serve
 ./core-agent serve-profiles
 ```
 
-### As a Go Module
+### As a Go module
 
 ```go
 package main
@@ -796,7 +794,7 @@ func main() {
 }
 ```
 
-### Dispatch Example
+### Dispatch example
 
 ```go
 // Dispatch a task to an agent
@@ -844,7 +842,7 @@ if prepResult.OK {
 }
 ```
 
-### Brain Operations
+### Brain operations
 
 ```go
 // Store knowledge in brain
@@ -871,20 +869,20 @@ for _, result := range results {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
-The package follows the AX standard with **test triplets**:
+The package follows the AX standard with test triplets:
 - `*_test.go` — Unit and integration tests (Good/Bad/Ugly pattern)
 - `*_example_test.go` — Usage examples as tests
 
-**Naming Convention:**
+**Naming convention:**
 - `_Good` — Happy path tests
 - `_Bad` — Expected error conditions
 - `_Ugly` — Panics and edge cases
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -908,7 +906,7 @@ go test -v ./pkg/brain/...
 GOWORK=off go test ./...
 ```
 
-### Test Coverage Areas
+### Test coverage areas
 
 - ✅ Agentic dispatch and workspace prep
 - ✅ Brain recall/remember/forget operations
@@ -923,9 +921,9 @@ GOWORK=off go test ./...
 
 ---
 
-## 🌐 API Endpoints
+## API endpoints
 
-### Hub Control Plane Endpoints
+### Hub control plane endpoints
 
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
@@ -947,25 +945,7 @@ All MCP endpoints follow the Model Context Protocol specification:
 
 ---
 
-## 📊 Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Total Go files** | ~400+ |
-| **Test files** | ~300+ |
-| **Example test files** | ~150+ |
-| **Subsystems** | 6 (agentic, brain, lemma, chathistory, monitor, runner, setup) |
-| **Tool groups** | 8 (agentic, brain, file, process, metrics, rag, webview, websocket) |
-| **MCP tools** | 50+ |
-| **Provider integrations** | 4 (Claude, Codex, Hermes, Google) |
-| **Transports** | 4 (stdio, tcp, http, unix) |
-| **Binary modes** | 8 (mcp, serve, hub, chat, serve-status, serve-reload, serve-profiles, models-download, models-job, run flow) |
-| **Configuration files** | 2 (agents.yaml, workspace.yaml) |
-| **Environment variables** | 15+ |
-
----
-
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -980,33 +960,7 @@ All MCP endpoints follow the Model Context Protocol specification:
 
 ---
 
-## 📈 Quality Metrics
-
-- ✅ **MCP Specification Compliance** — Full Model Context Protocol implementation
-- ✅ **Test Coverage** — Good/Bad/Ugly pattern for all scenarios
-- ✅ **Transport Flexibility** — Multiple transport backends (stdio, tcp, http, unix)
-- ✅ **Security** — Workspace sandboxing and Bearer authentication
-- ✅ **Extensibility** — Subsystem architecture for custom tools
-- ✅ **Documentation** — Complete README + INDEX
-- ✅ **Core Integration** — Full CoreGO framework support
-- ✅ **Cross-Platform** — Unix + Windows support (where applicable)
-- ✅ **Production Ready** — Deployed in production environments
-
----
-
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | N/A |
-| 2026-05-XX | Brain subsystem finalized | N/A |
-| 2026-04-30 | CLAUDE.md guidance created | N/A |
-| 2026-04-XX | Opencode integration added | N/A |
-| 2026-03-XX | Initial package creation | N/A |
-
----
-
-## 🎯 Tags
+## Tags
 
 ```yaml
 - ai-agent
@@ -1047,7 +1001,7 @@ All MCP endpoints follow the Model Context Protocol specification:
 
 ---
 
-## 📚 References
+## References
 
 1. **RFC Specification** — [plans/code/core/go/agent/RFC.md](../../../../../plans/code/core/go/agent/RFC.md)
 2. **Repository** — [~/Code/core/agent/](file:///Users/snider/Code/core/agent/)
@@ -1057,8 +1011,3 @@ All MCP endpoints follow the Model Context Protocol specification:
 6. **CoreGO Framework** — [CoreGO INDEX](../../INDEX.md)
 7. **Lethean Project** — [Lethean Documentation](https://docs.lthn.io)
 
----
-
-*Package documentation generated: 2026-06-17T20:00:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
-*Maintainer: Purberus <purberus@lthn.ai>*

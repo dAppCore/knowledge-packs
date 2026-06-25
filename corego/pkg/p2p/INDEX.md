@@ -5,7 +5,6 @@ title: go-p2p Package Documentation Index
 ---
 # go-p2p Package Documentation
 
-> **Peer-to-Peer Networking for Distributed Mining** — Complete P2P networking layer
 
 **Module:** `dappco.re/go/core/p2p`
 **Repository:** `core/go-p2p`
@@ -13,7 +12,7 @@ title: go-p2p Package Documentation Index
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description |
 |----------|-------------|
@@ -23,7 +22,7 @@ title: go-p2p Package Documentation Index
 
 ---
 
-## 🗂️ Subpackages
+## Subpackages
 
 ### Core Subpackages
 
@@ -37,7 +36,7 @@ title: go-p2p Package Documentation Index
 
 ---
 
-## 🎯 Quick Links
+## Quick links
 
 ### Node Architecture
 - **Node Roles:** `RoleController`, `RoleWorker`, `RoleDual`
@@ -77,7 +76,7 @@ title: go-p2p Package Documentation Index
 
 ---
 
-## 🏗️ Architecture Layers
+## Architecture layers
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -100,7 +99,7 @@ title: go-p2p Package Documentation Index
 
 ---
 
-## 🔍 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -111,7 +110,7 @@ title: go-p2p Package Documentation Index
 
 ---
 
-## 📊 Statistics
+## Statistics
 
 - **Total Message Types:** 16
 - **Node Roles:** 3 (Controller, Worker, Dual)
@@ -124,7 +123,7 @@ title: go-p2p Package Documentation Index
 
 ---
 
-## 🔗 Source Code Structure
+## Source code structure
 
 ```
 go-p2p/
@@ -155,7 +154,7 @@ go-p2p/
 
 ---
 
-## 🚀 Usage Examples
+## Usage examples
 
 ### Basic Node Setup
 

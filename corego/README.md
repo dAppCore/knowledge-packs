@@ -1,32 +1,30 @@
 ---
 type: Knowledge Pack
 title: CoreGo Framework
-description: Complete knowledge pack for CoreGo — the zero-dependency Go framework for the Lethean ecosystem
+description: Knowledge pack for CoreGo — the zero-dependency Go framework for the Lethean ecosystem
 author: Mistral Vibe
 version: 1.0.0
 created: 2026-06-17T14:00:00Z
 tags: [framework, golang, zero-dependency, core, lethean]
 ---
 
-# CoreGo Knowledge Pack
-
-> **"The reference implementation — every shape decision propagates to ~30 downstream repos"**
+# CoreGo knowledge pack
 
 > **Official Site:** [dappco.re/go/](https://dappco.re/go/)
 
 This knowledge pack contains everything an agent needs to understand, use, and contribute to CoreGo — the foundational Go framework for the Lethean ecosystem.
 
-**Official Documentation:** All content in this knowledge pack is sourced from [dappco.re/go/](https://dappco.re/go/), the official CoreGo documentation site.
+**Official documentation:** All content in this knowledge pack is sourced from [dappco.re/go/](https://dappco.re/go/), the official CoreGo documentation site.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 `dappco.re/go` is the umbrella primitives package. Four universal types form the surface every operation flows through. The package has zero external dependencies — `go.mod` stays at three lines.
 
-**Official Description from [dappco.re/go/](https://dappco.re/go/):**
+**Official description from [dappco.re/go/](https://dappco.re/go/):**
 
-### Key Characteristics
+### Key characteristics
 
 - **Zero external dependencies** — `go.mod` stays at three lines
 - **Universal types** — Result, Options, Actions, Errors form the foundation
@@ -34,7 +32,7 @@ This knowledge pack contains everything an agent needs to understand, use, and c
 - **Universal types everywhere** — No bespoke error idioms per-package
 - **Lib never imports consumer** — Primitives stay zero-dependency
 
-### Key Statistics
+### Key statistics
 
 - **Total packages:** 50+ (see [INDEX.md](INDEX.md))
 - **Stdlib packages wrapped:** 44
@@ -43,7 +41,7 @@ This knowledge pack contains everything an agent needs to understand, use, and c
 - **Current version:** v0.9.0 (last breaking-change window before v1.0.0-beta.1)
 - **Status:** Patch releases (v0.9.x) for fixes only
 
-### Official Install
+### Official install
 
 ```bash
 # From dappco.re/go/
@@ -52,7 +50,7 @@ go get dappco.re/go@latest
 
 ---
 
-## 📚 Documentation Structure
+## Documentation structure
 
 ```
 knowledge-packs/corego/
@@ -83,21 +81,21 @@ knowledge-packs/corego/
 
 ---
 
-## 🔗 Source of Truth
+## Source of truth
 
 The **canonical specification** lives in:
 - [`~/Code/meowmix/plans/code/core/go/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/RFC.md)
 - [`~/Code/core/go/AGENTS.md`](file:///Users/snider/Code/core/go/AGENTS.md)
 
-This knowledge pack **aggregates and organizes** that information for agent consumption.
+This knowledge pack aggregates and organises that information for agent consumption.
 
 ---
 
-## 📦 Core Concepts
+## Core concepts
 
 All content sourced from [dappco.re/go/](https://dappco.re/go/)
 
-### The Four Universal Primitives
+### The four universal primitives
 
 From the official documentation: "Four universal types form the surface every operation flows through."
 
@@ -112,11 +110,11 @@ Every component in the ecosystem accepts and returns the same primitive types. A
 
 ---
 
-### 1. The Result Pattern
+### 1. The Result pattern
 
 **Purpose:** Standard error handling with logging and panic recovery
 
-**Official Description:** `Result` is the universal output type. Every Core operation returns one. It collapses the `(T, error)` pair into a single value with `OK` discrimination.
+**Official description:** `Result` is the universal output type. Every Core operation returns one. It collapses the `(T, error)` pair into a single value with `OK` discrimination.
 
 ```go
 // Type definition
@@ -135,7 +133,7 @@ type Result struct {
 | `core.ResultOf(v, err)` | Adapt a stdlib `(T, error)` pair | `r := core.ResultOf(os.ReadFile(path))` |
 | `core.Try(fn)` | Wrap a function that may panic | `r := core.Try(func() any { return riskyParse(input) })` |
 
-**Unwrap Methods:**
+**Unwrap methods:**
 
 | Method | When to use | Example |
 |--------|--------------|---------|
@@ -145,7 +143,7 @@ type Result struct {
 | `core.Cast[T](r)` | Typed extract `(T, ok)` | `if user, ok := core.Cast[*User](r); ok { use(user) }` |
 | `core.MustCast[T](r)` | Panicking generic variant | Hot config paths |
 
-**Inspect Methods:**
+**Inspect methods:**
 
 | Method | Returns | Example |
 |--------|---------|---------|
@@ -158,11 +156,11 @@ type Result struct {
 
 ---
 
-### 2. The Options Pattern
+### 2. The Options pattern
 
 **Purpose:** Typed key/value bag — the universal input
 
-**Official Description:** `Options` is the universal input type. Every Core operation that takes parameters takes one. A structured collection of key/value pairs with typed accessors.
+**Official description:** `Options` is the universal input type. Every Core operation that takes parameters takes one. A structured collection of key/value pairs with typed accessors.
 
 ```go
 // Type definition
@@ -190,7 +188,7 @@ opts := core.NewOptions(
 opts.Set("key", value)  // Add or update a key. Mutates in place.
 ```
 
-**Typed Accessors:** Each accessor returns the type's zero value when the key is missing or the stored value isn't assignable to that type.
+**Typed accessors:** Each accessor returns the type's zero value when the key is missing or the stored value isn't assignable to that type.
 
 | Accessor | Returns | Zero | Example |
 |----------|---------|------|---------|
@@ -200,7 +198,7 @@ opts.Set("key", value)  // Add or update a key. Mutates in place.
 | `opts.Float64(key)` | `float64` | `0` | `weight := opts.Float64("weight")` (promotes int/int64/float32) |
 | `opts.Duration(key)` | `core.Duration` | `0` | `timeout := opts.Duration("timeout")` (parses string via `ParseDuration`) |
 
-**Strict Reads (Result-shaped):** For cases where missing-vs-typed-zero matters:
+**Strict reads (Result-shaped):** For cases where missing-vs-typed-zero matters:
 
 ```go
 r := opts.Get("port")
@@ -218,11 +216,11 @@ port := r.Value.(int)
 
 ---
 
-### 3. The Actions Pattern
+### 3. The Actions pattern
 
 **Purpose:** Named, registered, invokable unit of work
 
-**Official Description:** Actions are the atomic unit of work in `core/go`. Named, registered, invokable, inspectable. The Action registry **is** the capability map.
+**Official description:** Actions are the atomic unit of work in `core/go`. Named, registered, invokable, inspectable. The Action registry **is** the capability map.
 
 **Register:**
 
@@ -247,7 +245,7 @@ r := c.Action("git.log").Run(ctx, core.NewOptions(
 ))
 ```
 
-**Lifecycle — Enable / Disable:**
+**Lifecycle — enable / disable:**
 
 ```go
 c.Action("dangerous.purge").Disable()
@@ -302,7 +300,7 @@ Sync steps run sequentially — failure stops the chain. Async steps fire-and-fo
 
 ---
 
-### 4. The Errors Pattern
+### 4. The Errors pattern
 
 **Purpose:** Structured `*Err` with operation context, stable codes, uniform introspection
 
@@ -343,7 +341,7 @@ Each stdlib package is wrapped by **exactly one file** in CoreGo:
 
 **Why it matters:** Prevents duplicate wrappers and ensures consistency across the ecosystem.
 
-### 4. Test Triplets
+### 4. Test triplets
 
 Every package has three files:
 
@@ -358,7 +356,7 @@ pkg/
 
 ---
 
-## 🏗️ Design Principles
+## Design principles
 
 From [dappco.re/go/](https://dappco.re/go/design):
 
@@ -374,11 +372,11 @@ These principles form the **AX Standard** (Agent Experience) — designing code 
 
 ---
 
-## 🗂️ Package Catalog
+## Package catalog
 
 See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 
-### Core Packages
+### Core packages
 
 | Package | Purpose | Files |
 |---------|---------|-------|
@@ -392,7 +390,7 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 | `log` | Structured logging | log.go |
 | `result` | Result type and panic recovery | result.go |
 
-### I/O Packages
+### I/O packages
 
 | Package | Purpose | Backend |
 |---------|---------|---------|
@@ -400,7 +398,7 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 | `go-cache` | Caching layer | go-io medium |
 | `go-store` | SQLite key-value store | |
 
-### I/O Packages
+### I/O packages
 
 | Package | Purpose | Backends |
 |---------|---------|----------|
@@ -408,32 +406,32 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 | `go-cache` | Caching layer | go-io medium |
 | `go-store` | SQLite key-value store | |
 
-### Network Packages
+### Network packages
 
 | Package | Purpose | Protocol | Deep Dive |
 |---------|---------|----------|-----------|
-| `go-dns` | .lthn DNS Resolution | DNS (RFC 1035) | **[✅ Available](./pkg/dns/README.md)** |
-| `go-p2p` | Peer-to-peer networking | Levin, UEPS, WebSocket | **[✅ Available](./pkg/p2p/README.md)** |
-| `go-proxy` | Stratum mining proxy | TCP/TLS, Stratum JSON-RPC | **[✅ Available](./pkg/proxy/README.md)** |
+| `go-dns` | .lthn DNS Resolution | DNS (RFC 1035) | **[Available](./pkg/dns/README.md)** |
+| `go-p2p` | Peer-to-peer networking | Levin, UEPS, WebSocket | **[Available](./pkg/p2p/README.md)** |
+| `go-proxy` | Stratum mining proxy | TCP/TLS, Stratum JSON-RPC | **[Available](./pkg/proxy/README.md)** |
 | `go-netops` | UniFi network controller | HTTP API | Coming soon |
 
-### Internationalization Packages
+### Internationalisation packages
 
 | Package | Purpose | Features | Deep Dive |
 |---------|---------|----------|-----------|
-| `go-i18n` | Grammar-aware i18n | Semantic intent, GrammarImprint, dual-class, CLDR | **[✅ Available](./pkg/i18n/README.md)** |
+| `go-i18n` | Grammar-aware i18n | Semantic intent, GrammarImprint, dual-class, CLDR | **[Available](./pkg/i18n/README.md)** |
 
-### Blockchain Packages
+### Blockchain packages
 
 | Package | Purpose | Status | Deep Dive |
 |---------|---------|--------|-----------|
-| `go-blockchain` | Blockchain implementation | Production | **[✅ Available](./pkg/blockchain/README.md)** |
-| `go-lns` | Lethean Name System | Production | **[✅ Available](./pkg/lns/README.md)** |
-| `go-dns` | .lthn DNS Resolution | Production | **[✅ Available](./pkg/dns/README.md)** |
-| `go-io` | **Mandatory I/O abstraction** | Production | **[✅ Available](./pkg/io/README.md)** |
+| `go-blockchain` | Blockchain implementation | Production | **[Available](./pkg/blockchain/README.md)** |
+| `go-lns` | Lethean Name System | Production | **[Available](./pkg/lns/README.md)** |
+| `go-dns` | .lthn DNS Resolution | Production | **[Available](./pkg/dns/README.md)** |
+| `go-io` | **Mandatory I/O abstraction** | Production | **[Available](./pkg/io/README.md)** |
 | `go-miner` | Mining operations | Production | Coming soon |
 
-### AI/ML Packages
+### AI/ML packages
 
 | Package | Purpose | Backend |
 |---------|---------|---------|
@@ -447,9 +445,9 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
-### For Agents
+### For agents
 
 1. **Read the RFC:** Start with [`plans/code/core/go/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/RFC.md)
 2. **Explore AGENTS.md:** [`core/go/AGENTS.md`](file:///Users/snider/Code/core/go/AGENTS.md)
@@ -457,7 +455,7 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 4. **Use Result:** Always return `core.Result[T]`
 5. **Follow SPOR:** Each stdlib package has one owner
 
-### For Developers
+### For developers
 
 1. **Clone the repo:** `git clone forge.lthn.sh/core/go`
 2. **Read the RFC:** Understand the contract
@@ -467,16 +465,16 @@ See [INDEX.md](INDEX.md) for the complete list of 50+ packages.
 
 ---
 
-## 🔍 Exploring the Codebase
+## Exploring the codebase
 
-### Key Files
+### Key files
 
 - [`core/go/AGENTS.md`](file:///Users/snider/Code/core/go/AGENTS.md) — Agent-specific guidance
 - [`core/go/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/RFC.md) — Primary specification
 - [`core/go/result.go`](file:///Users/snider/Code/core/go/result.go) — Result type implementation
 - [`core/go/api.go`](file:///Users/snider/Code/core/go/api.go) — HTTP utilities
 
-### Discovery Commands
+### Discovery commands
 
 ```bash
 # List all packages
@@ -496,23 +494,9 @@ done
 
 ---
 
-## 📊 Quick Stats
+## Quick reference
 
-```
-Total Go files:        160+ (from earlier exploration)
-Total stdlib wrapped:   44
-Total downstream repos: ~30+
-SPOR compliance:       100% (each stdlib package has one owner)
-Test triplet coverage:  High (most packages have triplets)
-Package deep dives:    7 (go-lns, go-blockchain, go-dns, go-io, go-p2p, go-proxy, go-i18n)
-Current version:      v0.9.0 (pre-v1.0.0-beta.1)
-```
-
----
-
-## 📖 Quick Reference
-
-### Result Constructors
+### Result constructors
 
 | Constructor | Purpose | Example |
 |-------------|---------|---------|
@@ -521,9 +505,9 @@ Current version:      v0.9.0 (pre-v1.0.0-beta.1)
 | `core.ResultOf(v, err)` | Adapt `(T, error)` | `r := core.ResultOf(os.ReadFile(path))` |
 | `core.Try(fn)` | Panic-safe wrapper | `r := core.Try(func() any { ... })` |
 
-### Result Methods
+### Result methods
 
-| Method | Returns | Use Case |
+| Method | Returns | Use case |
 |--------|---------|----------|
 | `r.OK` | `bool` | Check success |
 | `r.Value` | `any` | Access the value |
@@ -534,9 +518,9 @@ Current version:      v0.9.0 (pre-v1.0.0-beta.1)
 | `core.Cast[T](r)` | `(T, bool)` | Type-safe extract |
 | `core.MustCast[T](r)` | `T` | Panic on type mismatch |
 
-### Options Accessors
+### Options accessors
 
-| Accessor | Returns | Zero Value |
+| Accessor | Returns | Zero value |
 |----------|---------|------------|
 | `opts.String(key)` | `string` | `""` |
 | `opts.Int(key)` | `int` | `0` |
@@ -544,9 +528,9 @@ Current version:      v0.9.0 (pre-v1.0.0-beta.1)
 | `opts.Float64(key)` | `float64` | `0` |
 | `opts.Duration(key)` | `core.Duration` | `0` |
 
-### Action Methods
+### Action methods
 
-| Method | Returns | Use Case |
+| Method | Returns | Use case |
 |--------|---------|----------|
 | `c.Action(name).Run(ctx, opts)` | `Result` | Invoke action |
 | `c.Action(name).Exists()` | `bool` | Check if registered |
@@ -559,28 +543,28 @@ Current version:      v0.9.0 (pre-v1.0.0-beta.1)
 
 ---
 
-## 🎯 Use Cases
+## Use cases
 
-### When to Use CoreGo
+### When to use CoreGo
 
-✅ **New dAppCore repository** — Always start with CoreGo
-✅ **Error handling** — Use `core.Result[T]` instead of `(T, error)`
-✅ **Panic recovery** — Use `core.Recover` in handlers
-✅ **I/O operations** — Use `go-io` backends instead of raw file operations
-✅ **HTTP clients** — Use `core.Request` instead of raw `http.Client`
-✅ **Universal input** — Use `core.Options` for all function parameters
-✅ **Named capabilities** — Use `core.Action` for all invokable operations
+- **New dAppCore repository** — Always start with CoreGo
+- **Error handling** — Use `core.Result[T]` instead of `(T, error)`
+- **Panic recovery** — Use `core.Recover` in handlers
+- **I/O operations** — Use `go-io` backends instead of raw file operations
+- **HTTP clients** — Use `core.Request` instead of raw `http.Client`
+- **Universal input** — Use `core.Options` for all function parameters
+- **Named capabilities** — Use `core.Action` for all invokable operations
 
-### When NOT to Use CoreGo
+### When not to use CoreGo
 
-❌ **Performance-critical code** — CoreGo adds minimal overhead but may not be suitable for extreme performance requirements
-❌ **External libraries** — Don't wrap external library calls in CoreGo (use the library directly)
-❌ **Stdlib packages already wrapped** — Don't re-wrap; use the existing CoreGo wrapper
-❌ **Binary size-sensitive projects** — CoreGo is designed for clarity over minimalism
+- **Performance-critical code** — CoreGo adds minimal overhead but may not be suitable for extreme performance requirements
+- **External libraries** — Don't wrap external library calls in CoreGo (use the library directly)
+- **Stdlib packages already wrapped** — Don't re-wrap; use the existing CoreGo wrapper
+- **Binary size-sensitive projects** — CoreGo is designed for clarity over minimalism
 
 ---
 
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 - [CoreGUI](../coregui/README.md) — GUI framework (Wails v2)
 - [CoreTS](../corets/README.md) — TypeScript framework
@@ -590,9 +574,9 @@ Current version:      v0.9.0 (pre-v1.0.0-beta.1)
 
 ---
 
-## 💡 Agent Tips
+## Agent tips
 
-### Core Principles
+### Core principles
 
 1. **Always check the RFC first** — The spec in [`plans/code/core/go/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/RFC.md) drives the code
 2. **Follow SPOR** — Don't duplicate stdlib wrappers; each has exactly one owner
@@ -600,7 +584,7 @@ Current version:      v0.9.0 (pre-v1.0.0-beta.1)
 4. **Write triplets** — Every new package needs `file.go`, `file_test.go`, and `file_example_test.go`
 5. **Comments for agents** — Write documentation that agents can parse (show usage, not describe)
 
-### AX-Specific Guidance
+### AX-specific guidance
 
 6. **Universal shapes** — Every operation returns `Result`, takes `Options`
 7. **Named everything** — Use descriptive names; abbreviations add mapping overhead
@@ -608,18 +592,18 @@ Current version:      v0.9.0 (pre-v1.0.0-beta.1)
 9. **Greppable codes** — Error codes form a flat keyspace for easy searching
 10. **Capability map** — The Action registry IS the API; it's auditable and testable
 
-### Learning Resources
+### Learning resources
 
-- **[Official Site](https://dappco.re/go/)** — Always start here
-- **[Result Deep Dive](https://dappco.re/go/result/)** — Master the universal output type
-- **[Options Deep Dive](https://dappco.re/go/options/)** — Understand the universal input
-- **[Actions Deep Dive](https://dappco.re/go/action/)** — Learn named capabilities
-- **[GitHub Repository](https://github.com/dappcore/go)** — Source code and issues
+- **[Official site](https://dappco.re/go/)** — Always start here
+- **[Result deep dive](https://dappco.re/go/result/)** — Master the universal output type
+- **[Options deep dive](https://dappco.re/go/options/)** — Understand the universal input
+- **[Actions deep dive](https://dappco.re/go/action/)** — Learn named capabilities
+- **[GitHub repository](https://github.com/dappcore/go)** — Source code and issues
 - **[AGENTS.md](file:///Users/snider/Code/core/go/AGENTS.md)** — Agent-specific guidance
 
 ---
 
-## 📝 Maintenance
+## Maintenance
 
 This knowledge pack is maintained by Mistral Vibe. Updates are triggered by:
 

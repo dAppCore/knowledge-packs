@@ -19,8 +19,6 @@ tags:
 ---
 # go-mcp — Model Context Protocol Server Framework
 
-> **The authoritative MCP server for CoreGO applications — File operations, tool registration, notification broadcasting, and channel events**
-
 **RFC:** [plans/code/core/mcp/RFC.md](../../../../../plans/code/core/mcp/RFC.md) (if exists)
 **Source:** [~/Code/core/mcp/](file:///Users/snider/Code/core/mcp/)
 **Module:** `dappco.re/go/mcp`
@@ -31,7 +29,7 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
 `go-mcp` provides a **lightweight MCP (Model Context Protocol) server** implementation for CoreGO applications, enabling AI agents and IDEs to interact with codebases, tools, and resources through a standardized protocol. The package implements the MCP specification with file operations, tool registration, notification broadcasting, and channel-based event streaming.
 
@@ -66,7 +64,7 @@ core/mcp/
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Component Stack
 
@@ -120,7 +118,7 @@ The package integrates with CoreGO via:
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 core/mcp/go/
@@ -297,7 +295,7 @@ core/mcp/go/
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
 ### Basic MCP Server
 
@@ -441,7 +439,7 @@ func main() {
 
 ---
 
-## 🔧 Core Types
+## Core types
 
 ### Service
 
@@ -521,7 +519,7 @@ type ToolRecord struct {
 
 ---
 
-## 📡 Tool Groups
+## Tool groups
 
 The MCP server provides several built-in tool groups:
 
@@ -599,7 +597,7 @@ Tools for WebSocket client operations.
 
 ---
 
-## 🧩 Subsystems
+## Subsystems
 
 ### Brain Subsystem
 
@@ -663,7 +661,7 @@ ideSubsystem := &mcp.IDESubsystem{
 
 ---
 
-## 🚀 Transport Configuration
+## Transport configuration
 
 The MCP server supports multiple transports, selected in priority order:
 
@@ -695,7 +693,7 @@ svc.Run(ctx)
 
 ---
 
-## 🔔 Notification System
+## Notification system
 
 The MCP server provides a rich notification and channel event system.
 
@@ -727,7 +725,7 @@ The `claude/channel` experimental capability is registered automatically, enabli
 
 ---
 
-## 📊 Progress Tracking
+## Progress tracking
 
 Progress notification helpers for long-running operations.
 
@@ -747,7 +745,7 @@ progress.Fail(ctx, "Scan failed", err)
 
 ---
 
-## 🔍 Compliance & Security
+## Compliance & security
 
 ### Workspace Sandboxing
 
@@ -780,7 +778,7 @@ The package includes compliance checking utilities for validating tool inputs an
 
 ---
 
-## 🔄 Adding Custom Tools
+## Adding custom tools
 
 ### Step 1: Define Input/Output Structs
 
@@ -855,7 +853,7 @@ func New(opts Options) (*Service, error) {
 
 ---
 
-## 📦 Adding a New Subsystem
+## Adding a new subsystem
 
 ### Step 1: Implement Subsystem Interface
 
@@ -906,7 +904,7 @@ svc, err := mcp.New(mcp.Options{
 
 ---
 
-## 🚀 Command-Line Usage
+## Command-line usage
 
 ### Build and Run
 
@@ -938,7 +936,7 @@ core go qa
 
 ---
 
-## 🧪 Testing
+## Testing
 
 The package follows the AX standard with comprehensive test coverage.
 
@@ -981,7 +979,7 @@ func TestMyTool_Ugly(t *testing.T) { ... }
 
 ---
 
-## 🌐 Integration with Other Packages
+## Integration with other packages
 
 ### Process Service Integration
 
@@ -1020,7 +1018,7 @@ svc, _ := mcp.New(mcp.Options{
 
 ---
 
-## 📊 Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -1037,7 +1035,7 @@ svc, _ := mcp.New(mcp.Options{
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -1049,17 +1047,7 @@ svc, _ := mcp.New(mcp.Options{
 
 ---
 
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | N/A |
-| 2026-05-XX | Subsystem architecture finalized | N/A |
-| 2026-04-30 | CLAUDE.md guidance created | N/A |
-
----
-
-## 🎯 Tags
+## Tags
 
 ```yaml
 - mcp
@@ -1093,7 +1081,7 @@ svc, _ := mcp.New(mcp.Options{
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/mcp/](file:///Users/snider/Code/core/mcp/)
 2. **CLAUDE.md** — [~/Code/core/mcp/CLAUDE.md](file:///Users/snider/Code/core/mcp/CLAUDE.md)

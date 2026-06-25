@@ -5,8 +5,6 @@ title: go-i18n Package Documentation Index
 ---
 # go-i18n Package Documentation
 
-> **Grammar-Aware Internationalization Engine** — Semantic translations with grammar, intents, and reversal
-
 **Module:** `dappco.re/go/i18n`
 **Repository:** `core/go-i18n`
 **RFC:** [../../../../../plans/code/core/go/i18n/RFC.md](../../../../../plans/code/core/go/i18n/RFC.md)
@@ -14,7 +12,7 @@ title: go-i18n Package Documentation Index
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Size |
 |----------|-------------|------|
@@ -26,7 +24,7 @@ title: go-i18n Package Documentation Index
 
 ---
 
-## 🗂️ Subpackages
+## Subpackages
 
 ### Core Subpackages
 
@@ -37,7 +35,7 @@ title: go-i18n Package Documentation Index
 
 ---
 
-## 🎯 Quick Links
+## Quick links
 
 ### Architecture
 - **Two-Layer Design:** `core.I18n` (lightweight interface) + `go-i18n` (full engine)
@@ -94,7 +92,7 @@ title: go-i18n Package Documentation Index
 
 ---
 
-## 🏗️ Architecture Layers
+## Architecture layers
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -126,9 +124,7 @@ title: go-i18n Package Documentation Index
 
 ---
 
-## 🔍 Deep Dive: Dual-Class Disambiguation
-
-One of the most sophisticated features — intelligent resolution of words that can be both **verbs** and **nouns**:
+## Dual-class disambiguation
 
 ### The Problem
 
@@ -192,9 +188,7 @@ if total < 0.10 {
 
 ---
 
-## 🔍 Deep Dive: GrammarImprint
-
-Privacy-preserving content classification — the network operates on content **without reading it**.
+## GrammarImprint
 
 ### Connection to LetherNet
 
@@ -271,9 +265,9 @@ augmented := reversal.Multiply(text, reversal.MultiplierOptions{
 
 ---
 
-## 🔍 Deep Dive: Semantic Intent
+## Semantic intent
 
-### Intent Composition
+### Intent composition
 
 ```go
 // Create intent with subject
@@ -380,7 +374,7 @@ c.Command("issue/get", core.Command{Action: handler})
 
 ---
 
-## 🏗️ Architecture Components
+## Architecture components
 
 ### File Map
 
@@ -434,7 +428,7 @@ c.Command("issue/get", core.Command{Action: handler})
 
 ---
 
-## 🔗 Source Code Structure
+## Source code structure
 
 ```
 go-i18n/
@@ -530,7 +524,7 @@ go-i18n/
 
 ---
 
-## 🚀 Usage Examples
+## Usage examples
 
 ### Minimal Setup
 
@@ -611,7 +605,7 @@ langs := svc.AvailableLanguages()
 
 ---
 
-## 🛡️ Quality & Testing
+## Quality and testing
 
 ### Test Coverage
 
@@ -645,7 +639,7 @@ From the code and REVIEW.md:
 
 ---
 
-## 🔍 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -658,7 +652,7 @@ From the code and REVIEW.md:
 
 ---
 
-## 📈 Statistics
+## Statistics
 
 ### Package Metrics
 - **Total Files:** 80+ Go files
@@ -704,7 +698,7 @@ From the code and REVIEW.md:
 
 ---
 
-## 🎯 Key Takeaways
+## Key takeaways
 
 1. **Two-Layer Architecture** — `core.I18n` (lightweight) + `go-i18n` (full engine) prevents dependency bloat
 2. **Semantic Intent** — Compose human-readable strings from verbs, nouns, intents — not just flat key-value
@@ -717,7 +711,7 @@ From the code and REVIEW.md:
 
 ---
 
-## 📚 External Resources
+## External resources
 
 - **CLDR (Unicode Common Locale Data Repository):** [unicode.org/cldr](http://unicode.org/cldr)
 - **BCP 47 (Language Tags):** [RFC 5646](https://tools.ietf.org/html/rfc5646)
@@ -726,6 +720,5 @@ From the code and REVIEW.md:
 
 ---
 
-*Knowledge Pack: go-i18n v1.0.0*
-*Last Updated: 2026-06-17*
-*Maintained by: Purberus <purberus@lthn.ai>*
+*Knowledge pack: go-i18n v1.0.0*
+*Last updated: 2026-06-17*

@@ -8,26 +8,25 @@
 
 ---
 
-## 📚 Table of Contents
+## Table of contents
 
-- [📋 Overview](#-overview)
-- [🏗️ Architecture](#-architecture)
-- [📦 Packages](#-packages)
-- [🔧 Configuration](#-configuration)
-- [🚀 Commands](#-commands)
-- [📝 Usage Patterns](#-usage-patterns)
-- [🧪 Testing](#-testing)
-- [📖 API Reference](#-api-reference)
-- [🔗 Related Documentation](#-related-documentation)
-- [📊 Statistics](#-statistics)
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Packages](#packages)
+- [Configuration](#configuration)
+- [Commands](#commands)
+- [Usage patterns](#usage-patterns)
+- [Testing](#testing)
+- [API reference](#api-reference)
+- [Related documentation](#related-documentation)
 
 ---
 
-## 📋 Overview
+## Overview
 
 **go-git** is a minimal in-house Git wrapper providing multi-repository operations with parallel execution. It serves as a thin abstraction over the git CLI, offering status checking, push/pull operations, and full CoreGo service integration — all designed for AI agent consumption following the AX standard.
 
-### 🎯 Key Features
+### Key features
 
 | Category | Features | Count |
 |----------|----------|-------|
@@ -38,7 +37,7 @@
 | **Service Methods** | Status access, filtering | 8 methods |
 | **Path Validation** | Security checks, symlink resolution | Built-in |
 
-### 📊 Package Statistics
+### Package statistics
 
 | Metric | Value |
 |--------|-------|
@@ -54,9 +53,9 @@
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Minimal Wrapper Design
+### Minimal wrapper design
 
 **go-git** is intentionally minimal:
 - Thin layer over git CLI (uses `/usr/bin/env git`)
@@ -64,15 +63,15 @@
 - Focuses on multi-repository workflows
 - Parallel execution for all batch operations
 
-### AX Standard Compliance
+### AX standard compliance
 
-✅ **100% AX Compliant:**
+100% AX compliant:
 - `git.go` → `git_test.go` + `git_example_test.go`
 - `service.go` → `service_test.go` + `service_example_test.go`
 - Comments are agent-first
 - SPOR (Single Point of Responsibility) per file
 
-### Module Structure
+### Module structure
 
 ```
 core/go-git/
@@ -98,7 +97,7 @@ core/go-git/
 └── LICENCE
 ```
 
-### CoreGo Integration
+### CoreGo integration
 
 ```
 Service Lifecycle:
@@ -111,11 +110,11 @@ Service Lifecycle:
 
 ---
 
-## 📦 Packages
+## Packages
 
-### Core Operations (`git.go`)
+### Core operations (`git.go`)
 
-#### Status Checking
+#### Status checking
 
 | Function | Description | Parallel | Iterator |
 |----------|-------------|----------|----------|
@@ -138,7 +137,7 @@ Service Lifecycle:
 - `HasUnpushed()` — Has unpushed commits
 - `HasUnpulled()` — Has unpulled commits
 
-#### Push Operations
+#### Push operations
 
 | Function | Description | Parallel | Iterator |
 |----------|-------------|----------|----------|
@@ -151,7 +150,7 @@ Service Lifecycle:
 - `Path` — Filesystem path
 - `Error` — Error if push failed
 
-#### Pull Operations
+#### Pull operations
 
 | Function | Description | Parallel | Iterator |
 |----------|-------------|----------|----------|
@@ -164,21 +163,21 @@ Service Lifecycle:
 - `Path` — Filesystem path
 - `Error` — Error if pull failed
 
-#### Helper Functions
+#### Helper functions
 
 | Function | Description |
 |----------|-------------|
 | `IsNonFastForward` | Check if error is non-fast-forward merge |
 
-#### Error Types
+#### Error types
 
 | Type | Description |
 |------|-------------|
 | `GitError` | Git command error with stderr |
 
-### CoreGo Service (`service.go`)
+### CoreGo service (`service.go`)
 
-#### Query Types
+#### Query types
 
 | Query | Description | Handler |
 |-------|-------------|---------|
@@ -187,7 +186,7 @@ Service Lifecycle:
 | `QueryAheadRepos` | Get repos with unpushed commits | `handleQuery` |
 | `QueryBehindRepos` | Get repos with unpulled commits | `handleQuery` |
 
-#### Task Types
+#### Task types
 
 | Task | Description | Handler |
 |------|-------------|---------|
@@ -196,7 +195,7 @@ Service Lifecycle:
 | `TaskPushMultiple` | Push to multiple repositories | `handleTaskMessage` |
 | `TaskPullMultiple` | Pull from multiple repositories | `handleTaskMessage` |
 
-#### Service Methods
+#### Service methods
 
 | Method | Returns | Description |
 |--------|---------|-------------|
@@ -211,9 +210,9 @@ Service Lifecycle:
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### Service Options
+### Service options
 
 ```go
 type ServiceOptions struct {
@@ -232,7 +231,7 @@ c := core.New(
 )
 ```
 
-### Path Validation Rules
+### Path validation rules
 
 1. **Absolute Paths Required** — All paths must be absolute
 2. **WorkDir Constraint** — If WorkDir is set, paths must be within it
@@ -249,9 +248,9 @@ c := core.New(
 
 ---
 
-## 🚀 Commands
+## Commands
 
-### CLI Integration
+### CLI integration
 
 ```bash
 # Pseudo-commands for CLI integration
@@ -276,7 +275,7 @@ core git behind-repos      # List repos with unpulled commits
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
 ### 1. Status Checking
 
@@ -383,9 +382,9 @@ for repo := range service.Ahead() {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 Each Go file has corresponding test files:
 
@@ -399,7 +398,7 @@ service_test.go          # Service unit tests
 service_example_test.go # Service examples
 ```
 
-### Test Coverage by Function
+### Test coverage by function
 
 | Function | Lines | Coverage |
 |----------|-------|----------|
@@ -413,7 +412,7 @@ service_example_test.go # Service examples
 | `PullMultiple` | ~20 | >80% |
 | `IsNonFastForward` | ~5 | >80% |
 
-### Service Test Coverage
+### Service test coverage
 
 | Method | Coverage |
 |--------|----------|
@@ -426,7 +425,7 @@ service_example_test.go # Service examples
 | `validatePaths` | >80% |
 | All accessor methods | >80% |
 
-### Test Commands
+### Test commands
 
 ```bash
 # Run all tests
@@ -448,9 +447,9 @@ go test -v -run TestStatus ./...
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Core Types
+### Core types
 
 ```go
 // RepoStatus - git status for a single repository
@@ -500,7 +499,7 @@ type StatusOptions struct {
 }
 ```
 
-### Core Functions
+### Core functions
 
 ```go
 // Status operations
@@ -521,7 +520,7 @@ func PullMultipleIter(ctx core.Context, paths []string, names map[string]string)
 func IsNonFastForward(err error) bool
 ```
 
-### Service Types
+### Service types
 
 ```go
 // ServiceOptions
@@ -579,16 +578,16 @@ func (s *Service) BehindRepos() []RepoStatus
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### Internal Documentation
+### Internal documentation
 
 | Resource | Description | Location |
 |----------|-------------|----------|
 | RFC | Package specification and design | [plans/code/core/go/git/RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/git/RFC.md) |
 | LLM Index | AI agent training data | [llms.txt](file:///Users/snider/Code/core/go-git/llms.txt) |
 
-### External References
+### External references
 
 | Resource | URL |
 |----------|-----|
@@ -596,47 +595,3 @@ func (s *Service) BehindRepos() []RepoStatus
 | Module | [pkg.go.dev/dappco.re/go/git](https://pkg.go.dev/dappco.re/go/git) |
 | Git Documentation | [git-scm.com/doc](https://git-scm.com/doc) |
 
----
-
-## 📊 Statistics
-
-### Code Metrics
-
-```
-Total Repository Size:    ~5 MB
-Go Source Files:         2 (git.go, service.go)
-Test Files:             4
-Example Files:          2
-Total Go Lines:          ~1,021
-  ├── git.go:            539
-  └── service.go:       482
-Test Lines:             ~500
-Documentation:          ~500 lines
-```
-
-### Function Count
-
-| Category | Count |
-|----------|-------|
-| Public Functions | 9 |
-| Public Methods | 8 |
-| Public Types | 10 |
-| Total Exported | 27 |
-
-### Test Statistics
-
-| Type | Count | Coverage |
-|------|-------|----------|
-| Unit Tests | 20+ | >80% |
-| Example Tests | 8+ | N/A |
-| Total | 28+ | >80% |
-
----
-
-## 🏷️ Tags
-
-#git #multi-repository #parallel #status #push #pull #corego #service #agent-first #ax-standard #minimal-wrapper #security #path-validation
-
----
-
-*Last updated: 2026-06-18 | Maintainer: Purberus <purberus@lthn.ai>*

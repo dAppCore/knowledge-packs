@@ -16,8 +16,6 @@ tags:
 ---
 # go-dns — .lthn DNS Resolution Service
 
-> **Distributed DNS resolution for the Lethean .lthn TLD — No ICANN dependency**
-
 **RFC:** [plans/code/core/go/dns/RFC.md](../../../../../plans/code/core/go/dns/RFC.md)
 **Source:** [~/Code/core/go-dns/](file:///Users/snider/Code/core/go-dns/)
 **Module:** `dappco.re/go/dns`
@@ -25,19 +23,19 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-dns` is the **official DNS resolution service** for the Lethean `.lthn` top-level domain (TLD). It provides:
+`go-dns` is the DNS resolution service for the Lethean `.lthn` top-level domain (TLD). It provides:
 
 - **Distributed resolution** — Resolves .lthn names from Lethean blockchain aliases (main chain) and HSD sidechain records
 - **Authoritative DNS server** — Full DNS protocol server (UDP+TCP port 53) for .lthn zone
 - **HTTP REST API** — Web-based lookup for clients that can't use native DNS
 - **CoreGO integration** — Native CoreApp service with automatic action registration
-- **Cache synchronization** — Tree-root-based invalidation for consistent, fresh data
+- **Cache synchronisation** — Tree-root-based invalidation for consistent, fresh data
 - **Reverse DNS (PTR)** — IP-to-name lookup via reverse index
 - **DNSSEC support** — DS record serving for secure delegation
 
-### Design Philosophy
+### Design philosophy
 
 1. **No ICANN fallback** — .lthn queries either resolve from cache or return NXDOMAIN (never upstream to recursive DNS)
 2. **HSD sidechain first** — Handshake sidechain is the single source of truth for DNS records
@@ -54,7 +52,7 @@ tags:
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 core/go-dns/
@@ -97,9 +95,9 @@ core/go-dns/
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Stack
+### Component stack
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -128,7 +126,7 @@ core/go-dns/
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Data Flow: Resolution Pipeline
+### Data flow: resolution pipeline
 
 ```
 Query: "charon.lthn" (DNS or HTTP)
@@ -158,7 +156,7 @@ Query: "charon.lthn" (DNS or HTTP)
        Return NXDOMAIN + SOA in Authority section
 ```
 
-### Data Flow: Discovery Pipeline
+### Data flow: discovery pipeline
 
 ```
 Trigger: Manual (dns.discover) or Automatic (every 15s)
@@ -193,7 +191,7 @@ Trigger: Manual (dns.discover) or Automatic (every 15s)
 
 ---
 
-## 🗂️ Data Types
+## Data types
 
 ### NameRecords — Cached DNS Records
 
@@ -224,7 +222,7 @@ type NameRecords struct {
 }
 ```
 
-### Service Configuration
+### Service configuration
 
 ```go
 type ServiceOptions struct {
@@ -260,7 +258,7 @@ type ServiceOptions struct {
     HTTPPort      int  // REST API port (default: 5554)
     HealthPort    int  // Health check port (legacy alias)
     
-    // Sync behavior
+    // Sync behaviour
     TreeRootCheckInterval time.Duration  // Default: 15s
     
     // Core integration
@@ -270,7 +268,7 @@ type ServiceOptions struct {
 }
 ```
 
-### Result Types
+### Result types
 
 ```go
 // ResolveAddressResult — Returned by dns.resolve
@@ -316,7 +314,7 @@ type ServiceDescription struct {
 }
 ```
 
-### HSD Client Types
+### HSD client types
 
 ```go
 type HSDClientOptions struct {
@@ -337,7 +335,7 @@ type HSDBlockchainInfo struct {
 }
 ```
 
-### Main Chain Client Types
+### Main chain client types
 
 ```go
 type MainchainClientOptions struct {
@@ -355,11 +353,11 @@ func (c *MainchainAliasClient) GetAllAliasDetails(ctx context.Context) ([]string
 
 ---
 
-## ⚙️ Core Actions
+## Core actions
 
 All actions are automatically registered with Core via `Service.OnStartup()` or manual `RegisterActions()`.
 
-### Query Actions (Read-only)
+### Query actions (read-only)
 
 | Action | Description | Parameters | Returns | HTTP Equivalent |
 |--------|-------------|------------|---------|-----------------|
@@ -369,14 +367,14 @@ All actions are automatically registered with Core via `Service.OnStartup()` or 
 | `dns.reverse` | Reverse DNS (PTR) | `{ip: string}` | `{names: [string]}` | `GET /reverse?ip=X.X.X.X` |
 | `dns.health` | Health check | `{}` | `{status, names_cached, tree_root}` | `GET /health` |
 
-### Task Actions (Side-effecting)
+### Task actions (side-effecting)
 
 | Action | Description | Parameters | Returns | Side Effects |
 |--------|-------------|------------|---------|--------------|
 | `dns.discover` | Rescan chain for aliases | `{}` | `{}` | Cache rebuild, HSD queries |
 | `dns.serve` | Start DNS server | `{bind?, port?, healthPort?}` | `ServiceRuntime` | DNS listeners (UDP+TCP) |
 
-### Action Names (Constants)
+### Action names (constants)
 
 ```go
 const (
@@ -392,7 +390,7 @@ const (
 
 ---
 
-## 🌐 HTTP REST API
+## HTTP REST API
 
 The HTTP server is optional. Enable by setting `HTTPPort` in `ServiceOptions`.
 
@@ -406,7 +404,7 @@ The HTTP server is optional. Enable by setting `HTTPPort` in `ServiceOptions`.
 | GET | `/health` | — | `{status, names_cached, tree_root}` | Health check |
 | GET | `/` | — | Help text | Server info |
 
-### Example Requests
+### Example requests
 
 ```bash
 # Resolve A records
@@ -432,9 +430,9 @@ curl "http://127.0.0.1:5554/health"
 
 ---
 
-## 🔌 DNS Protocol Server
+## DNS protocol server
 
-### Server Behavior
+### Server behaviour
 
 - **Protocol:** DNS (RFC 1035) via miekg/dns library
 - **Port:** 53 (default, requires root) or custom via `DNSPort`/`DNSListenPort`
@@ -443,9 +441,9 @@ curl "http://127.0.0.1:5554/health"
 - **Authoritative:** `true` (serves as authoritative for .lthn zone)
 - **Recursion Available:** `false` (no recursive resolution)
 
-### Query Handling
+### Query handling
 
-| Query Type | Behavior |
+| Query Type | Behaviour |
 |------------|----------|
 | A | Return IPv4 addresses from NameRecords.A |
 | AAAA | Return IPv6 addresses from NameRecords.AAAA |
@@ -457,9 +455,9 @@ curl "http://127.0.0.1:5554/health"
 | ANY | Return all record types |
 | Non-.lthn | Return REFUSED (RCODE 5) |
 
-### Special Cases
+### Special cases
 
-#### Zone Apex
+#### Zone apex
 Query: `lthn.` (or `@`)
 Response: SOA record for the zone
 ```
@@ -476,7 +474,7 @@ Response: SOA record for the zone
 Query: `nonexistent.lthn`
 Response: NXDOMAIN + SOA in Authority section
 
-#### Wildcard Matching
+#### Wildcard matching
 Wildcard records stored as `*.{parent}` (e.g., `*.charon`):
 - Query `foo.charon.lthn` → Check exact `foo.charon` → Not found
 - Check parent `charon` for NS records → If NS present, return delegation
@@ -487,16 +485,16 @@ Wildcard matching is **one level deep only**. `a.b.charon.lthn` does NOT match `
 
 ---
 
-## 📡 Data Sources & Fallback Chain
+## Data sources & fallback chain
 
-### Priority Order
+### Priority order
 
 1. **In-memory cache** (primary) — NameRecords populated by discovery loop
 2. **HSD sidechain** (authoritative) — `getnameresource(name)` via `dappco.re/go/hsd`
 3. **Alias comment DNS** (bootstrap) — `dns=` field from main chain alias comment
 4. **Hardcoded FallbackNames** (emergency) — Static list if chain unavailable
 
-### Alias Comment DNS Format
+### Alias comment DNS format
 
 Main chain aliases can include DNS records in their comment field:
 
@@ -526,7 +524,7 @@ Example with multiple values:
 
 **Parsing location:** `mainchain.go:extractAliasFromComment()` (copy from LNS)
 
-### Hardcoded Fallback Names
+### Hardcoded fallback names
 
 Emergency list used when main chain is unreachable at startup:
 
@@ -543,9 +541,9 @@ var knownNames = []string{
 
 ---
 
-## 🔄 Cache & Synchronization
+## Cache & synchronisation
 
-### Cache Structure
+### Cache structure
 
 ```go
 type Service struct {
@@ -561,9 +559,9 @@ type Service struct {
 }
 ```
 
-### Reverse Index
+### Reverse index
 
-Optimization for PTR queries:
+Optimisation for PTR queries:
 
 ```go
 type ReverseIndex struct {
@@ -577,9 +575,9 @@ names, found := reverseIndex.Lookup("10.69.69.165")
 
 **Generation:** Built atomically during cache sync. Scans all NameRecords, extracts all A/AAAA addresses, maps to names.
 
-### Synchronization Strategy
+### Synchronisation strategy
 
-#### Tree-Root Based Invalidation
+#### Tree-root based invalidation
 
 ```
 Every TreeRootCheckInterval (default 15s):
@@ -596,7 +594,7 @@ Else:
 
 **Advantage:** Single HSD query detects ANY change in the zone, avoiding N individual name queries.
 
-#### Cache Eviction Policy
+#### Cache eviction policy
 
 1. **Tree-root change (full replacement):** Entire cache rebuilt from scratch
 2. **Record TTL expiry (soft):** Records marked `stale` but continue serving during rebuild
@@ -609,7 +607,7 @@ Else:
 
 **Stale entries:** Served during cache rebuild to prevent DNS blackouts. Replaced atomically once rebuild completes.
 
-### Concurrency Model
+### Concurrency model
 
 | Component | Parallelism | Control |
 |-----------|-------------|---------|
@@ -622,9 +620,9 @@ Else:
 
 ---
 
-## 🛠️ Usage Examples
+## Usage examples
 
-### Basic Service Creation
+### Basic service creation
 
 ```go
 package main
@@ -651,7 +649,7 @@ func main() {
 }
 ```
 
-### Full DNS Server Setup
+### Full DNS server setup
 
 ```go
 package main
@@ -686,7 +684,7 @@ func main() {
 }
 ```
 
-### CoreGO Integration
+### CoreGO integration
 
 ```go
 package main
@@ -726,7 +724,7 @@ func main() {
 }
 ```
 
-### Light Mode (Cache + HTTP Only)
+### Light mode (cache + HTTP only)
 
 ```go
 package main
@@ -752,7 +750,7 @@ func main() {
 }
 ```
 
-### Custom Discovery
+### Custom discovery
 
 ```go
 package main
@@ -782,7 +780,7 @@ func main() {
 }
 ```
 
-### HSD Client Direct Usage
+### HSD client direct usage
 
 ```go
 package main
@@ -818,9 +816,9 @@ func main() {
 
 ---
 
-## 📊 Configuration Examples
+## Configuration examples
 
-### Production (Full Mode)
+### Production (full mode)
 
 ```go
 service := dns.NewService(dns.ServiceOptions{
@@ -849,7 +847,7 @@ service := dns.NewService(dns.DNSServiceOptions{
 })
 ```
 
-### Development (Light Mode)
+### Development (light mode)
 
 ```go
 service := dns.NewService(dns.ServiceConfiguration{
@@ -869,9 +867,9 @@ service := dns.NewService(dns.ServiceConfiguration{
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Coverage
+### Test coverage
 
 All packages follow the **triplet pattern** (`_test.go`, `_example_test.go`):
 
@@ -885,17 +883,17 @@ All packages follow the **triplet pattern** (`_test.go`, `_example_test.go`):
 | DNS Protocol | `servedns_test.go` | A/AAAA/TXT/NS/SOA/PTR/ANY queries |
 | HTTP Server | `http_server.go`, `http_server_test.go` | All endpoints |
 | Discovery | `service.go` (discovery methods) | Tree-root sync, concurrent lookups |
-| Parsing | `parsers_test.go` | Alias comment parsing, record normalization |
+| Parsing | `parsers_test.go` | Alias comment parsing, record normalisation |
 | Integration | `service_test.go` | Full pipeline: alias → HSD → cache → DNS reply |
 
-### Test Data
+### Test data
 
 - **Mock HSD responses:** Test HSD client with mocked JSON-RPC responses
 - **Mock alias data:** Test main chain discovery with static alias lists
 - **Testnet aliases:** Use real testnet data when available
 - **Edge cases:** Empty responses, malformed data, network failures
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -912,9 +910,9 @@ go tool cover -html=coverage.out
 
 ---
 
-## 📖 RFC & Specification Compliance
+## RFC & specification compliance
 
-### Normative References
+### Normative references
 
 - **[RFC 1035](https://datatracker.ietf.org/doc/html/rfc1035)** — DNS protocol specification
 - **[RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119)** — Key words (MUST, MUST NOT, SHOULD, etc.)
@@ -923,27 +921,27 @@ go tool cover -html=coverage.out
 - **[plans/code/core/network/RFC.alias-dns.md](../../../../../plans/code/core/network/RFC.alias-dns.md)** — Alias-DNS binding
 - **[plans/code/core/go/lns/RFC.md](../../../../../plans/code/core/go/lns/RFC.md)** — LNS sidechain conversion
 
-### Compliance Requirements
+### Compliance requirements
 
 | Requirement | Status | Location |
 |-------------|--------|----------|
-| DNS protocol framing | ✅ | miekg/dns library |
-| .lthn zone only | ✅ | serve.go:checkZone |
-| No ICANN fallback | ✅ | Core principle |
-| REFUSED for non-.lthn | ✅ | serve.go:handleDNS |
-| NXDOMAIN + SOA | ✅ | serve.go:handleDNS |
-| Tree-root invalidation | ✅ | service.go:checkTreeRoot |
-| Concurrent HSD queries | ✅ | service.go:DiscoverAliases |
-| Reverse index O(1) lookup | ✅ | ReverseIndex.Lookup |
-| HSD client in go-hsd | ⚠️ | RFC recommends go-hsd package |
+| DNS protocol framing | Complete | miekg/dns library |
+| .lthn zone only | Complete | serve.go:checkZone |
+| No ICANN fallback | Complete | Core principle |
+| REFUSED for non-.lthn | Complete | serve.go:handleDNS |
+| NXDOMAIN + SOA | Complete | serve.go:handleDNS |
+| Tree-root invalidation | Complete | service.go:checkTreeRoot |
+| Concurrent HSD queries | Complete | service.go:DiscoverAliases |
+| Reverse index O(1) lookup | Complete | ReverseIndex.Lookup |
+| HSD client in go-hsd | Pending | RFC recommends go-hsd package |
 
 **Note:** The RFC specifies that HSD client should be in a separate `go-hsd` package. Currently, go-dns contains its own HSD client (`hsd.go`). This will be extracted to `dappco.re/go/hsd` per RFC §8.
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
-### Internal Dependencies
+### Internal dependencies
 
 | Package | Module | Purpose |
 |---------|--------|---------|
@@ -951,14 +949,14 @@ go tool cover -html=coverage.out
 | `dappco.re/go/blockchain` | Main chain alias client | Alias discovery fallback |
 | `dappco.re/core` | Core framework | Result type, action system |
 
-### External Dependencies
+### External dependencies
 
 | Package | Purpose | Version |
 |---------|---------|---------|
 | `github.com/miekg/dns` | DNS protocol library | Latest |
 | `github.com/patrickmn/go-cache` | TTL cache for reverse index | Latest |
 
-### Dependency Graph
+### Dependency graph
 
 ```
 go-dns
@@ -975,9 +973,9 @@ go-dns
 
 ---
 
-## 🎯 Use Cases
+## Use cases
 
-### 1. Lethean VPN Gateway Discovery
+### 1. Lethean VPN gateway discovery
 
 ```go
 // VPN client discovers gateways
@@ -989,7 +987,7 @@ txt, ok := service.ResolveTXTRecords("gateway.lthn")
 // → ["v=lthn1", "type=gateway", "region=eu"]
 ```
 
-### 2. Wallet Name Resolution
+### 2. Wallet name resolution
 
 ```go
 // Resolve payment address from name
@@ -1005,7 +1003,7 @@ ownership, ok := c.Action("dns.resolve.txt").Run(ctx, map[string]any{
 // → {"txt": ["owner=LX...", "sig=..."]}
 ```
 
-### 3. Service Discovery
+### 3. Service discovery
 
 ```go
 // Discover all .lthn services
@@ -1023,7 +1021,7 @@ for _, name := range all.Names {
 }
 ```
 
-### 4. DNSSEC Validation
+### 4. DNSSEC validation
 
 ```go
 // Get DS records for validation
@@ -1034,7 +1032,7 @@ ds, ok := service.ResolveAll("secure.lthn")
 // (Integration with external DNSSEC validator)
 ```
 
-### 5. Reverse DNS for Monitoring
+### 5. Reverse DNS for monitoring
 
 ```go
 // Find which names point to a gateway IP
@@ -1054,9 +1052,9 @@ for {
 
 ---
 
-## 🚨 Error Handling
+## Error handling
 
-### Error Types
+### Error types
 
 | Error | Cause | Handler |
 |-------|-------|---------|
@@ -1067,7 +1065,7 @@ for {
 | Tree root query failed | HSD temporary issue | Keep using cached data |
 | Name not found | NXDOMAIN | Return 404/HTTP or NXDOMAIN/DNS |
 
-### Error Pattern (CoreGO Convention)
+### Error pattern (CoreGO convention)
 
 ```go
 // Following core.E pattern
@@ -1081,7 +1079,7 @@ if err != nil {
 }
 ```
 
-### HTTP Error Responses
+### HTTP error responses
 
 | Error | HTTP Status | DNS RCODE | Body |
 |-------|-------------|----------|------|
@@ -1092,7 +1090,7 @@ if err != nil {
 
 ---
 
-## 📈 Performance Characteristics
+## Performance characteristics
 
 ### Throughput
 
@@ -1120,16 +1118,16 @@ if err != nil {
 
 ---
 
-## 🛡️ Security Considerations
+## Security considerations
 
-### DNS Protocol Security
+### DNS protocol security
 
 - **No recursion:** RecursionAvailable=false prevents cache poisoning via recursive queries
 - **Authoritative only:** Serves only .lthn zone, no delegation to other zones
 - **REFUSED for non-.lthn:** Prevents information leakage about other zones
 - **No upstream:** Never forwards queries to external DNS servers
 
-### Data Integrity
+### Data integrity
 
 - **HSD as source of truth:** All records come from HSD sidechain (immutable blockchain data)
 - **Tree-root verification:** Cache invalidated on tree root change (ensures freshness)
@@ -1141,7 +1139,7 @@ if err != nil {
 - **Chain daemon auth:** Optional but recommended for main chain access
 - **TLS recommended:** Use HTTPS for all RPC endpoints in production
 
-### Rate Limiting
+### Rate limiting
 
 - **Not built-in:** Application-level rate limiting should be added at the HTTP/DNS layer
 - **Recommended:** Use a reverse proxy (nginx) or middleware for rate limiting
@@ -1149,11 +1147,11 @@ if err != nil {
 
 ---
 
-## 🔄 Migration Notes
+## Migration notes
 
 ### From LNS (JS → Go)
 
-The go-dns package is a **native Go port** of the LNS DNS resolution functionality. Key differences:
+The go-dns package is a native Go port of the LNS DNS resolution functionality. Key differences:
 
 | Aspect | LNS (JS) | go-dns (Go) |
 |--------|----------|-------------|
@@ -1170,7 +1168,7 @@ The go-dns package is a **native Go port** of the LNS DNS resolution functionali
 3. Gradual cutover as go-dns matures
 4. Eventually LNS DNS server replaced by go-dns
 
-### From Zone Cache Daemon
+### From zone cache daemon
 
 The zone-cache daemon (`alias-dns-bridge`) can be replaced by go-dns:
 
@@ -1184,34 +1182,23 @@ go-dns serve --hsd-url http://127.0.0.1:14037
 
 ---
 
-## 📝 Changelog
-
-| Version | Date | Changes |
-|---------|------|---------|
-| 0.1.0 | 2026-06 | Initial documentation |
-| 0.0.1 | 2025-01 | Package created (git stub) |
-
-**Note:** Version tracking will begin once the package moves from RFC to production implementation.
-
----
-
-## 🎯 Roadmap
+## Roadmap
 
 | Milestone | Priority | Status | Target |
 |----------|----------|--------|--------|
-| Complete HSD client extraction | High | ⚠️ | go-hsd package |
-| Full DNS protocol compliance | High | ✅ | RFC 1035 |
-| DNSSEC validation | Medium | 📋 | Q3 2026 |
-| Wildcard record support | Medium | ✅ | Implemented |
-| IPv6 full support | Medium | ✅ | AAAA records |
-| Dynamic reconfiguration | Low | 📋 | Runtime config reload |
-| Metrics/telemetry | Low | 📋 | Prometheus export |
+| Complete HSD client extraction | High | Pending | go-hsd package |
+| Full DNS protocol compliance | High | Complete | RFC 1035 |
+| DNSSEC validation | Medium | Planned | Q3 2026 |
+| Wildcard record support | Medium | Complete | Implemented |
+| IPv6 full support | Medium | Complete | AAAA records |
+| Dynamic reconfiguration | Low | Planned | Runtime config reload |
+| Metrics/telemetry | Low | Planned | Prometheus export |
 
 ---
 
-## 📚 Additional Resources
+## Additional resources
 
-### Reference Material
+### Reference material
 
 | Resource | Location | Purpose |
 |----------|----------|---------|
@@ -1220,7 +1207,7 @@ go-dns serve --hsd-url http://127.0.0.1:14037
 | Network RFC | [plans/code/core/network/](file:///Users/snider/Code/meowmix/plans/code/core/network/) | Network protocols |
 | miekg/dns | [github.com/miekg/dns](https://github.com/miekg/dns) | DNS library |
 
-### Related Packages
+### Related packages
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -1231,7 +1218,7 @@ go-dns serve --hsd-url http://127.0.0.1:14037
 
 ---
 
-## 💡 Agent Tips
+## Agent tips
 
 1. **Always check the RFC first** — [plans/code/core/go/dns/RFC.md](../../../../../plans/code/core/go/dns/RFC.md) is the source of truth
 2. **Follow AX Standard** — Comments are for agents, not humans
@@ -1243,7 +1230,7 @@ go-dns serve --hsd-url http://127.0.0.1:14037
 
 ---
 
-## 📊 Quick Stats
+## Code metrics
 
 - **Go files:** 20+ (implementation + tests + examples)
 - **Test files:** 10+ (100% triplet coverage)

@@ -1,24 +1,22 @@
 ---
 type: Knowledge Pack
 title: CoreTS Framework
-description: Complete knowledge pack for CoreTS — the TypeScript framework for Lethean frontend applications
+description: CoreTS — the TypeScript implementation of the Core framework for Lethean frontend applications
 author: Mistral Vibe
 version: 1.0.0
 created: 2026-06-17T14:35:00Z
 tags: [framework, typescript, frontend, lethean, deno]
 ---
 
-# CoreTS Knowledge Pack
+# CoreTS knowledge pack
 
-> **"The TypeScript layer of the Core polyglot framework"** — CoreTS RFC
-
-**Official Site:** CoreTS documentation is part of the unified [dappco.re](https://dappco.re/) site
+**Official site:** CoreTS documentation is part of the unified [dappco.re](https://dappco.re/) site
 
 CoreTS is the TypeScript implementation of the Core framework, running on Deno. It serves three roles in the polyglot ecosystem.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 From the [CoreTS RFC](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.md):
 
@@ -28,7 +26,7 @@ From the [CoreTS RFC](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.m
 2. **Browser runtime** — Web Components, WASM interop, and the client-side application shell
 3. **Standalone CLI** — TypeScript-native commands and tools that don't need Go
 
-### Why Deno, Not Node
+### Why Deno, not Node
 
 | Property | Node | Deno |
 |----------|------|------|
@@ -40,7 +38,7 @@ From the [CoreTS RFC](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.m
 
 **Key insight:** Deno's permission model IS the I/O fortress. A module requesting access outside its declared paths is denied at the runtime level — no wrapper needed.
 
-### The Polyglot Stack
+### The polyglot stack
 
 ```
 CoreGO  (Go)         — framework backbone, lifecycle, I/O, services
@@ -50,29 +48,29 @@ CorePHP (PHP)         — web platform, multi-tenant monolith
 
 Each language gets first-class status. CoreGO is the host process. CoreTS runs as a sidecar or standalone. CorePHP runs as a web server. All share the same conventions, IPC patterns, and i18n format.
 
-### Key Statistics
+### Repository details
 
 - **Repository:** `forge.lthn.sh/core/ts` (also `dappco.re/ts`)
 - **Runtime:** Deno
 - **Framework:** React + Lit Web Components
-- **Module System:** ES Modules
-- **Build Tool:** esbuild
+- **Module system:** ES Modules
+- **Build tool:** esbuild
 - **Sidecar:** CoreDeno (managed by CoreGO)
 
 ---
 
-## 📚 Source of Truth
+## Source of truth
 
-- **Primary Spec:** [`plans/code/core/ts/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.md)
+- **Primary spec:** [`plans/code/core/ts/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.md)
 - **Implementation:** [`core/ts/`](file:///Users/snider/Code/core/ts/)
-- **Agent Guide:** [`core/ts/AGENTS.md`](file:///Users/snider/Code/core/ts/AGENTS.md)
+- **Agent guide:** [`core/ts/AGENTS.md`](file:///Users/snider/Code/core/ts/AGENTS.md)
 - **Catalog:** [`plans/code/core/ts/RFC.catalog.md`](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.catalog.md)
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### CoreDeno Sidecar (Managed by CoreGO)
+### CoreDeno sidecar (managed by CoreGO)
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -122,9 +120,9 @@ JSON-RPC frames on the Deno socket are newline-delimited and capped to a bounded
 
 ---
 
-## 🎯 Three Roles
+## Three roles
 
-### 1. Module Loader + Sandbox
+### 1. Module loader + sandbox
 
 Reads `.core/view.yaml` manifests, loads modules with per-module permission flags:
 
@@ -147,7 +145,7 @@ deno run --allow-read=./photos/ --deny-net --deny-run module.ts
 
 Each module runs in a Deno isolate. Cross-module communication goes through the IPC layer, not direct imports.
 
-### 2. I/O Fortress Gateway
+### 2. I/O fortress gateway
 
 All file/network/process I/O from modules routes through Deno's permission gates before reaching Go via gRPC:
 
@@ -161,7 +159,7 @@ This is the same SASE containment model as go-io's sandbox — the CWD at launch
 
 Process ownership is also enforced at the gRPC layer: `ProcessStop` must be called with the owning `module_code`, and the server rejects anonymous stop requests.
 
-### 3. Build/Dev Toolchain
+### 3. Build/dev toolchain
 
 - **TypeScript compilation** — native in Deno, no build step
 - **Module resolution** — import maps, URL imports
@@ -171,7 +169,7 @@ Process ownership is also enforced at the gRPC layer: `ProcessStop` must be call
 
 ---
 
-## 🌐 Browser Runtime
+## Browser runtime
 
 ### Web Components
 
@@ -213,7 +211,7 @@ customElements.define('photo-grid', PhotoGrid);
 
 ---
 
-## 📦 Core Components
+## Core components
 
 ### 1. Runtime (Deno)
 
@@ -222,7 +220,7 @@ customElements.define('photo-grid', PhotoGrid);
 - **TypeScript** — First-class TypeScript support
 - **Permissions** — Fine-grained permission system
 
-### 2. UI Framework
+### 2. UI framework
 
 | Component | Purpose | Files |
 |-----------|---------|-------|
@@ -241,7 +239,7 @@ customElements.define('photo-grid', PhotoGrid);
 - Component orchestration
 - Responsive design
 
-### 3. Go Integration
+### 3. Go integration
 
 - **Protobuf** — Protocol Buffers for type-safe communication
 - **gRPC** — Remote procedure calls
@@ -249,9 +247,9 @@ customElements.define('photo-grid', PhotoGrid);
 
 ---
 
-## 💻 How-Tos
+## How-tos
 
-### 1. Creating a Module
+### 1. Creating a module
 
 Create a `.core/view.yaml` manifest:
 
@@ -265,7 +263,7 @@ permissions:
   run: []
 ```
 
-### 2. Importing Modules
+### 2. Importing modules
 
 Use URL imports or import maps:
 
@@ -277,7 +275,7 @@ import { PhotoGrid } from "https://dappco.re/ts/photo-gallery/src/photo-grid.ts"
 import { PhotoGrid } from "photo-grid";
 ```
 
-### 3. Running with Permissions
+### 3. Running with permissions
 
 ```bash
 # Deno runs with explicit permissions
@@ -306,15 +304,15 @@ customElements.define('my-element', MyElement);
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
-### For Agents
+### For agents
 
 1. **Read the RFC:** [`plans/code/core/ts/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.md)
 2. **Browse catalog:** [`plans/code/core/ts/RFC.catalog.md`](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.catalog.md)
 3. **Explore code:** `ls core/ts/`
 
-### For Developers
+### For developers
 
 1. **Clone the repo:** `git clone forge.lthn.sh/core/ts`
 2. **Install Deno:** `curl -fsSL https://deno.land/x/install/install.sh | sh`
@@ -323,21 +321,9 @@ customElements.define('my-element', MyElement);
 
 ---
 
-## 📊 Quick Stats
+## Quick reference
 
-```
-Total TypeScript files:   100+
-Total React components:  50+
-Total Lit components:    25+
-Build tool:              esbuild
-Runtime:                 Deno
-```
-
----
-
-## 📖 Quick Reference
-
-### Module Permissions
+### Module permissions
 
 | Permission | Deno Flag | Purpose |
 |------------|-----------|---------|
@@ -347,7 +333,7 @@ Runtime:                 Deno
 | `run` | `--allow-run` | Process execution |
 | `env` | `--allow-env` | Environment variables |
 
-### CoreDeno Communication
+### CoreDeno communication
 
 | Aspect | Details |
 |--------|---------|
@@ -356,61 +342,52 @@ Runtime:                 Deno
 | Direction | Bidirectional |
 | Permissions | `0700` (directory), `0600` (socket) |
 
-### Web Component Lifecycle
+### Web Component lifecycle
 
-| Method | When Called | Purpose |
+| Method | When called | Purpose |
 |--------|-------------|---------|
-| `constructor()` | Element created | Initialize component |
+| `constructor()` | Element created | Initialise component |
 | `connectedCallback()` | Added to DOM | Setup DOM, start rendering |
-| `disconnectedCallback()` | Removed from DOM | Cleanup resources |
+| `disconnectedCallback()` | Removed from DOM | Clean up resources |
 | `attributeChangedCallback()` | Attribute changed | React to attribute changes |
 
 ---
 
-## 🎯 Use Cases
+## Use cases
 
-### When to Use CoreTS
+### When to use CoreTS
 
-✅ **Frontend applications** — Use for web-based UIs
-✅ **Desktop app frontends** — Use with CoreGUI for Wails apps
-✅ **Type-safe APIs** — Use protobuf/gRPC with Go backends
-✅ **Semantic HTML** — Use GrammarImprint for agent-readable markup
-✅ **Sandboxed modules** — Use CoreDeno for secure module loading
-✅ **Modern web apps** — When you want Deno + TypeScript + Web Components
+- **Frontend applications** — web-based UIs
+- **Desktop app frontends** — use with CoreGUI for Wails apps
+- **Type-safe APIs** — protobuf/gRPC with Go backends
+- **Semantic HTML** — use GrammarImprint for agent-readable markup
+- **Sandboxed modules** — use CoreDeno for secure module loading
+- **Modern web apps** — Deno + TypeScript + Web Components
 
-### When NOT to Use CoreTS
+### When not to use CoreTS
 
-❌ **Node.js environments** — Use Deno, not Node
-❌ **Server-only applications** — Use CoreGO for backend services
-❌ **jQuery legacy code** — CoreTS uses modern Web Components
-
-### When NOT to Use CoreTS
-
-❌ **Backend services** — Use CoreGo instead
-❌ **CLI tools** — Use CoreCLI instead
-❌ **Node.js environments** — Deno-only runtime
+- **Node.js environments** — use Deno, not Node
+- **Server-only applications** — use CoreGO for backend services
+- **jQuery legacy code** — CoreTS uses modern Web Components
+- **Backend services** — use CoreGo instead
+- **CLI tools** — use CoreCLI instead
 
 ---
 
-## 💡 Agent Tips
-
-### Core Principles
+## Agent tips
 
 1. **Always check the RFC** — [`plans/code/core/ts/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.md) is the source of truth
 2. **Deno, not Node** — CoreTS uses Deno runtime with capability-based security
-3. **Web Components first** — Use Lit for custom elements, not React class components
-4. **Permissions are explicit** — Every module must declare its permissions in `.core/view.yaml`
-5. **Use GrammarImprint** — For semantic HTML that agents can understand
+3. **Web Components first** — use Lit for custom elements, not React class components
+4. **Permissions are explicit** — every module must declare its permissions in `.core/view.yaml`
+5. **Use GrammarImprint** — for semantic HTML that agents can understand
+6. **URL imports** — use direct URL imports or import maps, not npm
+7. **TypeScript native** — no build step needed for TypeScript
+8. **Sandboxed by default** — all modules run in isolates with explicit permissions
+9. **gRPC communication** — all I/O goes through the CoreDeno sidecar
+10. **Web Components** — the browser runtime uses custom elements
 
-### AX-Specific Guidance
-
-6. **URL imports** — Use direct URL imports or import maps, not npm
-7. **TypeScript native** — No build step needed for TypeScript
-8. **Sandboxed by default** — All modules run in isolates with explicit permissions
-9. **gRPC communication** — All I/O goes through the CoreDeno sidecar
-10. **Web Components** — The browser runtime uses custom elements
-
-### Learning Resources
+### Learning resources
 
 - **[CoreTS RFC](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.md)** — Primary specification
 - **[CoreTS Catalog](file:///Users/snider/Code/meowmix/plans/code/core/ts/RFC.catalog.md)** — Package catalog
@@ -419,7 +396,7 @@ Runtime:                 Deno
 
 ---
 
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 - [CoreGo](../corego/README.md) — Core Go framework (backend)
 - [CoreGUI](../coregui/README.md) — GUI framework (Wails integration)
@@ -429,17 +406,7 @@ Runtime:                 Deno
 
 ---
 
-## 💡 Agent Tips
-
-1. **Use Deno APIs** — No Node.js compatibility layer
-2. **ES Modules only** — No CommonJS
-3. **TypeScript first** — Always use TypeScript
-4. **GrammarImprint** — Generate semantic HTML for agents
-5. **Protobuf for APIs** — Type-safe communication with Go
-
----
-
-## 📝 Maintenance
+## Maintenance
 
 This knowledge pack is maintained by Mistral Vibe. Updates triggered by:
 

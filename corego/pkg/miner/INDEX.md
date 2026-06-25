@@ -2,30 +2,23 @@
 type: Package Index
 title: go-miner Package Index
 description: Complete index of go-miner package components and API surface
-description: Mining software controller library with unified Miner interface for XMRig, TT-Miner, and simulated miners, including Manager, Factory, ProfileManager, EventBus, and robust utilities
+description: Mining software controller library with unified Miner interface for XMRig, TT-Miner, and simulated miners, including Manager, Factory, ProfileManager, EventBus, and resilience utilities
 module: dappco.re/go/core/miner
 repo: core/go-miner
 ---
 
 # go-miner — Package Index
 
-> **Repository:** `core/go-miner`
-> **Module:** `dappco.re/go/core/miner`
-> **Type:** Library
-> **Status:** Production
-> **Tier:** lib (foundation — never imports consumer)
-> **Lines:** ~50,000+ (source + tests + examples)
-
 ---
 
-## 📚 Quick Links
+## Quick links
 
 - **[README.md](./README.md)** — Complete package documentation
 - **[RFC Specification](file:///Users/snider/Code/meowmix/plans/code/core/go/miner/RFC.md)** — Technical specification (self-contained, agent-implementable)
 - **[CLAUDE.md](file:///Users/snider/Code/core/go-miner/CLAUDE.md)** — Implementation details, file map, conventions, banned imports
 - **[AGENTS.md](file:///Users/snider/Code/core/go-miner/AGENTS.md)** — Agent guidance
 
-### Sub-Specifications
+### Sub-specifications
 
 The RFC includes comprehensive sub-specifications:
 
@@ -41,7 +34,7 @@ The RFC includes comprehensive sub-specifications:
 - **Section 10:** Errors — MinerError typed errors
 - **Sections 11-20:** Additional types and utilities
 
-### Local Documentation
+### Local documentation
 
 - [CLAUDE.md](file:///Users/snider/Code/core/go-miner/CLAUDE.md) — Development conventions, test patterns
 - [AGENTS.md](file:///Users/snider/Code/core/go-miner/AGENTS.md) — Agent-specific guidance
@@ -49,9 +42,9 @@ The RFC includes comprehensive sub-specifications:
 
 ---
 
-## 🗂️ File Structure
+## File structure
 
-### Core Package Files (`go/`)
+### Core package files (`go/`)
 
 | File | Lines | Purpose | Status |
 |------|-------|---------|--------|
@@ -74,7 +67,7 @@ The RFC includes comprehensive sub-specifications:
 | `log_buffer.go` | 1,171 | `LogBuffer` — timestamped ring buffer satisfying `io.Writer` | ✅ Complete |
 | `http_stats.go` | 310 | `FetchJSONStats[T]` generic HTTP stats fetcher | ✅ Complete |
 
-### API Subpackage (`go/pkg/api/`)
+### API subpackage (`go/pkg/api/`)
 
 | File | Lines | Purpose | Status |
 |------|-------|---------|--------|
@@ -82,9 +75,9 @@ The RFC includes comprehensive sub-specifications:
 
 **Total Core Source Lines:** ~50,000+
 
-### Test Files (`go/`)
+### Test files (`go/`)
 
-#### Unit Tests
+#### Unit tests
 
 | File | Lines | Purpose | Pattern |
 |------|-------|---------|---------|
@@ -117,7 +110,7 @@ The RFC includes comprehensive sub-specifications:
 
 **Total Test Lines:** ~800,000+
 
-#### Example Tests
+#### Example tests
 
 | File | Lines | Purpose |
 |------|-------|---------|
@@ -138,9 +131,9 @@ The RFC includes comprehensive sub-specifications:
 
 ---
 
-## 🔧 Public API Surface
+## Public API surface
 
-### Miner Interface
+### Miner interface
 
 The unified interface for all mining adapters:
 
@@ -171,7 +164,7 @@ type Miner interface {
 }
 ```
 
-### Miner Types
+### Miner types
 
 ```go
 const (
@@ -208,7 +201,7 @@ type BaseMiner struct {
 }
 ```
 
-### Configuration Types
+### Configuration types
 
 ```go
 // Config holds all parameters for starting a mining instance
@@ -302,7 +295,7 @@ type SystemInfo struct {
 }
 ```
 
-### Manager Types
+### Manager types
 
 ```go
 type Manager struct {
@@ -322,7 +315,7 @@ type CombinedMetrics struct {
 }
 ```
 
-### ProfileManager Types
+### ProfileManager types
 
 ```go
 type ProfileManager struct {
@@ -343,7 +336,7 @@ type RawConfig struct {
 }
 ```
 
-### Event Types
+### Event types
 
 ```go
 type EventType int
@@ -378,7 +371,7 @@ type EventBus struct {
 }
 ```
 
-### Utility Types
+### Utility types
 
 ```go
 // CircuitBreaker states
@@ -434,15 +427,15 @@ type LogBuffer struct {
 
 ---
 
-## 📋 Public API Methods
+## Public API methods
 
-### Miner Factory
+### Miner factory
 
 | Method | Signature | Description |
 |--------|-----------|-------------|
 | `CreateMiner` | `func CreateMiner(minerType, instanceName string) (Miner, error)` | Create a miner instance by type |
 
-### Miner Interface Methods
+### Miner interface methods
 
 | Method | Signature | Description |
 |--------|-----------|-------------|
@@ -464,7 +457,7 @@ type LogBuffer struct {
 | `GetLogs` | `func (m Miner) GetLogs() []string` | Get captured log lines |
 | `WriteStdin` | `func (m Miner) WriteStdin(input string) error` | Send command to stdin |
 
-### Manager Methods
+### Manager methods
 
 | Method | Signature | Description |
 |--------|-----------|-------------|
@@ -478,7 +471,7 @@ type LogBuffer struct {
 | `GetCombinedStats` | `func (m *Manager) GetCombinedStats() *CombinedMetrics` | Get aggregated stats |
 | `GetEventBus` | `func (m *Manager) GetEventBus() *EventBus` | Get the event bus |
 
-### ProfileManager Methods
+### ProfileManager methods
 
 | Method | Signature | Description |
 |--------|-----------|-------------|
@@ -490,7 +483,7 @@ type LogBuffer struct {
 | `UpdateProfile` | `func (pm *ProfileManager) UpdateProfile(profile *MiningProfile) error` | Update a profile |
 | `StartFromProfile` | `func (pm *ProfileManager) StartFromProfile(name string) (Miner, error)` | Start miner from profile |
 
-### EventBus Methods
+### EventBus methods
 
 | Method | Signature | Description |
 |--------|-----------|-------------|
@@ -500,7 +493,7 @@ type LogBuffer struct {
 | `UnsubscribeAll` | `func (eb *EventBus) UnsubscribeAll(ch chan MinerEventData)` | Unsubscribe from all events |
 | `Emit` | `func (eb *EventBus) Emit(eventType EventType, data MinerEventData)` | Emit an event |
 
-### Utility Methods
+### Utility methods
 
 #### CircuitBreaker
 
@@ -538,13 +531,13 @@ type LogBuffer struct {
 | `GetStrings` | `func (lb *LogBuffer) GetStrings() []string` | Get all lines as strings |
 | `Clear` | `func (lb *LogBuffer) Clear()` | Clear the buffer |
 
-#### HTTP Stats
+#### HTTP stats
 
 | Method | Signature | Description |
 |--------|-----------|-------------|
 | `FetchJSONStats` | `func FetchJSONStats[T any](ctx context.Context, url string) (*T, error)` | Fetch JSON stats from URL |
 
-### Adapter-Specific Methods
+### Adapter-specific methods
 
 #### XMRigMiner
 
@@ -571,16 +564,16 @@ type LogBuffer struct {
 
 ---
 
-## 🎯 Test Coverage
+## Test coverage
 
-### Test Naming Convention
+### Test naming convention
 
 All tests follow the **Good/Bad/Ugly** triplet pattern:
 - `TestFilename_Function_Good_Scenario` — Happy path, valid inputs
 - `TestFilename_Function_Bad_Scenario` — Error conditions, invalid inputs
 - `TestFilename_Function_Ugly_Scenario` — Edge cases, boundary conditions
 
-### Test Categories
+### Test categories
 
 | Category | Files | Lines | Coverage |
 |----------|-------|-------|----------|
@@ -606,7 +599,7 @@ All tests follow the **Good/Bad/Ugly** triplet pattern:
 
 **Total Test Coverage: High** — All public APIs have Good/Bad/Ugly tests
 
-### Example Test Patterns
+### Example test patterns
 
 ```go
 // Good: Happy path
@@ -621,37 +614,7 @@ func TestMiner_Start_Ugly_NilConfig(t *testing.T) { ... }
 
 ---
 
-## 🏆 Quality Metrics
-
-### Code Quality
-
-- **SPOR Compliance:** 100% — Each file has Single Point Of Responsibility
-- **Test Coverage:** High — Good/Bad/Ugly triplet for all public methods
-- **AX Standard:** Fully compliant — Comments as usage examples, UK English
-- **Documentation:** Complete — RFC, CLAUDE.md, AGENTS.md, inline docs
-- **Error Handling:** Consistent — Uses `core.E()` and typed errors
-- **Type Safety:** Strong — Generic `FetchJSONStats[T]` for type-safe HTTP calls
-
-### Performance
-
-- **Subprocess Management:** Efficient process lifecycle via `c.Process()`
-- **Event Broadcasting:** Non-blocking via go-stream hub
-- **Hashrate Tracking:** Two-tier retention with automatic reduction
-- **Circuit Protection:** Prevents cascading failures
-- **Rate Limiting:** Token bucket with idle eviction
-- **Log Capture:** Ring buffer with 500-line capacity
-
-### Security
-
-- **Input Validation:** All configurations validated before use
-- **Process Isolation:** Each miner runs in separate subprocess
-- **Circuit Breakers:** Protect against external API failures
-- **Rate Limiters:** Prevent abuse of external APIs
-- **Panic Recovery:** TaskSupervisor recovers from panics
-
----
-
-## 🔗 Relationships
+## Relationships
 
 ### Dependencies
 
@@ -690,7 +653,7 @@ func TestMiner_Start_Ugly_NilConfig(t *testing.T) { ... }
 | Fleet Management | Multi-node mining orchestration |
 | Custom Applications | Mining integration |
 
-### Related Packages
+### Related packages
 
 | Package | Relationship |
 |---------|--------------|
@@ -702,26 +665,9 @@ func TestMiner_Start_Ugly_NilConfig(t *testing.T) { ... }
 
 ---
 
-## 📈 Statistics
+## Usage patterns
 
-| Metric | Value |
-|--------|-------|
-| **Total Files** | 18+ source, 20+ tests, 10+ examples |
-| **Total Lines** | ~50,000+ source, ~800,000+ tests, ~20,000+ examples |
-| **Public Methods** | 50+ across all types |
-| **Public Types** | 25+ type definitions |
-| **Test Coverage** | High (Good/Bad/Ugly for all public APIs) |
-| **Documentation** | ~1,000+ lines in README.md, INDEX.md |
-| **Dependencies** | 4 internal (core, stream, store, process) |
-| **External Deps** | 0 (binaries downloaded at runtime) |
-| **Go Version** | 1.21+ |
-| **Licence** | EUPL-1.2 |
-
----
-
-## 🎓 Usage Patterns
-
-### Common Patterns
+### Common patterns
 
 1. **Single Miner** — Create and start one miner instance
 2. **Multi-Miner** — Use Manager for multiple miners
@@ -731,7 +677,7 @@ func TestMiner_Start_Ugly_NilConfig(t *testing.T) { ... }
 6. **Testing** — Use SimulatedMiner for development
 7. **Autostart** — Configure profiles to start on boot
 
-### Anti-Patterns
+### Anti-patterns
 
 1. **Don't ignore errors** — All methods return errors, handle them
 2. **Don't block in event handlers** — Keep event callbacks fast
@@ -742,9 +688,9 @@ func TestMiner_Start_Ugly_NilConfig(t *testing.T) { ... }
 
 ---
 
-## 📝 Notes
+## Notes
 
-### Supported Platforms
+### Supported platforms
 
 | Platform | XMRig | TT-Miner | Notes |
 |----------|-------|----------|-------|
@@ -752,7 +698,7 @@ func TestMiner_Start_Ugly_NilConfig(t *testing.T) { ... }
 | macOS | ✅ Yes | ❌ No | TT-Miner requires CUDA (NVIDIA) |
 | Windows | ✅ Yes | ✅ Yes | Full support |
 
-### Supported Algorithms
+### Supported algorithms
 
 **CPU (XMRig):**
 - RandomX (rx/0, rx/wow, rx/loki)
@@ -772,7 +718,7 @@ func TestMiner_Start_Ugly_NilConfig(t *testing.T) { ... }
 - ProgPoW
 - And more...
 
-### XDG Directories
+### XDG directories
 
 ```
 Linux:   ~/.local/share/lethean-desktop/miners/
@@ -780,46 +726,46 @@ macOS:   ~/Library/Application Support/lethean-desktop/miners/
 Windows: %APPDATA%\lethean-desktop\miners\
 ```
 
-### Binary Discovery
+### Binary discovery
 
 Miners are discovered in the XDG data directory. If not found, they are downloaded from GitHub releases.
 
-### Version Checking
+### Version checking
 
 Latest versions are fetched from GitHub API:
 - XMRig: https://github.com/xmrig/xmrig/releases
 - TT-Miner: https://github.com/SChernykh/tt-miner/releases
 
-### HTTP API Ports
+### HTTP API ports
 
 - XMRig: Auto-selected (default range)
 - TT-Miner: 4068 by default
 
-### Hashrate History Retention
+### Hashrate history retention
 
 - **High-resolution:** 10s intervals, 5 min retention
 - **Low-resolution:** 1 min intervals, 24h retention
 - **Automatic reduction:** High-res points > 5 min are aggregated to low-res
 
-### Circuit Breaker Defaults
+### Circuit breaker defaults
 
 - Max failures: 3
 - Timeout: 30 seconds
 - States: Closed → Open → HalfOpen
 
-### Rate Limiter Defaults
+### Rate limiter defaults
 
 - Token bucket algorithm
 - Configurable rate and period
 - Thread-safe
 
-### Task Supervisor Defaults
+### Task supervisor defaults
 
 - Max restarts: 5
 - Panic recovery: Yes
 - Restart delay: Configurable
 
-### Log Buffer Defaults
+### Log buffer defaults
 
 - Capacity: 500 lines
 - Timestamp precision: time.Time
@@ -827,7 +773,7 @@ Latest versions are fetched from GitHub API:
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|

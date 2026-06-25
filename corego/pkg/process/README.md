@@ -15,23 +15,21 @@ tags:
   - windows
   - unix
 ---
-# go-process — Process Orchestration & Daemon Management
-
-> **The authoritative process management framework for CoreGO applications**
+# go-process — Process orchestration and daemon management
 
 **RFC:** [plans/code/core/go/process/RFC.md](../../../../../plans/code/core/go/process/RFC.md)
 **Source:** [~/Code/core/go-process/](file:///Users/snider/Code/core/go-process/)
 **Module:** `dappco.re/go/process`
 **Dependencies:** `dappco.re/go`
-**Status:** ✅ Production-Ready (Windows Phase 1 compatible)
+**Status:** Production-ready (Windows Phase 1 compatible)
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-process` provides **comprehensive process orchestration** for CoreGO applications, enabling spawning, monitoring, and controlling external commands with full lifecycle management. It wraps external command execution with Core IPC integration, output streaming, PID file management, health endpoints, and REST/WebSocket provider support.
+`go-process` handles spawning, monitoring, and controlling external commands with full lifecycle management. It wraps external command execution with Core IPC integration, output streaming, PID file management, health endpoints, and REST/WebSocket provider support.
 
-### Primary Use Cases
+### Primary use cases
 
 1. **Daemon management** — Start/stop/restart long-running processes with PID files
 2. **Command pipelines** — Run dependent processes with orchestration
@@ -41,7 +39,7 @@ tags:
 6. **CoreGO integration** — Native ACTION system for process events
 7. **Registry tracking** — JSON-based daemon registry for multi-instance coordination
 
-### Design Philosophy
+### Design philosophy
 
 - **Single responsibility** — Each component handles one aspect of process management
 - **Core-native** — Full integration with Core ACTION system and Result pattern
@@ -51,9 +49,9 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Stack
+### Component stack
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -80,12 +78,12 @@ tags:
 ├─────────────────────────────────────────────────────────────┤
 │                    API Layer (pkg/api)                         │
 │  ProcessProvider — REST + WebSocket provider                 │
-│  Response types — Standardized API responses                  │
+│  Response types — Standardised API responses                  │
 │  WebSocket bridge — Real-time process events                 │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Core Integration
+### Core integration
 
 The package integrates with CoreGO via:
 - **ServiceRuntime** — Standard Core service lifecycle
@@ -95,7 +93,7 @@ The package integrates with CoreGO via:
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 go-process/
@@ -211,9 +209,9 @@ go-process/
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
-### Basic Process Execution
+### Basic process execution
 
 ```go
 package main
@@ -257,7 +255,7 @@ func main() {
 }
 ```
 
-### Daemon Management
+### Daemon management
 
 ```go
 package main
@@ -302,7 +300,7 @@ func main() {
 }
 ```
 
-### Pipeline Execution with Dependencies
+### Pipeline execution with dependencies
 
 ```go
 package main
@@ -362,7 +360,7 @@ func main() {
 }
 ```
 
-### Core ACTION Integration
+### Core ACTION integration
 
 ```go
 package main
@@ -401,7 +399,7 @@ func main() {
 }
 ```
 
-### Registry Tracking
+### Registry tracking
 
 ```go
 package main
@@ -448,7 +446,7 @@ func main() {
 
 ---
 
-## 🔧 Core Types
+## Core types
 
 ### ManagedProcess
 
@@ -484,7 +482,7 @@ type ManagedProcess struct {
 type Process = ManagedProcess
 ```
 
-**Key Methods:**
+**Key methods:**
 - `Info() Info` — Get process snapshot
 - `Output() string` — Get captured output
 - `OutputBytes() []byte` — Get output as bytes
@@ -494,7 +492,7 @@ type Process = ManagedProcess
 - `Signal(sig syscall.Signal) core.Result` — Send signal
 - `Wait() core.Result` — Wait for completion
 
-### Status Constants
+### Status constants
 
 ```go
 const (
@@ -506,7 +504,7 @@ const (
 )
 ```
 
-### Stream Constants
+### Stream constants
 
 ```go
 const (
@@ -601,11 +599,11 @@ type HealthCheck struct {
 
 ---
 
-## 🌐 ACTION System Integration
+## ACTION system integration
 
 Process events are broadcast via Core ACTION system with the following message types:
 
-### Action Types
+### Action types
 
 | Type | Description | Fields |
 |------|-------------|--------|
@@ -625,7 +623,7 @@ The service automatically registers these ACTION handlers on startup:
 
 ---
 
-## 🎛️ Service Configuration
+## Service configuration
 
 ### Options
 
@@ -637,14 +635,14 @@ type Options struct {
 }
 ```
 
-### Default Configuration
+### Default configuration
 
 ```go
 svc := process.NewService(process.Options{})
 // Uses 1MB buffer, integrates with Core ACTION system
 ```
 
-### Custom Configuration
+### Custom configuration
 
 ```go
 svc := process.NewService(process.Options{
@@ -654,11 +652,11 @@ svc := process.NewService(process.Options{
 
 ---
 
-## 🔌 REST API (pkg/api)
+## REST API (pkg/api)
 
 The `pkg/api` package provides HTTP REST endpoints and WebSocket streaming for process management.
 
-### Provider Configuration
+### Provider configuration
 
 ```go
 import "dappco.re/go/process/pkg/api"
@@ -693,7 +691,7 @@ provider.Register(router)
 | POST | `/api/process/processes/{id}/close-stdin` | Close stdin |
 | POST | `/api/process/processes/{id}/kill` | Kill process |
 
-### WebSocket Events
+### WebSocket events
 
 Real-time events via WebSocket:
 - `process.daemon.started` — Daemon started
@@ -706,24 +704,24 @@ Real-time events via WebSocket:
 
 ---
 
-## 🪟 Platform Support
+## Platform support
 
 ### Unix (Linux, macOS, BSD)
 
-- ✅ Full POSIX signal support
-- ✅ Process group management (Setpgid)
-- ✅ Signal-based process termination
-- ✅ Exit status detection (signaled vs exited)
+- Full POSIX signal support
+- Process group management (Setpgid)
+- Signal-based process termination
+- Exit status detection (signaled vs exited)
 
 ### Windows (Phase 1)
 
-- ✅ Compile compatibility (no syscall errors)
-- ✅ Best-effort process termination
-- ✅ Process group leader kill
-- ⚠️ No process group signals (stubbed)
-- ⚠️ No exit signal detection (returns false)
+- Compile compatibility (no syscall errors)
+- Best-effort process termination
+- Process group leader kill
+- No process group signals (stubbed)
+- No exit signal detection (returns false)
 
-**Phase 2 (Planned):**
+**Phase 2 (planned):**
 - Job Object lifecycle management
 - Full descendant tree termination
 - Proper Windows process group semantics
@@ -732,11 +730,11 @@ See [RFC.md](../../../../../plans/code/core/go/process/RFC.md) for details.
 
 ---
 
-## 🧪 Testing
+## Testing
 
-All subsystems have comprehensive test coverage following the AX standard (test triplets).
+All subsystems have test coverage following the AX standard (test triplets).
 
-### Running Tests
+### Running tests
 
 ```bash
 cd ~/Code/core/go-process/go
@@ -745,7 +743,7 @@ go test -cover ./...
 go test -bench . -benchmem
 ```
 
-### Test Coverage
+### Test coverage
 
 - Process lifecycle tests
 - Service integration tests
@@ -758,7 +756,7 @@ go test -bench . -benchmem
 
 ---
 
-## 📊 Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -766,15 +764,15 @@ go test -bench . -benchmem
 | **Repository** | `core/go-process` |
 | **Language** | Go 1.26+ |
 | **Dependencies** | `dappco.re/go`, `github.com/gin-gonic/gin` (pkg/api) |
-| **Test Triplets** | ✅ Complete |
-| **RFC Compliance** | ✅ Verified |
-| **Documentation** | ✅ Complete |
+| **Test Triplets** | Complete |
+| **RFC Compliance** | Verified |
+| **Documentation** | Complete |
 | **Windows Support** | Phase 1 (compile-compatible) |
-| **Platform Abstracted** | ✅ Unix + Windows |
+| **Platform Abstracted** | Unix + Windows |
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -783,60 +781,6 @@ go test -bench . -benchmem
 | [CoreGO INDEX](../../INDEX.md) | Package catalog | ../../INDEX.md |
 | [go-p2p](../p2p/) | P2P process management | ../p2p/ |
 | [go-proxy](../proxy/) | Mining proxy processes | ../proxy/ |
-
----
-
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | N/A |
-| 2026-05-12 | Windows RFC published | N/A |
-| 2026-04-30 | Package structure finalized | N/A |
-
----
-
-## 🎯 Tags
-
-```yaml
-- process-management
-- daemon
-- lifecycle
-- pidfile
-- ipc
-- health-check
-- cross-platform
-- windows
-- unix
-- posix
-- signals
-- process-group
-- job-object
-- corego
-- action-system
-- rest-api
-- websocket
-- registry
-- orchestration
-- pipeline
-- dependencies
-- production-ready
-```
-
----
-
-## 📈 Statistics
-
-| Metric | Value |
-|--------|-------|
-| Total Go files | ~45 |
-| Test files | ~35 |
-| Example test files | ~20 |
-| Lines of code | ~5,000+ |
-| Test coverage | High |
-| Platform support | Unix + Windows |
-| API endpoints | 15+ |
-| WebSocket channels | 7 |
 
 ---
 

@@ -5,15 +5,13 @@ title: go-proxy Package Documentation Index
 ---
 # go-proxy Package Documentation
 
-> **Stratum Mining Proxy** — CryptoNote protocol proxy library
-
 **Module:** `dappco.re/go/core/proxy`
 **Repository:** `core/go-proxy`
 **RFC:** [../../../../../plans/code/core/go/proxy/RFC.md](../../../../../plans/code/core/go/proxy/RFC.md)
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description |
 |----------|-------------|
@@ -22,9 +20,9 @@ title: go-proxy Package Documentation Index
 
 ---
 
-## 🗂️ Subpackages
+## Subpackages
 
-### Core Subpackages
+### Core subpackages
 
 | Package | Description | Key Files |
 |---------|-------------|-----------|
@@ -36,31 +34,29 @@ title: go-proxy Package Documentation Index
 
 ---
 
-## 🎯 Quick Links
+## Operating modes
 
-### Operating Modes
-
-**NiceHash Mode (Recommended for high-volume):**
+**NiceHash mode (recommended for high-volume):**
 - Splits 32-bit nonce space by fixing byte 39 of blob
 - 256 miners share one pool connection
-- Maximizes pool connection reuse
+- Maximises pool connection reuse
 - Minimal reconnection overhead
 
-**Simple Mode:**
+**Simple mode:**
 - One pool connection per miner
 - Optional connection reuse (ReuseTimeout)
 - Simpler architecture, higher connection count
 
-### Miner State Machine
+### Miner state machine
 
 Linear state transitions:
 ```
 WaitLogin (10s timeout) → WaitReady (600s timeout) → Ready (600s inactivity timeout) → Closing
 ```
 
-### Hashrate Windows
+### Hashrate windows
 
-Rolling hashrate calculated over 5 time windows:
+Rolling hashrate calculated over five time windows:
 - **60 seconds** — Real-time
 - **600 seconds** — 10-minute average
 - **3600 seconds** — 1-hour average
@@ -75,7 +71,7 @@ Rolling hashrate calculated over 5 time windows:
 
 ---
 
-## 🏗️ Architecture Layers
+## Architecture layers
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -102,7 +98,7 @@ Rolling hashrate calculated over 5 time windows:
 
 ---
 
-## 🔍 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship |
 |---------|----------------|--------------|
@@ -114,27 +110,22 @@ Rolling hashrate calculated over 5 time windows:
 
 ---
 
-## 📊 Statistics
+## NiceHash mode
 
-- **Total Files:** 80+ Go files
-- **Test Coverage:** High (Good/Bad/Ugly triplets per file)
-- **Subpackages:** 5 (pool, nicehash, simple, log, api)
-- **Lines of Code:** ~10,000 (estimated)
-- **Dependencies:** 2 (core/go, core/api)
-
-### NiceHash Mode Stats
 - **Miners per pool connection:** 256
 - **NonceStorage slots:** 256 per NonceMapper
 - **Connection reuse:** Automatic
 - **Slot allocation:** Round-robin with cursor
 
-### Simple Mode Stats
+## Simple mode
+
 - **Miners per pool connection:** 1
 - **Connection reuse:** Configurable via ReuseTimeout
 - **Idle pool size:** Configurable
 - **Memory per mapper:** ~1 KB
 
-### Protocol Stats
+## Protocol
+
 - **Miner states:** 4 (WaitLogin, WaitReady, Ready, Closing)
 - **Worker identification modes:** 6 (rig-id, user, password, agent, ip, disabled)
 - **Hashrate windows:** 5
@@ -143,7 +134,7 @@ Rolling hashrate calculated over 5 time windows:
 
 ---
 
-## 🔗 Source Code Structure
+## Source code structure
 
 ```
 go-proxy/
@@ -186,9 +177,9 @@ go-proxy/
 
 ---
 
-## 🚀 Usage Examples
+## Usage examples
 
-### Basic Usage
+### Basic usage
 
 ```go
 // Load config
@@ -226,7 +217,7 @@ p.Stop()
 }
 ```
 
-### Event Subscription
+### Event subscription
 
 ```go
 events := proxy.NewEventBus()
@@ -240,7 +231,7 @@ sub := events.Subscribe(func(event proxy.Event) {
 })
 ```
 
-### Custom Difficulty
+### Custom difficulty
 
 ```go
 // Global setting
@@ -252,29 +243,29 @@ cfg.CustomDiff = 50000
 
 ---
 
-## 🛡️ Security Features
+## Security features
 
 | Feature | Description |
 |---------|-------------|
 | **TLS (Inbound)** | Encrypt miner connections |
 | **TLS (Outbound)** | Encrypt pool connections with certificate pinning |
-| **Rate Limiting** | Per-IP token bucket (configurable) |
-| **Access Password** | Login authentication |
-| **HTTP Bearer Auth** | Monitoring API authentication |
-| **Restricted Mode** | Read-only HTTP API |
-| **Certificate Pinning** | Pool certificate fingerprint validation |
+| **Rate limiting** | Per-IP token bucket (configurable) |
+| **Access password** | Login authentication |
+| **HTTP Bearer auth** | Monitoring API authentication |
+| **Restricted mode** | Read-only HTTP API |
+| **Certificate pinning** | Pool certificate fingerprint validation |
 
 ---
 
-## 📈 Protocol Extensions
+## Protocol extensions
 
-| Extension | Description | RFC Field |
+| Extension | Description | RFC field |
 |-----------|-------------|-----------|
-| Algorithm Negotiation | Forward algo from miners to pools | `algo` in login/job |
+| Algorithm negotiation | Forward algo from miners to pools | `algo` in login/job |
 | RigID | Track miners by rig identifier | `rigid` in login |
-| Custom Difficulty | Per-miner difficulty override | Login suffix: `WALLET+DIFF` |
-| TLS Fingerprint | Pool certificate pinning | `tls-fingerprint` in pool config |
-| NiceHash Mode | Nonce-space splitting | Mode configuration |
+| Custom difficulty | Per-miner difficulty override | Login suffix: `WALLET+DIFF` |
+| TLS fingerprint | Pool certificate pinning | `tls-fingerprint` in pool config |
+| NiceHash mode | Nonce-space splitting | Mode configuration |
 
 ---
 

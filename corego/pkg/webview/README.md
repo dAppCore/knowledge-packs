@@ -16,8 +16,6 @@ tags:
 ---
 # go-webview — Browser Automation via Chrome DevTools Protocol
 
-> **The authoritative Chrome DevTools Protocol client for interactive browser automation in the Lethean ecosystem**
-
 **RFC:** [plans/code/core/go/webview/RFC.md](../../../../../plans/code/core/go/webview/RFC.md)
 **Source:** [~/Code/core/go-webview/](file:///Users/snider/Code/core/go-webview/)
 **Module:** `dappco.re/go/webview`
@@ -25,7 +23,7 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
 `go-webview` provides **complete browser automation** via Chrome DevTools Protocol (CDP). It enables programmatic control of Chrome/Chromium instances for:
 
@@ -56,7 +54,7 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Component Stack
 
@@ -97,7 +95,7 @@ tags:
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 go-webview/
@@ -127,7 +125,7 @@ go-webview/
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
 ### Prerequisites
 
@@ -235,7 +233,7 @@ if err := svc.Webview.Navigate("https://example.com"); err != nil {
 
 ---
 
-## 🔧 Core Types
+## Core types
 
 ### Webview
 
@@ -350,7 +348,7 @@ type CDPClient struct {
 
 ---
 
-## ⚡ Action Pattern
+## Action pattern
 
 Declarative automation with 20+ action types.
 
@@ -408,7 +406,7 @@ for _, action := range actions {
 
 ---
 
-## 🎭 Angular Integration
+## Angular integration
 
 Specialized helpers for Angular applications.
 
@@ -453,7 +451,7 @@ type AngularComponent struct {
 
 ---
 
-## 📡 Console & Exception Watching
+## Console and exception watching
 
 ### ConsoleWatcher
 
@@ -499,7 +497,7 @@ for exc := range exceptionWatcher.Chan() {
 
 ---
 
-## 🛡️ Security Features
+## Security features
 
 ### URL Validation
 
@@ -535,7 +533,7 @@ func validateNavigationURL(url string) error {
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Triplets
 
@@ -574,7 +572,7 @@ go test -run Example -v
 
 ---
 
-## 📊 Performance Considerations
+## Performance considerations
 
 ### Connection Overhead
 
@@ -594,7 +592,7 @@ go test -run Example -v
 
 ---
 
-## 🔗 Integration Points
+## Integration points
 
 ### CoreGO Framework
 
@@ -645,7 +643,7 @@ if !r.OK {
 
 ---
 
-## 📚 Examples
+## Examples
 
 ### Example 1: Simple Navigation and Click
 
@@ -733,7 +731,7 @@ func ExampleWebview_angular() {
 
 ---
 
-## 🐛 Debugging
+## Debugging
 
 ### Enable Debug Logging
 
@@ -768,7 +766,7 @@ wv, err := webview.New(webview.WithDebugURL("http://localhost:9222"))
 
 ---
 
-## 📈 Metrics & Monitoring
+## Metrics and monitoring
 
 ### Console Metrics
 
@@ -794,7 +792,7 @@ fmt.Printf("Navigation took: %v\n", duration)
 
 ---
 
-## 🎯 Best Practices
+## Best practices
 
 ### 1. Always Close Connections
 
@@ -849,7 +847,7 @@ actions := []webview.Action{
 
 ---
 
-## 📝 Notes
+## Notes
 
 - **Repository:** `forge.lthn.sh/core/go-webview`
 - **Primary Spec:** [RFC.md](../../../../../plans/code/core/go/webview/RFC.md)
@@ -859,7 +857,7 @@ actions := []webview.Action{
 
 ---
 
-## 🔍 See Also
+## See also
 
 - [go-p2p](../p2p/README.md) — Peer-to-peer networking
 - [go-proxy](../proxy/README.md) — Mining proxy

@@ -15,8 +15,6 @@ tags:
 
 # go-mcp Package Index
 
-> **Model Context Protocol Server Framework for CoreGO**
-
 **Repository:** `core/mcp`  
 **Module:** `dappco.re/go/mcp`  
 **PHP Package:** `forge.lthn.ai/core/mcp`  
@@ -28,7 +26,7 @@ tags:
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -38,11 +36,11 @@ tags:
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
 `go-mcp` is the **Model Context Protocol (MCP) server framework** for CoreGO applications, providing a lightweight implementation that enables AI agents (Claude Code, Cursor, etc.) and IDEs to interact with codebases through a standardized protocol. It implements the MCP specification with comprehensive file operations, tool registration, notification broadcasting, and channel-based event streaming.
 
-### Core Capabilities
+### Core capabilities
 
 1. **MCP Server** — Full Model Context Protocol implementation
 2. **Multi-Transport** — Stdio (default), TCP, HTTP/REST, Unix Socket
@@ -55,7 +53,7 @@ tags:
 9. **WebSocket Integration** — Optional go-ws integration for real-time events
 10. **Progress Tracking** — Progress notifications for long-running operations
 
-### Repository Layout
+### Repository layout
 
 ```
 core/mcp/
@@ -67,9 +65,9 @@ core/mcp/
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Layers
+### Component layers
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -111,7 +109,7 @@ core/mcp/
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 core/mcp/go/
@@ -304,9 +302,9 @@ core/mcp/go/
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
-### Basic MCP Server
+### Basic MCP server
 
 ```go
 svc, err := mcp.New(mcp.Options{
@@ -322,7 +320,7 @@ defer stop()
 svc.Run(ctx)
 ```
 
-### With TCP Transport
+### With TCP transport
 
 ```go
 os.Setenv("MCP_ADDR", "tcp://localhost:8080")
@@ -330,7 +328,7 @@ svc, _ := mcp.New(mcp.Options{WorkspaceRoot: "."})
 svc.Run(context.Background())
 ```
 
-### With HTTP Transport
+### With HTTP transport
 
 ```go
 os.Setenv("MCP_HTTP_ADDR", "localhost:8081")
@@ -339,7 +337,7 @@ svc, _ := mcp.New(mcp.Options{WorkspaceRoot: "."})
 svc.Run(context.Background())
 ```
 
-### With All Integrations
+### With all integrations
 
 ```go
 app, _ := core.New(
@@ -360,7 +358,7 @@ svc.Run(context.Background())
 
 ---
 
-## 🔧 Core Components
+## Core components
 
 ### Service
 
@@ -406,7 +404,7 @@ type Options struct {
 }
 ```
 
-### Subsystem Interface
+### Subsystem interface
 
 ```go
 type Subsystem interface {
@@ -422,9 +420,9 @@ type SubsystemWithNotifier interface {
 
 ---
 
-## 📡 Built-in Tool Groups
+## Built-in tool groups
 
-### File Operations (tools_files.go)
+### File operations (tools_files.go)
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -438,7 +436,7 @@ type SubsystemWithNotifier interface {
 | `lang_detect` | Detect language | path |
 | `lang_list` | List languages | - |
 
-### Process Management (tools_process.go)
+### Process management (tools_process.go)
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -475,7 +473,7 @@ type SubsystemWithNotifier interface {
 | `webview_type` | Type text | text |
 | `webview_close` | Close | - |
 
-### WebSocket Client (tools_ws.go)
+### WebSocket client (tools_ws.go)
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
@@ -486,9 +484,9 @@ type SubsystemWithNotifier interface {
 
 ---
 
-## 🧩 Subsystems
+## Subsystems
 
-### Brain Subsystem (brain/)
+### Brain subsystem (brain/)
 
 OpenBrain integration for memory operations.
 
@@ -507,7 +505,7 @@ OpenBrain integration for memory operations.
 - `brain_forget` — Remove from brain
 - `brain_search` — Search brain
 
-### Agentic Subsystem (agentic/)
+### Agentic subsystem (agentic/)
 
 Agent dispatch and workflow management.
 
@@ -536,7 +534,7 @@ Agent dispatch and workflow management.
 - `agent_scans` — List scans
 - `agent_reviews` — List reviews
 
-### IDE Subsystem (ide/)
+### IDE subsystem (ide/)
 
 IDE bridge for Laravel backend.
 
@@ -556,18 +554,18 @@ IDE bridge for Laravel backend.
 
 ---
 
-## 🚀 Transport Layer
+## Transport layer
 
 The MCP server supports multiple transports with automatic priority-based selection.
 
-### Transport Priority
+### Transport priority
 
 1. **Streamable HTTP** — If `MCP_HTTP_ADDR` is set
 2. **TCP** — If `MCP_ADDR` is set
 3. **Stdio** — Default
 4. **Unix Socket** — If `MCP_UNIX_SOCKET` is set
 
-### Transport Files
+### Transport files
 
 | File | Transport | Description |
 |------|-----------|-------------|
@@ -576,7 +574,7 @@ The MCP server supports multiple transports with automatic priority-based select
 | `transport_http.go` | HTTP | REST API with Bearer auth |
 | `transport_unix.go` | Unix | Unix domain socket |
 
-### Environment Variables
+### Environment variables
 
 | Variable | Description | Example |
 |----------|-------------|---------|
@@ -587,9 +585,9 @@ The MCP server supports multiple transports with automatic priority-based select
 
 ---
 
-## 🔔 Notification System
+## Notification system
 
-### Notification Methods
+### Notification methods
 
 ```go
 // Broadcast to all connected sessions
@@ -602,7 +600,7 @@ svc.ChannelSend(ctx, "agent.complete", map[string]any{"repo": "go-io"})
 svc.ChannelSendToSession(ctx, sessionID, "build.failed", data)
 ```
 
-### Channel Events
+### Channel events
 
 The `claude/channel` experimental capability is registered automatically.
 
@@ -612,7 +610,7 @@ The `claude/channel` experimental capability is registered automatically.
 - `process.crashed` — Process crashes
 - `agent.complete` — Agent task completion
 
-### Progress Tracking
+### Progress tracking
 
 ```go
 progress := mcp.NewProgress("scanning_repo", "Scanning repository", 100)
@@ -623,9 +621,9 @@ progress.Fail(ctx, "Failed", err)
 
 ---
 
-## 🔄 Adding Custom Tools
+## Adding custom tools
 
-### Step 1: Define Input/Output
+### Step 1: Define input/output
 
 ```go
 type MyToolInput struct {
@@ -638,7 +636,7 @@ type MyToolOutput struct {
 }
 ```
 
-### Step 2: Write Handler
+### Step 2: Write handler
 
 ```go
 func (s *Service) myTool(ctx context.Context, req *mcp.CallToolRequest, input MyToolInput) (*mcp.CallToolResult, MyToolOutput, error) {
@@ -646,7 +644,7 @@ func (s *Service) myTool(ctx context.Context, req *mcp.CallToolRequest, input My
 }
 ```
 
-### Step 3: Register Tool
+### Step 3: Register tool
 
 ```go
 func (s *Service) registerCustomTools() {
@@ -668,9 +666,9 @@ func (s *Service) registerCustomTools() {
 
 ---
 
-## 📦 Adding a New Subsystem
+## Adding a new subsystem
 
-### Implement Subsystem Interface
+### Implement subsystem interface
 
 ```go
 type MySubsystem struct{}
@@ -694,7 +692,7 @@ func (m *MySubsystem) Notify() chan any {
 }
 ```
 
-### Register Subsystem
+### Register subsystem
 
 ```go
 svc, _ := mcp.New(mcp.Options{
@@ -704,16 +702,16 @@ svc, _ := mcp.New(mcp.Options{
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 The package follows a specific naming convention:
 - `_Good` — Happy path tests
 - `_Bad` — Expected error cases
 - `_Ugly` — Panics and edge cases
 
-### Running Tests
+### Running tests
 
 ```bash
 cd ~/Code/core/mcp/go
@@ -735,9 +733,9 @@ GOWORK=off go test ./...
 
 ---
 
-## 🌐 Integration
+## Integration
 
-### Process Service Integration
+### Process service integration
 
 ```go
 app, _ := core.New(
@@ -750,7 +748,7 @@ svc, _ := mcp.New(mcp.Options{
 })
 ```
 
-### WebSocket Hub Integration
+### WebSocket hub integration
 
 ```go
 wsHub := ws.NewHub()
@@ -763,23 +761,7 @@ svc, _ := mcp.New(mcp.Options{
 
 ---
 
-## 📊 Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Total Go files** | ~150+ |
-| **Test files** | ~120+ |
-| **Example test files** | ~60+ |
-| **Subsystems** | 3 built-in + extensible |
-| **Tool groups** | 6 built-in + extensible |
-| **Transports** | 4 (stdio, tcp, http, unix) |
-| **Agentic tools** | 25+ |
-| **Brain tools** | 10+ |
-| **IDE tools** | 5+ |
-
----
-
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -790,29 +772,7 @@ svc, _ := mcp.New(mcp.Options{
 
 ---
 
-## 📈 Quality Metrics
-
-- ✅ **MCP Specification Compliance** — Full Model Context Protocol implementation
-- ✅ **Test Coverage** — Good/Bad/Ugly pattern for all scenarios
-- ✅ **Transport Flexibility** — Multiple transport backends
-- ✅ **Security** — Workspace sandboxing and Bearer auth
-- ✅ **Extensibility** — Subsystem architecture for custom tools
-- ✅ **Documentation** — Complete README + INDEX
-- ✅ **Core Integration** — Full CoreGO framework support
-
----
-
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | N/A |
-| 2026-05-XX | Brain subsystem finalized | N/A |
-| 2026-04-30 | CLAUDE.md guidance created | N/A |
-
----
-
-## 🎯 Tags
+## Tags
 
 ```yaml
 - mcp
@@ -848,7 +808,7 @@ svc, _ := mcp.New(mcp.Options{
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/mcp/](file:///Users/snider/Code/core/mcp/)
 2. **CLAUDE.md** — [~/Code/core/mcp/CLAUDE.md](file:///Users/snider/Code/core/mcp/CLAUDE.md)

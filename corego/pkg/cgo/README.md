@@ -1,7 +1,7 @@
 ---
 type: Package Deep Dive
 title: go-cgo — Standard CGo Harness
-description: Complete documentation for go-cgo — shared CGo boilerplate for all Core packages
+description: Shared CGo boilerplate for all Core packages that cross the Go/C boundary
 module: dappco.re/go/cgo
 repo: core/go-cgo
 tags: [cgo, c-interop, bindings, ffi, memory-management, unsafe]
@@ -10,36 +10,34 @@ author: Mistral Vibe
 version: 1.0.0
 ---
 
-# go-cgo — Standard CGo Harness
+# go-cgo — Standard CGo harness
 
-> **"Shared CGo boilerplate for all Core packages that cross the Go/C boundary. One harness, zero use-after-free bugs, every CGo package uses it."**
-
-`dappco.re/go/cgo` is the **Core cgo utility package** that provides a small, safe set of allocation, conversion, and function-pointer helpers for Go packages that need to interoperate with C code.
+`dappco.re/go/cgo` is the Core cgo utility package that provides a small, safe set of allocation, conversion, and function-pointer helpers for Go packages that need to interoperate with C code.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### What it is
 
-- **Standard CGo harness** — Centralized, tested primitives for C interop
-- **Memory-safe** — Double-free detection, use-after-free panics, finalizer-based cleanup
+- **Standard CGo harness** — Centralised, tested primitives for C interop
+- **Memory-safe** — Double-free detection, use-after-free panics, finaliser-based cleanup
 - **Minimal surface** — Small public API focused on CGo essentials
-- **Battle-tested** — Used by go-blockchain, go-mlx, go-rocm, go-inference
+- Used by go-blockchain, go-mlx, go-rocm, go-inference
 
 ### Why it exists
 
-Multiple Core packages use CGo (go-blockchain/crypto, go-mlx, go-rocm, go-inference). Each was rolling its own buffer allocation, string conversion, and error mapping. This package **centralizes that into tested, safe primitives** to prevent:
+Multiple Core packages use CGo (go-blockchain/crypto, go-mlx, go-rocm, go-inference). Each was rolling its own buffer allocation, string conversion, and error mapping. This package centralises that into tested, safe primitives to prevent:
 - Use-after-free bugs
 - Double-free bugs
 - Memory leaks
 - Type mismatches
 
-**Design principle:** CGo is error-prone. This harness is the **single, audited path** for all C interop in the Core ecosystem.
+CGo is error-prone. This harness is the single, audited path for all C interop in the Core ecosystem.
 
 ---
 
-## 📦 Quick Start
+## Quick start
 
 ```go
 import (
@@ -72,7 +70,7 @@ func main() {
 }
 ```
 
-### Without Scope (Manual Management)
+### Without scope (manual management)
 
 ```go
 import (
@@ -99,9 +97,9 @@ func main() {
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Core Components
+### Core components
 
 | Component | File | Purpose |
 |-----------|------|---------|
@@ -112,19 +110,19 @@ func main() {
 | **Function Calls** | `call.go` | C function pointer dispatcher |
 | **C String** | `cstring.go` | C string utilities |
 
-### Memory Safety Features
+### Memory safety features
 
-✅ **Double-free detection** — Panics on second Free() call
-✅ **Use-after-free detection** — Panics on access after Free()
-✅ **Finalizer-based cleanup** — Auto-frees on GC
-✅ **Atomic state tracking** — Thread-safe freed state
-✅ **Range validation** — Panics on invalid type conversions
+- Double-free detection — Panics on second Free() call
+- Use-after-free detection — Panics on access after Free()
+- Finaliser-based cleanup — Auto-frees on GC
+- Atomic state tracking — Thread-safe freed state
+- Range validation — Panics on invalid type conversions
 
 ---
 
-## 📁 Package Structure
+## Package structure
 
-### Source Files
+### Source files
 
 ```
 cgo/
@@ -137,7 +135,7 @@ cgo/
 └── call_test_support.go      # Test harness for C function calls
 ```
 
-### Test Files
+### Test files
 
 ```
 cgo/
@@ -154,11 +152,11 @@ cgo/
 
 ---
 
-## 🔧 Core Types
+## Core types
 
 ### Buffer
 
-Owns byte memory for C interop with **panic-safe cleanup**.
+Owns byte memory for C interop with panic-safe cleanup.
 
 #### Structure
 
@@ -218,7 +216,7 @@ defer buffer.Free()
 
 ### Scope
 
-Tracks multiple C allocations and releases them all at once. **Thread-safe** with `sync.Mutex`.
+Tracks multiple C allocations and releases them all at once. Thread-safe with `sync.Mutex`.
 
 #### Structure
 
@@ -235,7 +233,7 @@ type Scope struct {
 
 | Method | Signature | Description |
 |--------|-----------|-------------|
-| `NewScope` | `func NewScope() *Scope` | Create new scope with finalizer |
+| `NewScope` | `func NewScope() *Scope` | Create new scope with finaliser |
 | `FreeAll` | `func (s *Scope) FreeAll()` | Release all allocations, panic on double-free |
 | `Close` | `func (s *Scope) Close() error` | io.Closer interface, same as FreeAll() |
 | `Buffer` | `func (s *Scope) Buffer(size int) *Buffer` | Allocate managed buffer |
@@ -265,11 +263,11 @@ str2 := scope.CString("world")
 // scope.FreeAll() releases buf1, buf2, str1, str2
 ```
 
-**Best practice:** Use Scope for temporary values owned by a single call path. Use standalone `NewBuffer`, `CString`, and `Free` when a value must outlive a local scope or be managed by a higher-level owner.
+Use Scope for temporary values owned by a single call path. Use standalone `NewBuffer`, `CString`, and `Free` when a value must outlive a local scope or be managed by a higher-level owner.
 
 ---
 
-## 🔄 Type Conversions
+## Type conversions
 
 ### SizeT
 
@@ -345,11 +343,11 @@ if err != nil {
 
 ---
 
-## 🔁 String Conversion
+## String conversion
 
 ### GoString
 
-Converts C string to Go string **safely**.
+Converts C string to Go string safely.
 
 ```go
 func GoString(cs *C.char) string
@@ -384,7 +382,7 @@ C.my_function(cStr)
 
 ### Free
 
-Releases C-allocated memory. **Idempotent**.
+Releases C-allocated memory. Idempotent.
 
 ```go
 func Free(ptr unsafe.Pointer)
@@ -400,7 +398,7 @@ corecgo.Free(unsafe.Pointer(cStr)) // No panic
 
 ---
 
-## 🎯 Function Calls
+## Function calls
 
 ### Call
 
@@ -459,9 +457,9 @@ if err := corecgo.Call(
 
 ---
 
-## 📊 Data Flows
+## Data flows
 
-### Safe C Memory Lifecycle
+### Safe C memory lifecycle
 
 ```
 1. Allocate → NewBuffer(size) → C.malloc + finalizer
@@ -470,7 +468,7 @@ if err := corecgo.Call(
 4. Guard    → IsFreed() check or assertNotFreed() panic
 ```
 
-### Grouped Cleanup Pattern
+### Grouped cleanup pattern
 
 ```
 scope := corecgo.NewScope()
@@ -485,7 +483,7 @@ str := scope.CString("hello")
 scope.Close() // releases buf1, buf2, str
 ```
 
-### Multi-Argument C Function Call
+### Multi-argument C function call
 
 ```
 buffer := corecgo.NewBuffer(32)
@@ -504,7 +502,7 @@ if err != nil {
 
 ---
 
-## 📋 Error Handling
+## Error handling
 
 ### Philosophy
 
@@ -519,7 +517,7 @@ All errors use `core.E(scope, message, cause)` or **panic** with a diagnostic me
 
 The panic message includes the scope and the reason.
 
-### Errno Mapping
+### Errno mapping
 
 | C Return | Go Result |
 |----------|-----------|
@@ -528,7 +526,7 @@ The panic message includes the scope and the reason.
 
 ---
 
-## 🔗 Consumers
+## Consumers
 
 go-cgo is used by these Core packages for C interop:
 
@@ -541,15 +539,15 @@ go-cgo is used by these Core packages for C interop:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 All test files follow the AX Standard triplet pattern: `Test<File>_<Function>_{Good,Bad,Ugly}`.
 
-### Buffer Tests
+### Buffer tests
 
 | Test | Purpose |
 |------|---------|
-| `TestBuffer_NewBuffer_Good` | Size > 0, allocates, finalizer set |
+| `TestBuffer_NewBuffer_Good` | Size > 0, allocates, finaliser set |
 | `TestBuffer_NewBuffer_Bad` | Size < 0, panics |
 | `TestBuffer_Free_Good` | Called once, succeeds |
 | `TestBuffer_Free_Bad` | Called twice, second time panics |
@@ -561,11 +559,11 @@ All test files follow the AX Standard triplet pattern: `Test<File>_<Function>_{G
 | `TestBuffer_Len_Good` | Returns correct size |
 | `TestBuffer_IsFreed_Good` | Tracks state correctly |
 
-### Scope Tests
+### Scope tests
 
 | Test | Purpose |
 |------|---------|
-| `TestScope_NewScope_Good` | Creates scope, finalizer set |
+| `TestScope_NewScope_Good` | Creates scope, finaliser set |
 | `TestScope_Buffer_Good` | Allocates buffer within scope |
 | `TestScope_CString_Good` | Allocates C string within scope |
 | `TestScope_FreeAll_Good` | Releases all allocations |
@@ -573,7 +571,7 @@ All test files follow the AX Standard triplet pattern: `Test<File>_<Function>_{G
 | `TestScope_Close_Good` | Close() delegates to FreeAll() |
 | `TestScope_IsFreed_Good` | Tracks state correctly |
 
-### Call/Conversion Tests
+### Call/Conversion tests
 
 | Test | Purpose |
 |------|---------|
@@ -590,11 +588,11 @@ All test files follow the AX Standard triplet pattern: `Test<File>_<Function>_{G
 
 ---
 
-## 🔒 Compliance Rules
+## Compliance rules
 
 From `AGENTS.md`:
 
-### File Boundaries
+### File boundaries
 
 - **buffer.go** — Buffer type and methods
 - **scope.go** — Scope type and methods
@@ -603,9 +601,9 @@ From `AGENTS.md`:
 - **cstring.go** — C string utilities
 - **call_test_support.go** — Test harness
 
-**Rule:** Keep changes within existing file boundaries. Don't create monolithic files.
+Keep changes within existing file boundaries. Don't create monolithic files.
 
-### Import Restrictions
+### Import restrictions
 
 **Do NOT** add direct imports of:
 - `fmt`
@@ -632,14 +630,14 @@ core.Println("hello")
 return core.E("scope", "error message", err)
 ```
 
-### Test Organization
+### Test organisation
 
 - Each production file owns its matching tests
 - File `buffer.go` → tests in `buffer_test.go` and examples in `buffer_example_test.go`
 - Use `Test<File>_<Symbol>_{Good,Bad,Ugly}` naming convention
 - Examples use Go's runnable `// Output:` form
 
-### Verification Gate
+### Verification gate
 
 Before committing:
 ```sh
@@ -654,9 +652,9 @@ The audit must finish with `verdict: COMPLIANT`.
 
 ---
 
-## 🎓 Examples
+## Examples
 
-### Complete Scope Example
+### Complete scope example
 
 ```go
 package main
@@ -689,7 +687,7 @@ func main() {
 }
 ```
 
-### Buffer with C Function Call
+### Buffer with C function call
 
 ```go
 package main
@@ -734,7 +732,7 @@ func main() {
 }
 ```
 
-### Error Handling with Call
+### Error handling with Call
 
 ```go
 package main
@@ -777,20 +775,39 @@ func main() {
 
 ---
 
-## 📈 Statistics
+## Best practices
 
-```
-Total Go files:           6 (source) + 8 (tests/examples)
-Total lines (source):    ~2,161
-Total lines (tests):     ~3,000+
-Test coverage:            100% (file-by-file triplets)
-Public API surface:       ~25 symbols
-Consumer packages:       4 (go-blockchain, go-mlx, go-rocm, go-inference)
-```
+### When to use go-cgo
+
+Use go-cgo when:
+- Calling C functions from Go
+- Allocating C memory that needs Go management
+- Converting between Go and C types
+- Managing groups of C allocations
+
+Do NOT use go-cgo when:
+- You can do it in pure Go (no C interop needed)
+- You're using CGO directly without the harness (use go-cgo instead)
+- You need to call Go from C (reverse direction, not supported)
+
+### Memory management
+
+1. Prefer Scope for temporary allocations in a single function
+2. Use Buffer for C-backed byte slices
+3. Always use defer for manual cleanup
+4. Check IsFreed() before accessing if unsure
+5. Trust the panics — they protect against bugs
+
+### Error handling
+
+1. Panics are intentional — don't catch them, fix the bug
+2. Use Errno for C error codes
+3. Use WithErrno for complex C function calls
+4. Use Call for simple C function calls
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
 - [CoreGo Framework](../../README.md) — Parent knowledge pack
 - [go-mlx Package](../mlx/README.md) — Apple Metal GPU, uses go-cgo
@@ -799,41 +816,3 @@ Consumer packages:       4 (go-blockchain, go-mlx, go-rocm, go-inference)
 - [CoreGo RFC](file:///Users/snider/Code/meowmix/plans/code/core/go/RFC.md) — Framework specification
 - [go-cgo RFC](file:///Users/snider/Code/meowmix/plans/code/core/go/cgo/RFC.md) — Package specification
 - [go-cgo AGENTS.md](file:///Users/snider/Code/core/go-cgo/AGENTS.md) — Agent guidance
-
----
-
-## 💡 Best Practices
-
-### When to Use go-cgo
-
-✅ **Use go-cgo when:**
-- Calling C functions from Go
-- Allocating C memory that needs Go management
-- Converting between Go and C types
-- Managing groups of C allocations
-
-❌ **Do NOT use go-cgo when:**
-- You can do it in pure Go (no C interop needed)
-- You're using CGO directly without the harness (use go-cgo instead!)
-- You need to call Go from C (reverse direction, not supported)
-
-### Memory Management
-
-1. **Prefer Scope** for temporary allocations in a single function
-2. **Use Buffer** for C-backed byte slices
-3. **Always use defer** for manual cleanup
-4. **Check IsFreed()** before accessing if unsure
-5. **Trust the panics** — they're protecting you from bugs
-
-### Error Handling
-
-1. **Panics are intentional** — don't catch them, fix the bug
-2. **Use Errno** for C error codes
-3. **Use WithErrno** for complex C function calls
-4. **Use Call** for simple C function calls
-
----
-
-*Package documentation created: 2026-06-17T23:45:00Z*
-*Author: Mistral Vibe (Purberus <purberus@lthn.ai>)*
-*Source: dappco.re/go/cgo*

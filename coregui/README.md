@@ -1,30 +1,28 @@
 ---
 type: Knowledge Pack
 title: CoreGUI Framework
-description: Complete knowledge pack for CoreGUI — the Wails v2-based GUI framework for Lethean desktop applications
+description: Wails v2-based GUI framework for Lethean desktop applications
 author: Mistral Vibe
 version: 1.0.0
 created: 2026-06-17T14:30:00Z
 tags: [framework, gui, wails, desktop, lethean, wails3]
 ---
 
-# CoreGUI Knowledge Pack
+# CoreGUI knowledge pack
 
-> **"Gateway binary for provider-hosted actions"** — CoreGUI RFC
-
-**Official Site:** [dappco.re/go/gui/](https://dappco.re/go/gui/)
+**Official site:** [dappco.re/go/gui/](https://dappco.re/go/gui/)
 
 CoreGUI is the **Wails v2** framework for Lethean desktop applications, providing a native GUI wrapper with webview-based frontend and Go backend.
 
-**Official Description:** Native GUI runtime — Wails-shaped windows over core/go primitives.
+**Official description:** Native GUI runtime — Wails-shaped windows over core/go primitives.
 
 ---
 
-## 🎯 Overview
+## Overview
 
-**CoreGUI** serves as the **gateway binary** for provider-hosted actions.
+CoreGUI serves as the **gateway binary** for provider-hosted actions.
 
-### Gateway Role
+### Gateway role
 
 From the [CoreGUI RFC](file:///Users/snider/Code/meowmix/plans/code/core/gui/RFC.md):
 
@@ -34,27 +32,27 @@ CoreGUI serves as the gateway binary that:
 - Manages desktop process lifecycle
 - Provides window management and orchestration
 
-### Security Considerations
+### Security considerations
 
 **Blast-radius implication:** Single-process compromise. A webview-driven privilege escalation can directly compromise mounted providers and their state. The Cerberus DREAD context is documented in `code/core/api/RFC.providers.md § gateway-binary`.
 
 **CRITICAL:** CoreGUI MUST implement a per-action allow-list (severity: CRITICAL post-#1044 PATH A) before shipping providers in production builds.
 
-### Key Statistics
+### Key facts
 
 - **Framework:** Wails v3.0.0-alpha.91
-- **Display Package:** 30+ files, 67KB main implementation
-- **Test Coverage:** 100% test triplet pattern
+- **Display package:** 30+ files, 67KB main implementation
+- **Test coverage:** 100% test triplet pattern
 - **Ports:** Vite (9245), Bridge (9879) for lthn-desktop
 - **Status:** Page in flight — content fills in as the package converges
 
-### Official Install
+### Official install
 
 ```bash
 go get dappco.re/go/gui@latest
 ```
 
-### Official Import
+### Official import
 
 ```go
 import "dappco.re/go/gui"
@@ -62,15 +60,15 @@ import "dappco.re/go/gui"
 
 ---
 
-## 📚 Source of Truth
+## Source of truth
 
-- **Primary Spec:** [`plans/code/core/gui/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/gui/RFC.md)
+- **Primary spec:** [`plans/code/core/gui/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/gui/RFC.md)
 - **Implementation:** [`core/gui/go/pkg/display/`](file:///Users/snider/Code/core/gui/go/pkg/display/)
-- **Agent Guide:** [`core/gui/AGENTS.md`](file:///Users/snider/Code/core/gui/AGENTS.md)
+- **Agent guide:** [`core/gui/AGENTS.md`](file:///Users/snider/Code/core/gui/AGENTS.md)
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 CoreGUI (gateway binary)
@@ -92,9 +90,9 @@ CoreGUI (gateway binary)
 
 ---
 
-## 💻 How-Tos
+## How-tos
 
-### 1. Starting CoreGUI Development
+### 1. Starting CoreGUI development
 
 ```bash
 # Clone the repository
@@ -118,7 +116,7 @@ go build -o lthn-desktop ./...
 gui.sh build
 ```
 
-### 3. Managing Lifecycle
+### 3. Managing lifecycle
 
 ```bash
 # Check status
@@ -134,7 +132,7 @@ gui.sh restart 90  # Wait 90 seconds
 gui.sh log 100  # Last 100 lines
 ```
 
-### 4. Using the Bridge
+### 4. Using the bridge
 
 The bridge exposes CoreGUI capabilities to external tools:
 
@@ -146,7 +144,7 @@ gui.sh wait
 # The bridge runs on port 9879 by default
 ```
 
-### 5. Running Tests
+### 5. Running tests
 
 ```bash
 # Run all tests
@@ -164,11 +162,11 @@ gui.sh audit
 
 ---
 
-## 📦 Core Components
+## Core components
 
-### 1. Display Package (`pkg/display/`)
+### 1. Display package (`pkg/display/`)
 
-The **display package** is the heart of CoreGUI, managing:
+The display package manages:
 
 | Component | Purpose | Files |
 |-----------|---------|-------|
@@ -181,39 +179,39 @@ The **display package** is the heart of CoreGUI, managing:
 | `storage.go` | Storage management | 9KB |
 | `window/` | Window lifecycle | 12KB |
 
-**Test Triplets:** Each major component has `_test.go` + `_example_test.go`
+**Test triplets:** Each major component has `_test.go` + `_example_test.go`
 
-### 2. Window Package (`pkg/window/`)
+### 2. Window package (`pkg/window/`)
 
 Manages window lifecycle:
 
-- **Window Management:** Create, destroy, minimize, maximize, restore
-- **State Persistence:** Save/load window positions, sizes, states
-- **Layout Engine:** Smart layout, tiling, snapping, stacking
-- **WebView Integration:** Chrome DevTools Protocol client
+- **Window management:** Create, destroy, minimize, maximize, restore
+- **State persistence:** Save/load window positions, sizes, states
+- **Layout engine:** Smart layout, tiling, snapping, stacking
+- **WebView integration:** Chrome DevTools Protocol client
 
-**From GUI Challenges:**
+From GUI challenges:
 - 25 files, 12,575+ lines
 - Complete window management system
 - Smart layout engine
 - State persistence
 - WebView integration
 
-### 3. Browser Package (`pkg/browser/`)
+### 3. Browser package (`pkg/browser/`)
 
 Handles browser operations:
 
-- **Browser Control:** Open URLs, navigate, execute JavaScript
-- **Console Access:** Read browser console output
+- **Browser control:** Open URLs, navigate, execute JavaScript
+- **Console access:** Read browser console output
 - **Evaluation:** Run JavaScript in browser context
 
 ---
 
-## 🔥 Key Features
+## Key features
 
-### Window Lifecycle
+### Window lifecycle
 
-**Verbs from lethean-gui skill:**
+Verbs from lethean-gui skill:
 
 ```bash
 gui.sh status              # What's running (task dev, lthn proc, vite, bridge)
@@ -226,9 +224,9 @@ gui.sh build               # Go build only (compile sanity)
 gui.sh audit               # Full v0.9.0 + go/frontend tests
 ```
 
-### Display Orchestration
+### Display orchestration
 
-**30+ files** covering:
+30+ files covering:
 - API wrappers and handlers
 - Background tasks
 - Clipboard operations
@@ -247,7 +245,7 @@ gui.sh audit               # Full v0.9.0 + go/frontend tests
 - Sidecar management
 - Storage
 
-### Provider Integration
+### Provider integration
 
 CoreGUI mounts and manages:
 
@@ -261,16 +259,16 @@ CoreGUI mounts and manages:
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
-### For Agents
+### For agents
 
 1. **Read the RFC:** [`plans/code/core/gui/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/gui/RFC.md)
 2. **Explore the display package:** `ls core/gui/go/pkg/display/*.go`
 3. **Run tests:** `go test -count=1 ./...`
 4. **Check examples:** `go test -run Example ./...`
 
-### For Developers
+### For developers
 
 1. **Clone the repo:** `git clone forge.lthn.sh/core/gui`
 2. **Start dev:** `task dev` (Wails v2 orchestrator)
@@ -279,16 +277,16 @@ CoreGUI mounts and manages:
 
 ---
 
-## 🔍 Exploring the Codebase
+## Exploring the codebase
 
-### Key Files
+### Key files
 
 - [`core/gui/go/pkg/display/display.go`](file:///Users/snider/Code/core/gui/go/pkg/display/display.go) — Main display service
 - [`core/gui/go/pkg/display/api.go`](file:///Users/snider/Code/core/gui/go/pkg/display/api.go) — Display API
 - [`core/gui/go/pkg/window/`](file:///Users/snider/Code/core/gui/go/pkg/window/) — Window management
 - [`core/gui/CLAUDE.md`](file:///Users/snider/Code/core/gui/CLAUDE.md) — Claude-specific notes
 
-### Discovery Commands
+### Discovery commands
 
 ```bash
 # List all display files
@@ -306,23 +304,9 @@ find /Users/snider/Code/core/gui/go/pkg/display/ -name "*_test.go" | wc -l
 
 ---
 
-## 📊 Quick Stats
+## Quick reference
 
-```
-Total packages:          8+ (display, window, browser, lifecycle, clipboard, contextmenu, events, keybinding)
-Display package files:   30+
-Window package files:    25+
-Test files:              30+ (_test.go)
-Example files:           30+ (_example_test.go)
-Wails version:           v3.0.0-alpha.91
-Default ports:           Vite 9245, Bridge 9879 (lthn-desktop)
-```
-
----
-
-## 📖 Quick Reference
-
-### gui.sh Commands
+### gui.sh commands
 
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -335,7 +319,7 @@ Default ports:           Vite 9245, Bridge 9879 (lthn-desktop)
 | `gui.sh build` | Build binary | `gui.sh build` |
 | `gui.sh audit` | Full test suite | `gui.sh audit` |
 
-### Key Packages
+### Key packages
 
 | Package | Purpose | Location |
 |---------|---------|----------|
@@ -350,24 +334,24 @@ Default ports:           Vite 9245, Bridge 9879 (lthn-desktop)
 
 ---
 
-## 🎯 Use Cases
+## Use cases
 
-### When to Use CoreGUI
+### When to use CoreGUI
 
-✅ **Desktop applications** — Use CoreGUI for native desktop apps
-✅ **Provider integration** — Mount providers for unified action surface
-✅ **Window management** — Use display package for window orchestration
-✅ **WebView apps** — Use for Chrome DevTools Protocol integration
+- **Desktop applications** — native desktop apps
+- **Provider integration** — mount providers for unified action surface
+- **Window management** — use display package for window orchestration
+- **WebView apps** — Chrome DevTools Protocol integration
 
-### When NOT to Use CoreGUI
+### When not to use CoreGUI
 
-❌ **Server-only applications** — Use core/api instead
-❌ **CLI tools** — Use core/cli instead
-❌ **Mobile applications** — Not supported (Wails is desktop-only)
+- **Server-only applications** — use core/api instead
+- **CLI tools** — use core/cli instead
+- **Mobile applications** — not supported (Wails is desktop-only)
 
 ---
 
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 - [CoreGo](../corego/README.md) — Core Go framework (underlying primitives)
 - [CoreTS](../corets/README.md) — TypeScript framework (frontend)
@@ -377,7 +361,7 @@ Default ports:           Vite 9245, Bridge 9879 (lthn-desktop)
 
 ---
 
-## 💡 Agent Tips
+## Agent tips
 
 1. **Check gui.sh first** — Most lifecycle operations are wrapped
 2. **Use bridge for running apps** — Don't poll bridge as build detector
@@ -387,7 +371,7 @@ Default ports:           Vite 9245, Bridge 9879 (lthn-desktop)
 
 ---
 
-## 📝 Maintenance
+## Maintenance
 
 This knowledge pack is maintained by Mistral Vibe. Updates triggered by:
 

@@ -8,8 +8,6 @@ description: Structured logging and error handling package
 
 # go-log Package Index
 
-> **Structured Logging & Error Handling**
-
 **Repository:** `core/go-log`  
 **Module:** `dappco.re/go/log`  
 **Status:** ✅ Complete Documentation  
@@ -18,7 +16,7 @@ description: Structured logging and error handling package
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -27,19 +25,19 @@ description: Structured logging and error handling package
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
 **go-log** provides unified structured logging and error handling for Core applications. It is the **MANDATORY** error handling package for the entire Lethean ecosystem.
 
 ### Key Features
 
-- ✅ **Structured Logging** — Key-value pairs for machine-readable logs
-- ✅ **Log Levels** — Quiet, Error, Warn, Info, Debug
-- ✅ **Structured Errors** — Operation context, codes, recovery metadata
-- ✅ **Automatic Redaction** — Sensitive key masking
-- ✅ **Log Rotation** — File rotation with size/age/compression
-- ✅ **Zero Dependencies** — Only stdlib for production
-- ✅ **CoreGO Integration** — Re-exported as core.E(), core.Wrap(), etc.
+- **Structured Logging** — Key-value pairs for machine-readable logs
+- **Log Levels** — Quiet, Error, Warn, Info, Debug
+- **Structured Errors** — Operation context, codes, recovery metadata
+- **Automatic Redaction** — Sensitive key masking
+- **Log Rotation** — File rotation with size/age/compression
+- **Zero Dependencies** — Only stdlib for production
+- **CoreGO Integration** — Re-exported as core.E(), core.Wrap(), etc.
 
 ### Architecture Layers
 
@@ -49,7 +47,7 @@ description: Structured logging and error handling package
 
 ---
 
-## 🏗️ Components
+## Components
 
 ### Logger Types
 
@@ -79,7 +77,7 @@ description: Structured logging and error handling package
 
 ---
 
-## 📁 File Structure
+## File structure
 
 ```
 go-log/
@@ -100,7 +98,7 @@ go-log/
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
 ### Basic Setup
 
@@ -139,7 +137,7 @@ return log.WrapCode(err, "api.Handle", "invalid request", "ERR_INVALID_REQUEST")
 
 ---
 
-## 🎓 Use Cases
+## Use cases
 
 ### 1. Application Logging
 
@@ -204,7 +202,7 @@ logger := log.New(log.Options{
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Options
 
@@ -231,7 +229,7 @@ type RotationOptions struct {
 
 ---
 
-## 📊 Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -245,7 +243,7 @@ type RotationOptions struct {
 
 ---
 
-## ⚠️ Important Notes
+## Important notes
 
 ### MANDATORY Usage
 
@@ -267,7 +265,7 @@ Production code has zero external dependencies. Only stdlib is used for error ha
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -277,16 +275,7 @@ Production code has zero external dependencies. Only stdlib is used for error ha
 
 ---
 
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Initial deep dive documentation | N/A |
-| 2026-06-17 | Package INDEX created | N/A |
-
----
-
-## 🎯 Tags
+## Tags
 
 ```yaml
 - logging

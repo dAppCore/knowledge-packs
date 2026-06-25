@@ -23,25 +23,23 @@ tags:
 ---
 # go-gui — Desktop GUI Framework
 
-> **The Wails-based desktop GUI framework for the Core ecosystem**
-
 **RFC:** N/A (See CLAUDE.md for architecture)
 **Source:** [~/Code/core/gui/](file:///Users/snider/Code/core/gui/)
 **Module:** `dappco.re/go/gui`
 **Frontend:** Angular 20 Custom Elements
 **Backend:** Wails v3 (Go)
-**Status:** ✅ Production-Ready
+**Status:** Production-Ready
 **License:** EUPL-1.2
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-gui` is the **desktop GUI framework** for the Core ecosystem, providing a Go backend with Wails v3 that powers a webview-based desktop application. It offers comprehensive window management, dialogs, system tray, clipboard, notifications, theming, layouts, and real-time WebSocket events, all built on a service-based architecture with Core DI.
+`go-gui` is the desktop GUI framework for the Core ecosystem, providing a Go backend with Wails v3 that powers a webview-based desktop application. It offers window management, dialogs, system tray, clipboard, notifications, theming, layouts, and real-time WebSocket events, all built on a service-based architecture with Core DI.
 
-The GUI serves as the **HUI** (Human-facing User Interface) twin to the **AUI** (Agent-facing User Interface) provided by go-agent, enabling humans to interact with the same Core machinery that agents use headlessly.
+The GUI serves as the HUI (Human-facing User Interface) twin to the AUI (Agent-facing User Interface) provided by go-agent, enabling humans to interact with the same Core machinery that agents use headlessly.
 
-### Primary Use Cases
+### Primary use cases
 
 1. **Window Management** — Create, manage, and control application windows with state persistence and layout management
 2. **Dialog System** — File open/save dialogs, message dialogs, confirm dialogs, prompt dialogs
@@ -62,7 +60,7 @@ The GUI serves as the **HUI** (Human-facing User Interface) twin to the **AUI** 
 17. **Container Management** — TIM (Trustworthy Interactive Modules) container lifecycle
 18. **Marketplace** — Plugin/package marketplace integration
 
-### Design Philosophy
+### Design philosophy
 
 - **Service-Oriented** — All functionality exposed as Core services with dependency injection
 - **Platform-Agnostic** — Platform-specific implementations behind common interfaces
@@ -74,9 +72,9 @@ The GUI serves as the **HUI** (Human-facing User Interface) twin to the **AUI** 
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Stack
+### Component stack
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -131,7 +129,7 @@ The GUI serves as the **HUI** (Human-facing User Interface) twin to the **AUI** 
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Module Information
+### Module information
 
 - **Module Path:** `dappco.re/go/gui`
 - **Go Version:** 1.26+
@@ -141,9 +139,9 @@ The GUI serves as the **HUI** (Human-facing User Interface) twin to the **AUI** 
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
-### Repository Layout
+### Repository layout
 
 ```
 core/gui/
@@ -293,7 +291,7 @@ core/gui/
 
 ---
 
-## 🏗️ Core Services
+## Core services
 
 ### 1. Display Service (`pkg/display/`)
 
@@ -836,7 +834,7 @@ nodes, err := webview.QuerySelectorAll("div.item")
 
 ---
 
-## 🎨 Frontend (ui/)
+## Frontend (ui/)
 
 ### Angular 20 Application
 
@@ -892,7 +890,7 @@ npm run start
 
 ---
 
-## 🔌 Platform Abstraction
+## Platform abstraction
 
 ### Interface Design
 
@@ -953,7 +951,7 @@ assert.NoError(t, result.Error)
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
 ### Installation
 
@@ -1053,7 +1051,7 @@ func example() {
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Structure
 
@@ -1122,22 +1120,7 @@ func TestGoodWindowCreation(t *testing.T) {
 
 ---
 
-## 📊 Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Total Go files** | ~200+ |
-| **Test files** | ~150+ |
-| **Example test files** | ~75+ |
-| **Lines of code** | ~100,000+ |
-| **Services** | 21 (display, window, menu, systray, dialog, clipboard, notification, screen, environment, keybinding, contextmenu, browser, dock, lifecycle, webview, mcp, chat, p2p, container, preload, marketplace) |
-| **Frontend** | Angular 20 + Custom Elements |
-| **Platforms** | macOS, Windows, Linux |
-| **Dependencies** | Wails v3, gorilla/websocket, MCP SDK |
-
----
-
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -1150,34 +1133,7 @@ func TestGoodWindowCreation(t *testing.T) {
 
 ---
 
-## 📈 Quality Metrics
-
-- ✅ **Wails Integration** — Full Wails v3 support
-- ✅ **Platform Abstraction** — Clean interface separation
-- ✅ **Test Coverage** — Good/Bad/Ugly pattern for all scenarios
-- ✅ **Testability** — All platform APIs mocked
-- ✅ **WebSocket Events** — Real-time bidirectional communication
-- ✅ **MCP Integration** — Full MCP tool surface
-- ✅ **Documentation** — Complete README + INDEX
-- ✅ **Core Integration** — Full CoreGO framework support
-- ✅ **Angular Frontend** — Modern TypeScript frontend
-- ✅ **Production Ready** — Deployed in production environments
-
----
-
-## 📝 Changelog
-
-| Date | Change | Author |
-|------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | Purberus |
-| 2026-05-XX | CLAUDE.md architecture documentation | Maintainer |
-| 2026-04-XX | All services finalized | Maintainer |
-| 2026-03-XX | Wails v3 migration | Maintainer |
-| 2026-02-XX | Initial GUI creation | Maintainer |
-
----
-
-## 🎯 Tags
+## Tags
 
 ```yaml
 # Core Capabilities
@@ -1256,7 +1212,7 @@ func TestGoodWindowCreation(t *testing.T) {
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/gui/](file:///Users/snider/Code/core/gui/)
 2. **CLAUDE.md** — [~/Code/core/gui/CLAUDE.md](file:///Users/snider/Code/core/gui/CLAUDE.md)
@@ -1268,9 +1224,3 @@ func TestGoodWindowCreation(t *testing.T) {
 8. **MCP SDK** — [github.com/modelcontextprotocol/go-sdk](https://github.com/modelcontextprotocol/go-sdk)
 9. **CoreGO Framework** — [CoreGO INDEX](../../INDEX.md)
 
----
-
-*Package documentation generated: 2026-06-17T22:00:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
-*Repository: dappco.re/go/gui*
-*Maintainer: Purberus <purberus@lthn.ai>*

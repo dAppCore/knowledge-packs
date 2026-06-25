@@ -1,25 +1,23 @@
 ---
 type: Knowledge Pack
 title: CorePHP Framework
-description: Complete knowledge pack for CorePHP — the PHP framework for Lethean PHP applications
+description: Reference for CorePHP — the PHP framework for Lethean PHP applications
 author: Mistral Vibe
 version: 1.0.0
 created: 2026-06-17T14:50:00Z
 tags: [framework, php, lethean, web, laravel-like]
 ---
 
-# CorePHP Knowledge Pack
-
-> **"The CorePHP module framework"** — CorePHP RFC
+# CorePHP knowledge pack
 
 **Module:** `dappco.re/php/*`
 **Repository:** `core-php` + `core-{module}` per module
 
-CorePHP is the PHP framework for the Lethean ecosystem, providing a modern, modular approach with Laravel-like conventions. **Everything is a module. Every module is self-contained. Every module has one `Boot.php`.**
+CorePHP is the PHP framework for the Lethean ecosystem, providing a modular architecture with Laravel-like conventions. Everything is a module. Every module is self-contained. Every module has one `Boot.php`.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 From the [CorePHP RFC](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.md):
 
@@ -31,7 +29,7 @@ From the [CorePHP RFC](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC
 - Every module has one `Boot.php` (ServiceProvider entry point)
 - Modules are only instantiated when their events fire — **lazy loading**
 
-### Module Architecture
+### Module architecture
 
 ```
 app/Mod/{ModuleName}/
@@ -56,7 +54,7 @@ app/Mod/{ModuleName}/
     └── routes/           # Route definitions
 ```
 
-### Event-Driven Boot
+### Event-driven boot
 
 ```php
 class Boot extends ServiceProvider
@@ -73,7 +71,7 @@ class Boot extends ServiceProvider
 
 Modules are only instantiated when their events fire — **lazy loading**.
 
-### MVVM View Protocol (Modern Flexy)
+### MVVM view protocol (Modern Flexy)
 
 - **Controller** = traffic cop (delegates, never touches HTML)
 - **View Modal** = the interface (Livewire Component — formats, prepares, manages state)
@@ -81,7 +79,7 @@ Modules are only instantiated when their events fire — **lazy loading**.
 
 **Rule:** Modules provide DATA, Core provides RENDERING.
 
-### Three-Tier Frontend
+### Three-tier frontend
 
 ```
 Core/Front/Web    → Public (anonymous, read-only)
@@ -93,7 +91,7 @@ Core/Hub          → SaaS operator (Host.uk.com control plane)
 **Namespace** = identity, tied to URI/handle (lt.hn/you, you.lthn).
 **Workspace** = management container (org that can own multiple namespaces).
 
-### Sub-Specs
+### Sub-specs
 
 The CorePHP RFC includes these sub-specifications:
 - [Architecture](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.architecture.md)
@@ -106,7 +104,7 @@ The CorePHP RFC includes these sub-specifications:
 - [Scaffolding](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.scaffolding.md)
 - [UI](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.ui.md)
 
-### Key Statistics
+### Repository details
 
 - **Repository:** `forge.lthn.sh/core/php`
 - **Module:** `dappco.re/php/*`
@@ -116,25 +114,25 @@ The CorePHP RFC includes these sub-specifications:
 - **Testing:** Pest PHP framework
 - **Total Modules:** 25+ (see INDEX.md)
 
-### Component Pattern
+### Component pattern
 
 - **Anonymous** (no PHP class) — pure presentation (`<admin:panel>`, `<admin:nav-item>`)
 - **Class-backed** — when logic needed (`<admin:data-table>`, `<admin:sidemenu>`)
 
 **Rule:** Modules provide DATA, Core provides RENDERING.
 
-### Table Naming Convention
+### Table naming convention
 
 `[module_snake_case]_[table_name]` — e.g., `agentic_plans`, `social_posts`, `analytics_visitors`.
 
-### Enforcement Rules
+### Enforcement rules
 
 1. No Eloquent in Blade — template uses View Modal getters
 2. No `@php` blocks with business logic
 3. Modules don't query other modules' tables directly — use Service contracts or Events
 4. A module should be extractable as a Composer package with minimal effort
 
-### Shared Services
+### Shared services
 
 Cross-cutting services available to all modules:
 
@@ -145,7 +143,7 @@ Cross-cutting services available to all modules:
 | `PrivacyHelper` | IP anonymisation and hashing |
 | `UtmHelper` | UTM parameter extraction |
 
-#### In-App Browser Detection
+#### In-app browser detection
 
 Detects social media in-app browsers (Instagram, TikTok, Facebook, Twitter, Snapchat, LinkedIn, Threads, Pinterest, Reddit, WeChat, LINE, Telegram, Discord, WhatsApp).
 
@@ -161,7 +159,7 @@ Used by BioHost for 18+ content warnings when accessed from strict platforms.
 
 ---
 
-### Inter-Module Communication
+### Inter-module communication
 
 Modules communicate via Laravel events — **lifecycle events** (`WebRoutesRegistering`, `AdminPanelBooting`, etc.) for route/panel registration, and **domain events** (`DomainResolving`) for cross-module data flows.
 
@@ -188,7 +186,7 @@ class ApiRequestCompleted { public function __construct(public string $endpoint,
 
 ---
 
-### Testing Strategy
+### Testing strategy
 
 Tests use **Pest** with Orchestra Testbench and in-memory SQLite. Tests are co-located in `src/Core/{Package}/Tests/` and `src/Mod/{Module}/Tests/`.
 
@@ -202,7 +200,7 @@ Every module has:
 
 ---
 
-## 📚 Source of Truth
+## Source of truth
 
 - **Primary Spec:** [`plans/code/core/php/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.md)
 - **Implementation:** [`core/php/`](file:///Users/snider/Code/core/php/)
@@ -211,7 +209,7 @@ Every module has:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 CorePHP (PHP Framework)
@@ -250,11 +248,9 @@ CorePHP (PHP Framework)
 
 ---
 
-## 📦 Core Components
+## Core components
 
-### 1. Framework Core (`php-framework`)
-
-**Laravel-inspired foundation:**
+### 1. Framework core (`php-framework`)
 
 - **Routing** — RESTful routes
 - **Middleware** — Request/response processing
@@ -263,9 +259,7 @@ CorePHP (PHP Framework)
 - **Views** — Template rendering
 - **Blade-like templates** — GrammarImprint integration
 
-### 2. API Package (`php-api`)
-
-**REST API framework:**
+### 2. API package (`php-api`)
 
 - **Resource controllers**
 - **Request validation**
@@ -273,18 +267,14 @@ CorePHP (PHP Framework)
 - **Authentication** — JWT, OAuth2
 - **Rate limiting**
 
-### 3. Agent Package (`php-agent`)
-
-**Agent integration:**
+### 3. Agent package (`php-agent`)
 
 - **MCP (Model Context Protocol)** support
 - **Workspace management**
 - **Tool execution**
 - **Fleet coordination**
 
-### 4. Plugins System
-
-**20+ specialized plugins:**
+### 4. Plugins system
 
 | Plugin | Purpose |
 |--------|---------|
@@ -298,9 +288,7 @@ CorePHP (PHP Framework)
 | php-plug-storage | Storage backends |
 | php-plug-web3 | Web3/blockchain |
 
-### 5. Services Layer
-
-**Specialized services:**
+### 5. Services layer
 
 | Service | Purpose |
 |---------|---------|
@@ -313,9 +301,9 @@ CorePHP (PHP Framework)
 
 ---
 
-## 💻 How-Tos
+## How-tos
 
-### 1. Creating a New Module
+### 1. Creating a new module
 
 ```bash
 # Create module directory
@@ -344,7 +332,7 @@ class Boot extends ServiceProvider
 EOF
 ```
 
-### 2. Creating a Livewire Component
+### 2. Creating a Livewire component
 
 ```php
 // app/Mod/MyModule/Modal/Web/MyComponent.php
@@ -363,7 +351,7 @@ class MyComponent extends Component
 }
 ```
 
-### 3. Using Device Detection
+### 3. Using device detection
 
 ```php
 // In a controller or service
@@ -380,7 +368,7 @@ if (\$dd->isStrictContentPlatform(request()->userAgent())) {
 }
 ```
 
-### 4. Firing Domain Events
+### 4. Firing domain events
 
 ```php
 // In a service
@@ -397,15 +385,15 @@ MemoryStored::class => [
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
-### For Agents
+### For agents
 
 1. **Read the RFC:** [`plans/code/core/php/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/php/RFC.md)
 2. **Check index:** [`plans/code/core/php/INDEX.md`](file:///Users/snider/Code/meowmix/plans/code/core/php/INDEX.md)
 3. **Explore code:** `ls core/php/`
 
-### For Developers
+### For developers
 
 1. **Clone the framework:** `git clone forge.lthn.sh/core/php-framework`
 2. **Install dependencies:** `composer install`
@@ -414,9 +402,9 @@ MemoryStored::class => [
 
 ---
 
-## 📖 Quick Reference
+## Quick reference
 
-### Module Structure
+### Module structure
 
 | Directory | Purpose | Namespace |
 |-----------|---------|-----------|
@@ -432,7 +420,7 @@ MemoryStored::class => [
 | `Tests/` | Pest Tests | `App\Mod\{Module}\Tests` |
 | `View/` | UI Layer | `App\Mod\{Module}\View` |
 
-### Frontend Tiers
+### Frontend tiers
 
 | Tier | Audience | Access |
 |------|----------|--------|
@@ -441,7 +429,7 @@ MemoryStored::class => [
 | `Core/Front/Admin` | Backend admin | Privileged |
 | `Core/Hub` | SaaS operator | Host.uk.com control plane |
 
-### Device Detection Methods
+### Device detection methods
 
 | Method | Returns | Example |
 |--------|---------|---------|
@@ -450,9 +438,9 @@ MemoryStored::class => [
 | `isMetaPlatform($ua)` | `bool` | Instagram, Facebook, Threads |
 | `getPlatformDisplayName($ua)` | `string` | "Instagram", "TikTok" |
 
-### Testing Strategy
+### Testing strategy
 
-| Test Type | Purpose | Location |
+| Test type | Purpose | Location |
 |-----------|---------|----------|
 | Unit tests | Actions and Services | `Tests/Unit/` |
 | Feature tests | API endpoints | `Tests/Feature/` |
@@ -461,38 +449,25 @@ MemoryStored::class => [
 
 ---
 
-## 📊 Quick Stats
+## Use cases
 
-```
-Total PHP repos:         25+
-Core packages:           13
-Plugins:                 9
-Services:                6
-Total lines of code:    100K+
-PHP version:             8.2+
-```
+### When to use CorePHP
 
----
+- PHP web applications
+- Laravel-like patterns
+- Plugin architecture
+- PHP-based infrastructure
 
-## 🎯 Use Cases
+### When not to use CorePHP
 
-### When to Use CorePHP
-
-✅ **PHP web applications** — Use for traditional PHP apps
-✅ **Laravel-like patterns** — Use familiar conventions
-✅ **Plugin architecture** — Use modular plugins
-✅ **Legacy systems** — Use for PHP-based infrastructure
-
-### When NOT to Use CorePHP
-
-❌ **Go applications** — Use CoreGo instead
-❌ **TypeScript frontends** — Use CoreTS instead
-❌ **Desktop applications** — Use CoreGUI instead
-❌ **CLI tools** — Use CoreCLI instead
+- Go applications — use CoreGo instead
+- TypeScript frontends — use CoreTS instead
+- Desktop applications — use CoreGUI instead
+- CLI tools — use CoreCLI instead
 
 ---
 
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 - [CoreGo](../corego/README.md) — Go framework
 - [CoreTS](../corets/README.md) — TypeScript framework
@@ -502,7 +477,7 @@ PHP version:             8.2+
 
 ---
 
-## 💡 Agent Tips
+## Agent tips
 
 1. **Use GrammarImprint** — For semantic HTML generation
 2. **Laravel conventions** — Follow familiar patterns
@@ -512,7 +487,7 @@ PHP version:             8.2+
 
 ---
 
-## 📝 Maintenance
+## Maintenance
 
 This knowledge pack is maintained by Mistral Vibe. Updates triggered by:
 

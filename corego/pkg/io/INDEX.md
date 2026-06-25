@@ -6,8 +6,6 @@ title: go-io Package Documentation Index
 ---
 # go-io Package Documentation
 
-> **Mandatory I/O Abstraction** — The universal transport layer for Lethean
-
 **Module:** `dappco.re/go/core/io`
 **Repository:** `core/go-io`
 **RFC:** [../../../../../plans/code/core/go/io/RFC.md](../../../../../plans/code/core/go/io/RFC.md)
@@ -15,7 +13,7 @@ title: go-io Package Documentation Index
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Location |
 |----------|-------------|----------|
@@ -31,7 +29,7 @@ title: go-io Package Documentation Index
 
 ---
 
-## 🗂️ File Catalog
+## File catalogue
 
 ### Core Package
 
@@ -139,7 +137,7 @@ Each sigil file has corresponding `_test.go` and `_example_test.go` files.
 
 ---
 
-## 🎯 Quick Links
+## Quick links
 
 ### Medium Interface
 
@@ -213,7 +211,7 @@ func NewDirEntry(name string, isDir bool, mode fs.FileMode, info fs.FileInfo) Di
 
 ---
 
-## 🗝️ Medium Registry
+## Medium registry
 
 | Medium | Module | Source | Transport | Use Case | Status |
 |--------|--------|--------|-----------|----------|--------|
@@ -230,7 +228,7 @@ func NewDirEntry(name string, isDir bool, mode fs.FileMode, info fs.FileInfo) Di
 
 ---
 
-## 🎯 Action Registry (20+ Actions)
+## Action registry (20+ actions)
 
 ### Local Actions
 | Action | Description | Parameters |
@@ -278,18 +276,9 @@ func NewDirEntry(name string, isDir bool, mode fs.FileMode, info fs.FileInfo) Di
 
 ---
 
-## 📊 Statistics
+## Statistics
 
-### Code Metrics
-- **Total Go files:** 50+ (implementation)
-- **Test files:** 25+ (100% triplet coverage)
-- **Example files:** 25+ (100% triplet coverage)
-- **Subpackages:** 12
-- **Storage backends:** 10+
-- **Sigil types:** 15+
-- **CLOC (estimated):** 10,000+
-
-### Backend Coverage
+### Backend coverage
 | Backend | Implementation | Tests | Examples | Actions |
 |---------|---------------|-------|----------|---------|
 | Local | core/go | ✅ | ✅ | ✅ |
@@ -303,7 +292,7 @@ func NewDirEntry(name string, isDir bool, mode fs.FileMode, info fs.FileInfo) Di
 | Cube | go-io | ✅ | ✅ | ✅ |
 | Workspace | go-io | ✅ | ✅ | ✅ |
 
-### Sigil Coverage
+### Sigil coverage
 | Category | Count | Status |
 |----------|-------|--------|
 | Encryption | 1 (ChaChaPoly) | ✅ |
@@ -316,7 +305,7 @@ func NewDirEntry(name string, isDir bool, mode fs.FileMode, info fs.FileInfo) Di
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
 ### Quick Start
 
@@ -361,7 +350,7 @@ GOOS=linux GOARCH=amd64 go build ./go/...
 
 ---
 
-## 📝 Maintenance Notes
+## Maintenance notes
 
 ### Transport Split
 
@@ -410,7 +399,7 @@ This split keeps core/go minimal while go-io handles all integration complexity.
 
 ---
 
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship | Status |
 |---------|----------------|--------------|--------|
@@ -422,7 +411,7 @@ This split keeps core/go minimal while go-io handles all integration complexity.
 
 ---
 
-## 📅 Version History
+## Version history
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
@@ -431,26 +420,24 @@ This split keeps core/go minimal while go-io handles all integration complexity.
 
 ---
 
-## 🏆 Key Insights
+## Key points
 
-### Why go-io Matters
+### Why go-io matters
 
-1. **Universal Transport:** One interface for all storage — filesystem, memory, cloud, encrypted, archived
-2. **Testability:** MemoryMedium enables fast, deterministic unit tests
-3. **Security:** Sandbox containment prevents path escape attacks
-4. **Portability:** DataCube allows encrypted archive distribution
-5. **Extensibility:** New backends can be added without changing consumer code
+1. Universal transport — One interface for all storage: filesystem, memory, cloud, encrypted, archived
+2. Testability — MemoryMedium enables fast, deterministic unit tests
+3. Security — Sandbox containment prevents path escape attacks
+4. Portability — DataCube allows encrypted archive distribution
+5. Extensibility — New backends can be added without changing consumer code
 
-### Design Principles
+### Design principles
 
-- **SPOR:** Single Point Of Responsibility — each I/O operation has one owner
-- **AX Standard:** Comments for agents, not humans
-- **Test Triplets:** Every implementation has `_test.go` + `_example_test.go`
-- **Zero Dependencies:** Core contract in core/go, all extras in go-io
+- SPOR — Single Point Of Responsibility: each I/O operation has one owner
+- AX Standard — Comments for agents, not humans
+- Test Triplets — Every implementation has `_test.go` + `_example_test.go`
+- Zero dependencies — Core contract in core/go, all extras in go-io
 
 ---
 
-*Knowledge Pack Index: go-io v1.0.0*
-*Last Updated: 2026-06-17*
-*Author: Purberus <purberus@lthn.ai>*
-*Source: Lethean go-io Package*
+*Knowledge pack index: go-io v1.0.0*
+*Last updated: 2026-06-17*

@@ -17,13 +17,11 @@ tags:
   - xdg
   - core-service
 ---
-# go-config Package Index
-
-> **Core Configuration Module — Unified configuration resolution for the Core ecosystem**
+# go-config package index
 
 **Repository:** `core/config`  
 **Module:** `dappco.re/go/config`  
-**Status:** ✅ Production-Ready  
+**Status:** Production-ready  
 **License:** EUPL-1.2  
 **Language:** Go 1.26+  
 **Dependencies:** Core framework, go-io, Viper, testify  
@@ -32,7 +30,7 @@ tags:
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -44,19 +42,19 @@ tags:
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-`go-config` is the **Core configuration module** that provides a unified, consistent way for Core services and command-line tools to resolve configuration from multiple sources. It is the foundational configuration layer used throughout the Core ecosystem.
+`go-config` is the Core configuration module that provides a unified, consistent way for Core services and command-line tools to resolve configuration from multiple sources. It is the foundational configuration layer used throughout the Core ecosystem.
 
-### Design Philosophy
+### Design
 
-- **Dual-Viper Pattern** — Maintains two Viper instances to prevent environment variable leakage into saved files
-- **Hierarchical Discovery** — Walks up directory tree to find `.core/config.yaml` files
-- **Storage Abstraction** — All file I/O through `coreio.Medium` from go-io
-- **Service Integration** — Runs as a Core service with full lifecycle management
-- **Security-First** — Environment variables never persist to disk
+- **Dual-Viper pattern** — Maintains two Viper instances to prevent environment variable leakage into saved files
+- **Hierarchical discovery** — Walks up directory tree to find `.core/config.yaml` files
+- **Storage abstraction** — All file I/O through `coreio.Medium` from go-io
+- **Service integration** — Runs as a Core service with full lifecycle management
+- **Security-first** — Environment variables never persist to disk
 
-### Configuration Resolution Priority
+### Configuration resolution priority
 
 ```
 Lowest Priority ← Defaults → File → Environment Variables → Explicit Set() ← Highest Priority
@@ -64,11 +62,9 @@ Lowest Priority ← Defaults → File → Environment Variables → Explicit Set
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Dual-Viper Pattern
-
-The core architectural innovation that sets go-config apart:
+### Dual-Viper pattern
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -123,7 +119,7 @@ The core architectural innovation that sets go-config apart:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Component Layers
+### Component layers
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -171,7 +167,7 @@ The core architectural innovation that sets go-config apart:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Repository Structure
+### Repository structure
 
 ```
 go/
@@ -242,9 +238,9 @@ go/
 
 ---
 
-## 🔌 Core Interfaces & Types
+## Core interfaces and types
 
-### Config Interface
+### Config interface
 
 ```go
 type Config interface {
@@ -271,7 +267,7 @@ type Config interface {
 }
 ```
 
-### Config Type
+### Config type
 
 ```go
 type Config struct {
@@ -292,7 +288,7 @@ type Config struct {
 var _ core.Config = (*Config)(nil)
 ```
 
-### Service Type
+### Service type
 
 ```go
 type Service struct {
@@ -307,17 +303,11 @@ func (s *Service) OnShutdown() error { ... }
 
 ---
 
-## 🎯 Core Functionality
+## Core functionality
 
-### 1. Dual-Viper Configuration
+### 1. Dual-Viper configuration
 
-#### The Problem
-
-Traditional configuration systems have a flaw: when you save configuration to a file, environment variables can accidentally leak into the saved file, causing unexpected behavior across different environments.
-
-#### The Solution
-
-Dual-Viper maintains two separate Viper instances:
+Dual-Viper maintains two separate Viper instances. Writes go to both; reads come from the read view only; persists use the write view only. This prevents `CORE_CONFIG_*` environment variables from leaking into saved YAML files.
 
 ```go
 // v (read view): Contains everything
@@ -350,7 +340,7 @@ func (c *Config) Commit() error {
 }
 ```
 
-#### Invariant Enforcement
+#### Invariant enforcement
 
 ```
 ✅ Write: Set() → BOTH v AND f
@@ -362,9 +352,7 @@ func (c *Config) Commit() error {
 ❌ Save from v = Environment variable leakage
 ```
 
-### 2. Hierarchical Discovery
-
-#### Discovery Algorithm
+### 2. Hierarchical discovery
 
 ```
 Starting from: /project/subdir
@@ -383,8 +371,6 @@ Loading...
 Continue to check for overrides in parent directories...
 ```
 
-#### Code Usage
-
 ```go
 // Auto-discover from current directory
 cfg, err := config.New()
@@ -399,9 +385,9 @@ cfg, err := config.New(
 )
 ```
 
-### 3. Environment Variables
+### 3. Environment variables
 
-#### Default Prefix: CORE_CONFIG_
+#### Default prefix: CORE_CONFIG_
 
 ```bash
 # Set configuration via environment
@@ -415,8 +401,6 @@ CORE_CONFIG_database__port=5432
 - `CORE_CONFIG_dev__editor` → `dev.editor`
 - `CORE_CONFIG_server__database__host` → `server.database.host`
 
-#### Custom Prefix
-
 ```go
 // Use custom environment prefix
 cfg, err := config.New(config.WithEnvPrefix("MYAPP"))
@@ -426,8 +410,6 @@ MYAPP_dev__editor=vim
 MYAPP_server__port=8080
 ```
 
-#### Priority Override
-
 ```bash
 # Environment variable overrides file value
 CORE_CONFIG_server__port=9090
@@ -436,9 +418,9 @@ CORE_CONFIG_server__port=9090
 # Result: cfg.Get("server.port") returns 9090
 ```
 
-### 4. Manifest Resolution
+### 4. Manifest resolution
 
-#### Supported Manifest Types
+#### Supported manifest types
 
 | Manifest File | Purpose | Used By |
 |---------------|---------|---------|
@@ -448,8 +430,6 @@ CORE_CONFIG_server__port=9090
 | `manifest.yaml` | Package metadata | Various |
 | `agent.yaml` | Agent configuration | go-agent |
 | `zone.yaml` | Zone configuration | go-config |
-
-#### Manifest Loading
 
 ```go
 // Load a typed manifest
@@ -467,8 +447,6 @@ if err := cfg.Resolve("build.yaml", &buildConfig); err != nil {
 }
 ```
 
-#### Manifest Signature Verification
-
 ```go
 // Sign a manifest
 privateKey := ed25519.New()
@@ -482,9 +460,7 @@ if err := config.Verify(manifest, signature, publicKey); err != nil {
 }
 ```
 
-### 5. Feature Flags
-
-#### Usage
+### 5. Feature flags
 
 ```go
 // Enable a feature
@@ -504,7 +480,7 @@ if err := cfg.Feature("experimental.ai", &enabled); err != nil {
 }
 ```
 
-#### Resolution Priority
+#### Resolution priority
 
 ```
 1. Explicit SetFeature() calls (highest)
@@ -513,7 +489,6 @@ if err := cfg.Feature("experimental.ai", &enabled); err != nil {
 4. Config file values (lowest)
 ```
 
-Example:
 ```bash
 # Enable via environment
 CORE_FEATURE_experimental__ai=true
@@ -522,9 +497,7 @@ CORE_FEATURE_experimental__ai=true
 cfg.SetFeature("experimental.ai", true)
 ```
 
-### 6. Filesystem Watching
-
-#### Watch API
+### 6. Filesystem watching
 
 ```go
 // Watch a specific key
@@ -551,7 +524,7 @@ if err := cfg.Unwatch("dev.editor", callback); err != nil {
 }
 ```
 
-#### Implementation Details
+#### Implementation details
 
 - Uses platform-native filesystem notifications:
   - Linux: inotify
@@ -560,9 +533,7 @@ if err := cfg.Unwatch("dev.editor", callback); err != nil {
 - Callback is debounced to prevent rapid-fire notifications
 - Automatically re-establishes watch after filesystem events
 
-### 7. Path Utilities
-
-#### Resolution
+### 7. Path utilities
 
 ```go
 // Resolve path (expand ~, env vars, relative)
@@ -581,8 +552,6 @@ cleaned := config.Clean("/path/to/../file.txt")
 expanded, err := config.Expand("$HOME/projects/${USER}")
 // Result: /home/user/projects/user
 ```
-
-#### XDG Compliance
 
 ```go
 // Get XDG config home
@@ -608,9 +577,7 @@ home, err := config.UserDir()
 // Result: /home/user or /Users/user
 ```
 
-### 8. Service Integration
-
-#### As a Core Service
+### 8. Service integration
 
 ```go
 // Create service
@@ -632,7 +599,7 @@ if err := svc.Get("dev.editor", &editor); err != nil {
 }
 ```
 
-#### Service Lifecycle
+#### Service lifecycle
 
 ```
 OnStartup():
@@ -648,9 +615,9 @@ OnShutdown():
 
 ---
 
-## 🚀 Usage Examples
+## Usage examples
 
-### Basic Configuration
+### Basic configuration
 
 ```go
 package main
@@ -690,7 +657,7 @@ func main() {
 }
 ```
 
-### With Environment Variables
+### With environment variables
 
 ```bash
 # Set via environment
@@ -702,7 +669,7 @@ go run main.go
 # Output: Editor: vim (from environment)
 ```
 
-### Hierarchical Configuration
+### Hierarchical configuration
 
 ```
 /project/
@@ -719,7 +686,7 @@ cfg, err := config.New()
 // cfg.Get("dev.editor") returns "vim"
 ```
 
-### Manifest Usage
+### Manifest usage
 
 ```go
 // Load build manifest
@@ -742,7 +709,7 @@ fmt.Printf("Building %s v%s with Go %s\n",
     buildConfig.Go.Version)
 ```
 
-### Feature Flags
+### Feature flags
 
 ```go
 // Check for experimental feature
@@ -758,12 +725,12 @@ if cfg.IsEnabled("experimental.ai") {
 cfg.SetFeature("experimental.ai", true)
 ```
 
-### Filesystem Watch
+### Filesystem watch
 
 ```go
 // Watch for config changes
 if err := cfg.Watch("", func() {
-    fmt.Println("Configuration changed!")
+    fmt.Println("Configuration changed")
     all := cfg.All()
     // React to changes...
 }); err != nil {
@@ -774,7 +741,7 @@ if err := cfg.Watch("", func() {
 select {}
 ```
 
-### Service Mode
+### Service mode
 
 ```go
 package main
@@ -810,9 +777,9 @@ func main() {
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 All tests follow the AX Standard with Good/Bad/Ugly triplets:
 
@@ -837,7 +804,7 @@ All tests follow the AX Standard with Good/Bad/Ugly triplets:
 └── manifest_test.go         # Manifest tests
 ```
 
-### Mock Testing
+### Mock testing
 
 ```go
 // Test with mock medium
@@ -859,7 +826,7 @@ if err := cfg.Get("dev.editor", &editor); err != nil {
 // editor == "vim"
 ```
 
-### Running Tests
+### Running tests
 
 ```bash
 # From go/ directory
@@ -883,28 +850,28 @@ cd go && core go qa full
 
 ---
 
-## 📈 Quality Metrics
+## Quality metrics
 
 | Metric | Status | Details |
 |--------|--------|---------|
-| **Dual-Viper Pattern** | ✅ | Prevents env variable leakage to disk |
-| **Hierarchical Discovery** | ✅ | Walks directory tree for config files |
-| **Manifest Support** | ✅ | 6 manifest types with schema validation |
-| **Signature Verification** | ✅ | ed25519 signing and verification |
-| **Feature Flags** | ✅ | Multi-source resolution |
-| **Filesystem Watching** | ✅ | Cross-platform (inotify, FSEvents, etc.) |
-| **Storage Abstraction** | ✅ | go-io Medium interface |
-| **Core Service Integration** | ✅ | Full lifecycle with Start/Stop |
-| **XDG Compliance** | ✅ | Linux, macOS, Windows support |
-| **Test Coverage** | ✅ | Good/Bad/Ugly pattern throughout |
-| **Error Handling** | ✅ | Core error wrapping (coreerr.E) |
-| **Production Ready** | ✅ | Deployed throughout Core ecosystem |
+| **Dual-Viper Pattern** | Complete | Prevents env variable leakage to disk |
+| **Hierarchical Discovery** | Complete | Walks directory tree for config files |
+| **Manifest Support** | Complete | 6 manifest types with schema validation |
+| **Signature Verification** | Complete | ed25519 signing and verification |
+| **Feature Flags** | Complete | Multi-source resolution |
+| **Filesystem Watching** | Complete | Cross-platform (inotify, FSEvents, etc.) |
+| **Storage Abstraction** | Complete | go-io Medium interface |
+| **Core Service Integration** | Complete | Full lifecycle with Start/Stop |
+| **XDG Compliance** | Complete | Linux, macOS, Windows support |
+| **Test Coverage** | Complete | Good/Bad/Ugly pattern throughout |
+| **Error Handling** | Complete | Core error wrapping (coreerr.E) |
+| **Production Ready** | Complete | Deployed throughout Core ecosystem |
 
 ---
 
-## 📝 Best Practices
+## Best practices
 
-### Always Use Dual-Viper Correctly
+### Always use dual-Viper correctly
 
 ```go
 // ✅ CORRECT
@@ -920,7 +887,7 @@ cfg.f.Set("key", value) // Only writes to write view
 cfg.Get("key", &value)  // Reads from f (missing env vars)
 ```
 
-### Environment Variable Naming
+### Environment variable naming
 
 ```bash
 # ✅ CORRECT - Double underscore for nesting
@@ -933,7 +900,7 @@ CORE_CONFIG_server_database_host=localhost
 server__database__host=localhost
 ```
 
-### Configuration File Location
+### Configuration file location
 
 ```
 # ✅ CORRECT locations
@@ -947,7 +914,7 @@ server__database__host=localhost
 /var/config.yaml
 ```
 
-### Feature Flag Naming
+### Feature flag naming
 
 ```go
 // ✅ CORRECT - Dot notation
@@ -962,7 +929,7 @@ server__database__host=localhost
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 ### Dependencies
 
@@ -974,9 +941,7 @@ server__database__host=localhost
 | Viper | `github.com/spf13/viper` | Configuration engine |
 | Testify | `github.com/stretchr/testify` | Test assertions |
 
-### Consumer Packages
-
-All Core services that use configuration:
+### Consumer packages
 
 | Package | Module | Configuration Used For |
 |---------|--------|---------------------|
@@ -990,7 +955,7 @@ All Core services that use configuration:
 | [go-ml](../ml/) | `dappco.re/go/core/ml` | ML backend settings |
 | [go-inference](../inference/) | `dappco.re/go/inference` | Inference defaults |
 
-### Core Framework
+### Core framework
 
 | Package | Relationship |
 |---------|--------------|
@@ -998,7 +963,7 @@ All Core services that use configuration:
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/config/](file:///Users/snider/Code/core/config/)
 2. **CLAUDE.md** — [~/Code/core/config/CLAUDE.md](file:///Users/snider/Code/core/config/CLAUDE.md)
@@ -1009,10 +974,3 @@ All Core services that use configuration:
 7. **Development Guide** — [~/Code/core/config/docs/development.md](file:///Users/snider/Code/core/config/docs/development.md)
 8. **Index** — [~/Code/core/config/docs/index.md](file:///Users/snider/Code/core/config/docs/index.md)
 9. **CoreGO INDEX** — [../../INDEX.md](file:///Users/snider/Code/meowmix/knowledge-packs/corego/INDEX.md)
-
----
-
-*Package index generated: 2026-06-18T00:30:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
-*Module: dappco.re/go/config*
-*Maintainer: Purberus <purberus@lthn.ai>*

@@ -13,9 +13,7 @@ tags:
   - http-cache
   - path-traversal-protection
 ---
-# go-cache — Storage-Agnostic JSON Caching
-
-> **The authoritative caching layer for CoreGO applications**
+# go-cache — Storage-agnostic JSON caching
 
 **RFC:** [plans/code/core/go/cache/RFC.md](../../../../../plans/code/core/go/cache/RFC.md)
 **Source:** [~/Code/core/go-cache/](file:///Users/snider/Code/core/go-cache/)
@@ -24,26 +22,26 @@ tags:
 
 ---
 
-## 🎯 Overview
+## Overview
 
-`go-cache` provides a **storage-agnostic JSON-based caching layer** backed by any `io.Medium`. It implements:
+`go-cache` provides a storage-agnostic JSON-based caching layer backed by any `io.Medium`. It implements:
 
-- **JSON serialization** — Values stored as JSON with metadata
+- **JSON serialisation** — Values stored as JSON with metadata
 - **TTL support** — Automatic expiry for all entries
 - **Path-traversal protection** — Safe key validation
 - **Invalidation hooks** — Automatic cache invalidation on triggers
-- **HTTP caching** — Specialized helpers for HTTP response caching
+- **HTTP caching** — Specialised helpers for HTTP response caching
 - **Multiple backends** — Local FS, SQLite, S3, in-memory via `go-io`
 
-### Primary Use Cases
+### Primary use cases
 
-1. **General caching** — Store any JSON-serializable data
+1. **General caching** — Store any JSON-serialisable data
 2. **HTTP response caching** — Cache API responses with request matching
 3. **Scoped caching** — Namespace isolation with collision resistance
 4. **GitHub API caching** — Rate limit reduction with smart keys
-5. **Performance optimization** — Reduce expensive computations
+5. **Performance optimisation** — Reduce expensive computations
 
-### Design Philosophy
+### Design
 
 - **Storage-agnostic** — All I/O delegated to `io.Medium`
 - **Security-first** — Path-traversal protection on every operation
@@ -53,9 +51,9 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Stack
+### Component stack
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -78,7 +76,7 @@ tags:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Data Flow
+### Data flow
 
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
@@ -98,7 +96,7 @@ tags:
 
 ---
 
-## 📦 Package Structure
+## Package structure
 
 ```
 go-cache/
@@ -116,9 +114,9 @@ go-cache/
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
-### Basic Cache Setup
+### Basic cache setup
 
 ```go
 package main
@@ -155,7 +153,7 @@ func main() {
 }
 ```
 
-### With Different Backends
+### With different backends
 
 ```go
 // SQLite backend

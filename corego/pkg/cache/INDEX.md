@@ -6,19 +6,16 @@ title: go-cache Package Index
 description: Storage-agnostic JSON caching layer
 ---
 
-# go-cache Package Index
-
-> **Storage-Agnostic JSON Caching**
+# go-cache package index
 
 **Repository:** `core/go-cache`  
 **Module:** `dappco.re/go/cache`  
-**Status:** ✅ Complete Documentation  
 **Last Updated:** 2026-06-17  
 **Maintainer:** Purberus <purberus@lthn.ai>
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -27,35 +24,35 @@ description: Storage-agnostic JSON caching layer
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-**go-cache** provides a storage-agnostic JSON-based caching layer backed by any `io.Medium`. It is used extensively in the Lethean ecosystem for performance optimization, HTTP response caching, and GitHub API rate limit reduction.
+`go-cache` provides a storage-agnostic JSON-based caching layer backed by any `io.Medium`. It is used in the Lethean ecosystem for performance optimisation, HTTP response caching, and GitHub API rate limit reduction.
 
-### Key Features
+### Key features
 
-- ✅ Storage-agnostic (any `io.Medium` backend)
-- ✅ JSON serialization with metadata
-- ✅ TTL support (default: 1 hour)
-- ✅ Path-traversal protection
-- ✅ Cache invalidation hooks
-- ✅ HTTP response caching
-- ✅ Scoped caches with collision resistance
-- ✅ GitHub API caching helpers
-- ✅ Binary data caching
-- ✅ Zero external dependencies
+- Storage-agnostic (any `io.Medium` backend)
+- JSON serialisation with metadata
+- TTL support (default: 1 hour)
+- Path-traversal protection
+- Cache invalidation hooks
+- HTTP response caching
+- Scoped caches with collision resistance
+- GitHub API caching helpers
+- Binary data caching
+- Zero external dependencies
 
-### Architecture Layers
+### Architecture layers
 
-1. **Application Layer** — Caching of data, HTTP responses, API results
-2. **Cache Layer** — Main cache operations with Get/Set/Delete
-3. **Storage Layer** — Pluggable backends via `io.Medium`
-4. **HTTP Cache Layer** — HTTP response caching with request matching
+1. **Application layer** — Caching of data, HTTP responses, API results
+2. **Cache layer** — Main cache operations with Get/Set/Delete
+3. **Storage layer** — Pluggable backends via `io.Medium`
+4. **HTTP cache layer** — HTTP response caching with request matching
 
 ---
 
-## 🏗️ Components
+## Components
 
-### Core Types
+### Core types
 
 | Type | File | Purpose |
 |------|------|---------|
@@ -65,14 +62,14 @@ description: Storage-agnostic JSON caching layer
 | `InvalidateFunc` | `cache.go` | Invalidation callback |
 | `ScopedCache` | `cache.go` | Namespaced cache |
 
-### Storage Types
+### Storage types
 
 | Type | Backend | Purpose |
 |------|---------|---------|
 | Any `io.Medium` | Local, SQLite, S3 | Pluggable storage |
 | `CacheStorage` | `cache.go` | Medium wrapper for cache operations |
 
-### HTTP Cache Types
+### HTTP cache types
 
 | Type | File | Purpose |
 |------|------|---------|
@@ -82,7 +79,7 @@ description: Storage-agnostic JSON caching layer
 
 ---
 
-## 📁 File Structure
+## File structure
 
 ```
 go-cache/
@@ -100,9 +97,9 @@ go-cache/
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
-### Basic Setup
+### Basic setup
 
 ```go
 import (
@@ -121,7 +118,7 @@ var v string
 found, _ := c.Get("key", &v)
 ```
 
-### With Different Backends
+### With different backends
 
 ```go
 // SQLite
@@ -133,7 +130,7 @@ import "dappco.re/go/io/s3"
 c, _ := cache.New(s3.New(s3.Config{Bucket: "my-bucket"}), "cache/", 1*time.Hour)
 ```
 
-### CoreGO Service
+### CoreGO service
 
 ```go
 import core "dappco.re/go"
@@ -150,9 +147,9 @@ svc := core.MustServiceFor[*cache.Service](c, "cache")
 
 ---
 
-## 🎓 Use Cases
+## Use cases
 
-### 1. General Caching
+### 1. General caching
 
 ```go
 c, _ := cache.New(coreio.Local, "/tmp/cache", 5*time.Minute)
@@ -162,7 +159,7 @@ var u User
 found, _ := c.Get("users:123", &u)
 ```
 
-### 2. HTTP Response Caching
+### 2. HTTP response caching
 
 ```go
 httpCache, _ := cache.NewHTTPCache(coreio.Local, "/tmp/http-cache", 10*time.Minute)
@@ -171,14 +168,14 @@ httpCache.Put(request, response)
 cachedResp, found, _ := httpCache.Get(request)
 ```
 
-### 3. Scoped Caches
+### 3. Scoped caches
 
 ```go
 scoped := cache.Scoped("my-service")
 scoped.Set("config", config)  // Stored as: <hash>/my-service/config
 ```
 
-### 4. Cache Invalidation
+### 4. Cache invalidation
 
 ```go
 cache.RegisterInvalidation("user:updated", func(trigger string) []string {
@@ -189,7 +186,7 @@ cache.RegisterInvalidation("user:updated", func(trigger string) []string {
 cache.Invalidate("user:updated:123")
 ```
 
-### 5. GitHub API Caching
+### 5. GitHub API caching
 
 ```go
 key := cache.GitHubOrgReposKey("octocat")
@@ -203,7 +200,7 @@ cache.Set(key, repos)
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### CacheOptions
 
@@ -229,9 +226,9 @@ cache.ServiceOptions{
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Coverage
+### Test coverage
 
 All files have test triplets (`_test.go` + `_example_test.go`):
 
@@ -242,7 +239,7 @@ All files have test triplets (`_test.go` + `_example_test.go`):
 | service_test.go | Service registration |
 | service_example_test.go | Service examples |
 
-### Running Tests
+### Running tests
 
 ```bash
 cd ~/Code/core/go-cache/go
@@ -259,7 +256,7 @@ go test -run Example -v
 
 ---
 
-## 📊 Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -267,13 +264,13 @@ go test -run Example -v
 | **Repository** | `core/go-cache` |
 | **Language** | Go 1.26+ |
 | **Dependencies** | `dappco.re/go`, `dappco.re/go/io` |
-| **Test Triplets** | ✅ Complete |
-| **RFC Compliance** | ✅ Verified |
-| **Documentation** | ✅ Complete |
+| **Test Triplets** | Complete |
+| **RFC Compliance** | Verified |
+| **Documentation** | Complete |
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -283,33 +280,7 @@ go test -run Example -v
 
 ---
 
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Initial deep dive documentation | N/A |
-| 2026-06-17 | Package INDEX created | N/A |
-
----
-
-## 🎯 Tags
-
-```yaml
-- cache
-- storage-agnostic
-- json-cache
-- ttl
-- invalidation
-- http-cache
-- path-traversal-protection
-- github-api-cache
-- namespaced-cache
-- lazy-eviction
-```
-
----
-
-## 📈 Statistics
+## Performance
 
 | Metric | Value |
 |--------|-------|
@@ -319,9 +290,3 @@ go test -run Example -v
 | Default TTL | 1 hour |
 | Max key length | 4096 bytes |
 | Entry metadata size | ~100 bytes |
-
----
-
-*Package index generated: 2026-06-17T17:00:00Z*
-*Knowledge Pack: CoreGo v1.1.0*
-*Maintainer: Purberus <purberus@lthn.ai>*

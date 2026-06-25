@@ -17,14 +17,12 @@ tags:
   - daemon
   - service-management
 ---
-# go-cli Package Index
-
-> **Unified Command-Line Interface for the Core Ecosystem**
+# go-cli package index
 
 **Repository:** `core/cli`  
 **Module:** `forge.lthn.ai/core/cli`  
 **Binary:** `core`  
-**Status:** ✅ Production-Ready  
+**Status:** Production-ready  
 **License:** EUPL-1.2  
 **Test Pattern:** Good/Bad/Ugly (AX Standard)  
 **Last Updated:** 2026-06-17  
@@ -32,7 +30,7 @@ tags:
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -42,34 +40,34 @@ tags:
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-`go-cli` is the **unified command-line interface** for the Core ecosystem, providing a single `core` binary that wraps common development tooling (testing, linting, building, releasing, multi-repo management) behind a consistent interface. It is built on **Cobra** for command parsing with a **Bubbletea-based TUI framework** and full **i18n/localization** support.
+`go-cli` is the unified command-line interface for the Core ecosystem, providing a single `core` binary that wraps common development tooling (testing, linting, building, releasing, multi-repo management) behind a consistent interface. It is built on **Cobra** for command parsing with a **Bubbletea-based TUI framework** and full **i18n/localisation** support.
 
-### Core Capabilities
+### Core capabilities
 
-1. **Unified Development Workflow** — Single command for all development tasks across Go, PHP, and Wails projects
-2. **Environment Verification** — `core doctor` for diagnosing development environment issues
-3. **Package Management** — Install, remove, search, and manage Core packages
-4. **Project Scaffolding** — Generate new projects with proper structure and configuration
-5. **Build & CI** — Consistent build, test, lint, and release workflows
-6. **Multi-Repo Operations** — Execute commands across multiple repositories
-7. **Daemon Management** — Start, stop, list, and manage background services
+1. **Unified development workflow** — Single command for all development tasks across Go, PHP, and Wails projects
+2. **Environment verification** — `core doctor` for diagnosing development environment issues
+3. **Package management** — Install, remove, search, and manage Core packages
+4. **Project scaffolding** — Generate new projects with proper structure and configuration
+5. **Build and CI** — Consistent build, test, lint, and release workflows
+6. **Multi-repo operations** — Execute commands across multiple repositories
+7. **Daemon management** — Start, stop, list, and manage background services
 8. **Interactive TUI** — Rich terminal user interface for complex workflows
-9. **Internationalization** — Full i18n support with grammar-aware messaging
+9. **Internationalisation** — Full i18n support with grammar-aware messaging
 
-### Design Philosophy
+### Design principles
 
-- **Token-Efficient** — Minimize boilerplate and cognitive overhead for developers
+- **Token-efficient** — Minimise boilerplate and cognitive overhead for developers
 - **Composable** — Commands register explicitly onto Core framework instance
 - **Unified** — Single binary with consistent patterns across all commands
 - **Intuitive** — Clear command structure with helpful output
 - **Extensible** — External modules can register commands without coupling
-- **Localizable** — Full i18n support for global developer community
+- **Localisable** — Full i18n support for global developer community
 - **Observable** — Rich output with progress tracking and styled formatting
 - **Testable** — Complete test triplet coverage (_test.go + _example_test.go)
 
-### Binary Information
+### Binary information
 
 - **Binary Name:** `core`
 - **Install:** `go install forge.lthn.ai/core/cli/cmd/core@latest`
@@ -78,9 +76,9 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Layers
+### Component layers
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -115,7 +113,7 @@ tags:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Repository Structure
+### Repository structure
 
 ```
 core/cli/
@@ -204,11 +202,11 @@ core/cli/
 
 ---
 
-## 🎯 Core Commands
+## Core commands
 
-### Built-in Commands
+### Built-in commands
 
-#### 1. `core config` — Configuration Management
+#### 1. `core config` — Configuration management
 
 **Description:** Manage Core CLI configuration with YAML-based files and environment variable overrides.
 
@@ -218,13 +216,13 @@ core/cli/
 - `core config list` — List all configuration
 - `core config path` — Show configuration file path
 
-**Configuration Priority:**
+**Configuration priority:**
 1. Command-line flags
 2. Environment variables (`CORE_CONFIG_*` prefix)
 3. Configuration file (`~/.core/config.yaml`)
 4. Default values
 
-#### 2. `core doctor` — Environment Diagnosis
+#### 2. `core doctor` — Environment diagnosis
 
 **Description:** Diagnose development environment issues and verify prerequisites.
 
@@ -244,17 +242,17 @@ core/cli/
 - Environment variables
 - File system permissions
 
-#### 3. `core help` — Help System
+#### 3. `core help` — Help system
 
 **Description:** Get help with grammar-aware i18n support.
 
 **Features:**
 - Context-sensitive help
 - Grammar-aware messages
-- Localized output
+- Localised output
 - Command usage examples
 
-#### 4. `core pkg` — Package Management
+#### 4. `core pkg` — Package management
 
 **Description:** Manage Core ecosystem packages.
 
@@ -266,16 +264,16 @@ core/cli/
 - `core pkg manage` — Manage package versions
 - `core pkg commands` — List package commands
 
-### External Commands (Ecosystem)
+### External commands (ecosystem)
 
 Commands from external modules that integrate with the CLI:
 
-- `core build` — Build & release commands (from `dappco.re/go/build`)
+- `core build` — Build and release commands (from `dappco.re/go/build`)
 - `core go` — Go development commands (from `dappco.re/go/lint`)
 - `core qa` — Quality assurance commands (from `dappco.re/go/lint`)
 - `core agent` — Agent orchestration commands (from `dappco.re/go/agent`)
 
-### Action Projection
+### Action projection
 
 The action registry is projected onto the CLI as commands, providing a third surface for the same capability map that the API and MCP layers project.
 
@@ -285,9 +283,9 @@ The action registry is projected onto the CLI as commands, providing a third sur
 
 ---
 
-## 🏗️ CLI Runtime (pkg/cli)
+## CLI runtime (pkg/cli)
 
-### Key Components
+### Key components
 
 #### Runtime (`runtime.go`)
 - Singleton lifecycle management (Init, Shutdown, Execute)
@@ -296,21 +294,21 @@ The action registry is projected onto the CLI as commands, providing a third sur
 - Signal handling (SIGINT, SIGTERM, SIGHUP)
 - Cleanup and graceful shutdown
 
-#### Command Builders (`command.go`)
+#### Command builders (`command.go`)
 - `NewCommand()` — Create command with error return
 - `NewGroup()` — Create command group
 - `NewRun()` — Create simple command without error
 - Flag helpers: `StringFlag()`, `BoolFlag()`, `IntFlag()`
 - Type aliases for Cobra types (Command ≈ cobra.Command)
 
-#### Service Management (`service.go`)
+#### Service management (`service.go`)
 - Service lifecycle management
 - Dependency injection
 - Start/Stop ordering
 - Error propagation
 
-#### Styled Output (`output.go`)
-**Semantic Output Functions:**
+#### Styled output (`output.go`)
+**Semantic output functions:**
 - `Success()` — Green checkmark for success messages
 - `Error()` — Red cross for error messages
 - `Warn()` — Yellow for warnings
@@ -322,47 +320,46 @@ The action registry is projected onto the CLI as commands, providing a third sur
 - `Hint()` — Suggestion/hint
 - `Echo()` — Raw output without styling
 
-**All functions have verbose variants:**
-- `SuccessVerb()`, `ErrorVerb()`, etc.
+All functions have verbose variants: `SuccessVerb()`, `ErrorVerb()`, etc.
 
-#### Error Handling (`errors.go`)
+#### Error handling (`errors.go`)
 - `Err()` — Create new error
 - `Wrap()` — Wrap error with context
 - `WrapVerb()` — Wrap with verbose output
 - `Exit()` — Exit with error
 - Re-exports: `Is()`, `As()`, `Join()` from errors package
 
-#### Task Tracker (`tracker.go`)
+#### Task tracker (`tracker.go`)
 - Concurrent task execution with spinners
 - Progress bars for progress-tracked tasks
 - TTY-aware (live updates vs static output)
 - Error aggregation
 - Task timeout support
 
-#### Daemon Management (`daemon.go`)
+#### Daemon management (`daemon.go`)
 **Modes:**
 - `ModeInteractive` — Running in terminal with TTY
 - `ModePipe` — Output piped to another command
 - `ModeDaemon` — Running as daemon (detached)
 
-**Daemon Service Management:**
+**Daemon service management:**
 - Reads `.core/manifest.yaml` from project directory
 - Walks up directory tree to find manifest
 - Daemons run with `CORE_DAEMON=1` environment variable
 - Tracked in `~/.core/daemons/`
 
-#### Tree Rendering (`tree.go`)
+#### Tree rendering (`tree.go`)
 - Hierarchical data rendering
 - Multiple styles: ASCII, Unicode, Rounded, Double
-- Customizable appearance
+- Customisable appearance
 
-#### Layout Utilities (`layout.go`)
+#### Layout utilities (`layout.go`)
 - Grid layout
 - Flex layout (row/column)
 - Border rendering
 - Alignment options
 
-#### ANSI Utilities (`ansi.go`)
+#### ANSI utilities (`ansi.go`)
 - Color constants (Red, Green, Blue, Yellow, Cyan, Magenta)
 - Style constants (Bold, Dim, Italic, Underline)
 - `ApplyStyle()` — Apply style to text
@@ -370,7 +367,7 @@ The action registry is projected onto the CLI as commands, providing a third sur
 - `StripANSI()` — Remove ANSI codes
 
 #### Styles (`styles.go`)
-**Predefined Styles:**
+**Predefined styles:**
 - `StyleSuccess` — Green, bold
 - `StyleError` — Red, bold
 - `StyleWarn` — Yellow, bold
@@ -378,7 +375,7 @@ The action registry is projected onto the CLI as commands, providing a third sur
 - `StyleDim` — Gray
 - `StyleHeader` — Bold, underline
 
-**Custom Style Creation:**
+**Custom style creation:**
 ```go
 style := cli.NewStyle().
     Foreground(cli.ColorRed).
@@ -386,8 +383,8 @@ style := cli.NewStyle().
     Italic(true)
 ```
 
-#### Glyph System (`glyph.go`)
-**Emoji/Symbol Shortcodes:**
+#### Glyph system (`glyph.go`)
+**Emoji/symbol shortcodes:**
 - `:check:` — ✓ (success)
 - `:cross:` — ✗ (failure)
 - `:warn:` — ⚠ (warning)
@@ -403,7 +400,7 @@ style := cli.NewStyle().
 - Registration of custom glyphs
 - Fallback to text when glyph unavailable
 
-#### Prompt Utilities (`prompt.go`)
+#### Prompt utilities (`prompt.go`)
 - `PromptConfirm()` — Yes/No prompt
 - `PromptInput()` — Text input prompt
 - `PromptPassword()` — Hidden input prompt
@@ -411,20 +408,20 @@ style := cli.NewStyle().
 - `PromptMultiSelect()` — Multiple selection from options
 - Support for default values and validation
 
-#### i18n Integration (`i18n.go`)
+#### i18n integration (`i18n.go`)
 - `T()` — Get translation
-- `TN()` — Get translation with pluralization
+- `TN()` — Get translation with pluralisation
 - `TC()` — Get translation with context
 - `HasTranslation()` — Check if translation exists
 - `SetLocale()` — Set current locale
 
 ---
 
-## 🎨 Frame TUI Framework
+## Frame TUI framework
 
 Bubbletea-based terminal user interface framework with HLCRF (Header, Left, Content, Right, Footer) layout.
 
-### HLCRF Layout
+### HLCRF layout
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -435,7 +432,7 @@ Bubbletea-based terminal user interface framework with HLCRF (Header, Left, Cont
 ├───────────────┴─────────────────┴───────────────┴─────────┘
 ```
 
-### Frame Components
+### Frame components
 
 1. **List** — Scrollable list with selection
 2. **Tree** — Hierarchical tree view
@@ -456,32 +453,32 @@ Bubbletea-based terminal user interface framework with HLCRF (Header, Left, Cont
 
 ---
 
-## 🌐 i18n Support
+## i18n support
 
 ### Features
 
-- **Locale System:** Support for multiple languages
-- **Grammar-Aware:** Proper pluralization and verb conjugation
-- **Translation Files:** YAML-based translation catalogs
-- **Context Support:** Context-aware translations
+- **Locale system:** Support for multiple languages
+- **Grammar-aware:** Proper pluralisation and verb conjugation
+- **Translation files:** YAML-based translation catalogs
+- **Context support:** Context-aware translations
 
-### Grammar System
+### Grammar system
 
-**Action Messages:**
+**Action messages:**
 ```go
 cli.ActionCreated("file")  // "file was created" / "files were created"
 cli.ActionDeleted("item")   // "item was deleted" / "items were deleted"
 cli.ActionUpdated("user")  // "user was updated" / "users were updated"
 ```
 
-**Progress Messages:**
+**Progress messages:**
 ```go
 cli.ProgressStarting("Build")  // "Starting build..."
 cli.ProgressCompleted("Build") // "Build completed"
 cli.ProgressFailed("Build")   // "Build failed"
 ```
 
-**With Count:**
+**With count:**
 ```go
 cli.ActionFound("file", 1)   // "1 file was found"
 cli.ActionFound("file", 5)   // "5 files were found"
@@ -489,7 +486,7 @@ cli.ActionFound("file", 5)   // "5 files were found"
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
 ### Installation
 
@@ -502,7 +499,7 @@ cd ~/Code/core/cli/go
 go build -o core ./cmd/core/
 ```
 
-### Basic Usage
+### Basic usage
 
 ```bash
 # Verify environment
@@ -532,20 +529,20 @@ CORE_DAEMON=1 core serve
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 Complete test triplet coverage following AX Standard:
 - `*_test.go` — Unit and integration tests
 - `*_example_test.go` — Usage examples as tests
 
-**Naming Convention:**
+**Naming convention:**
 - `TestGood*` — Happy path tests
 - `TestBad*` — Expected error conditions
 - `TestUgly*` — Panics and edge cases
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -564,7 +561,7 @@ go test -race ./...
 
 ---
 
-## 📊 Statistics
+## Statistics
 
 | Metric | Value |
 |--------|-------|
@@ -580,7 +577,7 @@ go test -race ./...
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -592,89 +589,7 @@ go test -race ./...
 
 ---
 
-## 📈 Quality Metrics
-
-- ✅ **Cobra Integration** — Full Cobra command framework support
-- ✅ **Bubbletea TUI** — Rich terminal user interface
-- ✅ **Lipgloss Styles** — Comprehensive styling support
-- ✅ **Test Coverage** — Good/Bad/Ugly pattern for all scenarios
-- ✅ **i18n Support** — Full internationalization with grammar
-- ✅ **Documentation** — Complete README + INDEX
-- ✅ **Core Integration** — Full CoreGO framework support
-- ✅ **Extensible** — External modules can register commands
-- ✅ **Token-Efficient** — Minimal boilerplate for developers
-
----
-
-## 📝 Changelog
-
-| Date | Change | Author |
-|------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | Purberus |
-| 2026-05-XX | CLAUDE.md architecture documentation | Maintainer |
-| 2026-04-XX | i18n system integrated | Maintainer |
-| 2026-03-XX | Bubbletea TUI framework added | Maintainer |
-| 2026-02-XX | Initial CLI creation | Maintainer |
-
----
-
-## 🎯 Tags
-
-```yaml
-# Core Capabilities
-- cli
-- command-line-interface
-- cobra
-- developer-tools
-- build-tool
-- tui
-- terminal-ui
-- bubbletea
-- lipgloss
-
-# Features
-- command-management
-- flag-parsing
-- argument-handling
-- error-handling
-- output-formatting
-- styled-output
-- ansi-colors
-- progress-tracking
-- task-tracker
-- spinner
-- daemon-management
-
-# i18n
-- internationalization
-- localization
-- grammar-aware
-- pluralization
-
-# Architecture
-- composable
-- extensible
-- modular
-- dependency-injection
-- lifecycle-management
-
-# Quality
-- production-ready
-- high-coverage
-- testable
-- documented
-
-# Ecosystem
-- corego
-- wails
-- dappcore
-- lethean
-- forgejo
-```
-
----
-
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/cli/](file:///Users/snider/Code/core/cli/)
 2. **CLAUDE.md** — [~/Code/core/cli/CLAUDE.md](file:///Users/snider/Code/core/cli/CLAUDE.md)
@@ -683,10 +598,3 @@ go test -race ./...
 5. **Bubbletea** — [github.com/charmbracelet/bubbletea](https://github.com/charmbracelet/bubbletea)
 6. **Lipgloss** — [github.com/charmbracelet/lipgloss](https://github.com/charmbracelet/lipgloss)
 7. **CoreGO Framework** — [CoreGO INDEX](../../INDEX.md)
-
----
-
-*Package index generated: 2026-06-17T21:30:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
-*Repository: forge.lthn.ai/core/cli*
-*Maintainer: Purberus <purberus@lthn.ai>*

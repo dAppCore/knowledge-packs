@@ -1,7 +1,6 @@
 ---
 type: Package Index
 title: go-store Package Index
-description: Complete index of go-store package components and API surface
 description: SQLite KV store with TTL, namespace isolation, DuckDB workspaces, InfluxDB journal, cold archive, io.Medium integration
 module: dappco.re/go/store
 repo: core/go-store
@@ -18,7 +17,7 @@ repo: core/go-store
 
 ---
 
-## 📚 Quick Links
+## Quick links
 
 - **[README.md](./README.md)** — Complete package documentation
 - **[RFC Specification](file:///Users/snider/Code/meowmix/plans/code/core/go/store/RFC.md)** — Technical specification (self-contained, agent-implementable)
@@ -48,7 +47,7 @@ The RFC includes comprehensive sub-specifications:
 
 ---
 
-## 🗂️ File Structure
+## File structure
 
 ### Core Package Files (`go/`)
 
@@ -157,7 +156,7 @@ The RFC includes comprehensive sub-specifications:
 
 ---
 
-## 🔧 Public API Surface
+## Public API surface
 
 ### Store Type
 
@@ -295,7 +294,7 @@ type Medium interface {
 
 ---
 
-## 📋 Public API Methods
+## Public API methods
 
 ### Store Constructors
 
@@ -453,7 +452,7 @@ type Medium interface {
 
 ---
 
-## 🎯 Test Coverage
+## Test coverage
 
 ### Test Naming Convention
 
@@ -495,7 +494,7 @@ func TestStore_Set_Ugly_EmptyKey(t *testing.T) { ... }
 
 ---
 
-## 🏆 Quality Metrics
+## Quality metrics
 
 ### Code Quality
 
@@ -523,7 +522,7 @@ func TestStore_Set_Ugly_EmptyKey(t *testing.T) { ... }
 
 ---
 
-## 🔗 Relationships
+## Relationships
 
 ### Dependencies
 
@@ -569,22 +568,8 @@ func TestStore_Set_Ugly_EmptyKey(t *testing.T) { ... }
 
 ---
 
-## 📈 Statistics
 
-| Metric | Value |
-|--------|-------|
-| **Total Files** | 20+ source, 48 tests, 16 examples |
-| **Total Lines** | ~23,000+ source, ~370,000+ tests, ~53,000+ examples |
-| **Public Methods** | 100+ across all types |
-| **Test Coverage** | High (Good/Bad/Ugly for all public APIs) |
-| **Documentation** | ~1,100+ lines in README.md, INDEX.md |
-| **Dependencies** | 3 external (sqlite, influxdb-client, core) |
-| **Go Version** | 1.21+ |
-| **Licence** | EUPL-1.2 |
-
----
-
-## 🎓 Usage Patterns
+## Usage patterns
 
 ### Common Patterns
 
@@ -606,7 +591,7 @@ func TestStore_Set_Ugly_EmptyKey(t *testing.T) { ... }
 
 ---
 
-## 📝 Notes
+## Notes
 
 - **Namespace Validation:** `^[a-zA-Z0-9-]+$` — Only alphanumeric and hyphens
 - **TTL Precision:** Unix milliseconds for `expires_at` field
@@ -620,7 +605,7 @@ func TestStore_Set_Ugly_EmptyKey(t *testing.T) { ... }
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -637,5 +622,3 @@ func TestStore_Set_Ugly_EmptyKey(t *testing.T) { ... }
 
 ---
 
-*Package index generated from source code analysis and RFC specification.*
-*Last updated: 2026-06-18T05:00:00Z*

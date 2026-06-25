@@ -4,16 +4,16 @@
 > **Repository:** [`github.com/dappcore/go-forge`](https://github.com/dappcore/go-forge)  
 > **Spec:** [`plans/code/core/go/forge/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/forge/RFC.md)  
 > **Maintainer:** Purberus <purberus@lthn.ai>  
-> **Status:** ✅ Production Ready  
+> **Status:** Production Ready  
 > **Module:** `dappco.re/go/forge`
 
 ---
 
-## 📋 Overview
+## Overview
 
-**go-forge** is a comprehensive Go client for the Forgejo API, providing access to ~450 endpoints for repository management, issue tracking, pull requests, project management, and more. It follows the AX standard and is designed for AI agent consumption.
+**go-forge** is a Go client for the Forgejo API, providing access to ~450 endpoints for repository management, issue tracking, pull requests, project management, and more. It follows the AX standard and is designed for AI agent consumption.
 
-### 🎯 Key Capabilities
+### Key capabilities
 
 | Category | Endpoints | Description |
 |----------|-----------|-------------|
@@ -30,9 +30,9 @@
 
 **Total: ~450 endpoints**
 
-### 🏗️ Architecture
+### Architecture
 
-### Module Structure
+### Module structure
 
 ```
 core/go-forge/
@@ -90,7 +90,7 @@ core/go-forge/
 └── LICENCE
 ```
 
-### Core Design Principles
+### Core design principles
 
 1. **Zero Dependencies** — Only depends on `dappco.re/go` and `github.com/goccy/go-json`
 2. **AX Standard** — Each `.go` file has corresponding `_test.go` and `_example_test.go`
@@ -100,9 +100,9 @@ core/go-forge/
 
 ---
 
-## 📦 Packages
+## Packages
 
-### API Endpoint Categories
+### API endpoint categories
 
 #### Repository Management (`repos.go`, `contents.go`, `branches.go`, `commits.go`)
 
@@ -188,9 +188,9 @@ core/go-forge/
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### Client Initialization
+### Client initialisation
 
 ```go
 import "dappco.re/go/forge"
@@ -214,7 +214,7 @@ client := forge.NewClient("https://codeberg.org",
 )
 ```
 
-### Configuration Options
+### Configuration options
 
 | Option | Description | Default |
 |--------|-------------|---------|
@@ -227,9 +227,9 @@ client := forge.NewClient("https://codeberg.org",
 
 ---
 
-## 🚀 Commands
+## Commands
 
-### CLI Integration
+### CLI integration
 
 ```bash
 # The go-forge package provides programmatic access
@@ -244,7 +244,7 @@ core forge issues create --repo owner/repo --title "Bug" --body "Description"
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
 ### 1. Basic Repository Operations
 
@@ -385,15 +385,15 @@ issues, err := client.SearchIssues(ctx, "bug", forge.SearchOptions{
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 Each API endpoint file has:
 - `_test.go` — Unit tests with mocked responses
 - `_example_test.go` — Usage examples as tests
 
-### Test Coverage
+### Test coverage
 
 | Package | Functions | Lines | Coverage |
 |---------|-----------|-------|----------|
@@ -422,7 +422,7 @@ Each API endpoint file has:
 | `webhooks.go` | 15+ | ~500 | >85% |
 | `wiki.go` | 10+ | ~300 | >80% |
 
-### Test Commands
+### Test commands
 
 ```bash
 # All tests
@@ -441,9 +441,9 @@ go tool cover -html=coverage.out
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Client Types
+### Client types
 
 ```go
 type Client struct {
@@ -460,7 +460,7 @@ func NewClient(baseURL string, opts ...ClientOption) *Client
 func (c *Client) Do(req *http.Request) (*http.Response, error)
 ```
 
-### Repository Types
+### Repository types
 
 ```go
 type Repository struct {
@@ -493,7 +493,7 @@ type CreateRepoOptions struct {
 }
 ```
 
-### Issue Types
+### Issue types
 
 ```go
 type Issue struct {
@@ -527,7 +527,7 @@ type CreateIssueOptions struct {
 }
 ```
 
-### Pull Request Types
+### Pull request types
 
 ```go
 type PullRequest struct {
@@ -565,15 +565,15 @@ type PRBranch struct {
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
-### Internal Documentation
+### Internal documentation
 
 | File | Description | Location |
 |------|-------------|----------|
 | RFC | Package specification | [plans/code/core/go/forge/RFC.md](file:///Users/snider/Code/meowmix/plans/code/core/go/forge/RFC.md) |
 
-### External References
+### External references
 
 | Resource | URL |
 |----------|-----|
@@ -582,60 +582,3 @@ type PRBranch struct {
 | Forgejo | [forgejo.org](https://forgejo.org) |
 | Codeberg | [codeberg.org](https://codeberg.org) |
 
----
-
-## 📊 Statistics
-
-### File Counts
-
-```
-Total Files:          100+
-  └── Go Files:        90+
-      ├── API Endpoints: 30+
-      ├── Type Definitions: 50+
-      ├── Tests:        40+
-      └── Examples:      30+
-  └── Documentation:   5+
-
-Lines of Code:
-  └── Go:              ~35,000
-  └── Markdown:        ~1,000
-  └── Total:           ~36,000
-```
-
-### Endpoint Coverage
-
-| Category | Endpoints | Implemented |
-|----------|-----------|-------------|
-| Repository | ~50 | ✅ 100% |
-| Issues | ~40 | ✅ 100% |
-| Pull Requests | ~35 | ✅ 100% |
-| Projects | ~25 | ✅ 100% |
-| Organizations | ~30 | ✅ 100% |
-| Users | ~20 | ✅ 100% |
-| Webhooks | ~15 | ✅ 100% |
-| Releases | ~10 | ✅ 100% |
-| Activity | ~20 | ✅ 100% |
-| Admin | ~15 | ✅ 100% |
-| Actions | ~20 | ✅ 100% |
-| **Total** | **~280** | **✅ 100%** |
-
-*Note: The README mentions ~450 endpoints, which includes all variations and sub-endpoints.*
-
-### Test Coverage Breakdown
-
-| Category | Count | Coverage |
-|----------|-------|----------|
-| Unit Tests | 200+ | >85% |
-| Example Tests | 30+ | N/A |
-| Integration Tests | 10+ | >80% |
-
----
-
-## 🏷️ Tags
-
-#forgejo #api #client #repository #issues #pull-requests #projects #organizations #users #webhooks #releases #activitypub #admin #actions #search #gitea #codeberg #git #forge #agent-first
-
----
-
-*Last updated: 2026-06-18 | Maintainer: Purberus <purberus@lthn.ai>*

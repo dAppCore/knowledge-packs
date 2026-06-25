@@ -15,20 +15,18 @@ tags:
 
 # go-process Package Index
 
-> **Process Orchestration & Daemon Management for CoreGO**
-
 **Repository:** `core/go-process`  
 **Module:** `dappco.re/go/process`  
-**Status:** ✅ Production-Ready  
+**Status:** Production-ready  
 **Windows Support:** Phase 1 (compile-compatible)  
-**Test Triplets:** ✅ Complete  
+**Test Triplets:** Complete  
 **RFC:** [plans/code/core/go/process/RFC.md](../../../../../plans/code/core/go/process/RFC.md)
 **Last Updated:** 2026-06-17  
 **Maintainer:** Purberus <purberus@lthn.ai>
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -38,23 +36,23 @@ tags:
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-`go-process` is the **process orchestration framework** for CoreGO applications, providing comprehensive management of external commands with full lifecycle support. It enables spawning, monitoring, and controlling processes with Core IPC integration, output streaming, PID file management, health endpoints, and REST/WebSocket provider support.
+`go-process` manages external commands for CoreGO applications with full lifecycle support. It handles spawning, monitoring, and controlling processes with Core IPC integration, output streaming, PID file management, health endpoints, and REST/WebSocket provider support.
 
-### Core Capabilities
+### Core capabilities
 
-1. **Process Management** — Start, stop, kill, signal processes with full lifecycle tracking
-2. **Daemon Lifecycle** — PID file management, graceful shutdown, health checks
-3. **Pipeline Orchestration** — Run dependent processes with `After` dependencies
-4. **Output Capture** — Ring buffer streaming with configurable size
-5. **Event Broadcasting** — Core ACTION system integration for process events
-6. **Registry Tracking** — JSON-based daemon registry for multi-instance coordination
-7. **Cross-Platform** — Unix (POSIX) + Windows (Phase 1 stubs, Phase 2 Job Objects)
-8. **REST API** — Comprehensive HTTP endpoints via `pkg/api`
-9. **WebSocket Streaming** — Real-time process events via WebSocket
+1. **Process management** — Start, stop, kill, signal processes with full lifecycle tracking
+2. **Daemon lifecycle** — PID file management, graceful shutdown, health checks
+3. **Pipeline orchestration** — Run dependent processes with `After` dependencies
+4. **Output capture** — Ring buffer streaming with configurable size
+5. **Event broadcasting** — Core ACTION system integration for process events
+6. **Registry tracking** — JSON-based daemon registry for multi-instance coordination
+7. **Cross-platform** — Unix (POSIX) + Windows (Phase 1 stubs, Phase 2 Job Objects)
+8. **REST API** — HTTP endpoints via `pkg/api`
+9. **WebSocket streaming** — Real-time process events via WebSocket
 
-### Architecture Layers
+### Architecture layers
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -81,16 +79,16 @@ tags:
 ├─────────────────────────────────────────────────────────────┤
 │                    API Layer (pkg/api)                         │
 │  ProcessProvider — REST + WebSocket provider                 │
-│  Response types — Standardized API responses                  │
+│  Response types — Standardised API responses                  │
 │  WebSocket bridge — Real-time process events                 │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🏗️ Components
+## Components
 
-### Core Types
+### Core types
 
 | Type | File | Purpose |
 |------|------|---------|
@@ -102,14 +100,14 @@ tags:
 | `Registry` | `registry.go` | JSON-based daemon registry |
 | `RingBuffer` | `buffer.go` | Output capture ring buffer |
 
-### Status Types
+### Status types
 
 | Type | Description | Values |
 |------|-------------|--------|
 | `Status` | Process lifecycle state | `pending`, `running`, `exited`, `failed`, `killed` |
 | `Stream` | Output stream identifier | `stdout`, `stderr` |
 
-### Configuration Types
+### Configuration types
 
 | Type | File | Purpose |
 |------|------|---------|
@@ -121,7 +119,7 @@ tags:
 | `DaemonEntry` | `registry.go` | Registry entry metadata |
 | `HealthCheck` | `daemon.go` | Health check function |
 
-### ACTION Message Types
+### ACTION message types
 
 | Type | File | Purpose |
 |------|------|---------|
@@ -130,7 +128,7 @@ tags:
 | `ActionProcessExited` | `actions.go` | Process has exited |
 | `ActionProcessKilled` | `actions.go` | Process was killed |
 
-### Error Types
+### Error types
 
 | Error | File | Purpose |
 |-------|------|---------|
@@ -144,7 +142,7 @@ tags:
 | `ErrRunnerInvalidDependencyName` | `runner.go` | Invalid dependency name |
 | `ErrRunnerContextRequired` | `runner.go` | Runner context is nil |
 
-### Platform Helpers
+### Platform helpers
 
 | Function | Purpose |
 |----------|---------|
@@ -158,7 +156,7 @@ tags:
 
 ---
 
-## 📁 File Structure
+## File structure
 
 ```
 go-process/
@@ -271,9 +269,9 @@ go-process/
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
-### Basic Process Execution
+### Basic process execution
 
 ```go
 app, _ := core.New(
@@ -285,7 +283,7 @@ proc, _ := svc.Start(context.Background(), "echo", "hello")
 fmt.Println(proc.Output())
 ```
 
-### Daemon Management
+### Daemon management
 
 ```go
 daemon := process.NewDaemon(process.DaemonOptions{
@@ -298,7 +296,7 @@ defer stop()
 daemon.Start(ctx, "myapp")
 ```
 
-### Pipeline with Dependencies
+### Pipeline with dependencies
 
 ```go
 runner := process.NewRunner(svc)
@@ -310,7 +308,7 @@ specs := []process.RunSpec{
 results, _ := runner.Run(context.Background(), specs)
 ```
 
-### Registry Tracking
+### Registry tracking
 
 ```go
 reg := process.NewRegistry("/tmp/daemons")
@@ -323,9 +321,9 @@ entries, _ := reg.List()
 
 ---
 
-## 🌐 API Endpoints (pkg/api)
+## API endpoints (pkg/api)
 
-### Daemon Endpoints
+### Daemon endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -334,7 +332,7 @@ entries, _ := reg.List()
 | POST | `/api/process/daemons/{code}/{daemon}/stop` | Stop daemon |
 | GET | `/api/process/daemons/{code}/{daemon}/health` | Health check |
 
-### Process Endpoints
+### Process endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -348,7 +346,7 @@ entries, _ := reg.List()
 | POST | `/api/process/processes/{id}/close-stdin` | Close stdin |
 | POST | `/api/process/processes/{id}/kill` | Kill process |
 
-### WebSocket Events
+### WebSocket events
 
 | Channel | Description |
 |---------|-------------|
@@ -362,9 +360,9 @@ entries, _ := reg.List()
 
 ---
 
-## 🎓 Use Cases
+## Use cases
 
-### 1. Mining Pool Daemon
+### 1. Mining pool daemon
 
 ```go
 // Start mining pool with PID file and health checks
@@ -379,7 +377,7 @@ daemon := process.NewDaemon(process.DaemonOptions{
 daemon.Start(ctx, "go-pool")
 ```
 
-### 2. Build Pipeline
+### 2. Build pipeline
 
 ```go
 // Run build pipeline: lint → test → build
@@ -391,7 +389,7 @@ specs := []process.RunSpec{
 results, _ := runner.Run(ctx, specs)
 ```
 
-### 3. Service with WebSocket Events
+### 3. Service with WebSocket events
 
 ```go
 // Provider setup with WebSocket bridge
@@ -403,7 +401,7 @@ provider.Register(router)
 // Events: process.started, process.output, process.exited, etc.
 ```
 
-### 4. Health Check Server
+### 4. Health check server
 
 ```go
 // Daemon with health server
@@ -418,7 +416,7 @@ daemon.Start(ctx, "myapp")
 // Access health at: http://localhost:9090/health
 ```
 
-### 5. Process Group Management
+### 5. Process group management
 
 ```go
 // Start process in its own process group
@@ -431,9 +429,9 @@ proc, _ := svc.Start(ctx, "my-server", "--port", "8080",
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### Service Options
+### Service options
 
 ```go
 type Options struct {
@@ -446,7 +444,7 @@ svc := process.NewService(process.Options{
 })
 ```
 
-### Daemon Options
+### Daemon options
 
 ```go
 type DaemonOptions struct {
@@ -475,11 +473,10 @@ type RunOptions struct {
 
 ---
 
-## 🪟 Platform Support
+## Platform support
 
 ### Unix (Linux, macOS, BSD)
 
-✅ **Fully Supported**
 - POSIX signal support (SIGTERM, SIGKILL, etc.)
 - Process group management via Setpgid
 - Signal-based process termination
@@ -488,33 +485,33 @@ type RunOptions struct {
 
 ### Windows (Phase 1)
 
-✅ **Compile-Compatible**
+Compile-compatible:
 - No syscall compilation errors
 - Best-effort process termination
 - Process group leader kill
 - Stub implementations for unavailable features
 
-⚠️ **Limitations (Phase 1)**
+Limitations (Phase 1):
 - No process group signals (stubbed to no-op)
 - No exit signal detection (always returns false)
 - Process group kill only affects leader
 
-📋 **Phase 2 (Planned)**
+Phase 2 (planned):
 - Job Object lifecycle management
 - Full descendant tree termination
 - Proper Windows process group semantics
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 All components follow the AX standard with **test triplets**:
 - `*_test.go` — Unit and integration tests
 - `*_example_test.go` — Usage examples as tests
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -534,42 +531,35 @@ go test -bench . -benchmem
 go test -v ./pkg/api/...
 ```
 
-### Test Coverage Areas
+### Test coverage areas
 
-- ✅ Process lifecycle (start, stop, kill, signal)
-- ✅ Service integration
-- ✅ Daemon management
-- ✅ Runner pipeline orchestration
-- ✅ Registry operations
-- ✅ Platform-specific behavior (Unix + Windows)
-- ✅ API provider endpoints
-- ✅ WebSocket bridge
-- ✅ Health check server
-- ✅ PID file management
-- ✅ Buffer operations
-- ✅ ACTION system integration
-
----
-
-## 📊 Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Total Go files** | ~45 |
-| **Test files** | ~35 |
-| **Example test files** | ~20 |
-| **Lines of code** | ~5,000+ |
-| **Test coverage** | High |
-| **Platform support** | Unix + Windows |
-| **API endpoints** | 15+ |
-| **WebSocket channels** | 7 |
-| **Core ACTION handlers** | 5 |
-| **Configuration options** | 3 types |
-| **Error types** | 9 |
+- Process lifecycle (start, stop, kill, signal)
+- Service integration
+- Daemon management
+- Runner pipeline orchestration
+- Registry operations
+- Platform-specific behaviour (Unix + Windows)
+- API provider endpoints
+- WebSocket bridge
+- Health check server
+- PID file management
+- Buffer operations
+- ACTION system integration
 
 ---
 
-## 🔗 Related Packages
+## Quality metrics
+
+- **SPOR compliance** — Single Point Of Responsibility for all types
+- **Test triplets** — Every public type has _test.go + _example_test.go
+- **RFC verified** — Windows support specification complete
+- **Core integration** — Full Core ACTION system support
+- **Cross-platform** — Unix + Windows support
+- **Documentation** — Complete README + INDEX
+
+---
+
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -581,67 +571,12 @@ go test -v ./pkg/api/...
 
 ---
 
-## 📈 Quality Metrics
+## References
 
-- ✅ **SPOR Compliance** — Single Point Of Responsibility for all types
-- ✅ **Test Triplets** — Every public type has _test.go + _example_test.go
-- ✅ **RFC Verified** — Windows support specification complete
-- ✅ **Core Integration** — Full Core ACTION system support
-- ✅ **Cross-Platform** — Unix + Windows support
-- ✅ **Documentation** — Complete README + INDEX
-
----
-
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | N/A |
-| 2026-05-12 | Windows Phase 1 RFC published | N/A |
-| 2026-04-30 | Package structure finalized | N/A |
-| 2026-03-XX | Initial package creation | N/A |
-
----
-
-## 🎯 Tags
-
-```yaml
-- process-management
-- daemon-management
-- lifecycle
-- pidfile
-- ipc
-- health-check
-- cross-platform
-- windows
-- unix
-- posix
-- signals
-- process-group
-- job-object
-- corego
-- action-system
-- rest-api
-- websocket
-- registry
-- orchestration
-- pipeline
-- dependencies
-- ring-buffer
-- stdout
-- stderr
-- production-ready
-- high-coverage
-```
-
----
-
-## 📚 References
-
-1. **RFC Specification** — [plans/code/core/go/process/RFC.md](../../../../../plans/code/core/go/process/RFC.md)
+1. **RFC specification** — [plans/code/core/go/process/RFC.md](../../../../../plans/code/core/go/process/RFC.md)
 2. **Repository** — [~/Code/core/go-process/](file:///Users/snider/Code/core/go-process/)
-3. **CoreGO Framework** — [CoreGO INDEX](../../INDEX.md)
-4. **AX Standard** — Single Point Of Responsibility pattern
+3. **CoreGO framework** — [CoreGO INDEX](../../INDEX.md)
+4. **AX standard** — Single Point Of Responsibility pattern
 
 ---
 

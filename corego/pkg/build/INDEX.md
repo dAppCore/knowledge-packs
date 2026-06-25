@@ -8,25 +8,25 @@
 
 ---
 
-## 📚 Table of Contents
+## Table of contents
 
-- [📋 Overview](#-overview)
-- [🏗️ Architecture](#-architecture)
-- [📦 Packages](#-packages)
-- [🔧 Configuration](#-configuration)
-- [🚀 Commands](#-commands)
-- [📝 Usage Patterns](#-usage-patterns)
-- [🧪 Testing](#-testing)
-- [📖 API Reference](#-api-reference)
-- [🔗 Related Documentation](#-related-documentation)
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Packages](#packages)
+- [Configuration](#configuration)
+- [Commands](#commands)
+- [Usage patterns](#usage-patterns)
+- [Testing](#testing)
+- [API reference](#api-reference)
+- [Related documentation](#related-documentation)
 
 ---
 
-## 📋 Overview
+## Overview
 
-**go-build** is the comprehensive build orchestration framework for the Lethean ecosystem. It provides a unified interface for building, packaging, signing, and publishing software across 11+ project types and 8+ release destinations.
+**go-build** is the build orchestration framework for the Lethean ecosystem. It provides a unified interface for building, packaging, signing, and publishing software across 11+ project types and 8+ release destinations.
 
-### 🎯 Key Features
+### Key features
 
 | Category | Count | Description |
 |----------|-------|-------------|
@@ -39,20 +39,7 @@
 | **Signing Methods** | 3 | GPG, macOS codesign/notarisation, Windows SignTool |
 | **Platform Targets** | 6+ | linux/amd64, linux/arm64, darwin/amd64, darwin/arm64, windows/amd64, windows/arm64 |
 
-### 📊 Package Statistics
-
-| Metric | Value |
-|--------|-------|
-| Total Files | 200+ Go files |
-| Total Lines | ~250,000 |
-| Test Files | 100+ |
-| Documentation | 37KB (this README) + 36KB (INDEX) |
-| Module | dappco.re/go/build |
-| Go Version | 1.22+ |
-
----
-
-## 🏗️ Architecture
+## Architecture
 
 ### Repository Structure
 
@@ -129,7 +116,7 @@ type Generator interface {
 
 ---
 
-## 📦 Packages
+## Packages
 
 ### pkg/build/ — Core Build Logic
 
@@ -722,7 +709,7 @@ type Local struct{}
 // Implements all Medium methods for os filesystem
 ```
 
-**Note:** The `storage` package uses the same interface as `go-io`, allowing seamless integration with S3, SQLite, HTTP, and other backends.
+**Note:** The `storage` package uses the same interface as `go-io`, allowing integration with S3, SQLite, HTTP, and other backends.
 
 ### pkg/api/ — API Provider Surface
 
@@ -789,7 +776,7 @@ func (s *Service) Status() ServiceStatus
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### .core/build.yaml
 
@@ -1001,7 +988,7 @@ publishers:
 
 ---
 
-## 🚀 Commands
+## Commands
 
 ### Command Structure
 
@@ -1255,7 +1242,7 @@ core build workflow \
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
 ### Pattern 1: Simple Go CLI Tool
 
@@ -1486,7 +1473,7 @@ core release --tag v1.0.0 --sign --publish --sdk --changelog
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Organization
 
@@ -1671,7 +1658,7 @@ go tool cover -func=coverage.out
 
 ---
 
-## 📖 API Reference
+## API reference
 
 ### Type Index
 
@@ -1734,7 +1721,7 @@ go tool cover -func=coverage.out
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
 ### RFC Documents
 
@@ -1770,7 +1757,7 @@ go tool cover -func=coverage.out
 
 ---
 
-## 🏷️ Metadata
+## Metadata
 
 ### Package Information
 
@@ -1812,15 +1799,3 @@ date: 2026-06-17
 
 ---
 
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Initial knowledge pack documentation | c92a626 |
-| 2026-06-17 | Added to CoreGo knowledge pack | c92a626 |
-
----
-
-*This INDEX.md file is part of the CoreGo Knowledge Pack, maintained by Purberus <purberus@lthn.ai>*  
-*Knowledge Pack Version: CoreGo v1.2.0*  
-*Last Updated: 2026-06-17*

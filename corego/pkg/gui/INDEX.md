@@ -4,7 +4,7 @@ package: gui
 module: dappco.re/go/gui
 repo: core/gui
 title: go-gui Package Index
-description: Wails-based desktop GUI framework for the Core ecosystem with Angular frontend
+description: Desktop GUI framework for the Core ecosystem — Wails v3 backend with Angular 20 frontend
 lang: go
 tags:
   - gui
@@ -17,13 +17,13 @@ tags:
 ---
 # go-gui Package Index
 
-> **Desktop GUI Framework for the Core Ecosystem**
+**Desktop GUI framework for the Core ecosystem**
 
 **Repository:** `core/gui`  
 **Module:** `dappco.re/go/gui`  
 **Frontend:** Angular 20 Custom Elements  
 **Backend:** Wails v3 (Go)  
-**Status:** ✅ Production-Ready  
+**Status:** Production-Ready  
 **License:** EUPL-1.2  
 **Test Pattern:** Good/Bad/Ugly (AX Standard)  
 **Last Updated:** 2026-06-17  
@@ -31,7 +31,7 @@ tags:
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -41,11 +41,11 @@ tags:
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-`go-gui` is the **HUI** (Human-facing User Interface) twin to the **AUI** (Agent-facing User Interface) provided by go-agent. It is a desktop GUI framework built on **Wails v3** (Go backend) with an **Angular 20** frontend that provides comprehensive window management, dialogs, system tray, clipboard, notifications, theming, layouts, and real-time WebSocket events.
+`go-gui` is the HUI (Human-facing User Interface) twin to the AUI (Agent-facing User Interface) provided by go-agent. It is a desktop GUI framework built on Wails v3 (Go backend) with an Angular 20 frontend that provides window management, dialogs, system tray, clipboard, notifications, theming, layouts, and real-time WebSocket events.
 
-### Core Capabilities
+### Core capabilities
 
 1. **Window Management** — Complete window lifecycle with state persistence, layout management, tiling, and snapping
 2. **Dialog System** — File open/save, message, confirm, and prompt dialogs
@@ -67,7 +67,7 @@ tags:
 18. **Marketplace** — Plugin/package discovery and installation
 19. **Preload** — Trusted preload policy
 
-### Design Principles
+### Design principles
 
 - **Service-Oriented Architecture** — All functionality as Core services with dependency injection
 - **Platform-Agnostic** — Platform-specific code behind common interfaces
@@ -78,9 +78,9 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### Component Layers
+### Component layers
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -131,9 +131,9 @@ tags:
 
 ---
 
-## 📦 Repository Structure
+## Repository structure
 
-### Go Backend (go/)
+### Go backend (go/)
 
 ```
 go/
@@ -176,7 +176,7 @@ go/
 └── go.work
 ```
 
-### Angular Frontend (ui/)
+### Angular frontend (ui/)
 
 ```
 ui/
@@ -198,7 +198,7 @@ ui/
 
 ---
 
-## 🚀 Services (21 Total)
+## Services (21 total)
 
 ### Display Service
 - WebSocket event broadcasting to frontend
@@ -310,15 +310,15 @@ ui/
 
 ---
 
-## 🎨 Frontend Features
+## Frontend features
 
-### Angular 20 Custom Elements
+### Angular 20 custom elements
 - Custom elements for Wails integration
 - Reusable component architecture
 - Type-safe TypeScript
 - Reactive programming with RxJS
 
-### Real-time Updates
+### Real-time updates
 - WebSocket connection to backend
 - Event-driven architecture
 - Bidirectional communication
@@ -330,7 +330,7 @@ ui/
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
 ### Installation
 
@@ -353,7 +353,7 @@ cd ..
 ./go/core-gui
 ```
 
-### Go Integration
+### Go integration
 
 ```go
 package main
@@ -384,7 +384,7 @@ func main() {
 }
 ```
 
-### Service Usage
+### Service usage
 
 ```go
 // Window
@@ -403,20 +403,20 @@ webview.Eval(`alert('Hello')`)
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 - `*_test.go` — Unit and integration tests
 - `*_example_test.go` — Usage examples
 - Naming: `TestGood*`, `TestBad*`, `TestUgly*`
 
-### Testing Approach
+### Testing approach
 1. Mock all platform APIs
 2. Isolated tests per service
 3. Integration tests for service interactions
 4. Wails stubs for desktop-independent testing
 
-### Running Tests
+### Running tests
 
 ```bash
 # All Go tests
@@ -433,22 +433,7 @@ npm test
 
 ---
 
-## 📊 Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Go files** | ~200+ |
-| **Test files** | ~150+ |
-| **Example tests** | ~75+ |
-| **Lines of code** | ~100,000+ |
-| **Services** | 21 |
-| **Frontend** | Angular 20 |
-| **Platforms** | macOS, Windows, Linux |
-| **Wails Version** | v3 (alpha.74) |
-
----
-
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -459,33 +444,7 @@ npm test
 
 ---
 
-## 📈 Quality Metrics
-
-- ✅ **Wails v3 Integration**
-- ✅ **Platform Abstraction**
-- ✅ **Test Coverage** (Good/Bad/Ugly)
-- ✅ **Testability** (All APIs mocked)
-- ✅ **WebSocket Events**
-- ✅ **MCP Integration**
-- ✅ **Documentation** (README + INDEX)
-- ✅ **Core Integration**
-- ✅ **Angular Frontend**
-- ✅ **Production Ready**
-
----
-
-## 📝 Changelog
-
-| Date | Change | Author |
-|------|--------|--------|
-| 2026-06-17 | Complete knowledge pack documentation | Purberus |
-| 2026-05-XX | All services finalized | Maintainer |
-| 2026-04-XX | Wails v3 migration complete | Maintainer |
-| 2026-03-XX | Initial service structure | Maintainer |
-
----
-
-## 🎯 Tags
+## Tags
 
 ```yaml
 # Core
@@ -551,7 +510,7 @@ npm test
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/gui/](file:///Users/snider/Code/core/gui/)
 2. **CLAUDE.md** — [~/Code/core/gui/CLAUDE.md](file:///Users/snider/Code/core/gui/CLAUDE.md)
@@ -560,9 +519,3 @@ npm test
 5. **Angular** — [angular.io](https://angular.io)
 6. **CoreGO INDEX** — [../../INDEX.md](file:///Users/snider/Code/meowmix/knowledge-packs/corego/INDEX.md)
 
----
-
-*Package index generated: 2026-06-17T22:30:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
-*Repository: dappco.re/go/gui*
-*Maintainer: Purberus <purberus@lthn.ai>*

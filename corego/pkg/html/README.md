@@ -1,7 +1,6 @@
 ---
 type: Package Deep Dive
 title: go-html — Consent-Aware Semantic HTML Renderer
-description: Complete documentation for go-html — HLCRF DOM compositor with grammar pipeline integration
 description: Server-side and WASM HTML rendering engine with consent-aware rendering, GrammarImprint analysis, Web Component codegen
 module: dappco.re/go/core/html
 repo: core/go-html
@@ -13,13 +12,11 @@ version: 1.0.0
 
 # go-html — Consent-Aware Semantic HTML Renderer
 
-> **"An agent should be able to build layouts, render nodes, and generate Web Components from this document alone."**
-
-`dappco.re/go/core/html` is a **server-side and WASM HTML rendering engine** that implements the full consent-aware presentation layer. It provides a type-safe node tree, HLCRF (Header/Left/Content/Right/Footer) layout compositor, responsive multi-variant wrapper, grammar pipeline integration, and Web Component code generation.
+`dappco.re/go/core/html` is a server-side and WASM HTML rendering engine that implements the full consent-aware presentation layer. It provides a type-safe node tree, HLCRF (Header/Left/Content/Right/Footer) layout compositor, responsive multi-variant wrapper, grammar pipeline integration, and Web Component code generation.
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### What it is
 
@@ -43,7 +40,7 @@ Borg encrypts → Enchantrix containers → Poindexter routes → go-html render
 
 ---
 
-## 📦 Quick Start
+## Quick start
 
 ### Basic Usage
 
@@ -96,7 +93,7 @@ const result = gohtml.renderToString(
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Core Components
 
@@ -125,7 +122,7 @@ go-html/
 
 ---
 
-## 🗂️ Package Structure
+## Package structure
 
 ### Source Files
 
@@ -192,7 +189,7 @@ go/
 
 ---
 
-## 🔧 Core Types
+## Core types
 
 ### Node Interface
 
@@ -224,7 +221,7 @@ All renderable units implement this single method. Concrete node types are unexp
 
 ---
 
-## 🎨 HLCRF Layout System
+## HLCRF layout system
 
 ### The Five Slots
 
@@ -301,7 +298,7 @@ html.NewLayout("HCF").
 
 ---
 
-## 🔄 Responsive Compositor
+## Responsive compositor
 
 `Responsive` wraps multiple named `Layout` variants for breakpoint-aware rendering:
 
@@ -353,7 +350,7 @@ CSS can then show/hide based on media queries:
 
 ---
 
-## 🔐 Entitlement System (Entitled)
+## Entitlement system (Entitled)
 
 ### Deny-by-Default Content Gating
 
@@ -384,7 +381,7 @@ html := page.Render(ctx)
 
 ---
 
-## 📝 Text & i18n
+## Text and i18n
 
 ### Text Nodes
 
@@ -417,7 +414,7 @@ html.Text("greeting.personal", ctx.Data["user_name"])
 
 ---
 
-## 🔗 Attribute Helpers
+## Attribute helpers
 
 Convenience functions for setting common attributes on `El` nodes. All helpers **recursively apply** through wrapper nodes (`If`, `Unless`, `Entitled`, `Each`, `Switch`, `Layout`, `Responsive`).
 
@@ -460,7 +457,7 @@ html.AutoFocus(html.El("input"))
 
 ---
 
-## 🧠 Grammar Pipeline (Server-Side Only)
+## Grammar pipeline (server-side only)
 
 The grammar pipeline is **excluded from WASM builds** via `//go:build !js` on `pipeline.go`. It bridges the rendering layer to the semantic analysis layer.
 
@@ -534,7 +531,7 @@ Same-content variants with different layout structures (e.g., `HLCRF` vs `HCF`) 
 
 ---
 
-## 🎭 Web Component Codegen
+## Web Component codegen
 
 The `cmd/codegen/` package generates **Web Component classes with closed Shadow DOM** at build time.
 
@@ -572,7 +569,7 @@ customElements.define('nav-bar', NavBar);
 
 ---
 
-## ⚡ WASM Module
+## WASM module
 
 The WASM entry point at `cmd/wasm/main.go` exports a single JavaScript function:
 
@@ -642,7 +639,7 @@ make wasm
 
 ---
 
-## 🛡️ Safety Model
+## Safety model
 
 ### 1. XSS Prevention
 
@@ -670,7 +667,7 @@ These 13 elements never emit a closing tag:
 
 ---
 
-## 📦 Code Example Gallery
+## Code examples
 
 ### Complete Page Layout
 
@@ -768,7 +765,7 @@ page := html.NewResponsive().
 
 ---
 
-## 🔗 Dependencies
+## Dependencies
 
 ### Internal Dependencies
 
@@ -791,9 +788,9 @@ page := html.NewResponsive().
 
 ---
 
-## 📊 Statistics
+## Statistics
 
-### Code Metrics
+### Code metrics
 
 ```
 Total Go files:           25+
@@ -827,9 +824,9 @@ Layout variants:        31 (5! - 1 = 119 possible, but practical subset)
 
 ---
 
-## 🎯 Use Cases
+## Use cases
 
-### Primary Use Cases
+### Primary use cases
 
 1. **Consent-aware rendering** — Show/hide content based on entitlements
 2. **Semantic HTML generation** — Type-safe, XSS-safe HTML construction
@@ -847,7 +844,7 @@ Layout variants:        31 (5! - 1 = 119 possible, but practical subset)
 
 ---
 
-## 🔒 Compliance Rules
+## Compliance rules
 
 From `AGENTS.md` and `CLAUDE.md`:
 
@@ -900,7 +897,7 @@ The audit must print `verdict: COMPLIANT` with every counter at zero.
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
 - [CoreGo Framework](../../README.md) — Parent knowledge pack
 - [go-i18n Package](../i18n/README.md) — i18n translation and reversal
@@ -921,9 +918,9 @@ The audit must print `verdict: COMPLIANT` with every counter at zero.
 
 ---
 
-## 💡 Best Practices
+## Best practices
 
-### When to Use go-html
+### When to use go-html
 
 ✅ **Use go-html when:**
 - Building semantic HTML with type safety
@@ -966,7 +963,7 @@ The audit must print `verdict: COMPLIANT` with every counter at zero.
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author**: Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created**: 2026-06-18T01:00:00Z
@@ -978,6 +975,5 @@ The audit must print `verdict: COMPLIANT` with every counter at zero.
 
 ---
 
-*Package documentation created: 2026-06-18T01:00:00Z*
-*Author: Mistral Vibe (Purberus <purberus@lthn.ai>)*
+*Package documentation: 2026-06-18T01:00:00Z*
 *Source: dappco.re/go/core/html*

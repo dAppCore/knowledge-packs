@@ -8,18 +8,14 @@ description: WebSocket hub for real-time event streaming
 
 # go-ws Package Index
 
-> **WebSocket Hub for Real-Time Event Streaming**
-
 **Repository:** `core/go-ws`  
 **Module:** `dappco.re/go/ws`  
-**Status:** ✅ Complete Documentation  
 **Note:** ⚠️ Superseded by go/stream (see RFC)  
-**Last Updated:** 2026-06-17  
-**Maintainer:** Purberus <purberus@lthn.ai>
+**Last Updated:** 2026-06-17
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -28,20 +24,9 @@ description: WebSocket hub for real-time event streaming
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
 **go-ws** provides a complete WebSocket hub for real-time event broadcasting from CoreGO services to frontend clients. It implements the hub pattern with channel-based subscriptions, authentication, Redis pub/sub bridging, and reconnecting clients.
-
-### Key Features
-
-- ✅ Hub pattern for connection management
-- ✅ Channel-based message routing
-- ✅ Optional authentication (API key, bearer token, query token)
-- ✅ Redis pub/sub bridge for distributed deployments
-- ✅ Reconnecting client with exponential backoff
-- ✅ CoreGO service integration
-- ✅ Process output streaming
-- ✅ Security features (origin checking, input validation)
 
 ### Architecture Layers
 
@@ -53,7 +38,7 @@ description: WebSocket hub for real-time event streaming
 
 ---
 
-## 🏗️ Components
+## Components
 
 ### Core Types
 
@@ -94,7 +79,7 @@ description: WebSocket hub for real-time event streaming
 
 ---
 
-## 📁 File Structure
+## File structure
 
 ```
 go-ws/
@@ -116,7 +101,7 @@ go-ws/
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
 ### Basic Setup
 
@@ -165,7 +150,7 @@ docker run -p 6379:6379 redis
 
 ---
 
-## 🎓 Use Cases
+## Use cases
 
 ### 1. Process Output Streaming
 
@@ -223,7 +208,7 @@ client.Connect(context.Background())
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### HubConfig
 
@@ -257,7 +242,7 @@ type RedisConfig struct {
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Coverage
 
@@ -297,7 +282,7 @@ go test -bench . -benchmem
 
 ---
 
-## 📊 Metadata
+## Metadata
 
 | Attribute | Value |
 |-----------|-------|
@@ -312,7 +297,7 @@ go test -bench . -benchmem
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 | Package | Relationship | Path |
 |---------|--------------|------|
@@ -322,49 +307,3 @@ go test -bench . -benchmem
 | [go-netops](../netops/) | Network operations | ../netops/ |
 | [CoreGO INDEX](../../INDEX.md) | Package catalog | ../../INDEX.md |
 
----
-
-## 📝 Changelog
-
-| Date | Change | Commit |
-|------|--------|--------|
-| 2026-06-17 | Initial deep dive documentation | N/A |
-| 2026-06-17 | Package INDEX created | N/A |
-
----
-
-## 🎯 Tags
-
-```yaml
-- websocket
-- realtime
-- streaming
-- hub
-- pubsub
-- redis
-- authentication
-- reconnect
-- process-output
-- event-broadcast
-- channel-subscription
-- distributed
-- single-goroutine
-```
-
----
-
-## 📈 Statistics
-
-| Metric | Value |
-|--------|-------|
-| Throughput | ~10K msg/sec (single hub) |
-| Per connection | ~1K msg/sec sustained |
-| Redis bridge | ~5K msg/sec cross-instance |
-| Memory per connection | ~10 KB |
-| Goroutines per connection | ~2 |
-
----
-
-*Package index generated: 2026-06-17T16:00:00Z*
-*Knowledge Pack: CoreGo v1.1.0*
-*Maintainer: Purberus <purberus@lthn.ai>*

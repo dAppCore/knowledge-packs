@@ -4,16 +4,16 @@
 > **Repository:** [`github.com/dappcore/go-devops`](https://github.com/dappcore/go-devops)  
 > **Spec:** [`plans/code/core/go/devops/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/go/devops/RFC.md)  
 > **Maintainer:** Purberus <purberus@lthn.ai>  
-> **Status:** ✅ Production Ready  
+> **Status:** Production Ready  
 > **Module:** `forge.lthn.ai/core/go-devops`
 
 ---
 
-## 📋 Overview
+## Overview
 
-**go-devops** is the comprehensive infrastructure and build automation library for the Lethean ecosystem. It provides a native Go Ansible playbook executor, multi-target build pipeline, code signing, release orchestration, and a developer toolkit — all designed for AI agent consumption.
+**go-devops** is the infrastructure and build automation library for the Lethean ecosystem. It provides a native Go Ansible playbook executor, multi-target build pipeline, code signing, release orchestration, and a developer toolkit — all designed for AI agent consumption.
 
-### 🎯 Key Capabilities
+### Key capabilities
 
 | Category | Features |
 |----------|----------|
@@ -26,11 +26,11 @@
 | **SDK Generation** | OpenAPI SDK generator (TypeScript, Python, Go, PHP) |
 | **Developer Toolkit** | Cyclomatic complexity analysis, vulnerability scanning, coverage trending |
 
-### 🏗️ Architecture
+### Architecture
 
 **go-devops** is intentionally a multi-Service repository (Mantis #1336/#1379). Each independently-stateful subpackage exposes its own canonical `NewService(opts) + Register(c)` pair under its own package name. Pure-utility subpackages intentionally have no Service wiring.
 
-### Module Structure
+### Module structure
 
 ```
 core/go-devops/
@@ -54,7 +54,7 @@ core/go-devops/
 │   ├── snapshot/                # Snapshot utilities
 │   │   └── snapshot.go          # Snapshot creation and management
 │   │
-│   ├── locales/                 # Localization support
+│   ├── locales/                 # Localisation support
 │   │   └── embed.go             # Embedded translations
 │   │
 │   ├── go.mod                   # Module definition
@@ -69,7 +69,7 @@ core/go-devops/
 │   ├── index.md                 # Documentation index
 │   ├── publishers.md            # Publisher backends
 │   ├── sdk-generation.md        # SDK generation guide
-│   └── sync.md                  # Synchronization
+│   └── sync.md                  # Synchronisation
 │
 ├── playbooks/                   # Ansible playbooks
 ├── external/                    # External dependencies
@@ -79,7 +79,7 @@ core/go-devops/
 └── LICENCE
 ```
 
-### Core Design Principles
+### Core design principles
 
 1. **Agent-First** — Designed for AI agents to understand and extend
 2. **Zero External Dependencies** — Uses CoreGo primitives exclusively where possible
@@ -89,9 +89,9 @@ core/go-devops/
 
 ---
 
-## 📦 Packages
+## Packages
 
-### Ansible Integration (`ansible/`)
+### Ansible integration (`ansible/`)
 
 The Ansible integration provides a pure Go Ansible playbook executor with ~30 module handlers:
 
@@ -100,13 +100,13 @@ The Ansible integration provides a pure Go Ansible playbook executor with ~30 mo
 - **Jinja2 Templating** — Template support with Jinja2
 - **Module Handlers** — ~30 module types for various operations
 
-**Key Files:**
+**Key files:**
 - Playbook parsing and execution
 - Inventory management
 - SSH connection pooling
 - Module registry
 
-### Build Pipeline (`build/`)
+### Build pipeline (`build/`)
 
 Multi-target build pipeline with auto-detection:
 
@@ -115,7 +115,7 @@ Multi-target build pipeline with auto-detection:
 - **Caching:** Build caching for efficiency
 - **Obfuscation:** Code obfuscation support
 
-### Release Orchestration (`release/`)
+### Release orchestration (`release/`)
 
 Complete release automation:
 
@@ -124,7 +124,7 @@ Complete release automation:
 - **Publisher Backends** — 8 backends for release distribution
 - **Signing** — macOS codesign, GPG, Windows signtool
 
-**Publisher Backends:**
+**Publisher backends:**
 1. GitHub Releases
 2. Docker Hub/Registry
 3. Homebrew
@@ -145,13 +145,13 @@ Complete release automation:
 
 - **CloudNS DNS Management** — Domain and DNS record management
 
-### Container/VM Management
+### Container/VM management
 
-- **QEMU** — Full virtualization support
+- **QEMU** — Full virtualisation support
 - **Hyperkit** — macOS hypervisor framework
 - **LinuxKit** — Docker-free container runtime
 
-### SDK Generation
+### SDK generation
 
 OpenAPI-based SDK generator supporting:
 
@@ -160,31 +160,31 @@ OpenAPI-based SDK generator supporting:
 - **Go**
 - **PHP**
 
-### Developer Toolkit (`devkit/`)
+### Developer toolkit (`devkit/`)
 
-#### Coverage Analysis
+#### Coverage analysis
 
 - **Trending** — Coverage trend analysis across commits
 - **Reporting** — HTML and text reports
 - **Thresholds** — Configurable coverage thresholds
 
-#### Secret Scanning
+#### Secret scanning
 
 - **Pattern Matching** — Detect secrets in code
 - **False Positive Reduction** — Smart filtering
 - **Reporting** — Detailed scan reports
 
-#### Complexity Analysis
+#### Complexity analysis
 
 - **Cyclomatic Complexity** — Code complexity metrics
 - **Threshold Warnings** — Configurable complexity limits
-- **Visualization** — Complexity heatmaps
+- **Visualisation** — Complexity heatmaps
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### Workspace Configuration
+### Workspace configuration
 
 ```yaml
 # .core/devops.yaml
@@ -219,9 +219,9 @@ signing:
 
 ---
 
-## 🚀 Commands
+## Commands
 
-### Deployment Commands
+### Deployment commands
 
 ```bash
 # Deploy to configured target
@@ -234,7 +234,7 @@ core devops deploy production --playbook deploy.yml
 core devops deploy --list
 ```
 
-### Setup Commands
+### Setup commands
 
 ```bash
 # Interactive setup wizard
@@ -247,7 +247,7 @@ core devops setup github-webhooks
 core devops setup repo
 ```
 
-### Workspace Commands
+### Workspace commands
 
 ```bash
 # Show workspace configuration
@@ -259,9 +259,9 @@ core devops workspace validate
 
 ---
 
-## 📝 Usage Patterns
+## Usage patterns
 
-### Running Ansible Playbooks
+### Running Ansible playbooks
 
 ```go
 import (
@@ -289,7 +289,7 @@ if result.Error != nil {
 fmt.Printf("Playbook completed in %v", result.Duration)
 ```
 
-### Build and Release Pipeline
+### Build and release pipeline
 
 ```go
 import (
@@ -314,7 +314,7 @@ if err := release.Publish(ctx, releaseCfg, artifacts...); err != nil {
 }
 ```
 
-### Using DevKit for Code Analysis
+### Using DevKit for code analysis
 
 ```go
 import (
@@ -331,7 +331,7 @@ for _, secret := range secrets {
     fmt.Printf("Found secret at %s: %s\n", secret.File, secret.Type)
 }
 
-// Analyze coverage
+// Analyse coverage
 coverage, err := devkit.AnalyzeCoverage(ctx, "coverage.out")
 if err != nil {
     log.Fatal(err)
@@ -342,16 +342,16 @@ fmt.Printf("Coverage: %.2f%%\n", coverage.Percent)
 
 ---
 
-## 🧪 Testing
+## Testing
 
-### Test Structure
+### Test structure
 
 Each package follows the AX standard with:
 
 - `_test.go` — Unit tests
 - `_example_test.go` — Usage examples
 
-### Running Tests
+### Running tests
 
 ```bash
 # All tests
@@ -368,7 +368,7 @@ go test -coverprofile=coverage.out ./...
 go tool cover -html=coverage.out
 ```
 
-### Test Coverage
+### Test coverage
 
 | Package | Files | Lines | Coverage |
 |---------|-------|-------|----------|
@@ -381,9 +381,9 @@ go tool cover -html=coverage.out
 
 ---
 
-## 📖 API Reference
+## API reference
 
-### Ansible Package
+### Ansible package
 
 ```go
 type Playbook struct {
@@ -408,7 +408,7 @@ func ParseInventory(path string) (*Inventory, error)
 func (pb *Playbook) Run(ctx context.Context, inv *Inventory) *PlaybookResult
 ```
 
-### DevKit Package
+### DevKit package
 
 ```go
 type CoverageReport struct {
@@ -432,7 +432,7 @@ func ScanSecrets(ctx context.Context, root string) ([]SecretResult, error)
 
 ---
 
-## 🔗 Related Documentation
+## Related documentation
 
 | Resource | Description |
 |----------|-------------|
@@ -444,7 +444,7 @@ func ScanSecrets(ctx context.Context, root string) ([]SecretResult, error)
 
 ---
 
-## 📊 Statistics
+## Statistics
 
 | Metric | Value |
 |--------|-------|
@@ -455,9 +455,3 @@ func ScanSecrets(ctx context.Context, root string) ([]SecretResult, error)
 | **Test Files** | 50+ |
 | **Documentation** | 30KB+ |
 | **Lines of Code** | ~15,000 |
-
----
-
-## 🏷️ Tags
-
-#devops #ansible #build #release #deployment #infrastructure #automation #signing #sdk #toolkit

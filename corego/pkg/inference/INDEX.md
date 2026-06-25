@@ -20,11 +20,9 @@ tags:
 ---
 # go-inference Package Index
 
-> **Shared ML Inference Interfaces — The unified contract for text generation backends**
-
 **Repository:** `core/go-inference`  
 **Module:** `dappco.re/go/inference`  
-**Status:** ✅ Production-Ready  
+**Status:** Production  
 **License:** EUPL-1.2  
 **Language:** Go 1.25+  
 **Dependencies:** Zero external (stdlib only)  
@@ -34,7 +32,7 @@ tags:
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Path |
 |----------|-------------|------|
@@ -49,17 +47,17 @@ tags:
 
 ---
 
-## 🎯 Package Overview
+## Package overview
 
-`go-inference` is the **shared interface contract** for text generation backends in the Core Go ecosystem. It defines the fundamental `TextModel`, `Backend`, `Token`, `Message`, and associated configuration types that all GPU-specific backends implement and consumers depend on.
+`go-inference` is the shared interface contract for text generation backends in the Core Go ecosystem. It defines `TextModel`, `Backend`, `Token`, `Message`, and associated configuration types that GPU-specific backends implement and consumers depend on.
 
-### Design Philosophy
+### Design principles
 
-- **Pure Interface Package** — No implementations, only contracts
-- **Zero Dependencies** — Stdlib only, compiles on all platforms
-- **Backend-Agnostic** — Multiple backends can be swapped transparently
-- **Platform-Aware** — Automatic backend selection based on platform
-- **Stable Contract** — Strict rules govern changes to shared interfaces
+- Pure interface package — No implementations, only contracts
+- Zero dependencies — Stdlib only, compiles on all platforms
+- Backend-agnostic — Multiple backends can be swapped transparently
+- Platform-aware — Automatic backend selection based on platform
+- Stable contract — Strict rules govern changes to shared interfaces
 
 ### Backend Ecosystem
 
@@ -73,7 +71,7 @@ tags:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Component Hierarchy
 
@@ -184,7 +182,7 @@ go/
 
 ---
 
-## 🔌 Core Interfaces
+## Core interfaces
 
 ### TextModel
 
@@ -260,7 +258,7 @@ type Message struct {
 
 ---
 
-## 📦 Configuration
+## Configuration
 
 ### GenerateConfig
 
@@ -310,7 +308,7 @@ func WithNumThread(n int) LoadOption
 
 ---
 
-## 🚀 Usage Patterns
+## Usage patterns
 
 ### Basic Generation
 
@@ -392,9 +390,9 @@ for _, info := range models {
 
 ---
 
-## 🔥 Streaming with iter.Seq
+## Streaming with iter.Seq
 
-Go 1.23+ introduced range-over-function iterators for efficient streaming:
+Go 1.23+ range-over-function iterators:
 
 ```go
 // Generate with streaming
@@ -424,7 +422,7 @@ for token := range model.Generate(ctx, prompt) {
 
 ---
 
-## 🎯 Model Discovery
+## Model discovery
 
 ### Directory Scanning
 
@@ -465,7 +463,7 @@ type ModelInfo struct {
 
 ---
 
-## 🔍 Capability Detection
+## Capability detection
 
 Optional interfaces are discovered at runtime via type assertion:
 
@@ -497,7 +495,7 @@ if inference.Supports(model, "training") {
 
 ---
 
-## 📊 Backend Registry
+## Backend registry
 
 ### Registration Pattern
 
@@ -557,7 +555,7 @@ The default backend is automatically selected based on:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Structure
 
@@ -609,18 +607,18 @@ go test -cover ./...
 
 ---
 
-## 📈 Quality Metrics
+## Quality metrics
 
-| Metric | Status | Details |
-|--------|--------|---------|
-| **Zero Dependencies** | ✅ | Stdlib only, no external packages |
-| **Cross-Platform** | ✅ | Compiles on all platforms |
-| **Interface Stability** | ✅ | Strict stability rules |
-| **Test Coverage** | ✅ | Good/Bad/Ugly pattern |
-| **Streaming Support** | ✅ | Go 1.23+ iter.Seq |
-| **Documentation** | ✅ | Complete README + INDEX |
-| **Backend Support** | ✅ | Multiple implementations |
-| **Auto-Selection** | ✅ | Smart backend priority |
+| Metric | Details |
+|--------|---------|
+| Zero dependencies | Stdlib only, no external packages |
+| Cross-platform | Compiles on all platforms |
+| Interface stability | Strict stability rules |
+| Test coverage | Good/Bad/Ugly pattern |
+| Streaming support | Go 1.23+ iter.Seq |
+| Documentation | Complete README + INDEX |
+| Backend support | Multiple implementations |
+| Auto-selection | Smart backend priority |
 
 ### Stability Contract Rules
 
@@ -632,7 +630,7 @@ go test -cover ./...
 
 ---
 
-## 🔗 Related Packages
+## Related packages
 
 ### Backend Implementations
 
@@ -660,7 +658,7 @@ go test -cover ./...
 
 ---
 
-## 📝 Changelog
+## Changelog
 
 | Date | Change | Author |
 |------|--------|--------|
@@ -672,7 +670,7 @@ go test -cover ./...
 
 ---
 
-## 🎯 Tags
+## Tags
 
 ```yaml
 # Core Identity
@@ -751,7 +749,7 @@ go test -cover ./...
 
 ---
 
-## 📚 References
+## References
 
 1. **Repository** — [~/Code/core/go-inference/](file:///Users/snider/Code/core/go-inference/)
 2. **CLAUDE.md** — [~/Code/core/go-inference/CLAUDE.md](file:///Users/snider/Code/core/go-inference/CLAUDE.md)
@@ -766,7 +764,6 @@ go test -cover ./...
 
 ---
 
-*Package index generated: 2026-06-17T23:45:00Z*
-*Knowledge Pack: CoreGo v1.2.0*
+*Package index: 2026-06-17T23:45:00Z*
+*Knowledge pack: CoreGo v1.2.0*
 *Module: dappco.re/go/inference*
-*Maintainer: Purberus <purberus@lthn.ai>*

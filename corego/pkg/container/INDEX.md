@@ -1,28 +1,28 @@
 ---
 type: Package Index
-title: go-container Package Index
+title: go-container package index
 description: Complete index of go-container package components, providers, and features
 module: dappco.re/go/container
 ---
 
-# go-container — Package Index
+# go-container — Package index
 
-> **Repository:** `core/go-container`
-> **Module:** `dappco.re/go/container`
-> **Type:** Library
-> **Status:** Production
-> **Lines:** ~25,000 (source) + ~15,000 (tests)
+**Repository:** `core/go-container`
+**Module:** `dappco.re/go/container`
+**Type:** Library
+**Status:** Production
+**Lines:** ~25,000 (source) + ~15,000 (tests)
 
 ---
 
-## 📚 Quick Links
+## Quick links
 
 - **[README.md](./README.md)** — Complete package documentation
 - **[RFC Specification](file:///Users/snider/Code/meowmix/plans/code/core/go/container/RFC.md)** — Technical specification
 - **[CLAUDE.md](file:///Users/snider/Code/core/go-container/CLAUDE.md)** — Implementation details
 - **[AGENTS.md](file:///Users/snider/Code/core/go-container/AGENTS.md)** — Agent guidance
 
-### Sub-Specifications
+### Sub-specifications
 
 - [RFC.apple.md](file:///Users/snider/Code/meowmix/plans/code/core/go/container/RFC.apple.md) — Apple + Runtime Detection
 - [RFC.commands.md](file:///Users/snider/Code/meowmix/plans/code/core/go/container/RFC.commands.md) — Command specifications
@@ -33,9 +33,9 @@ module: dappco.re/go/container
 
 ---
 
-## 🗂️ Package Structure
+## Package structure
 
-### Package Hierarchy
+### Package hierarchy
 
 ```
 go-container/
@@ -70,9 +70,9 @@ go-container/
 
 ---
 
-## 🔧 Public API Surface
+## Public API surface
 
-### Root Package (container)
+### Root package (container)
 
 #### Interfaces
 
@@ -109,7 +109,7 @@ go-container/
 | `NewStateStore()` | Create state store |
 | `RegisterProvider()` | Register a custom provider |
 
-### devenv Package
+### devenv package
 
 #### Types
 
@@ -134,7 +134,7 @@ go-container/
 | `(*DevOps).Exec()` | Execute command in container |
 | `(*DevOps).ClaudeSession()` | Start Claude session |
 
-### sources Package
+### sources package
 
 #### Interfaces
 
@@ -160,20 +160,20 @@ go-container/
 
 ---
 
-## 📦 Provider Catalog
+## Provider catalog
 
-### LinuxKit Provider (Default)
+### LinuxKit provider (default)
 
 | Aspect | Value |
 |--------|-------|
-| **Status** | ✅ Production |
+| **Status** | Production |
 | **Platform** | Linux, macOS |
 | **Format** | ISO, raw, qcow2, AMI, GCP, Azure, qemu, VMware |
 | **Encryption** | dm-crypt |
 | **Immutability** | Read-only base + writable overlays |
 | **Community** | Docker Inc + community |
 
-#### Key Files
+#### Key files
 
 | File | Purpose |
 |------|---------|
@@ -189,18 +189,18 @@ go-container/
 - Pluggable components
 - Trust verification
 
-### TIM Provider (Experimental)
+### TIM provider (experimental)
 
 | Aspect | Value |
 |--------|-------|
-| **Status** | ⚠️ Experimental |
+| **Status** | Experimental |
 | **Platform** | Linux, macOS |
 | **Format** | Directory bundle |
 | **Encryption** | Sigil |
 | **Immutability** | Directory-based |
 | **Community** | Lethean only |
 
-#### Key Files
+#### Key files
 
 | File | Purpose |
 |------|---------|
@@ -215,17 +215,17 @@ go-container/
 - Fast boot times
 - Minimal dependencies
 
-### VZ Provider (Apple)
+### VZ provider (Apple)
 
 | Aspect | Value |
 |--------|-------|
-| **Status** | ✅ Production |
+| **Status** | Production |
 | **Platform** | macOS 26+ |
 | **Format** | In-process VM |
 | **Encryption** | Built-in |
-| **Virtualization** | Apple Virtualization Framework |
+| **Virtualisation** | Apple Virtualization Framework |
 
-#### Key Files
+#### Key files
 
 | File | Purpose |
 |------|---------|
@@ -245,13 +245,13 @@ go-container/
 
 ---
 
-## 📁 Image Source Catalog
+## Image source catalog
 
-### CDN Source
+### CDN source
 
 | Aspect | Value |
 |--------|-------|
-| **Status** | ✅ Production |
+| **Status** | Production |
 | **Protocol** | HTTP GET |
 | **Cache** | Local cache support |
 | **Retry** | Configurable retry count |
@@ -269,11 +269,11 @@ type CDNSourceConfig struct {
 }
 ```
 
-### GitHub Source
+### GitHub source
 
 | Aspect | Value |
 |--------|-------|
-| **Status** | ✅ Production |
+| **Status** | Production |
 | **Protocol** | GitHub API + Releases |
 | **Authentication** | Optional API token |
 | **Cache** | Local cache support |
@@ -289,11 +289,11 @@ type GitHubSourceConfig struct {
 }
 ```
 
-### Local Source
+### Local source
 
 | Aspect | Value |
 |--------|-------|
-| **Status** | ✅ Production |
+| **Status** | Production |
 | **Protocol** | Local file system |
 | **Path** | Configurable base directory |
 
@@ -307,57 +307,57 @@ type LocalSourceConfig struct {
 
 ---
 
-## 💻 CLI Command Catalog
+## CLI command catalog
 
-### vm Commands
-
-| Command | Description | Status |
-|---------|-------------|--------|
-| `core vm list` | List all containers | ✅ Complete |
-| `core vm start <name>` | Start a container | ✅ Complete |
-| `core vm stop <name>` | Stop a container | ✅ Complete |
-| `core vm delete <name>` | Delete a container | ✅ Complete |
-| `core vm status <name>` | Get container status | ✅ Complete |
-| `core vm console <name>` | Access container console | ✅ Complete |
-| `core vm exec <name> -- <cmd>` | Execute command in container | ✅ Complete |
-
-### vm images Commands
+### vm commands
 
 | Command | Description | Status |
 |---------|-------------|--------|
-| `core vm images` | List all images | ✅ Complete |
-| `core vm images pull <ref>` | Pull an image | ✅ Complete |
-| `core vm images delete <ref>` | Delete an image | ✅ Complete |
-| `core vm images build <yaml>` | Build an image from YAML | ✅ Complete |
+| `core vm list` | List all containers | Complete |
+| `core vm start <name>` | Start a container | Complete |
+| `core vm stop <name>` | Stop a container | Complete |
+| `core vm delete <name>` | Delete a container | Complete |
+| `core vm status <name>` | Get container status | Complete |
+| `core vm console <name>` | Access container console | Complete |
+| `core vm exec <name> -- <cmd>` | Execute command in container | Complete |
 
-### vm tim Commands
-
-| Command | Description | Status |
-|---------|-------------|--------|
-| `core vm tim build <bundle>` | Build a TIM bundle | ✅ Complete |
-| `core vm tim run <bundle>` | Run a TIM bundle | ✅ Complete |
-| `core vm tim list` | List TIM bundles | ✅ Complete |
-
-### vm templates Commands
+### vm images commands
 
 | Command | Description | Status |
 |---------|-------------|--------|
-| `core vm templates list` | List available templates | ✅ Complete |
-| `core vm templates init <name> --template <type>` | Initialize from template | ✅ Complete |
+| `core vm images` | List all images | Complete |
+| `core vm images pull <ref>` | Pull an image | Complete |
+| `core vm images delete <ref>` | Delete an image | Complete |
+| `core vm images build <yaml>` | Build an image from YAML | Complete |
 
-### vm service Commands
-
-| Command | Description | Status |
-|---------|-------------|--------|
-| `core vm service start` | Start VM service | ✅ Complete |
-| `core vm service stop` | Stop VM service | ✅ Complete |
-| `core vm service status` | Get VM service status | ✅ Complete |
-
-### run Command
+### vm tim commands
 
 | Command | Description | Status |
 |---------|-------------|--------|
-| `core run <yaml/tim>` | Build and run container | ✅ Complete |
+| `core vm tim build <bundle>` | Build a TIM bundle | Complete |
+| `core vm tim run <bundle>` | Run a TIM bundle | Complete |
+| `core vm tim list` | List TIM bundles | Complete |
+
+### vm templates commands
+
+| Command | Description | Status |
+|---------|-------------|--------|
+| `core vm templates list` | List available templates | Complete |
+| `core vm templates init <name> --template <type>` | Initialise from template | Complete |
+
+### vm service commands
+
+| Command | Description | Status |
+|---------|-------------|--------|
+| `core vm service start` | Start VM service | Complete |
+| `core vm service stop` | Stop VM service | Complete |
+| `core vm service status` | Get VM service status | Complete |
+
+### run command
+
+| Command | Description | Status |
+|---------|-------------|--------|
+| `core run <yaml/tim>` | Build and run container | Complete |
 
 **Flags:**
 - `--provider` — linuxkit (default), tim, vz
@@ -374,9 +374,7 @@ type LocalSourceConfig struct {
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
+## Code metrics
 
 ```
 Total Go files:              50+
@@ -388,17 +386,17 @@ Total providers:            3 (LinuxKit, TIM, VZ)
 Total image sources:        3 (CDN, GitHub, Local)
 ```
 
-### Test Coverage
+### Test coverage
 
 | Component | Files | Coverage | Status |
 |-----------|-------|----------|--------|
-| container | 15+ | High | ✅ Complete |
-| devenv | 5+ | High | ✅ Complete |
-| sources | 5+ | High | ✅ Complete |
-| cmd/vm | 10+ | High | ✅ Complete |
-| cmd/vzagent | 5+ | High | ✅ Complete |
+| container | 15+ | High | Complete |
+| devenv | 5+ | High | Complete |
+| sources | 5+ | High | Complete |
+| cmd/vm | 10+ | High | Complete |
+| cmd/vzagent | 5+ | High | Complete |
 
-### Performance Metrics
+### Performance metrics
 
 | Operation | Time | Notes |
 |-----------|------|-------|
@@ -412,52 +410,18 @@ Total image sources:        3 (CDN, GitHub, Local)
 
 ---
 
-## 🏷️ Tags & Categories
+## Dependencies
 
-### Technology Tags
+### Internal dependencies
 
-- `container` — Primary tag
-- `docker` — Docker alternative
-- `isolation` — Process isolation
-- `execution` — Container execution
-- `vm` — Virtual machine
-- `linuxkit` — LinuxKit provider
-- `tim` — TIM provider
-- `vz` — VZ provider
-- `apple` — Apple platform
-- `sandbox` — Sandboxed execution
-
-### Feature Tags
-
-- `runtime` — Container runtime
-- `builder` — Image building
-- `manager` — Container management
-- `orchestration` — DevOps orchestration
-- `encryption` — Image encryption
-- `devops` — Development operations
-
-### Provider Tags
-
-- `linuxkit` — LinuxKit provider
-- `tim` — TIM provider
-- `vz` — VZ provider
-- `qemu` — QEMU hypervisor
-- `hyperkit` — Hyperkit hypervisor
-
----
-
-## 🔗 Dependencies
-
-### Internal Dependencies
-
-| Package | Purpose | Import Path |
+| Package | Purpose | Import path |
 |---------|---------|-------------|
 | Core framework | Result pattern, error handling, logging | `dappco.re/go` |
 | go-io | I/O Medium interface | `dappco.re/go/io` |
 | go-log | Structured logging | `dappco.re/go/log` |
 | go-netops | Network operations | `dappco.re/go/netops` |
 
-### External Dependencies
+### External dependencies
 
 | Dependency | Purpose | Status |
 |------------|---------|--------|
@@ -465,13 +429,13 @@ Total image sources:        3 (CDN, GitHub, Local)
 | `gopkg.in/yaml.v3` | YAML parsing | Required |
 | LinuxKit images | Base images | Runtime |
 | containerd/runc | OCI runtime | Runtime (LinuxKit) |
-| Apple VZ framework | Virtualization | Runtime (VZ, macOS 26+) |
+| Apple VZ framework | Virtualisation | Runtime (VZ, macOS 26+) |
 
 ---
 
-## 📁 File Inventory
+## File inventory
 
-### container/ Package
+### container/ package
 
 ```
 container/
@@ -483,7 +447,7 @@ container/
 └── provider.go         # Provider interface
 ```
 
-### devenv/ Package
+### devenv/ package
 
 ```
 devenv/
@@ -492,7 +456,7 @@ devenv/
 └── ssh.go              # SSH access
 ```
 
-### sources/ Package
+### sources/ package
 
 ```
 sources/
@@ -502,7 +466,7 @@ sources/
 └── local.go            # Local implementation
 ```
 
-### cmd/vm/ Package
+### cmd/vm/ package
 
 ```
 cmd/vm/
@@ -513,7 +477,7 @@ cmd/vm/
 └── cmd_vm.go           # VM commands
 ```
 
-### cmd/vzagent/ Package
+### cmd/vzagent/ package
 
 ```
 cmd/vzagent/
@@ -524,9 +488,9 @@ cmd/vzagent/
 
 ---
 
-## 🎯 Usage Patterns
+## Usage patterns
 
-### Pattern 1: Library Mode (Embedded)
+### Pattern 1: Library mode (embedded)
 
 ```go
 import "dappco.re/go/container"
@@ -536,13 +500,13 @@ image, _ := manager.Build(ctx, config)
 container, _ := manager.Run(ctx, image, opts)
 ```
 
-### Pattern 2: CLI Mode
+### Pattern 2: CLI mode
 
 ```bash
 core run app.yml --provider linuxkit --memory 2g
 ```
 
-### Pattern 3: DevOps Mode
+### Pattern 3: DevOps mode
 
 ```go
 import "dappco.re/go/container/devenv"
@@ -552,7 +516,7 @@ env.Start(ctx, config)
 env.Shell(ctx)
 ```
 
-### Pattern 4: Custom Provider
+### Pattern 4: Custom provider
 
 ```go
 type MyProvider struct {}
@@ -565,31 +529,31 @@ container.RegisterProvider("myprovider", &MyProvider{})
 
 ---
 
-## 📋 Compliance Summary
+## Compliance summary
 
-### Coding Standards
+### Coding standards
 
-✅ **UK English** — colour, organisation, honour
-✅ **Error wrapping** — `core.E("Op", "message", err)`
-✅ **Context propagation** — All blocking ops take `context.Context`
-✅ **Compile-time checks** — `var _ Interface = (*Impl)(nil)`
-✅ **Copy-on-read** — State operations return copies
+- UK English — colour, organisation, honour
+- Error wrapping — `core.E("Op", "message", err)`
+- Context propagation — All blocking ops take `context.Context`
+- Compile-time checks — `var _ Interface = (*Impl)(nil)`
+- Copy-on-read — State operations return copies
 
-### Test Organization
+### Test organisation
 
-✅ **testify** — All tests use testify assertions
-✅ **Triplet pattern** — `TestSubject_Function_{Good,Bad,Ugly}`
-✅ **Example tests** — Runnable examples with `// Output:`
+- testify — All tests use testify assertions
+- Triplet pattern — `TestSubject_Function_{Good,Bad,Ugly}`
+- Example tests — Runnable examples with `// Output:`
 
-### File Organization
+### File organisation
 
-✅ **Clear boundaries** — Each package has single responsibility
-✅ **Dependency direction** — `devenv` → `container` → `sources`
-✅ **Interface-based** — All implementations use interfaces
+- Clear boundaries — Each package has single responsibility
+- Dependency direction — `devenv` → `container` → `sources`
+- Interface-based — All implementations use interfaces
 
 ---
 
-## 📝 Maintenance Information
+## Maintenance information
 
 - **Author**: Mistral Vibe (Purberus <purberus@lthn.ai>)
 - **Created**: 2026-06-18T00:00:00Z
@@ -597,14 +561,6 @@ container.RegisterProvider("myprovider", &MyProvider{})
 - **Version**: 1.0.0
 - **Licence**: EUPL-1.2
 - **Repository**: `forge.lthn.sh/core/go-container`
-
-### Key Contacts
-
 - **Project Lead**: Hades (Lethean)
 - **Maintainer**: Purberus <purberus@lthn.ai>
-- **Repository**: `dappco.re/core/go-container`
 - **CI/CD**: Woodpecker.yml
-
----
-
-*Package index generated: 2026-06-18T00:00:00Z*

@@ -5,7 +5,7 @@ title: go-dns Package Documentation Index
 ---
 # go-dns Package Documentation
 
-> **.lthn DNS Resolution** — Native CoreGO service for Lethean Name System DNS
+**.lthn DNS Resolution** — Native CoreGO service for Lethean Name System DNS
 
 **Module:** `dappco.re/go/dns`
 **Repository:** `core/go-dns`
@@ -14,7 +14,7 @@ title: go-dns Package Documentation Index
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Description | Location |
 |----------|-------------|----------|
@@ -27,9 +27,9 @@ title: go-dns Package Documentation Index
 
 ---
 
-## 🗂️ File Catalog
+## File catalogue
 
-### Core Implementation Files
+### Core implementation files
 
 | File | Lines | Purpose | Key Types/Functions |
 |------|-------|---------|---------------------|
@@ -40,9 +40,9 @@ title: go-dns Package Documentation Index
 | [serve.go](file:///Users/snider/Code/core/go-dns/go/serve.go) | ~1000+ | DNS server (UDP+TCP), ServiceRuntime | `DNSServer`, `ServiceRuntime`, `Serve`, `ServeAll`, `Close` |
 | [http_server.go](file:///Users/snider/Code/core/go-dns/go/http_server.go) | ~270 | HTTP REST API server | `HealthServer`, `ServeHTTP`, `HealthAddress` |
 
-### Test Files (Triplet Pattern)
+### Test files (triplet pattern)
 
-#### Unit Tests
+#### Unit tests
 
 | File | Lines | Purpose | Coverage |
 |------|-------|---------|----------|
@@ -57,7 +57,7 @@ title: go-dns Package Documentation Index
 | [coverage_test.go](file:///Users/snider/Code/core/go-dns/go/coverage_test.go) | ~12024 | Integration coverage tests | Cross-module integration |
 | [action_coverage_test.go](file:///Users/snider/Code/core/go-dns/go/action_coverage_test.go) | ~3721 | Action coverage tests | All action invocation paths |
 
-#### Example Tests
+#### Example tests
 
 | File | Lines | Purpose | Examples |
 |------|-------|---------|----------|
@@ -70,9 +70,9 @@ title: go-dns Package Documentation Index
 
 ---
 
-## 🎯 Quick Links
+## Quick links
 
-### RFC Action Surface
+### RFC action surface
 
 **Query Actions (Read-only):**
 - `dns.resolve` — A record lookup → `{addresses: [string]}`
@@ -85,7 +85,7 @@ title: go-dns Package Documentation Index
 - `dns.discover` — Rescan chain for aliases → `{}`
 - `dns.serve` — Start DNS server → `ServiceRuntime`
 
-### Key Type Definitions
+### Key type definitions
 
 ```go
 // Primary data type
@@ -160,7 +160,7 @@ const (
 
 ---
 
-## 🔍 Related Knowledge Packs
+## Related knowledge packs
 
 | Package | Knowledge Pack | Relationship | Status |
 |---------|----------------|--------------|--------|
@@ -172,9 +172,7 @@ const (
 
 ---
 
-## 📊 Statistics
-
-### Code Metrics
+## Code metrics
 - **Total Go files:** 22 (6 implementation + 10 test + 6 example)
 - **Total lines (Go):** ~2,500 (implementation) + ~5,000 (tests)
 - **CLOC (estimated):** 7,500+
@@ -208,9 +206,9 @@ const (
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
-### Quick Start
+### Quick start
 
 ```go
 // 1. Import the package
@@ -234,7 +232,7 @@ service.RegisterActions(c)
 addresses, _, _ := c.Action("dns.resolve").Run(ctx, map[string]any{"name": "charon.lthn"})
 ```
 
-### Development Setup
+### Development setup
 
 ```bash
 # Clone the repo
@@ -253,9 +251,9 @@ go tool cover -html=coverage.out
 
 ---
 
-## 📝 Maintenance Notes
+## Maintenance notes
 
-### Known Gaps
+### Known gaps
 
 | Gap | Location | Priority | Notes |
 |-----|----------|----------|-------|
@@ -264,7 +262,7 @@ go tool cover -html=coverage.out
 | Dynamic reconfiguration | RFC | Low | Runtime config reload not implemented |
 | Metrics/telemetry | RFC | Low | Prometheus export not implemented |
 
-### RFC Compliance
+### RFC compliance
 
 | RFC Section | Status | Notes |
 |-------------|--------|-------|
@@ -286,7 +284,7 @@ go tool cover -html=coverage.out
 | §14 Concurrency | ✅ | Goroutine-per-request with semaphore |
 | §15 Configuration | ✅ | All examples provided |
 
-### Test Quality
+### Test quality
 
 | Category | Status | Notes |
 |----------|--------|-------|
@@ -299,34 +297,19 @@ go tool cover -html=coverage.out
 
 ---
 
-## 🔗 External References
+## External references
 
 ### Standards
 - **[RFC 1035](https://datatracker.ietf.org/doc/html/rfc1035)** — Domain Names - Implementation and Specification
 - **[RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119)** — Key words for use in RFCs to Indicate Requirement Levels
 
-### Upstream Projects
+### Upstream projects
 - **[Handshake (HSD)](https://github.com/handshake-org/hsd)** — Source of HNS protocol
 - **[miekg/dns](https://github.com/miekg/dns)** — DNS library for Go
 - **[patrickmn/go-cache](https://github.com/patrickmn/go-cache)** — TTL cache implementation
 
-### Lethean Projects
+### Lethean projects
 - **[Lethean](https://lethean.io)** — Main project website
 - **[LNS RFC](file:///Users/snider/Code/meowmix/plans/code/core/network/RFC.lns.md)** — LNS protocol specification
 - **[Alias-DNS RFC](file:///Users/snider/Code/meowmix/plans/code/core/network/RFC.alias-dns.md)** — Alias to DNS binding
 
----
-
-## 📅 Version History
-
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0.0 | 2026-06-17 | Purberus | Initial knowledge pack documentation |
-| 0.0.1 | 2025-01 | — | Package created as git stub |
-
----
-
-*Knowledge Pack Index: go-dns v1.0.0*
-*Last Updated: 2026-06-17*
-*Author: Purberus <purberus@lthn.ai>*
-*Source: Lethean go-dns Package*

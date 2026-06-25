@@ -1,16 +1,14 @@
 ---
 type: Knowledge Pack
 title: CorePlay Framework
-description: Complete knowledge pack for CorePlay — the Play framework combining Go backend with TypeScript frontend
+description: Knowledge pack for CorePlay — the Play framework combining Go backend with TypeScript frontend
 author: Mistral Vibe
 version: 1.0.0
 created: 2026-06-17T14:45:00Z
 tags: [framework, play, golang, typescript, lethean, fullstack]
 ---
 
-# CorePlay Knowledge Pack
-
-> **"STIM Game & Software Preservation"** — Core Play RFC
+# CorePlay knowledge pack
 
 **Tagline:** `core play` — run preserved software in deterministic STIM bundles. Games are the demo. Legacy enterprise is the product.
 
@@ -22,7 +20,7 @@ CorePlay runs preserved software inside **STIM (Sandboxed Temporal Isolation Mod
 
 ---
 
-## 🎯 Overview
+## Overview
 
 From the [Core Play RFC](file:///Users/snider/Code/meowmix/plans/code/core/play/RFC.md):
 
@@ -42,17 +40,9 @@ core play command-and-conquer      # same
 
 **Directory name IS the game name.** Same pattern as `core build` reads `build.yaml`.
 
-### Key Statistics
-
-- **Repository:** `forge.lthn.sh/core/play`
-- **Module:** `dappco.re/go/play`
-- **Purpose:** Software preservation and emulation
-- **Bundle format:** STIM (deterministic, hash-verified, SBOM-tracked)
-- **Status:** Production-ready for games, enterprise preservation in development
-
 ---
 
-## 📦 STIM Bundle Structure
+## STIM bundle structure
 
 From the RFC, a STIM bundle has this structure:
 
@@ -110,7 +100,7 @@ audio:
 
 ---
 
-## 📚 Source of Truth
+## Source of truth
 
 - **Primary Spec:** [`plans/code/core/play/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/play/RFC.md)
 - **Catalog:** [`plans/code/core/play/RFC.catalog.md`](file:///Users/snider/Code/meowmix/plans/code/core/play/RFC.catalog.md)
@@ -120,13 +110,13 @@ audio:
 
 ---
 
-## 🎮 Kingdoms: The MMO Strategy Game
+## Kingdoms: the MMO strategy game
 
 From the [Kingdoms RFC](file:///Users/snider/Code/meowmix/plans/code/core/play/RFC.kingdoms.md):
 
 **Kingdoms** is a medieval village → castle → kingdom strategy game that grows, release by release, into an MMO.
 
-### Why Kingdoms Exists
+### Why Kingdoms exists
 
 Stronghold Kingdoms had two fatal flaws:
 1. **Deleted strategic geography** — No territory to hold, no frontier to defend
@@ -138,7 +128,7 @@ Stronghold Kingdoms had two fatal flaws:
 - **Permanence** — What you build stays, and you defend it
 - **The off-switch** — Your home is never PvP-attackable; the castellan (AI) defends while you're offline
 
-### The Engine: AIventure
+### The engine: AIventure
 
 Built on **[AIventure](https://github.com/bebechien/AIventure)** — a fork of Phaser Studio's Angular template.
 
@@ -147,7 +137,7 @@ Built on **[AIventure](https://github.com/bebechien/AIventure)** — a fork of P
 - **Entities:** `Player`, `MovableObject`, `MovingNPC`, `AgenticNPC`
 - **Systems:** `GridManager`, `WorldData`, `InteractionSystem`, `EventBus`
 
-### The Go Authority
+### The Go authority
 
 The Go authority is **authoritative, deterministic, and verifiable**:
 
@@ -164,16 +154,16 @@ The Go authority is **authoritative, deterministic, and verifiable**:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-### STIM Bundle-Based
+### STIM bundle-based
 
 CorePlay uses **STIM (Sandboxed Temporal Isolation Module)** bundles:
 - Deterministic, hash-verified, SBOM-tracked archives
 - Contains: artefact + runtime engine + manifest
 - Directory name = game name
 
-### Data-Driven World
+### Data-driven world
 
 The `game.json` (Phaser Editor export) defines:
 - **Classes** = prefabs/actors with multiple inheritance
@@ -182,7 +172,7 @@ The `game.json` (Phaser Editor export) defines:
 
 ---
 
-## 📦 Core Components
+## Core components
 
 ### 1. Backend (Go)
 
@@ -218,7 +208,7 @@ const response = await client.sayHello({ name: "World" });
 console.log(response.message);
 ```
 
-### 3. Communication Layer
+### 3. Communication layer
 
 **Protobuf + gRPC:**
 
@@ -229,9 +219,9 @@ console.log(response.message);
 
 ---
 
-## 💻 How-Tos
+## How-tos
 
-### 1. Creating a STIM Bundle
+### 1. Creating a STIM bundle
 
 ```bash
 # Create bundle directory (name = game name)
@@ -311,16 +301,16 @@ npm run start
 
 ---
 
-## 🚀 Getting Started
+## Getting started
 
-### For Agents
+### For agents
 
 1. **Read the RFC:** [`plans/code/core/play/RFC.md`](file:///Users/snider/Code/meowmix/plans/code/core/play/RFC.md)
 2. **Check catalog:** [`RFC.catalog.md`](file:///Users/snider/Code/meowmix/plans/code/core/play/RFC.catalog.md)
 3. **Explore kingdoms:** [`RFC.kingdoms.md`](file:///Users/snider/Code/meowmix/plans/code/core/play/RFC.kingdoms.md)
 4. **Browse code:** `ls core/play/`
 
-### For Developers
+### For developers
 
 1. **Clone the repo:** `git clone forge.lthn.sh/core/play`
 2. **Define protobuf:** Create `.proto` files
@@ -330,9 +320,9 @@ npm run start
 
 ---
 
-## 📖 Quick Reference
+## Quick reference
 
-### Core Play Commands
+### Core Play commands
 
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -340,17 +330,17 @@ npm run start
 | `core play <name>` | Run specific game | `core play mega-lo-mania` |
 | `core play --server <url>` | Connect to MMO server | `core play --server wss://...` |
 
-### STIM Bundle Files
+### STIM bundle files
 
 | File | Purpose | Required |
 |------|---------|----------|
-| `manifest.yaml` | Bundle metadata | ✅ Yes |
-| `emulator.yaml` | Runtime configuration | ✅ Yes |
-| `sbom.json` | CycloneDX SBOM | ✅ Yes |
-| `checksums.sha256` | Deterministic hash chain | ✅ Yes |
-| `rom/<file>` | Original artefact | ✅ Yes |
+| `manifest.yaml` | Bundle metadata | Yes |
+| `emulator.yaml` | Runtime configuration | Yes |
+| `sbom.json` | CycloneDX SBOM | Yes |
+| `checksums.sha256` | Deterministic hash chain | Yes |
+| `rom/<file>` | Original artefact | Yes |
 
-### Supported Engines
+### Supported engines
 
 | Engine | Platform | Description |
 |--------|----------|-------------|
@@ -361,37 +351,25 @@ npm run start
 
 ---
 
-## 📊 Quick Stats
+## Use cases
 
-```
-Backend files:         50+
-Frontend files:        30+
-Protobuf definitions:  10+
-gRPC services:         10+
-Build stages:          Multi-stage Docker
-```
+### When to use CorePlay
 
----
+- Fullstack applications — Go backend + TS frontend
+- Type-safe APIs — Protobuf/gRPC communication
+- Hot-reload development — Fast iteration
+- Production builds — Optimised Docker images
 
-## 🎯 Use Cases
+### When not to use CorePlay
 
-### When to Use CorePlay
-
-✅ **Fullstack applications** — Go backend + TS frontend
-✅ **Type-safe APIs** — Protobuf/gRPC communication
-✅ **Hot-reload development** — Fast iteration
-✅ **Production builds** — Optimized Docker images
-
-### When NOT to Use CorePlay
-
-❌ **Backend-only services** — Use CoreGo instead
-❌ **Frontend-only apps** — Use CoreTS instead
-❌ **Simple CLI tools** — Use CoreCLI instead
-❌ **PHP applications** — Use CorePHP instead
+- Backend-only services — use CoreGo instead
+- Frontend-only apps — use CoreTS instead
+- Simple CLI tools — use CoreCLI instead
+- PHP applications — use CorePHP instead
 
 ---
 
-## 🔗 Related Knowledge Packs
+## Related knowledge packs
 
 - [CoreGo](../corego/README.md) — Backend framework
 - [CoreTS](../corets/README.md) — Frontend framework
@@ -401,7 +379,7 @@ Build stages:          Multi-stage Docker
 
 ---
 
-## 💡 Agent Tips
+## Agent tips
 
 1. **Protobuf first** — Always define API with protobuf
 2. **Type-safe** — Never use raw JSON APIs
@@ -411,7 +389,7 @@ Build stages:          Multi-stage Docker
 
 ---
 
-## 📝 Maintenance
+## Maintenance
 
 This knowledge pack is maintained by Mistral Vibe. Updates triggered by:
 
@@ -419,10 +397,3 @@ This knowledge pack is maintained by Mistral Vibe. Updates triggered by:
 - Changes to `core/play/` repository
 - New protobuf patterns
 - gRPC updates
-
----
-
-*Knowledge Pack v1.0.0*
-*Created: 2026-06-17T14:45:00Z*
-*Author: Mistral Vibe*
-*Source: Lethean CorePlay Framework*
